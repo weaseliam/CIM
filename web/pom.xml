@@ -41,8 +41,8 @@
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>unpack-ui</id>
-						<phase>compile</phase>
+						<id>unpack-ui-resources</id>
+						<phase>process-resources</phase>
 						<goals>
 							<goal>unpack</goal>
 						</goals>
@@ -52,8 +52,8 @@
 									<groupId>com.cim</groupId>
 									<artifactId>cim-ui</artifactId>
 									<version>${project.version}</version>
-									<classifier>dist</classifier>
 									<type>zip</type>
+									<classifier>dist</classifier>
 									<overWrite>true</overWrite>
 									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}</outputDirectory>
 								</artifactItem>
@@ -92,5 +92,47 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>m2e</id>
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>org.apache.maven.plugins</groupId>
+												<artifactId>maven-dependency-plugin</artifactId>
+												<versionRange>[0.0,)</versionRange>
+												<goals>
+													<goal>unpack</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore></ignore>
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+	</profiles>
 
 </project>

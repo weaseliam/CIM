@@ -28,6 +28,7 @@
 				<executions>
 					<execution>
 						<id>install node and npm</id>
+						<phase>initialize</phase>
 						<goals>
 							<goal>install-node-and-npm</goal>
 						</goals>
@@ -35,6 +36,7 @@
 
 					<execution>
 						<id>npm install</id>
+						<phase>initialize</phase>
 						<goals>
 							<goal>npm</goal>
 						</goals>
@@ -45,7 +47,7 @@
 
 					<execution>
 						<id>Frontend production build</id>
-						<phase>package</phase>
+						<phase>compile</phase>
 						<goals>
 							<goal>npm</goal>
 						</goals>
