@@ -1,19 +1,25 @@
 const webpack = require('webpack');
-const webpackConfig = require('./webpack.config.base');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const baseConfig = require('./webpack.config.base');
 const DashboardPlugin = require('webpack-dashboard/plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const HOST = process.env.HOST || '127.0.0.1';
 const PORT = process.env.PORT || '3000';
 
-webpackConfig.entry.unshift('react-hot-loader/patch');
+const webpackConfig = {};
+
+webpackConfig.entry = [
+  'react-hot-loader/patch',
+  baseConfig.entry
+];
 
 webpackConfig.devtool = process.env.WEBPACK_DEVTOOL || 'eval-source-map';
 
+webpackConfig.output = baseConfig.output;
 webpackConfig.output.path = '/' + webpackConfig.output.path;
-webpackConfig.output.filename = 'bundle.js';
 
+webpackConfig.resolve = baseConfig.resolve;
+
+webpackConfig.module = baseConfig.module;
 webpackConfig.module.loaders.push({
   test: /\.scss$/,
   loaders: ['style-loader', 'css-loader?importLoaders=1', 'postcss-loader', 'sass-loader'],
@@ -33,18 +39,10 @@ webpackConfig.devServer = {
 webpackConfig.plugins = [
   new webpack.NoEmitOnErrorsPlugin(),
   new webpack.HotModuleReplacementPlugin(),
-  new ExtractTextPlugin({
-    filename: 'style.css',
-    allChunks: true
-  }),
+  new webpack.NamedModulesPlugin(),
+  baseConfig.extractTextPlugin,
   new DashboardPlugin(),
-  new HtmlWebpackPlugin({
-    template: './src/index.html',
-    files: {
-      css: ['style.css'],
-      js: [webpackConfig.output.filename]
-    }
-  })
+  baseConfig.htmlWebpackPlugin
 ]
 
 module.exports = webpackConfig;

@@ -131,6 +131,34 @@
 						</plugin>
 					</plugins>
 				</pluginManagement>
+
+				<plugins>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>copy-resources</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${project.basedir}/src/main/webapp</outputDirectory>
+									<resources>
+										<resource>
+											<directory>${project.build.directory}/${project.artifactId}-${project.version}</directory>
+											<includes>
+												<include>*.html</include>
+												<include>*.js</include>
+												<include>*.css</include>
+											</includes>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
 			</build>
 		</profile>
 	</profiles>

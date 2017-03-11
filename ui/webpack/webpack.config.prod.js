@@ -1,12 +1,17 @@
 const webpack = require('webpack');
-const webpackConfig = require('./webpack.config.base');
-const loaders = require('./webpack.loaders');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const baseConfig = require('./webpack.config.base');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-webpackConfig.output.filename = '[chunkhash].js';
+const webpackConfig = {};
 
+webpackConfig.entry = baseConfig.entry;
+
+webpackConfig.output = baseConfig.output;
+
+webpackConfig.resolve = baseConfig.resolve;
+
+webpackConfig.module = baseConfig.module;
 webpackConfig.module.loaders.push({
   test: /\.scss$/,
   loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader?sourceMap&localIdentName=[local]___[hash:base64:5]!postcss-loader!sass-loader?outputStyle=expanded' }),
@@ -29,17 +34,8 @@ webpackConfig.plugins = [
     }
   }),
   new webpack.optimize.OccurrenceOrderPlugin(),
-  new ExtractTextPlugin({
-    filename: '[chunkhash].css',
-    allChunks: true
-  }),
-  new HtmlWebpackPlugin({
-    template: './src/index.html',
-    files: {
-      css: ['[chunkhash].css'],
-      js: [webpackConfig.output.filename]
-    }
-  })
+  baseConfig.extractTextPlugin,
+  baseConfig.htmlWebpackPlugin
 ];
 
 module.exports = webpackConfig;
