@@ -1,5 +1,7 @@
 package com.cim.core.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -14,6 +16,8 @@ import com.cim.core.app.Profiles;
 @EnableWebSecurity
 class SecurityConfig
 {
+	private static Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
+	
 	@Bean
 	@Profile(Profiles.DEVELOPMENT)
 	WebSecurityConfigurerAdapter noAuth()
@@ -23,6 +27,8 @@ class SecurityConfig
 			@Override
 			public void configure(HttpSecurity http) throws Exception
 			{
+				logger.info("Running DEVELOPMENT security configuration");
+				
 				http.authorizeRequests().anyRequest().permitAll();
 			}
 		};
@@ -37,7 +43,18 @@ class SecurityConfig
 			@Override
 			public void configure(HttpSecurity http) throws Exception
 			{
-				http.authorizeRequests().antMatchers("/").permitAll().anyRequest().authenticated().and().httpBasic();
+				logger.info("Running PRODUCTION security configuration");
+				
+				http
+					.authorizeRequests()
+					.antMatchers("/").permitAll()
+					.anyRequest()
+					.authenticated()
+					.and()
+				.httpBasic()
+					.and()
+				.logout()
+					.permitAll();
 			}
 
 			@Override
