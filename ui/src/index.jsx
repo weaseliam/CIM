@@ -1,10 +1,12 @@
+/* eslint-disable */
+
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
 import App from './components/app.jsx';
 
-render(<AppContainer><App /></AppContainer>, document.querySelector("#app"));
+render(<App />, document.querySelector('#app'));
 
 if (module && module.hot) {
   module.hot.accept('./components/app.jsx', () => {
@@ -13,7 +15,7 @@ if (module && module.hot) {
       <AppContainer>
         <App />
       </AppContainer>,
-      document.querySelector("#app")
+      document.querySelector('#app')
     );
   });
 }
