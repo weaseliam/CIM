@@ -55,6 +55,10 @@ class SecurityConfig
 					.and()
 				.logout()
 					.permitAll();
+				
+				// TODO: Remove these in the future
+				http.csrf().disable();
+				http.headers().frameOptions().sameOrigin();
 			}
 
 			@Override
