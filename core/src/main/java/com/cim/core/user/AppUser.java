@@ -2,13 +2,14 @@ package com.cim.core.user;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class AppUser
 {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	private String userName;
@@ -18,6 +19,8 @@ public class AppUser
 	private String firstName;
 	
 	private String lastName;
+	
+	private String email;
 
 	public String getUserName()
 	{
@@ -59,10 +62,20 @@ public class AppUser
 		this.lastName = lastName;
 	}
 
+	public String getEmail()
+	{
+		return email;
+	}
+
+	public void setEmail(String email)
+	{
+		this.email = email;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "AppUser [id=" + id + ", userName=" + userName + ", firstName=" + firstName + ", lastName=" + lastName
-				+ "]";
+				+ ", email=" + email + "]";
 	}
 }

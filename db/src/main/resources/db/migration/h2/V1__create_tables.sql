@@ -3,7 +3,8 @@ create table APP_USER (
 	user_name varchar(255) not null,
 	password varchar(255) not null,
 	first_name varchar(255) not null,
-	last_name varchar(255) not null
+	last_name varchar(255) not null,
+	email varchar(255)
 );
 
 insert into APP_USER (user_name, password, first_name, last_name) 

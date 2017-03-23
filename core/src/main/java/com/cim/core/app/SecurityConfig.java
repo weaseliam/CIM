@@ -1,7 +1,10 @@
-package com.cim.core.security;
+package com.cim.core.app;
+
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -10,7 +13,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import com.cim.core.app.Profiles;
+import com.cim.core.user.AppUser;
+import com.cim.core.user.AppUserService;
 
 @Configuration
 @EnableWebSecurity
@@ -40,6 +44,9 @@ class SecurityConfig
 	{
 		return new WebSecurityConfigurerAdapter()
 		{
+			@Autowired
+			private AppUserService userService;
+			
 			@Override
 			public void configure(HttpSecurity http) throws Exception
 			{
@@ -64,7 +71,14 @@ class SecurityConfig
 			@Override
 			public void configure(AuthenticationManagerBuilder auth) throws Exception
 			{
-				auth.inMemoryAuthentication().withUser("admin").password("admin").roles("USER");
+				List<AppUser> users = userService.listUsers();
+				
+				for (AppUser user : users)
+				{
+					String userName = user.getUserName();
+					String password = user.getPassword();
+					auth.inMemoryAuthentication().withUser(userName).password(password).roles("USER");
+				}
 			}
 		};
 	}
