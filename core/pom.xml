@@ -89,14 +89,6 @@
 		</dependency>
 
 
-		<!-- Runtime -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		
-
 		<!-- Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

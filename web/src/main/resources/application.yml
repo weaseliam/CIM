@@ -2,10 +2,25 @@ spring:
   profiles:
     active: prod
   
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: 
+  
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/cim?useSSL=false
+#    username: root
+#    password: root
+#    dbcp2:
+#      test-while-idle: true
+#      validation-query: SELECT 1
+  
   jpa:
     hibernate:
       ddl-auto: validate
-
+    show-sql: false
+  
   h2:
     console:
       enabled: true
+      path: /h2-console
