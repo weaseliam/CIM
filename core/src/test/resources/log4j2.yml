@@ -10,3 +10,9 @@ Configutation:
       level: info
       AppenderRef:
       - ref: ConsoleAppender
+    Logger:
+    - name: com.cim
+      level: debug
+      additivity: false
+      AppenderRef:
+      - ref: ConsoleAppender
