@@ -22,7 +22,7 @@ webpackConfig.resolve = baseConfig.resolve;
 webpackConfig.module = baseConfig.module;
 webpackConfig.module.loaders.push({
   test: /\.scss$/,
-  loaders: ['style-loader', 'css-loader?importLoaders=1', 'postcss-loader', 'sass-loader'],
+  loaders: ['style-loader', 'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]', 'postcss-loader', 'sass-loader'],
   exclude: ['node_modules']
 });
 
@@ -43,6 +43,6 @@ webpackConfig.plugins = [
   baseConfig.extractTextPlugin,
   new DashboardPlugin(),
   baseConfig.htmlWebpackPlugin
-]
+];
 
 module.exports = webpackConfig;

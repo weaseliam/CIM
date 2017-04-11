@@ -63,6 +63,15 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- m2e workaround: ignore bundle.js, index.html, style.css from src/main/webapp -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warSourceExcludes>bundle.js, index.html, style.css</warSourceExcludes>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -92,21 +101,22 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
-	    <dependency>
-	      <groupId>mysql</groupId>
-	      <artifactId>mysql-connector-java</artifactId>
-	      <scope>provided</scope>
-	    </dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<profiles>
+		<!-- Workaround for use with eclipse as Maven project -->
 		<profile>
 			<id>m2e</id>
 			<activation>
