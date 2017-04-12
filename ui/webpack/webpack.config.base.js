@@ -16,6 +16,7 @@ module.exports = {
   },
 
   module: {
+    exprContextCritical: false,
     loaders
   },
 

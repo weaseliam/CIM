@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const baseConfig = require('./webpack.config.base');
-const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const HOST = process.env.HOST || '127.0.0.1';
 const PORT = process.env.PORT || '3000';
@@ -8,6 +7,8 @@ const PORT = process.env.PORT || '3000';
 const webpackConfig = {};
 
 webpackConfig.entry = [
+  'webpack-dev-server/client?http://' + HOST + ':' + PORT,
+  'webpack/hot/only-dev-server',
   'react-hot-loader/patch',
   baseConfig.entry
 ];
@@ -28,12 +29,21 @@ webpackConfig.module.loaders.push({
 
 webpackConfig.devServer = {
   contentBase: './target/dist',
-  noInfo: true,
+  noInfo: false,
   hot: true,
   inline: true,
   historyApiFallback: true,
   port: PORT,
-  host: HOST
+  host: HOST,
+  stats: {
+    assets: false,
+    colors: true,
+    version: false,
+    hash: false,
+    timings: false,
+    chunks: false,
+    chunkModules: false
+  }
 };
 
 webpackConfig.plugins = [
@@ -41,7 +51,6 @@ webpackConfig.plugins = [
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NamedModulesPlugin(),
   baseConfig.extractTextPlugin,
-  new DashboardPlugin(),
   baseConfig.htmlWebpackPlugin
 ];
 

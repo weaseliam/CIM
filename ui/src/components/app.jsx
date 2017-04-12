@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import styles from './app.scss';
 
 // eslint-disable-next-line
-export default class App extends React.Component {
+export default class App extends Component {
   render() {
     return (
       <div>
