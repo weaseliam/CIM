@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware, { END } from 'redux-saga';
 
@@ -8,6 +6,7 @@ import rootSaga from './sagas';
 import DevTools from './dev-tools';
 
 const configureStore = () => {
+  // eslint-disable-next-line
   const initialState = window.__INITIAL_STATE__;
 
   const sagaMiddleware = createSagaMiddleware();
@@ -26,6 +25,7 @@ const configureStore = () => {
 
   if (module && module.hot) {
     module.hot.accept('./reducers', () => {
+      // eslint-disable-next-line
       const nextRootReducer = require('./reducers').default;
       store.replaceReducer(nextRootReducer);
     });

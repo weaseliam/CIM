@@ -7,7 +7,7 @@
     "build": "webpack --config webpack/webpack.config.prod.js --progress --profile --colors",
     "prebuild": "npm run lint",
     "start": "webpack-dev-server --config webpack/webpack.config.dev.js --progress --profile --colors",
-    "lint": "eslint --ext js --ext jsx src",
+    "lint": "eslint --ext js --ext jsx src"
   },
   "repository": {
     "type": "git",

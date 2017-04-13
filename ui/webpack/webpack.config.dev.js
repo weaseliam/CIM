@@ -7,7 +7,7 @@ const PORT = process.env.PORT || '3000';
 const webpackConfig = {};
 
 webpackConfig.entry = [
-  'webpack-dev-server/client?http://' + HOST + ':' + PORT,
+  `webpack-dev-server/client?http://${HOST}:${PORT}`,
   'webpack/hot/only-dev-server',
   'react-hot-loader/patch',
   baseConfig.entry
@@ -16,7 +16,7 @@ webpackConfig.entry = [
 webpackConfig.devtool = process.env.WEBPACK_DEVTOOL || 'eval-source-map';
 
 webpackConfig.output = baseConfig.output;
-webpackConfig.output.path = '/' + webpackConfig.output.path;
+webpackConfig.output.path = `/${webpackConfig.output.path}`;
 
 webpackConfig.resolve = baseConfig.resolve;
 
@@ -43,6 +43,12 @@ webpackConfig.devServer = {
     timings: false,
     chunks: false,
     chunkModules: false
+  },
+  proxy: {
+    '/': {
+      target: 'http://localhost:8080',
+      secure: false
+    }
   }
 };
 

@@ -7,19 +7,17 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
 import Root from './core/root';
-import store from './core/store';
-import routes from './core/routes';
 
 const renderRootComponent = (RootComponent) => {
   const targetElement = document.getElementById('root');
 
   render(
     <AppContainer>
-      <RootComponent store={store} routes={routes} />
+      <RootComponent />
     </AppContainer>,
     targetElement
   );
-}
+};
 
 renderRootComponent(Root);
 

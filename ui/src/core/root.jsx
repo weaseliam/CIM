@@ -2,26 +2,23 @@ import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+import store from './store';
+import routes from './routes';
 import DevTools from './dev-tools';
 
-const Root = (props) => {
-  const { store, routes } = props;
-
-  return (
-    <Provider store={store}>
-      <div>
-        <Router>
-          {routes}
-        </Router>
-        {process.env.NODE_ENV !== 'production' ? <DevTools /> : null}
-      </div>
-    </Provider>
-  );
-};
+const Root = () => (
+  <Provider store={store}>
+    <div>
+      <Router>
+        {routes}
+      </Router>
+      {process.env.NODE_ENV !== 'production' ? <DevTools /> : null}
+    </div>
+  </Provider>
+);
 
 Root.propTypes = {
   store: PropTypes.shape(Object).isRequired,
-  routes: PropTypes.node.isRequired
 };
 
 export default Root;
