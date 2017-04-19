@@ -56,21 +56,12 @@
 									<type>zip</type>
 									<classifier>dist</classifier>
 									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}</outputDirectory>
+									<outputDirectory>${project.basedir}/src/main/webapp</outputDirectory>
 								</artifactItem>
 							</artifactItems>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-
-			<!-- m2e workaround: ignore bundle.js, index.html, style.css from src/main/webapp -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<warSourceExcludes>bundle.js, index.html, style.css</warSourceExcludes>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -114,76 +105,4 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
-	<profiles>
-		<!-- Workaround for use with eclipse as Maven project -->
-		<profile>
-			<id>m2e</id>
-			<activation>
-				<property>
-					<name>m2e.version</name>
-				</property>
-			</activation>
-
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.eclipse.m2e</groupId>
-							<artifactId>lifecycle-mapping</artifactId>
-							<version>1.0.0</version>
-							<configuration>
-								<lifecycleMappingMetadata>
-									<pluginExecutions>
-										<pluginExecution>
-											<pluginExecutionFilter>
-												<groupId>org.apache.maven.plugins</groupId>
-												<artifactId>maven-dependency-plugin</artifactId>
-												<versionRange>[0.0,)</versionRange>
-												<goals>
-													<goal>unpack</goal>
-												</goals>
-											</pluginExecutionFilter>
-											<action>
-												<ignore></ignore>
-											</action>
-										</pluginExecution>
-									</pluginExecutions>
-								</lifecycleMappingMetadata>
-							</configuration>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-
-				<plugins>
-					<plugin>
-						<artifactId>maven-resources-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>copy-resources</id>
-								<phase>validate</phase>
-								<goals>
-									<goal>copy-resources</goal>
-								</goals>
-								<configuration>
-									<outputDirectory>${project.basedir}/src/main/webapp</outputDirectory>
-									<resources>
-										<resource>
-											<directory>${project.build.directory}/${project.artifactId}-${project.version}</directory>
-											<includes>
-												<include>*.html</include>
-												<include>*.js</include>
-												<include>*.css</include>
-											</includes>
-										</resource>
-									</resources>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-
 </project>
