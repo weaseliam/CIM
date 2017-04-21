@@ -6,8 +6,9 @@
   "scripts": {
     "build": "webpack --config webpack/webpack.config.prod.js --progress --profile --colors",
     "prebuild": "npm run lint",
+    "lint": "eslint --ext js --ext jsx src",
     "start": "webpack-dev-server --config webpack/webpack.config.dev.js --progress --profile --colors",
-    "lint": "eslint --ext js --ext jsx src"
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "redux-saga": "~0.14.6"
   },
   "devDependencies": {
+    "@kadira/storybook": "~2.35.3",
     "autoprefixer": "~6.7.6",
     "babel-core": "~6.23.1",
     "babel-loader": "~6.3.2",
