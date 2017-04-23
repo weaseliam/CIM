@@ -12,12 +12,12 @@
   align-items: center;
 
   &:before {
-    content: "";
+    content: " ";
     display: inline-block;
     width: 100px;
     height: 50px;
-    border: solid 1px black;
     margin-right: 5px;
+    background: url("../../styles/assets/company-logo.png") no-repeat;
   }
 }
 
@@ -26,12 +26,13 @@
   align-items: center;
 
   &:before {
-    content: "";
+    content: "\f2c0";
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 1.6em;
     display: inline-block;
-    width: 42px;
-    height: 42px;
     border-radius: 50%;
     border: solid 1px black;
     margin-right: 5px;
+    padding: 8px;
   }
 }

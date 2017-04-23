@@ -8,6 +8,7 @@ import { AppContainer } from 'react-hot-loader';
 
 import '../node_modules/font-awesome/css/font-awesome.css';
 import '../node_modules/bootstrap-css-only/css/bootstrap.css';
+import './styles/styles.scss';
 import Root from './core/root';
 
 const renderRootComponent = (RootComponent) => {

@@ -13,7 +13,7 @@ module.exports = [
     loader: 'file-loader'
   },
   {
-    test: /\.(woff|woff2)$/,
+    test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
     loader: 'url-loader?prefix=font/&limit=5000'
   },
   {
