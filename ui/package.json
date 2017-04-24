@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack/webpack.config.prod.js --progress --profile --colors",
-    "prebuild": "npm run lint",
+    "prebuild": "npm run lint && npm run test",
     "lint": "eslint --ext js --ext jsx src",
-    "test": "karma start --single-run --no-auto-watch karma/karma.config.js",
+    "test": "karma start karma/karma.config.js --single-run",
+    "test:watch": "karma start karma/karma.config.js",
+    "test:debug": "karma start karma/karma.config.js --browsers=Chrome",
     "start": "webpack-dev-server --config webpack/webpack.config.dev.js --progress --profile --colors",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
@@ -19,6 +21,7 @@
   "license": "",
   "homepage": "https://github.com/weaseliam/CIM#readme",
   "dependencies": {
+    "prop-types": "~15.5.0",
     "react": "~15.5.0",
     "react-bootstrap": "~0.30.9",
     "react-dom": "~15.5.0",
@@ -44,6 +47,7 @@
     "eslint": "^3.16.1",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jasmine": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
     "extract-text-webpack-plugin": "~v2.0.0-rc.1",
@@ -60,6 +64,7 @@
     "node-sass": "~4.3.0",
     "postcss": "~5.2.16",
     "postcss-loader": "~1.2.2",
+    "react-addons-test-utils": "~15.5.0",
     "react-hot-loader": "~3.0.0-beta.6",
     "react-test-renderer": "~15.5.4",
     "redux-devtools": "~3.3.2",

@@ -24,7 +24,7 @@ webpackConfig.module = baseConfig.module;
 webpackConfig.module.loaders.push({
   test: /\.scss$/,
   loaders: ['style-loader', 'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]', 'postcss-loader', 'sass-loader'],
-  exclude: ['node_modules']
+  exclude: ['node', 'node_modules']
 });
 
 webpackConfig.devServer = {

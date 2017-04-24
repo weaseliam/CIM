@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import 'babel-polyfill';
 
 import React from 'react';
@@ -12,6 +10,7 @@ import './styles/styles.scss';
 import Root from './core/root';
 
 const renderRootComponent = (RootComponent) => {
+  // eslint-disable-next-line
   const targetElement = document.getElementById('root');
 
   render(
@@ -26,6 +25,7 @@ renderRootComponent(Root);
 
 if (module && module.hot) {
   module.hot.accept('./core/root.jsx', () => {
+    // eslint-disable-next-line
     const NextRoot = require('./core/root.jsx').default;
     renderRootComponent(NextRoot);
   });

@@ -1,8 +1,14 @@
 {
+  "env": {
+      "jasmine": true,
+      "node": true
+  },
+  "plugins": ["jasmine"],
   "extends": "airbnb",
   "rules": {
     "func-names": [0],
     "comma-dangle": [0],
-    "linebreak-style": [0]
+    "linebreak-style": [0],
+    "import/no-extraneous-dependencies": [0]
   }
 }

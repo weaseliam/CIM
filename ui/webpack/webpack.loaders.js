@@ -1,7 +1,7 @@
 module.exports = [
   {
     test: /\.jsx?$/,
-    exclude: /(node_modules|bower_components|public\/)/,
+    exclude: /(node|node_modules)/,
     loader: 'babel-loader'
   },
   {
@@ -26,17 +26,17 @@ module.exports = [
   },
   {
     test: /\.gif/,
-    exclude: /(node_modules|bower_components)/,
+    exclude: /(node|node_modules)/,
     loader: 'url-loader?limit=10000&mimetype=image/gif'
   },
   {
     test: /\.jpg/,
-    exclude: /(node_modules|bower_components)/,
+    exclude: /(node|node_modules)/,
     loader: 'url-loader?limit=10000&mimetype=image/jpg'
   },
   {
     test: /\.png/,
-    exclude: /(node_modules|bower_components)/,
+    exclude: /(node|node_modules)/,
     loader: 'url-loader?limit=10000&mimetype=image/png'
   }
 ];

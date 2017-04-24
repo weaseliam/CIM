@@ -1,5 +1,4 @@
 import React from 'react';
-// eslint-disable-next-line
 import { storiesOf } from '@kadira/storybook';
 import { withKnobs, text } from '@kadira/storybook-addon-knobs';
 
@@ -12,6 +11,7 @@ stories.add('default', () => (
   <div style={{ border: 'dotted 1px blue' }}>
     <Header
       companyTitle={text('Company title', 'Company Title')}
-      userName={text('User name', 'User Name')} />
+      userName={text('User name', 'User Name')}
+    />
   </div>
 ));

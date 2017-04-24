@@ -15,7 +15,7 @@ webpackConfig.module = baseConfig.module;
 webpackConfig.module.loaders.push({
   test: /\.scss$/,
   loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader?sourceMap&modules&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader!sass-loader?outputStyle=expanded' }),
-  exclude: ['node_modules']
+  exclude: ['node', 'node_modules']
 });
 
 webpackConfig.plugins = [
