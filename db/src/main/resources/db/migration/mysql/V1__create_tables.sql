@@ -7,5 +7,8 @@ CREATE TABLE app_user (
 	email VARCHAR(128)
 );
 
+ALTER TABLE app_user
+ADD CONSTRAINT unique_user UNIQUE (user_name);
+
 INSERT INTO app_user (user_name, password, first_name, last_name) 
-VALUES ('admin', 'admin', 'System', 'Administrator');
+VALUES ('admin', 'admin', 'Administrator', 'System');

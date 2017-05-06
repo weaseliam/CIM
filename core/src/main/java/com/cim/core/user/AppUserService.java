@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 @Service
 @Repository
@@ -16,13 +17,20 @@ public class AppUserService
 {
 	private static Logger logger = LoggerFactory.getLogger(AppUserService.class);
 	
+	private AppUserRepository userRepo;
+	
 	@Autowired
-	private AppUserRepository repository;
+	public AppUserService(AppUserRepository userRepo)
+	{
+		Assert.notNull(userRepo, "userRepo must not be null");
+		
+		this.userRepo = userRepo;
+	}
 	
 	public List<AppUser> listUsers()
 	{
-		List<AppUser> users = repository.findAll();
-		logger.debug(users.toString());
+		List<AppUser> users = userRepo.findAll();
+		logger.debug("Got all app users {}", users.toString());
 		
 		return users;
 	}

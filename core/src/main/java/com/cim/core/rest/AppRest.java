@@ -10,10 +10,12 @@ public class AppRest
 {
 	private static final Logger logger = LoggerFactory.getLogger(AppRest.class);
 
+	public static final String API_PATH	= "/api";
+
 	@RequestMapping("/")
-	String toIndex()
+	public String handleIndex()
 	{
-		logger.debug("Returning index.html for application root");
+		logger.debug("Returning index for application root");
 
 		return "index.html";
 	}
