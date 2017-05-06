@@ -19,6 +19,9 @@ const App = () => (
       Testing font-awesome:
       <i className="fa fa-check fa-2x" aria-hidden="true" />
     </p>
+    <p>
+      Testing <a href="/swagger-ui.html">swagger</a>
+    </p>
     <p>Enjoy!</p>
   </div>
 );
