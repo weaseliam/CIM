@@ -1,4 +1,4 @@
-package com.cim.core.rest;
+package com.cim.core.app;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

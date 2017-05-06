@@ -1,5 +1,7 @@
 package com.cim.core.user;
 
+import org.springframework.util.Assert;
+
 public class AppUserUi
 {
 	private String userName;
@@ -12,6 +14,8 @@ public class AppUserUi
 
 	public AppUserUi(AppUser appUser)
 	{
+		Assert.notNull(appUser, "appUser must not be null");
+		
 		setUserName(appUser.getUserName());
 		setFirstName(appUser.getFirstName());
 		setLastName(appUser.getLastName());
