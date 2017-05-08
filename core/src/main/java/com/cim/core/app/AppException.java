@@ -12,9 +12,28 @@ public class AppException extends RuntimeException
 		super();
 	}
 
-	public AppException(String code, String[] params, String message, Throwable t)
+	public AppException(String code)
 	{
-		super(message, t);
+		super();
+		setCode(code);
+	}
+	
+	public AppException(String code, Throwable t)
+	{
+		super(t);
+		setCode(code);
+	}
+	
+	public AppException(String code, String[] params)
+	{
+		super();
+		setCode(code);
+		setParams(params);
+	}
+
+	public AppException(String code, String[] params, Throwable t)
+	{
+		super(t);
 		setCode(code);
 		setParams(params);
 	}
@@ -22,6 +41,13 @@ public class AppException extends RuntimeException
 	public AppException(String code, String[] params, String message)
 	{
 		super(message);
+		setCode(code);
+		setParams(params);
+	}
+
+	public AppException(String code, String[] params, String message, Throwable t)
+	{
+		super(message, t);
 		setCode(code);
 		setParams(params);
 	}

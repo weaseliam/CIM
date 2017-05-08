@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import com.cim.core.app.AppException;
+
 @Service
 @Repository
 @Transactional(readOnly = true)
@@ -34,6 +36,11 @@ public class SessionService
 		
 		String userName = auth.getName();
 		AppUser user = userRepo.findByUserNameIgnoreCase(userName);
+		if (user == null)
+		{
+			throw new AppException("session.user.notFoundInDB");
+		}
+		
 		logger.debug("Got logged in user {}", user);
 		
 		return user;
