@@ -21,21 +21,23 @@ public class UiException
 		updateTimestamp();
 	}
 
-	public UiException(AppException e)
-	{
-		Assert.notNull(e, "AppException must not be null");
-		
-		updateTimestamp();
-		setCode(e.getCode());
-		setParams(e.getParams());
-		setMessage(e.getMessage());
-	}
-
 	public UiException(Throwable t)
 	{
 		Assert.notNull(t, "Throwable must not be null");
-		
 		updateTimestamp();
+		
+		if (t instanceof AppException)
+		{
+			AppException e = (AppException) t;
+			
+			setCode(e.getCode());
+			setParams(e.getParams());
+		}
+		else
+		{
+			setCode(t.getClass().getName());
+		}
+		
 		setMessage(t.getMessage());
 	}
 
@@ -82,12 +84,12 @@ public class UiException
 	private void updateTimestamp()
 	{
 		setTimestamp(TIMESTAMP_FORMAT.format(new Date()));
-	}	
-	
+	}
+
 	@Override
 	public String toString()
 	{
-		return "AppException [code=" + code + ", params=" + Arrays.toString(params) + ", message=" + message
+		return "UiException [code=" + code + ", params=" + Arrays.toString(params) + ", message=" + message
 				+ ", timestamp=" + timestamp + "]";
 	}
 }

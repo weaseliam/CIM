@@ -14,42 +14,42 @@ public class AppException extends RuntimeException
 
 	public AppException(String code)
 	{
-		super();
-		setCode(code);
+		super(code);
+		this.code = code;
 	}
 	
 	public AppException(String code, Throwable t)
 	{
-		super(t);
-		setCode(code);
+		super(code, t);
+		this.code = code;
 	}
 	
 	public AppException(String code, String[] params)
 	{
-		super();
-		setCode(code);
-		setParams(params);
+		super(code);
+		this.code = code;
+		this.params = params;
 	}
 
 	public AppException(String code, String[] params, Throwable t)
 	{
-		super(t);
-		setCode(code);
-		setParams(params);
+		super(code, t);
+		this.code = code;
+		this.params = params;
 	}
 
 	public AppException(String code, String[] params, String message)
 	{
 		super(message);
-		setCode(code);
-		setParams(params);
+		this.code = code;
+		this.params = params;
 	}
 
 	public AppException(String code, String[] params, String message, Throwable t)
 	{
 		super(message, t);
-		setCode(code);
-		setParams(params);
+		this.code = code;
+		this.params = params;
 	}
 
 	public AppException(String code, String message)
@@ -67,19 +67,9 @@ public class AppException extends RuntimeException
 		return code;
 	}
 
-	public void setCode(String code)
-	{
-		this.code = code;
-	}
-
 	public String[] getParams()
 	{
 		return params;
-	}
-
-	public void setParams(String[] params)
-	{
-		this.params = params;
 	}
 
 	@Override

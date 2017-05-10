@@ -1,5 +1,6 @@
 package com.cim.core.app;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
@@ -19,8 +20,9 @@ public class ExceptionConfig
 	@ExceptionHandler({ Exception.class })
 	public ResponseEntity<Object> handleGlobalException(Exception e, WebRequest request)
 	{
+		logger.error("Caught exception in global handler", e);
+		
 		Exception i18nEx = tryToI18N(e, request.getLocale());
-		logger.error("Caught exception in global handler", i18nEx);
 
 		return new ResponseEntity<Object>(new UiException(i18nEx), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
@@ -34,14 +36,15 @@ public class ExceptionConfig
 		
 		AppException appEx = (AppException) e;
 		
-		if (!StringUtils.isBlank(e.getMessage()) ||
-			StringUtils.isBlank(appEx.getCode()))
+		if (StringUtils.isBlank(appEx.getCode()) ||
+			!StringUtils.isBlank(appEx.getMessage()) &&
+				!StringUtils.equals(appEx.getCode(), appEx.getMessage()))
 		{
 			return appEx;
 		}
 		
-		//TODO: perform English i18n based on code using dedicated service
-		String i18nMessage = appEx.getCode();
+		//TODO: perform English i18n based on code and params using dedicated service
+		String i18nMessage = appEx.getCode() + Arrays.toString(appEx.getParams());
 		
 		return new AppException(appEx.getCode(), 
 								appEx.getParams(), 
