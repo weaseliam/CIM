@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 import Header from '../components/header';
 import { fetchLoggedInUser } from '../actions/app-actions';
@@ -20,7 +21,17 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header companyTitle="CIM Company" userName={this.props.user.userName} className={styles.header} />
+        <div className={styles.headerContainer}>
+          <div className={styles.header}>
+            <Header companyTitle="CIM Company" userName={this.props.user.userName} />
+          </div>
+          <div className={styles.userMenu}>
+            <DropdownButton bsStyle="default" bsSize="xsmall" pullRight>
+              <MenuItem eventKey="1">Logout</MenuItem>
+            </DropdownButton>
+          </div>
+        </div>
+
         {this.props.children}
       </div>
     );
