@@ -1,7 +1,11 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import App from '../layout/components/app';
+
+import App from '../layout/containers/app';
+import Page1 from '../layout/containers/page1';
 
 export default (
-  <Route exact path="/" component={App} />
+  <App>
+    <Route exact path="/" component={Page1} />
+  </App>
 );

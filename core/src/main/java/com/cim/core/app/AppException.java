@@ -26,15 +26,13 @@ public class AppException extends RuntimeException
 	
 	public AppException(String code, String[] params)
 	{
-		super(code);
-		this.code = code;
+		this(code);
 		this.params = params;
 	}
 
 	public AppException(String code, String[] params, Throwable t)
 	{
-		super(code, t);
-		this.code = code;
+		this(code, t);
 		this.params = params;
 	}
 

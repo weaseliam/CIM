@@ -33,7 +33,7 @@ const configureStore = () => {
 
   store.close = () => store.dispatch(END);
   store.runSaga = sagaMiddleware.run;
-  store.runSaga(rootSaga);
+  rootSaga.map(saga => store.runSaga(saga));
 
   return store;
 };

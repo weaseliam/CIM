@@ -5,10 +5,13 @@
   },
   "plugins": ["jasmine"],
   "extends": "airbnb",
+  "parser": "babel-eslint",
   "rules": {
+    "strict": 0,
     "func-names": [0],
     "comma-dangle": [0],
     "linebreak-style": [0],
-    "import/no-extraneous-dependencies": [0]
+    "import/no-extraneous-dependencies": [0],
+    "react/prop-types": [0]
   }
 }

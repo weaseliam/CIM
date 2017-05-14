@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
+import AppReducer from '../layout/reducers/app-reducer';
+
 export default combineReducers({
-  // eslint-disable-next-line
-  app: function (state, action) { if (state == null) state = []; return state; }
+  app: AppReducer
 });

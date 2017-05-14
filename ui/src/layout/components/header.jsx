@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import styles from './header.scss';
 
-const Header = ({ companyTitle, userName }) => (
-  <div className={styles.header}>
+const Header = ({ companyTitle, userName, className }) => (
+  <div className={classNames(styles.header, className)}>
     <div className={styles.company}>
       {companyTitle}
     </div>
@@ -16,12 +17,14 @@ const Header = ({ companyTitle, userName }) => (
 
 Header.propTypes = {
   companyTitle: PropTypes.string,
-  userName: PropTypes.string
+  userName: PropTypes.string,
+  className: PropTypes.string
 };
 
 Header.defaultProps = {
   companyTitle: 'Company Title',
-  userName: 'User Name'
+  userName: 'User Name',
+  className: ''
 };
 
 export default Header;

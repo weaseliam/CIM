@@ -1,7 +1,5 @@
-// import { fork } from 'redux-saga/effects';
+import appSagas from '../layout/sagas/app-saga';
 
-// import customSaga from './custom-saga';
-
-export default function* rootSaga() {
-  // yield fork(customSaga);
-}
+export default [
+  appSagas
+];
