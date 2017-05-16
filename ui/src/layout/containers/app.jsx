@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
+import { autobind } from 'core-decorators';
 
 import Header from '../components/header';
-import { fetchLoggedInUser } from '../actions/app-actions';
+import { fetchLoggedInUserAction, logOutUserAction } from '../actions/app-actions';
 
 import styles from './app.scss';
 
@@ -15,7 +16,12 @@ const mapStateToProps = state => ({
 @connect(mapStateToProps)
 class App extends Component {
   componentWillMount() {
-    this.props.dispatch(fetchLoggedInUser());
+    this.props.dispatch(fetchLoggedInUserAction());
+  }
+
+  @autobind
+  handleLogout() {
+    this.props.dispatch(logOutUserAction());
   }
 
   render() {
@@ -27,7 +33,7 @@ class App extends Component {
           </div>
           <div className={styles.userMenu}>
             <DropdownButton bsStyle="default" bsSize="xsmall" pullRight>
-              <MenuItem eventKey="1">Logout</MenuItem>
+              <MenuItem onSelect={this.handleLogout}>Logout</MenuItem>
             </DropdownButton>
           </div>
         </div>

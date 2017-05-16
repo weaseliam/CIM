@@ -1,20 +1,32 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 
-import { getLoggedInUser } from '../apis/app-api';
+import { getLoggedInUser, logOutUser } from '../apis/app-api';
 import { ACTION_START, ACTION_SUCCESS, ACTION_ERROR } from '../../core/constants';
-import { fetchLoggedInUser, FETCH_LOGGED_IN_USER } from '../actions/app-actions';
+import { fetchLoggedInUserAction, logOutUserAction, FETCH_LOGGED_IN_USER, LOG_OUT_USER } from '../actions/app-actions';
 
 function* fetchLoggedInUserSaga() {
   try {
-    yield put(fetchLoggedInUser(null, ACTION_START));
+    yield put(fetchLoggedInUserAction(null, ACTION_START));
     const user = yield call(getLoggedInUser);
 
-    yield put(fetchLoggedInUser(user, ACTION_SUCCESS));
+    yield put(fetchLoggedInUserAction(user, ACTION_SUCCESS));
   } catch (error) {
-    yield put(fetchLoggedInUser(error.response.data, ACTION_ERROR));
+    yield put(fetchLoggedInUserAction(error.response.data, ACTION_ERROR));
+  }
+}
+
+function* logOutUserSaga() {
+  try {
+    yield put(logOutUserAction(ACTION_START));
+    yield call(logOutUser);
+
+    yield put(logOutUserAction(ACTION_SUCCESS));
+  } catch (error) {
+    yield put(logOutUserAction(ACTION_ERROR));
   }
 }
 
 export default function* appSagas() {
   yield takeEvery(FETCH_LOGGED_IN_USER, fetchLoggedInUserSaga);
+  yield takeEvery(LOG_OUT_USER, logOutUserSaga);
 }

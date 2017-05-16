@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 import com.cim.core.user.AppUser;
 import com.cim.core.user.AppUserService;
@@ -61,7 +62,19 @@ class SecurityConfig
 				.httpBasic()
 					.and()
 				.logout()
+					.logoutUrl("/logout")
+					.deleteCookies("JSESSIONID")
+//					.invalidateHttpSession(true)
+//					.logoutSuccessUrl("/")
+					.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
 					.permitAll();
+//					.and()
+//	            .sessionManagement()
+//		            .sessionFixation()
+//		            .newSession()
+//	                .maximumSessions(1)
+//	                .maxSessionsPreventsLogin(true)
+//	                .expiredUrl("/");
 				
 				// TODO: Remove these in the future
 				http.csrf().disable();
