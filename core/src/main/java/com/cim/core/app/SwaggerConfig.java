@@ -24,7 +24,7 @@ public class SwaggerConfig
 						.build())
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("com.cim"))
-				.paths(PathSelectors.ant(AppRest.API_PATH + "/*"))
+				.paths(PathSelectors.ant(AppController.API_PATH + "/*"))
 				.build();
 	}
 }

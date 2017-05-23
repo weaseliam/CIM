@@ -8,14 +8,5 @@ export const getLoggedInUser = () => (
 );
 
 export const logOutUser = () => {
-  // logout from server
-  axios.get('/logout');
-
-  // logout from basic auth
-  axios.get('/', {
-    auth: {
-      username: '',
-      password: ''
-    }
-  });
+  axios.post('/logout');
 };

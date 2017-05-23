@@ -6,17 +6,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class AppRest
+public class AppController
 {
-	private static final Logger logger = LoggerFactory.getLogger(AppRest.class);
+	private static final Logger logger = LoggerFactory.getLogger(AppController.class);
 
 	public static final String API_PATH	= "/api";
 
 	@RequestMapping("/")
-	public String handleIndex()
+	public String index()
 	{
 		logger.debug("Returning index for application root");
 
 		return "index.html";
+	}
+
+	@RequestMapping("/login")
+	public String login()
+	{
+		return "login";
 	}
 }

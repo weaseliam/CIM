@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cim.core.app.AppRest;
+import com.cim.core.app.AppController;
 
 @RestController
-@RequestMapping(AppRest.API_PATH + "/session")
+@RequestMapping(AppController.API_PATH + "/session")
 public class SessionRest
 {
 	private static final Logger logger = LoggerFactory.getLogger(SessionRest.class);

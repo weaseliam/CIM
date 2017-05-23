@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 
 import com.cim.core.user.AppUser;
 import com.cim.core.user.AppUserService;
@@ -24,7 +23,7 @@ class SecurityConfig
 	private static Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 	
 	@Bean
-	@Profile(Profiles.DEVELOPMENT)
+	@Profile(AppProfiles.DEVELOPMENT)
 	WebSecurityConfigurerAdapter noAuth()
 	{
 		return new WebSecurityConfigurerAdapter()
@@ -40,7 +39,7 @@ class SecurityConfig
 	}
 
 	@Bean
-	@Profile(Profiles.PRODUCTION)
+	@Profile(AppProfiles.PRODUCTION)
 	WebSecurityConfigurerAdapter basic()
 	{
 		return new WebSecurityConfigurerAdapter()
@@ -55,27 +54,30 @@ class SecurityConfig
 				
 				http
 					.authorizeRequests()
-					.antMatchers("/").permitAll()
-					.anyRequest()
-					.authenticated()
-					.and()
-				.httpBasic()
-					.and()
-				.logout()
-					.logoutUrl("/logout")
-					.deleteCookies("JSESSIONID")
-//					.invalidateHttpSession(true)
-//					.logoutSuccessUrl("/")
-					.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
-					.permitAll();
-//					.and()
-//	            .sessionManagement()
-//		            .sessionFixation()
-//		            .newSession()
-//	                .maximumSessions(1)
-//	                .maxSessionsPreventsLogin(true)
-//	                .expiredUrl("/");
-				
+						.antMatchers("/").permitAll()
+						.anyRequest().authenticated()
+						.and()
+					.formLogin()
+						.loginPage("/login")
+						.permitAll()
+						.and()
+//					.httpBasic()
+//						.and()
+					.logout()
+						.logoutUrl("/logout")
+						.deleteCookies("JSESSIONID")
+						.invalidateHttpSession(true)
+//						.logoutSuccessUrl("/login")
+//						.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
+						.permitAll();
+//						.and()
+//		            .sessionManagement()
+//			            .sessionFixation()
+//			            .newSession()
+//		                .maximumSessions(1)
+//		                .maxSessionsPreventsLogin(true)
+//		                .expiredUrl("/login");
+					
 				// TODO: Remove these in the future
 				http.csrf().disable();
 				http.headers().frameOptions().sameOrigin();
