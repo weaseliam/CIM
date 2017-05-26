@@ -8,91 +8,114 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import com.cim.core.user.AppUser;
 import com.cim.core.user.AppUserService;
 
-@Configuration
 @EnableWebSecurity
 class SecurityConfig
 {
 	private static Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
-	
+
+	@Autowired
+	private AppUserService userService;
+
 	@Bean
-	@Profile(AppProfiles.DEVELOPMENT)
-	WebSecurityConfigurerAdapter noAuth()
+	public UserDetailsService userDetailsService() throws Exception
 	{
-		return new WebSecurityConfigurerAdapter()
+		List<AppUser> users = userService.listUsers();
+		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+
+		for (AppUser user : users)
 		{
-			@Override
-			public void configure(HttpSecurity http) throws Exception
-			{
-				logger.info("Running DEVELOPMENT security configuration");
-				
-				http.authorizeRequests().anyRequest().permitAll();
-			}
-		};
+			String userName = user.getUserName();
+			String password = user.getPassword();
+			manager.createUser(User
+					.withUsername(userName)
+					.password(password)
+					.roles("USER").build());
+		}
+
+		return manager;
 	}
 
-	@Bean
+	@Configuration
+	@Order(1)
 	@Profile(AppProfiles.PRODUCTION)
-	WebSecurityConfigurerAdapter basic()
+	public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter
 	{
-		return new WebSecurityConfigurerAdapter()
+		protected void configure(HttpSecurity http) throws Exception
 		{
-			@Autowired
-			private AppUserService userService;
-			
-			@Override
-			public void configure(HttpSecurity http) throws Exception
-			{
-				logger.info("Running PRODUCTION security configuration");
-				
-				http
-					.authorizeRequests()
-						.anyRequest().fullyAuthenticated()
-						.and()
-					.formLogin()
-						.loginPage("/login")
-						.permitAll()
-						.and()
-					.httpBasic()
-						.and()
-					.logout()
-						.logoutUrl("/logout")
-						.deleteCookies("JSESSIONID")
-						.invalidateHttpSession(true)
-						.logoutSuccessUrl("/login")
-//						.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
-						.and()
-		            .sessionManagement()
-			            .sessionFixation()
-			            .newSession()
-		                .maximumSessions(1)
-//		                .maxSessionsPreventsLogin(true)
-		                .expiredUrl("/login");
-				
-				// TODO: Remove these in the future
-				http.csrf().disable();
-				http.headers().frameOptions().sameOrigin();
-			}
+			logger.info("Running PRODUCTION rest api security configuration");
 
-			@Override
-			public void configure(AuthenticationManagerBuilder auth) throws Exception
-			{
-				List<AppUser> users = userService.listUsers();
-				
-				for (AppUser user : users)
-				{
-					String userName = user.getUserName();
-					String password = user.getPassword();
-					auth.inMemoryAuthentication().withUser(userName).password(password).roles("USER");
-				}
-			}
-		};
+			http
+				.antMatcher("/api/**")
+					.authorizeRequests()
+						.anyRequest()
+						.hasRole("USER")
+						.and()
+					.httpBasic();
+		}
+	}
+
+	@Configuration
+	@Profile(AppProfiles.PRODUCTION)
+	public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter
+	{
+		@Override
+		protected void configure(HttpSecurity http) throws Exception
+		{
+			logger.info("Running PRODUCTION security configuration");
+
+			http
+				.authorizeRequests()
+					.anyRequest().fullyAuthenticated()
+					.and()
+				.formLogin()
+					.loginPage("/login")
+					.permitAll()
+					.and()
+				.logout()
+					.logoutUrl("/logout")
+					.deleteCookies("JSESSIONID")
+					.invalidateHttpSession(true)
+					.logoutSuccessUrl("/login")
+					// .logoutSuccessHandler(new
+					// HttpStatusReturningLogoutSuccessHandler())
+					.and()
+				.sessionManagement()
+					.sessionFixation()
+					.newSession()
+					.maximumSessions(1)
+					// .maxSessionsPreventsLogin(true)
+					.expiredUrl("/login");
+
+			// TODO: Remove these in the future
+			http.csrf().disable();
+			http.headers().frameOptions().sameOrigin();
+		}
+	}
+
+	@Configuration
+	@Profile(AppProfiles.DEVELOPMENT)
+	public static class DevWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter
+	{
+		@Override
+		protected void configure(HttpSecurity http) throws Exception
+		{
+			logger.info("Running DEVELOPMENT security configuration");
+
+			http
+				.authorizeRequests()
+					.anyRequest()
+					.permitAll();
+		}
 	}
 }
