@@ -10,7 +10,7 @@ public class AppController
 {
 	private static final Logger logger = LoggerFactory.getLogger(AppController.class);
 
-	public static final String API_PATH	= "/api";
+	public static final String API_PATH = "/api";
 
 	@RequestMapping("/")
 	public String index()

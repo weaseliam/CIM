@@ -54,30 +54,28 @@ class SecurityConfig
 				
 				http
 					.authorizeRequests()
-						.antMatchers("/").permitAll()
-						.anyRequest().authenticated()
+						.anyRequest().fullyAuthenticated()
 						.and()
 					.formLogin()
 						.loginPage("/login")
 						.permitAll()
 						.and()
-//					.httpBasic()
-//						.and()
+					.httpBasic()
+						.and()
 					.logout()
 						.logoutUrl("/logout")
 						.deleteCookies("JSESSIONID")
 						.invalidateHttpSession(true)
-//						.logoutSuccessUrl("/login")
+						.logoutSuccessUrl("/login")
 //						.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
-						.permitAll();
-//						.and()
-//		            .sessionManagement()
-//			            .sessionFixation()
-//			            .newSession()
-//		                .maximumSessions(1)
+						.and()
+		            .sessionManagement()
+			            .sessionFixation()
+			            .newSession()
+		                .maximumSessions(1)
 //		                .maxSessionsPreventsLogin(true)
-//		                .expiredUrl("/login");
-					
+		                .expiredUrl("/login");
+				
 				// TODO: Remove these in the future
 				http.csrf().disable();
 				http.headers().frameOptions().sameOrigin();
