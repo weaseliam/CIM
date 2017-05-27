@@ -26,7 +26,13 @@ function* logOutUserSaga() {
   }
 }
 
+function* afterLogOutUserSaga() {
+  // eslint-disable-next-line
+  yield window.location = "/login?logout";
+}
+
 export default function* appSagas() {
   yield takeEvery(FETCH_LOGGED_IN_USER, fetchLoggedInUserSaga);
   yield takeEvery(LOG_OUT_USER, logOutUserSaga);
+  yield takeEvery(`${LOG_OUT_USER}${ACTION_SUCCESS}`, afterLogOutUserSaga);
 }

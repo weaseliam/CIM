@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<title>Login</title>
+	
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="icon" href="/templates/assets/favicon.ico" />
+	<link rel="stylesheet" th:href="@{/templates/css/bootstrap.min.css}" href="/templates/css/bootstrap.min.css" />
+	<link rel="stylesheet" th:href="@{/templates/css/login.css}" href="/templates/css/login.css" />
+</head>
+
+<body>
+	<form class="form-signin" th:action="@{/login}" action="/login" method="POST">
+		<h2 class="form-signin-heading">&nbsp;</h2>
+		<div th:if="${param.error}"  class="alert alert-danger">Invalid username and password.</div>
+		<div th:if="${param.logout}" class="alert alert-info">You have been logged out.</div>
+
+		<label for="inputUser" class="sr-only">User name</label>
+		<div class="input-group">
+			<span class="input-group-addon glyphicon glyphicon-user" aria-hidden="true" />
+			<input type="text" name="username" id="inputUser"
+				   class="form-control" placeholder="User name" required="" autofocus="" />
+		</div>
+		
+		<label for="inputPass" class="sr-only">Password</label>
+		<div class="input-group">
+			<span class="input-group-addon glyphicon glyphicon-pencil" aria-hidden="true" />
+			<input type="password" name="password" id="inputPass"
+				   class="form-control" placeholder="Password" required="" />
+		</div>
+		
+		<button class="btn btn-lg btn-primary btn-block" type="submit">
+			Sign in &nbsp;
+			<span class="glyphicon glyphicon-log-in" aria-hidden="true" />
+		</button>
+	</form>
+</body>
+</html>

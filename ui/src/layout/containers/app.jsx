@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 import { autobind } from 'core-decorators';
+import R from 'ramda';
 
 import Header from '../components/header';
 import { fetchLoggedInUserAction, logOutUserAction } from '../actions/app-actions';
@@ -25,6 +26,11 @@ class App extends Component {
   }
 
   render() {
+    if (R.isEmpty(this.props.user) || R.isNil(this.props.user) ||
+        R.isEmpty(this.props.user.userName) || R.isNil(this.props.user.userName)) {
+      return null;
+    }
+
     return (
       <div>
         <div className={styles.headerContainer}>
@@ -33,7 +39,7 @@ class App extends Component {
           </div>
           <div className={styles.userMenu}>
             <DropdownButton bsStyle="default" bsSize="xsmall" pullRight>
-              <MenuItem onSelect={this.handleLogout}>Logout</MenuItem>
+              <MenuItem onSelect={this.handleLogout}>Sign out</MenuItem>
             </DropdownButton>
           </div>
         </div>

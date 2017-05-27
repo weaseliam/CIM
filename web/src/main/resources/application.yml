@@ -26,6 +26,7 @@ spring:
       path: /h2-console
 
   thymeleaf:
+    prefix: /templates/
     cache: false
     view-names:
       - login

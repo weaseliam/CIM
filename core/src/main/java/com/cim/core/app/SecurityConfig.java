@@ -56,7 +56,7 @@ class SecurityConfig
 			logger.info("Running PRODUCTION rest api security configuration");
 
 			http
-				.antMatcher("/api/**")
+				.antMatcher(AppController.API_PATH + "/**")
 					.authorizeRequests()
 						.anyRequest()
 						.hasRole("USER")
@@ -76,6 +76,7 @@ class SecurityConfig
 
 			http
 				.authorizeRequests()
+					.antMatchers("/templates/**").permitAll()
 					.anyRequest().fullyAuthenticated()
 					.and()
 				.formLogin()
@@ -86,15 +87,12 @@ class SecurityConfig
 					.logoutUrl("/logout")
 					.deleteCookies("JSESSIONID")
 					.invalidateHttpSession(true)
-					.logoutSuccessUrl("/login")
-					// .logoutSuccessHandler(new
-					// HttpStatusReturningLogoutSuccessHandler())
+					.logoutSuccessUrl("/login?logout")
 					.and()
 				.sessionManagement()
 					.sessionFixation()
 					.newSession()
 					.maximumSessions(1)
-					// .maxSessionsPreventsLogin(true)
 					.expiredUrl("/login");
 
 			// TODO: Remove these in the future
