@@ -1,8 +1,8 @@
 bundle.js
 index.html
 style.css
-*.woff
-*.woff2
-*.eot
-*.svg
-*.ttf
+/*.woff
+/*.woff2
+/*.eot
+/*.svg
+/*.ttf
