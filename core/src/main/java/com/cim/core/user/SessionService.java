@@ -38,7 +38,7 @@ public class SessionService
 		AppUser user = userRepo.findByUserNameIgnoreCase(userName);
 		if (user == null)
 		{
-			throw new AppException("session.user.notFoundInDB");
+			throw new AppException("session.user.notFoundInDB", new String[]{ userName });
 		}
 		
 		logger.debug("Got logged in user {}", user);

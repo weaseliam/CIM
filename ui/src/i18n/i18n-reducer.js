@@ -1,7 +1,7 @@
 export const INITIAL_STATE = {
   i18n: {
     language: '',
-    dictionary: {}
+    messages: {}
   }
 };
 

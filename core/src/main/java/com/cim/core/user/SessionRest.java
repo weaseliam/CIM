@@ -3,6 +3,7 @@ package com.cim.core.user;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,12 +28,12 @@ public class SessionRest
 	}
 	
 	@GetMapping
-	public AppUserUi getLoggedInUser()
+	public ResponseEntity<AppUserUi> getLoggedInUser()
 	{
 		AppUser user = sessionService.getLoggedInUser();
 		AppUserUi uiUser = new AppUserUi(user);
 		
 		logger.debug("Response {}", uiUser);
-		return uiUser;
+		return ResponseEntity.ok(uiUser);
 	}
 }
