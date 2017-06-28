@@ -6,7 +6,8 @@ import { autobind } from 'core-decorators';
 import R from 'ramda';
 
 import Header from '../components/header';
-import { fetchLoggedInUserAction, logOutUserAction } from '../actions/app-actions';
+import Loading from '../components/loading';
+import { bootstrapAppAction, logOutUserAction } from '../actions/app-actions';
 
 import styles from './app.scss';
 
@@ -16,8 +17,8 @@ const mapStateToProps = state => ({
 
 @connect(mapStateToProps)
 class App extends Component {
-  componentWillMount() {
-    this.props.dispatch(fetchLoggedInUserAction());
+  componentDidMount() {
+    this.props.dispatch(bootstrapAppAction());
   }
 
   @autobind
@@ -28,7 +29,7 @@ class App extends Component {
   render() {
     if (R.isEmpty(this.props.user) || R.isNil(this.props.user) ||
         R.isEmpty(this.props.user.userName) || R.isNil(this.props.user.userName)) {
-      return null;
+      return <Loading />;
     }
 
     return (

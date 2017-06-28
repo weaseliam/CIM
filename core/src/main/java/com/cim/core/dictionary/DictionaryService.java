@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
@@ -109,6 +111,11 @@ public class DictionaryService
 	public String getDefaultLanguage()
 	{
 		return defaultLang;
+	}
+	
+	public List<String> listSupportedLanguages()
+	{
+		return new ArrayList<String>(dictionaries.keySet());
 	}
 	
 	public String getMessage(String code)

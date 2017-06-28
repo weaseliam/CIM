@@ -1,12 +1,10 @@
 package com.cim.core.dictionary;
 
-import java.util.Locale;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
@@ -36,8 +34,7 @@ public class DictionaryRest
 	@GetMapping
 	public ResponseEntity<DictionaryUi> getDictionary()
 	{
-		Locale locale = LocaleContextHolder.getLocale();
-		String lang = locale.getLanguage();
+		String lang = dictionaryService.getDefaultLanguage();
 		
 		return getDictionary(lang);
 	}
