@@ -1,14 +1,14 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 
-import { getLoggedInUser, logOutUser } from '../apis/app-api';
-import { ACTION_START, ACTION_SUCCESS, ACTION_ERROR } from '../../core/constants';
+import { getLoggedInUser, logOutUser } from './app-api';
+import { ACTION_START, ACTION_SUCCESS, ACTION_ERROR } from '../core/constants';
 import {
   bootstrapAppAction,
   fetchLoggedInUserAction,
   logOutUserAction,
   BOOTSTRAP_APP, LOG_OUT_USER
-} from '../actions/app-actions';
-import { changeLanguageSaga } from '../../i18n/i18n-saga';
+} from './app-actions';
+import { changeLanguageSaga } from '../i18n/i18n-saga';
 
 function* fetchLoggedInUserSaga() {
   try {

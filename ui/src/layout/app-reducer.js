@@ -1,5 +1,5 @@
-import { ACTION_START, ACTION_SUCCESS, ACTION_ERROR } from '../../core/constants';
-import { FETCH_LOGGED_IN_USER } from '../actions/app-actions';
+import { ACTION_START, ACTION_SUCCESS, ACTION_ERROR } from '../core/constants';
+import { FETCH_LOGGED_IN_USER } from './app-actions';
 
 export const INITIAL_STATE = {
   session: {

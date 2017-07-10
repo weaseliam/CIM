@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { API_PATH } from '../../core/constants';
+import { API_PATH } from '../core/constants';
 
 export const getLoggedInUser = () => (
   axios.get(`${API_PATH}/session`)

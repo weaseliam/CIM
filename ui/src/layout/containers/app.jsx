@@ -7,7 +7,7 @@ import R from 'ramda';
 
 import Header from '../components/header';
 import Loading from '../components/loading';
-import { bootstrapAppAction, logOutUserAction } from '../actions/app-actions';
+import { bootstrapAppAction, logOutUserAction } from '../app-actions';
 
 import styles from './app.scss';
 

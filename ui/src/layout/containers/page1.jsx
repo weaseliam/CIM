@@ -26,11 +26,11 @@ class Page1 extends Component {
           Click browser inspect to see for yourself :P
         </p>
         <p>
-          Testing bootstrap:
+          Testing bootstrap<br />
           <Button bsStyle="success">Success</Button>
         </p>
         <p>
-          Testing font-awesome:
+          Testing font-awesome<br />
           <i className="fa fa-check fa-2x" aria-hidden="true" />
         </p>
         <p>
