@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
 
 import { ACTION_START, ACTION_SUCCESS, ACTION_ERROR } from '../core/constants';
 import { changeLanguageAction, CHANGE_LANGUAGE } from './i18n-actions';
@@ -17,5 +17,5 @@ export function* changeLanguageSaga() {
 }
 
 export default function* i18nSagas() {
-  yield takeEvery(CHANGE_LANGUAGE, changeLanguageSaga);
+  yield takeLatest(CHANGE_LANGUAGE, changeLanguageSaga);
 }
