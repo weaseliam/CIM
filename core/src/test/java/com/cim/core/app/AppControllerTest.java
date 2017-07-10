@@ -1,4 +1,4 @@
-package com.cim.core.rest;
+package com.cim.core.app;
 
 import static io.restassured.RestAssured.given;
 
@@ -11,17 +11,26 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class AppRestTest
+public class AppControllerTest
 {
     @LocalServerPort
     int port;
 	
 	@Test
-	public void testAppRoot()
+	public void testRoot()
 	{
 		given().
 			port(port).
 		when().
 			get("/");
+	}
+	
+	@Test
+	public void testLogin()
+	{
+		given().
+			port(port).
+		when().
+			get("/login");
 	}
 }
