@@ -11,6 +11,8 @@ webpackConfig.output = baseConfig.output;
 
 webpackConfig.resolve = baseConfig.resolve;
 
+webpackConfig.devtool = 'cheap-source-map';
+
 webpackConfig.module = baseConfig.module;
 webpackConfig.module.loaders.push({
   test: /\.scss$/,

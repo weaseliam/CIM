@@ -13,7 +13,7 @@ webpackConfig.entry = [
   baseConfig.entry
 ];
 
-webpackConfig.devtool = process.env.WEBPACK_DEVTOOL || 'eval-source-map';
+webpackConfig.devtool = 'inline-source-map';
 
 webpackConfig.output = baseConfig.output;
 webpackConfig.output.path = `/${webpackConfig.output.path}`;
