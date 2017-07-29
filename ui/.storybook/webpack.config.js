@@ -1,5 +1,5 @@
 const genDefaultConfig = require('@storybook/react/dist/server/config/defaults/webpack.config.js');
-const baseConfig = require('../webpack/webpack.config.base');
+const baseConfig = require('../.webpack/webpack.config.base');
 
 module.exports = function(config, env) {
   var config = genDefaultConfig(config, env);
