@@ -1,8 +1,17 @@
 import R from 'ramda';
 
+import { isNilOrEmpty } from '../core/util';
+
+/**
+ * If the message contains string sequence of type `{n}` were n is a number
+ * between 1 and 9, it will replace it with the n-th value from params.
+ *
+ * @param {string} message
+ * @param {Array} params
+ * @returns formatted message or initial message
+ */
 export const format = (message, params) => {
-  if (R.isNil(message) || R.isEmpty(message ||
-      R.isNil(params) || R.isEmpty(params))) {
+  if (isNilOrEmpty(message) || isNilOrEmpty(params)) {
     return message;
   }
 
@@ -34,8 +43,19 @@ export const format = (message, params) => {
   return formatted;
 };
 
+/**
+ * Translate code and parameters using messages.
+ * The code is the key part from messages.
+ * If the message contains string sequence of type `{n}` were n is a number
+ * between 1 and 9, it will replace it with the n-th value from params.
+ *
+ * @param {object} messages dictionary messages
+ * @param {string} code translation code
+ * @param {Array} params translation parameters
+ * @returns translated message or initial translation code
+ */
 export const translate = (messages, code, params) => {
-  if (R.isNil(code) || R.isEmpty(code)) {
+  if (isNilOrEmpty(code)) {
     return code;
   }
 
@@ -44,7 +64,7 @@ export const translate = (messages, code, params) => {
     return code;
   }
 
-  if (R.isNil(params) || R.isEmpty(params)) {
+  if (isNilOrEmpty(params)) {
     return message;
   }
 

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import withI18n from '../../i18n/i18n-hoc';
 
-import styles from './app.scss';
+import styles from './page1.scss';
 
 const mapStateToProps = state => ({
   userName: state.app.session.user.userName
@@ -13,7 +13,10 @@ const mapStateToProps = state => ({
 @withI18n
 @connect(mapStateToProps)
 class Page1 extends Component {
-  componentDidUpdate() {
+  static propTypes = {
+  }
+
+  static defaultProps = {
   }
 
   render() {
@@ -26,35 +29,30 @@ class Page1 extends Component {
           Click browser inspect to see for yourself :P
         </p>
         <p>
-          Testing bootstrap<br />
+          <b>Testing bootstrap</b><br />
           <Button bsStyle="success">Success</Button>
         </p>
         <p>
-          Testing font-awesome<br />
+          <b>Testing font-awesome</b><br />
           <i className="fa fa-check fa-2x" aria-hidden="true" />
         </p>
         <p>
-          Testing <a href="/swagger-ui.html" target="_blank" rel="noopener noreferrer">swagger</a>
+          <b>Testing swagger</b><br />
+          <a href="/swagger-ui.html" target="_blank" rel="noopener noreferrer">swagger</a>
         </p>
         <p>
-          Testing redux<br />
+          <b>Testing redux</b><br />
           User name from state: {this.props.userName}
         </p>
         <p>
-          Testing i18n<br />
+          <b>Testing i18n</b><br />
           Current language: {this.props.i18n.language}<br />
           Translation test: {this.props.t('session.user.notFoundInDB', ['test'])}
         </p>
-        <p>Enjoy!</p>
+        <h3>Enjoy!</h3>
       </div>
     );
   }
 }
-
-Page1.propTypes = {
-};
-
-Page1.defaultProps = {
-};
 
 export default Page1;

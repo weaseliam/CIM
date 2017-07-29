@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 import { autobind } from 'core-decorators';
-import R from 'ramda';
 
 import Header from '../components/header';
 import Loading from '../components/loading';
 import { bootstrapAppAction, logOutUserAction } from '../app-actions';
+import { isNilOrEmpty } from '../../core/util';
 
 import styles from './app.scss';
 
@@ -17,6 +17,14 @@ const mapStateToProps = state => ({
 
 @connect(mapStateToProps)
 class App extends Component {
+  static propTypes = {
+    children: PropTypes.node
+  }
+
+  static defaultProps = {
+    children: []
+  }
+
   componentDidMount() {
     this.props.dispatch(bootstrapAppAction());
   }
@@ -27,8 +35,7 @@ class App extends Component {
   }
 
   render() {
-    if (R.isEmpty(this.props.user) || R.isNil(this.props.user) ||
-        R.isEmpty(this.props.user.userName) || R.isNil(this.props.user.userName)) {
+    if (isNilOrEmpty(this.props.user) || isNilOrEmpty(this.props.user.userName)) {
       return <Loading />;
     }
 
@@ -50,13 +57,5 @@ class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  children: PropTypes.node
-};
-
-App.defaultProps = {
-  children: []
-};
 
 export default App;

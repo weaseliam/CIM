@@ -7,10 +7,11 @@ import { AppContainer } from 'react-hot-loader';
 import '../node_modules/font-awesome/css/font-awesome.css';
 import '../node_modules/bootstrap-css-only/css/bootstrap.css';
 import './styles/styles.scss';
+
 import Root from './core/root';
 
 const renderRootComponent = (RootComponent) => {
-  // eslint-disable-next-line
+  // eslint-disable-next-line no-undef
   const targetElement = document.getElementById('root');
 
   render(
@@ -25,7 +26,7 @@ renderRootComponent(Root);
 
 if (module && module.hot) {
   module.hot.accept('./core/root.jsx', () => {
-    // eslint-disable-next-line
+    // eslint-disable-next-line global-require
     const NextRoot = require('./core/root.jsx').default;
     renderRootComponent(NextRoot);
   });

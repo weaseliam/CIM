@@ -10,6 +10,9 @@ import {
 } from './app-actions';
 import { changeLanguageSaga } from '../i18n/i18n-saga';
 
+/**
+ * Fetch current logged in user detail saga.
+ */
 function* fetchLoggedInUserSaga() {
   try {
     yield put(fetchLoggedInUserAction(undefined, ACTION_START));
@@ -22,6 +25,9 @@ function* fetchLoggedInUserSaga() {
   }
 }
 
+/**
+ * Bootstrap application saga.
+ */
 function* bootstrapAppSaga() {
   try {
     yield put(bootstrapAppAction(undefined, ACTION_START));
@@ -35,6 +41,9 @@ function* bootstrapAppSaga() {
   }
 }
 
+/**
+ * Log out current user saga.
+ */
 function* logOutUserSaga() {
   try {
     yield put(logOutUserAction(ACTION_START));
@@ -47,9 +56,12 @@ function* logOutUserSaga() {
   }
 }
 
+/**
+ * After successful log out user saga.
+ */
 function* afterLogOutUserSaga() {
-  // eslint-disable-next-line
-  yield window.location = "/login?logout";
+  // eslint-disable-next-line no-undef
+  yield window.location = '/login?logout';
 }
 
 export default function* appSagas() {
