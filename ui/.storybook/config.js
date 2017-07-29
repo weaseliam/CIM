@@ -1,4 +1,4 @@
-import { configure } from '@kadira/storybook';
+import { configure } from '@storybook/react';
 import '../node_modules/font-awesome/css/font-awesome.css';
 import '../src/styles/styles.scss';
 

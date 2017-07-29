@@ -1,4 +1,4 @@
-const genDefaultConfig = require('@kadira/storybook/dist/server/config/defaults/webpack.config.js');
+const genDefaultConfig = require('@storybook/react/dist/server/config/defaults/webpack.config.js');
 const baseConfig = require('../webpack/webpack.config.base');
 
 module.exports = function(config, env) {
