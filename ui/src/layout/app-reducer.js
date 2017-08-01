@@ -1,4 +1,4 @@
-import { fetchLoggedInUserRoutine } from './app-actions';
+import { fetchLoggedInUserRoutine } from './app-routines';
 
 export const INITIAL_STATE = {
   session: {

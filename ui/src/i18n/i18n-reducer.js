@@ -1,4 +1,4 @@
-import { changeLanguageRoutine } from './i18n-actions';
+import { changeLanguageRoutine } from './i18n-routines';
 
 export const INITIAL_STATE = {
   language: '',

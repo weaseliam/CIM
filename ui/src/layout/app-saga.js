@@ -5,7 +5,7 @@ import {
   bootstrapAppRoutine,
   fetchLoggedInUserRoutine,
   logOutUserRoutine
-} from './app-actions';
+} from './app-routines';
 import { changeLanguageSaga } from '../i18n/i18n-saga';
 
 /**

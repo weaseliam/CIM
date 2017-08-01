@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 
-import { changeLanguageRoutine } from './i18n-actions';
+import { changeLanguageRoutine } from './i18n-routines';
 import fetchDictionary from './i18n-api';
 
 /**

@@ -6,7 +6,7 @@ import { autobind } from 'core-decorators';
 
 import Header from '../components/header';
 import Loading from '../components/loading';
-import { bootstrapAppRoutine, logOutUserRoutine } from '../app-actions';
+import { bootstrapAppRoutine, logOutUserRoutine } from '../app-routines';
 import { isNilOrEmpty } from '../../core/util';
 
 import styles from './app.scss';
