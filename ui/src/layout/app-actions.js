@@ -1,27 +1,17 @@
-export const BOOTSTRAP_APP = 'BOOTSTRAP_APP';
-export const FETCH_LOGGED_IN_USER = 'FETCH_LOGGED_IN_USER';
-export const LOG_OUT_USER = 'LOG_OUT_USER';
+import { createRoutine } from 'redux-saga-routines';
 
 /**
- * Bootstrap application action.
+ * Bootstrap application routine.
  * This is called at application start, after successful login.
  */
-export const bootstrapAppAction = (payload = undefined, phase = '') => ({
-  type: `${BOOTSTRAP_APP}${phase}`,
-  payload
-});
+export const bootstrapAppRoutine = createRoutine('BOOTSTRAP_APP');
 
 /**
- * Fetch current logged in user details action.
+ * Fetch current logged in user details routine.
  */
-export const fetchLoggedInUserAction = (payload = undefined, phase = '') => ({
-  type: `${FETCH_LOGGED_IN_USER}${phase}`,
-  payload
-});
+export const fetchLoggedInUserRoutine = createRoutine('FETCH_LOGGED_IN_USER');
 
 /**
- * Log out current user action.
+ * Log out current user routine.
  */
-export const logOutUserAction = (phase = '') => ({
-  type: `${LOG_OUT_USER}${phase}`
-});
+export const logOutUserRoutine = createRoutine('LOG_OUT_USER');

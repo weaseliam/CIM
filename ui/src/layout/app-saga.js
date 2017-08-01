@@ -1,12 +1,10 @@
 import { takeEvery, call, put } from 'redux-saga/effects';
 
 import { getLoggedInUser, logOutUser } from './app-api';
-import { ACTION_START, ACTION_SUCCESS, ACTION_ERROR } from '../core/constants';
 import {
-  bootstrapAppAction,
-  fetchLoggedInUserAction,
-  logOutUserAction,
-  BOOTSTRAP_APP, LOG_OUT_USER
+  bootstrapAppRoutine,
+  fetchLoggedInUserRoutine,
+  logOutUserRoutine
 } from './app-actions';
 import { changeLanguageSaga } from '../i18n/i18n-saga';
 
@@ -15,13 +13,11 @@ import { changeLanguageSaga } from '../i18n/i18n-saga';
  */
 function* fetchLoggedInUserSaga() {
   try {
-    yield put(fetchLoggedInUserAction(undefined, ACTION_START));
-
     const user = yield call(getLoggedInUser);
 
-    yield put(fetchLoggedInUserAction(user, ACTION_SUCCESS));
+    yield put(fetchLoggedInUserRoutine.success(user));
   } catch (error) {
-    yield put(fetchLoggedInUserAction(error.response.data, ACTION_ERROR));
+    yield put(fetchLoggedInUserRoutine.failure(error.response.data));
   }
 }
 
@@ -30,14 +26,14 @@ function* fetchLoggedInUserSaga() {
  */
 function* bootstrapAppSaga() {
   try {
-    yield put(bootstrapAppAction(undefined, ACTION_START));
-
     yield call(fetchLoggedInUserSaga);
     yield call(changeLanguageSaga);
 
-    yield put(bootstrapAppAction(undefined, ACTION_SUCCESS));
+    yield put(bootstrapAppRoutine.success());
   } catch (error) {
-    yield put(bootstrapAppAction(error.response.data, ACTION_ERROR));
+    yield put(bootstrapAppRoutine.failure(error.response.data));
+  } finally {
+    yield put(bootstrapAppRoutine.fulfill());
   }
 }
 
@@ -46,13 +42,13 @@ function* bootstrapAppSaga() {
  */
 function* logOutUserSaga() {
   try {
-    yield put(logOutUserAction(ACTION_START));
-
     yield call(logOutUser);
 
-    yield put(logOutUserAction(ACTION_SUCCESS));
+    yield put(logOutUserRoutine.success());
   } catch (error) {
-    yield put(logOutUserAction(ACTION_ERROR));
+    yield put(logOutUserRoutine.failure());
+  } finally {
+    yield put(logOutUserRoutine.fulfill());
   }
 }
 
@@ -65,7 +61,7 @@ function* afterLogOutUserSaga() {
 }
 
 export default function* appSagas() {
-  yield takeEvery(BOOTSTRAP_APP, bootstrapAppSaga);
-  yield takeEvery(LOG_OUT_USER, logOutUserSaga);
-  yield takeEvery(`${LOG_OUT_USER}${ACTION_SUCCESS}`, afterLogOutUserSaga);
+  yield takeEvery(bootstrapAppRoutine.TRIGGER, bootstrapAppSaga);
+  yield takeEvery(logOutUserRoutine.TRIGGER, logOutUserSaga);
+  yield takeEvery(logOutUserRoutine.FULFILL, afterLogOutUserSaga);
 }

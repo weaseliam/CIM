@@ -1,9 +1,6 @@
-export const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE';
+import { createRoutine } from 'redux-saga-routines';
 
 /**
- * Change language action.
+ * Change language routine.
  */
-export const changeLanguageAction = (payload = undefined, phase = '') => ({
-  type: `${CHANGE_LANGUAGE}${phase}`,
-  payload
-});
+export const changeLanguageRoutine = createRoutine('CHANGE_LANGUAGE');

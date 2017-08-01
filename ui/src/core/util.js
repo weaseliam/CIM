@@ -6,7 +6,6 @@ import R from 'ramda';
  *
  * @param {any} value
  */
-// eslint-disable-next-line import/prefer-default-export
 export const isNilOrEmpty = value => (
   R.isNil(value) || R.isEmpty(value)
 );
