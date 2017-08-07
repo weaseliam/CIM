@@ -14,11 +14,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 public class CIMApplication 
 {
-	private static final Logger logger = LoggerFactory.getLogger(CIMApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(CIMApplication.class);
 	
     public static void main(String[] args) throws Exception 
 	{
-    	logger.info("Staring application from Spring Boot main");
+    	log.info("Staring application from Spring Boot main");
     	
         SpringApplication.run(CIMApplication.class, args);
     }

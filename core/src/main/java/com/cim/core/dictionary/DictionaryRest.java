@@ -19,7 +19,7 @@ import com.cim.core.app.AppController;
 @RequestMapping(AppController.API_PATH + "/dictionary")
 public class DictionaryRest
 {
-	private static final Logger logger = LoggerFactory.getLogger(DictionaryRest.class);
+	private static final Logger log = LoggerFactory.getLogger(DictionaryRest.class);
 	
 	private DictionaryService dictionaryService;
 	
@@ -47,15 +47,17 @@ public class DictionaryRest
 	
 	private ResponseEntity<DictionaryUi> getDictionary(String lang)
 	{
+		log.debug("Fetching dictionary for language {}", lang);
+		
 		Map<String, String> messages = dictionaryService.getDictionary(lang);
 		if (messages == null)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 		
-		DictionaryUi dictionary = new DictionaryUi(lang, messages);
+		DictionaryUi dictionary = DictionaryAssembler.toResource(lang, messages);
 		
-		logger.debug("Response {}", dictionary);
+		log.debug("Response {}", dictionary);
 		return ResponseEntity.ok(dictionary);
 	}
 }

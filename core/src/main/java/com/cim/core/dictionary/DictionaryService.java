@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DictionaryService
 {
-	private static final Logger logger = LoggerFactory.getLogger(DictionaryService.class);
+	private static final Logger log = LoggerFactory.getLogger(DictionaryService.class);
 	
 	private Map<String, Map<String, String>> dictionaries = new HashMap<>();
 	private String defaultLang = "en";
@@ -56,21 +56,21 @@ public class DictionaryService
 				}
 				catch (IOException e)
 				{
-					logger.error("Failed to load dictionary from file " + file, e);
+					log.error("Failed to load dictionary from file " + file, e);
 				}
 				
 				String language = file.getName().substring(0, file.getName().indexOf('.'));
 				dictionaries.put(language, (Map) messages);
-				logger.debug("Loaded {} dictionary file from {}", language, file);
+				log.debug("Loaded {} dictionary file from {}", language, file);
 				
 				return messages;
 			}).collect(Collectors.toList());
 			
-			logger.info("Loaded {} dictionary files {}", dictionaries.size(), dictionaries.keySet());
+			log.info("Loaded {} dictionary files {}", dictionaries.size(), dictionaries.keySet());
 		}
 		catch (IOException e)
 		{
-			logger.error("Failed to load dictionary files", e);
+			log.error("Failed to load dictionary files", e);
 		}
 	}
 	
@@ -83,7 +83,7 @@ public class DictionaryService
 			defaultLang = firstLang;
 		}
 		
-		logger.info("Default language is {}", defaultLang);
+		log.info("Default language is {}", defaultLang);
 	}
 	
 	public Map<String, String> getDefaultDictionary()
@@ -138,6 +138,7 @@ public class DictionaryService
 		if (StringUtils.isBlank(code) ||
 			StringUtils.isBlank(lang))
 		{
+			log.debug("Failed to read message for lang {}, code {}, params {}", lang, code, params);
 			return code;
 		}
 		
@@ -146,6 +147,7 @@ public class DictionaryService
 			dictionary.isEmpty() ||
 			!dictionary.containsKey(code))
 		{
+			log.debug("Failed to read message for lang {}, code {}, params {}", lang, code, params);
 			return code;
 		}
 		

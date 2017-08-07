@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AppController
 {
-	private static final Logger logger = LoggerFactory.getLogger(AppController.class);
+	private static final Logger log = LoggerFactory.getLogger(AppController.class);
 
 	public static final String API_PATH = "/api";
 
 	@RequestMapping("/")
 	public String index()
 	{
-		logger.debug("Returning index for application root");
+		log.debug("Returning index for application root");
 
 		return "index.html";
 	}

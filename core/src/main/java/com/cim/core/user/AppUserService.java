@@ -15,7 +15,7 @@ import org.springframework.util.Assert;
 @Transactional(readOnly = true)
 public class AppUserService
 {
-	private static Logger logger = LoggerFactory.getLogger(AppUserService.class);
+	private static Logger log = LoggerFactory.getLogger(AppUserService.class);
 	
 	private AppUserRepository userRepo;
 	
@@ -30,7 +30,7 @@ public class AppUserService
 	public List<AppUser> listUsers()
 	{
 		List<AppUser> users = userRepo.findAll();
-		logger.debug("Got all app users {}", users.toString());
+		log.debug("Got all app users {}", users.toString());
 		
 		return users;
 	}

@@ -3,6 +3,7 @@ package com.cim.core.user;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ import com.cim.core.app.AppController;
 @RequestMapping(AppController.API_PATH + "/session")
 public class SessionRest
 {
-	private static final Logger logger = LoggerFactory.getLogger(SessionRest.class);
+	private static final Logger log = LoggerFactory.getLogger(SessionRest.class);
 	
 	private SessionService sessionService;
 	
@@ -30,10 +31,17 @@ public class SessionRest
 	@GetMapping
 	public ResponseEntity<AppUserUi> getLoggedInUser()
 	{
-		AppUser user = sessionService.getLoggedInUser();
-		AppUserUi uiUser = new AppUserUi(user);
+		log.debug("Fetching current logged in user");
 		
-		logger.debug("Response {}", uiUser);
+		AppUser user = sessionService.getLoggedInUser();
+		if (user == null)
+		{
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		
+		AppUserUi uiUser = SessionAssembler.toResource(user);
+		
+		log.debug("Response {}", uiUser);
 		return ResponseEntity.ok(uiUser);
 	}
 }

@@ -17,7 +17,7 @@ import com.cim.core.app.AppException;
 @Transactional(readOnly = true)
 public class SessionService
 {
-	private static Logger logger = LoggerFactory.getLogger(SessionService.class);
+	private static Logger log = LoggerFactory.getLogger(SessionService.class);
 	
 	private AppUserRepository userRepo;
 	
@@ -32,17 +32,15 @@ public class SessionService
 	public AppUser getLoggedInUser()
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Assert.notNull(auth, "Spring security context authentication must not be null");
+		if (auth == null)
+		{
+			throw new AppException("security.context.auth.error");
+		}
 		
 		String userName = auth.getName();
 		AppUser user = userRepo.findByUserNameIgnoreCase(userName);
-		if (user == null)
-		{
-			throw new AppException("session.user.notFoundInDB", new String[]{ userName });
-		}
 		
-		logger.debug("Got logged in user {}", user);
-		
+		log.debug("Got logged in user {}", user);
 		return user;
 	}
 }

@@ -22,7 +22,7 @@ import com.cim.core.user.AppUserService;
 @EnableWebSecurity
 class SecurityConfig
 {
-	private static Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
+	private static Logger log = LoggerFactory.getLogger(SecurityConfig.class);
 
 	@Autowired
 	private AppUserService userService;
@@ -53,7 +53,7 @@ class SecurityConfig
 	{
 		protected void configure(HttpSecurity http) throws Exception
 		{
-			logger.info("Running PRODUCTION rest api security configuration");
+			log.info("Running PRODUCTION rest api security configuration");
 
 			http
 				.antMatcher(AppController.API_PATH + "/**")
@@ -72,7 +72,7 @@ class SecurityConfig
 		@Override
 		protected void configure(HttpSecurity http) throws Exception
 		{
-			logger.info("Running PRODUCTION security configuration");
+			log.info("Running PRODUCTION security configuration");
 
 			http
 				.authorizeRequests()
@@ -108,7 +108,7 @@ class SecurityConfig
 		@Override
 		protected void configure(HttpSecurity http) throws Exception
 		{
-			logger.info("Running DEVELOPMENT security configuration");
+			log.info("Running DEVELOPMENT security configuration");
 
 			http
 				.authorizeRequests()

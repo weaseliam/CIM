@@ -47,7 +47,7 @@ class Page1 extends Component {
         <p>
           <b>Testing i18n</b><br />
           Current language: {this.props.i18n.language}<br />
-          Translation test: {this.props.t('session.user.notFoundInDB', ['test'])}
+          Translation test: {this.props.t('security.context.auth.error', ['test'])}
         </p>
         <h3>Enjoy!</h3>
       </div>

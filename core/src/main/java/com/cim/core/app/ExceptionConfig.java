@@ -18,7 +18,7 @@ import com.cim.core.dictionary.DictionaryService;
 @ControllerAdvice
 public class ExceptionConfig
 {
-	private static Logger logger = LoggerFactory.getLogger(ExceptionConfig.class);
+	private static Logger log = LoggerFactory.getLogger(ExceptionConfig.class);
 
 	private DictionaryService dictionaryService;
 	
@@ -33,7 +33,7 @@ public class ExceptionConfig
 	@ExceptionHandler({ Exception.class })
 	public ResponseEntity<UiException> handleGlobalException(Exception e, WebRequest request)
 	{
-		logger.error("Caught exception in global handler", e);
+		log.error("Caught exception in global handler", e);
 		
 		Exception i18nEx = tryToI18N(e, request.getLocale());
 
