@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 
 import Header from '../header';
 
-describe('<Header />', () => {
+describe('header-test', () => {
   it('renders', () => {
     const wrapper = mount(<Header />);
 

@@ -18,7 +18,7 @@ module.exports = function (config) {
       'tests.webpack.js': ['webpack', 'sourcemap']
     },
 
-    reporters: ['dots'],
+    reporters: ['spec'],
 
     colors: true,
     logLevel: config.LOG_ERROR,
