@@ -16,7 +16,8 @@
 	</parent>
 
 	<properties>
-		<node.version>6.10.0</node.version>
+		<node.version>v8.4.0</node.version>
+		<npm.version>5.2.0</npm.version>
 	</properties>
 
 	<build>
@@ -24,7 +25,11 @@
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
-				<version>1.2</version>
+				<version>1.5</version>
+				<configuration>
+					<nodeVersion>${node.version}</nodeVersion>
+					<npmVersion>${npm.version}</npmVersion>
+				</configuration>
 				<executions>
 					<execution>
 						<id>install node and npm</id>
@@ -56,9 +61,6 @@
 						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<nodeVersion>v${node.version}</nodeVersion>
-				</configuration>
 			</plugin>
 
 			<plugin>

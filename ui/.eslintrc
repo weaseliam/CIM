@@ -16,6 +16,7 @@
     "class-methods-use-this": [0],
     "no-continue": [0],
     "no-mixed-operators": [0],
-    "import/prefer-default-export": [0]
+    "import/prefer-default-export": [0],
+    "react/jsx-wrap-multilines": [0]
   }
 }
