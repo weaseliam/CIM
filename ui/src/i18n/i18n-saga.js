@@ -6,9 +6,9 @@ import fetchDictionary from './i18n-api';
 /**
  * Change app language saga
  */
-export function* changeLanguageSaga() {
+export function* changeLanguageSaga(action) {
   try {
-    const dictionary = yield call(fetchDictionary);
+    const dictionary = yield call(fetchDictionary, action.payload);
 
     yield put(changeLanguageRoutine.success(dictionary));
   } catch (error) {

@@ -27,7 +27,7 @@ function* fetchLoggedInUserSaga() {
 function* bootstrapAppSaga() {
   try {
     yield call(fetchLoggedInUserSaga);
-    yield call(changeLanguageSaga);
+    yield call(changeLanguageSaga, {});
 
     yield put(bootstrapAppRoutine.success());
   } catch (error) {
