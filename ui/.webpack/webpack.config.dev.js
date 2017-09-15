@@ -1,26 +1,21 @@
-const webpack = require('webpack');
 const baseConfig = require('./webpack.config.base');
+const plugins = require('./webpack.plugins');
 
 const HOST = process.env.HOST || '127.0.0.1';
 const PORT = process.env.PORT || '3000';
+const SERVER_HOST = HOST || '127.0.0.1';
+const SERVER_PORT = '8080';
 
-const webpackConfig = {};
+const webpackConfig = baseConfig;
 
-webpackConfig.entry = [
+webpackConfig.entry.unshift(
   `webpack-dev-server/client?http://${HOST}:${PORT}`,
   'webpack/hot/only-dev-server',
-  'react-hot-loader/patch',
-  baseConfig.entry
-];
+  'react-hot-loader/patch'
+);
 
 webpackConfig.devtool = 'inline-source-map';
 
-webpackConfig.output = baseConfig.output;
-webpackConfig.output.path = `/${webpackConfig.output.path}`;
-
-webpackConfig.resolve = baseConfig.resolve;
-
-webpackConfig.module = baseConfig.module;
 webpackConfig.module.loaders.push({
   test: /\.scss$/,
   loaders: ['style-loader', 'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]', 'postcss-loader', 'sass-loader'],
@@ -46,18 +41,18 @@ webpackConfig.devServer = {
   },
   proxy: {
     '/': {
-      target: 'http://localhost:8080',
+      target: `http://${SERVER_HOST}:${SERVER_PORT}`,
       secure: false
     }
   }
 };
 
 webpackConfig.plugins = [
-  new webpack.NoEmitOnErrorsPlugin(),
-  new webpack.HotModuleReplacementPlugin(),
-  new webpack.NamedModulesPlugin(),
-  baseConfig.extractTextPlugin,
-  baseConfig.htmlWebpackPlugin
+  plugins.noEmitOnErrorsPlugin,
+  plugins.hotModuleReplacementPlugin,
+  plugins.namedModulesPlugin,
+  plugins.extractTextPlugin,
+  plugins.htmlWebpackPlugin
 ];
 
 module.exports = webpackConfig;

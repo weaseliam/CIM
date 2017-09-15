@@ -1,19 +1,9 @@
-const webpack = require('webpack');
-const baseConfig = require('./webpack.config.base');
-const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const baseConfig = require('./webpack.config.base');
+const plugins = require('./webpack.plugins');
 
-const webpackConfig = {};
+const webpackConfig = baseConfig;
 
-webpackConfig.entry = baseConfig.entry;
-
-webpackConfig.output = baseConfig.output;
-
-webpackConfig.resolve = baseConfig.resolve;
-
-webpackConfig.devtool = 'cheap-source-map';
-
-webpackConfig.module = baseConfig.module;
 webpackConfig.module.loaders.push({
   test: /\.scss$/,
   loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader?sourceMap&modules&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader!sass-loader?outputStyle=expanded' }),
@@ -21,21 +11,12 @@ webpackConfig.module.loaders.push({
 });
 
 webpackConfig.plugins = [
-  new WebpackCleanupPlugin(),
-  new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify('production')
-  }),
-  new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false,
-      screw_ie8: true,
-      drop_console: true,
-      drop_debugger: true
-    }
-  }),
-  new webpack.optimize.OccurrenceOrderPlugin(),
-  baseConfig.extractTextPlugin,
-  baseConfig.htmlWebpackPlugin
+  plugins.cleanupPlugin,
+  plugins.definePlugin,
+  plugins.uglifyJsPlugin,
+  plugins.occurrenceOrderPlugin,
+  plugins.extractTextPlugin,
+  plugins.htmlWebpackPlugin
 ];
 
 module.exports = webpackConfig;

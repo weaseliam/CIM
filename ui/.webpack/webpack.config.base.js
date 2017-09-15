@@ -1,13 +1,14 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 const loaders = require('./webpack.loaders');
 
 module.exports = {
-  entry: './src/index.jsx',
+  entry: ['./src/index.jsx'],
+
+  devtool: 'cheap-source-map',
 
   output: {
     publicPath: '',
-    path: 'target/dist',
+    path: path.resolve(__dirname, '../target/dist'),
     filename: 'bundle.js'
   },
 
@@ -18,18 +19,5 @@ module.exports = {
   module: {
     exprContextCritical: false,
     loaders
-  },
-
-  extractTextPlugin: new ExtractTextPlugin({
-    filename: 'style.css',
-    allChunks: true
-  }),
-
-  htmlWebpackPlugin: new HtmlWebpackPlugin({
-    template: './src/index.html',
-    files: {
-      css: ['style.css'],
-      js: ['bundle.js']
-    }
-  })
+  }
 };
