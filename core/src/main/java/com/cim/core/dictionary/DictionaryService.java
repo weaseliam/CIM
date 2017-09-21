@@ -1,17 +1,12 @@
 package com.cim.core.dictionary;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
@@ -19,8 +14,11 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 @Service
 public class DictionaryService
@@ -42,31 +40,33 @@ public class DictionaryService
 	{
 		try
 		{
-			Files.walk(Paths.get(new ClassPathResource("dictionary").getFile().getPath())).map(path -> {
-				File file = path.toFile();
-				if (!file.isFile())
-				{
-					return null;
-				}
+			ResourcePatternResolver resourceResolver = new PathMatchingResourcePatternResolver();
+			Resource[] resources = resourceResolver.getResources(
+					ResourceUtils.CLASSPATH_URL_PREFIX + "dictionary/*");
 
+			log.info("Found {} dictionaries in classpath", resources != null ? resources.length : 0);
+
+			for (Resource resource : resources)
+			{
 				Properties messages = new Properties();
-				try (InputStream in = new FileInputStream(file))
+				try (InputStream in = resource.getInputStream())
 				{
 					messages.load(in);
 				}
 				catch (IOException e)
 				{
-					log.error("Failed to load dictionary from file " + file, e);
+					log.error("Failed to load dictionary from " + resource, e);
+					continue;
 				}
-				
-				String language = file.getName().substring(0, file.getName().indexOf('.'));
+
+				String fileName = resource.getFilename();
+				String language = fileName.substring(0, fileName.indexOf('.'));
 				dictionaries.put(language, (Map) messages);
-				log.debug("Loaded {} dictionary file from {}", language, file);
-				
-				return messages;
-			}).collect(Collectors.toList());
+
+				log.debug("Loaded {} dictionary from {}", language, resource);
+			}
 			
-			log.info("Loaded {} dictionary files {}", dictionaries.size(), dictionaries.keySet());
+			log.info("Loaded {} dictionaries {}", dictionaries.size(), dictionaries.keySet());
 		}
 		catch (IOException e)
 		{
