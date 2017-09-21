@@ -5,7 +5,7 @@ export const INITIAL_STATE = {
   messages: {}
 };
 
-export default function (state = INITIAL_STATE, action) {
+export const i18nReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case changeLanguageRoutine.SUCCESS: {
       const newState = action.payload;
@@ -16,4 +16,4 @@ export default function (state = INITIAL_STATE, action) {
     default:
       return state;
   }
-}
+};

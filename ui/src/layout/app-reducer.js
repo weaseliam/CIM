@@ -11,7 +11,7 @@ export const INITIAL_STATE = {
   }
 };
 
-export default function (state = INITIAL_STATE, action) {
+export const appReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case fetchLoggedInUserRoutine.SUCCESS: {
       const newState = { ...state };
@@ -23,4 +23,4 @@ export default function (state = INITIAL_STATE, action) {
     default:
       return state;
   }
-}
+};

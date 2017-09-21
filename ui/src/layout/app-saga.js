@@ -60,7 +60,7 @@ function* afterLogOutUserSaga() {
   yield window.location = '/login?logout';
 }
 
-export default function* appSagas() {
+export function* appSagas() {
   yield takeEvery(bootstrapAppRoutine.TRIGGER, bootstrapAppSaga);
   yield takeEvery(logOutUserRoutine.TRIGGER, logOutUserSaga);
   yield takeEvery(logOutUserRoutine.FULFILL, afterLogOutUserSaga);

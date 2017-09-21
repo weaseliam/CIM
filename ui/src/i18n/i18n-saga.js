@@ -1,7 +1,7 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 
 import { changeLanguageRoutine } from './i18n-routines';
-import fetchDictionary from './i18n-api';
+import { fetchDictionary } from './i18n-api';
 
 /**
  * Change app language saga
@@ -16,6 +16,6 @@ export function* changeLanguageSaga(action) {
   }
 }
 
-export default function* i18nSagas() {
+export function* i18nSagas() {
   yield takeLatest(changeLanguageRoutine.TRIGGER, changeLanguageSaga);
 }

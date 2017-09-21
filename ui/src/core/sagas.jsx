@@ -1,7 +1,7 @@
-import appSagas from '../layout/app-saga';
-import i18nSagas from '../i18n/i18n-saga';
+import { appSagas } from '../layout/app-saga';
+import { i18nSagas } from '../i18n/i18n-saga';
 
-export default [
+export const rootSaga = [
   appSagas,
   i18nSagas
 ];

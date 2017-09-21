@@ -1,4 +1,4 @@
-import i18nReducer, { INITIAL_STATE } from '../i18n-reducer';
+import { i18nReducer, INITIAL_STATE } from '../i18n-reducer';
 import { changeLanguageRoutine } from '../i18n-routines';
 
 describe('i18n-reducer-test', () => {

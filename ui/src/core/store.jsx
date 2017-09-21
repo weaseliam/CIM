@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware, { END } from 'redux-saga';
 
-import rootReducer from './reducers';
-import rootSaga from './sagas';
+import { rootReducer } from './reducers';
+import { rootSaga } from './sagas';
 import DevTools from './dev-tools';
 
 const configureStore = () => {
@@ -26,7 +26,7 @@ const configureStore = () => {
   if (module && module.hot) {
     module.hot.accept('./reducers', () => {
       // eslint-disable-next-line global-require
-      const nextRootReducer = require('./reducers').default;
+      const nextRootReducer = require('./reducers').rootReducer;
       store.replaceReducer(nextRootReducer);
     });
   }
@@ -38,4 +38,4 @@ const configureStore = () => {
   return store;
 };
 
-export default configureStore();
+export const store = configureStore();

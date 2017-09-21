@@ -2,8 +2,8 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import SagaTester from 'redux-saga-tester';
 
-import i18nReducer, { INITIAL_STATE } from '../i18n-reducer';
-import i18nSagas from '../i18n-saga';
+import { i18nReducer, INITIAL_STATE } from '../i18n-reducer';
+import { i18nSagas } from '../i18n-saga';
 import { changeLanguageRoutine } from '../i18n-routines';
 
 describe('i18n-saga-test', () => {

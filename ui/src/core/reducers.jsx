@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import AppReducer from '../layout/app-reducer';
-import I18nReducer from '../i18n/i18n-reducer';
+import { appReducer } from '../layout/app-reducer';
+import { i18nReducer } from '../i18n/i18n-reducer';
 
-export default combineReducers({
-  app: AppReducer,
-  i18n: I18nReducer
+export const rootReducer = combineReducers({
+  app: appReducer,
+  i18n: i18nReducer
 });
