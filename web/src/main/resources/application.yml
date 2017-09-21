@@ -30,6 +30,7 @@ spring:
     cache: false
     view-names:
       - login
+      - error
 
 server:
   error:

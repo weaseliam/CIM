@@ -1,0 +1,19 @@
+.center {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: auto;
+	margin-top: auto;
+}
+
+.error {
+	display: inline;
+}
+
+.status {
+	color: red;
+}
+
+.timestamp {
+	font-size: small !important;
+}

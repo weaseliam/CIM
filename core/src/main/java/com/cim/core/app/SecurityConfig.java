@@ -87,7 +87,6 @@ class SecurityConfig
 					.logoutUrl("/logout")
 					.deleteCookies("JSESSIONID")
 					.invalidateHttpSession(true)
-					.logoutSuccessUrl("/login?logout")
 					.and()
 				.sessionManagement()
 					.sessionFixation()
