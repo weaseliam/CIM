@@ -1,6 +1,7 @@
-bundle.js
-index.html
-style.css
+/app*.js
+/vendor*.js
+/index*.html
+/style*.css
 /*.woff
 /*.woff2
 /*.eot

@@ -5,16 +5,22 @@ const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 
 module.exports = {
   extractTextPlugin: new ExtractTextPlugin({
-    filename: 'style.css',
+    filename: 'style.[hash:8].css',
     allChunks: true
   }),
   
   htmlWebpackPlugin: new HtmlWebpackPlugin({
     template: './src/index.html',
     files: {
-      css: ['style.css'],
-      js: ['bundle.js']
+      css: ['style.[hash:8].css'],
+      js: ['app.[hash:8].js', 'vendor.[hash:8].js']
     }
+  }),
+
+  commonsChunkPlugin: new webpack.optimize.CommonsChunkPlugin({
+    name: 'vendor', 
+    filename: 'vendor.[hash:8].js',
+    minChunks: Infinity
   }),
 
   noEmitOnErrorsPlugin: new webpack.NoEmitOnErrorsPlugin(),

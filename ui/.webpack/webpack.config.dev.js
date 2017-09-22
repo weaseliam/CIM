@@ -8,7 +8,7 @@ const SERVER_PORT = '8080';
 
 const webpackConfig = baseConfig;
 
-webpackConfig.entry.unshift(
+webpackConfig.entry.app.unshift(
   `webpack-dev-server/client?http://${HOST}:${PORT}`,
   'webpack/hot/only-dev-server',
   'react-hot-loader/patch'
@@ -52,6 +52,7 @@ webpackConfig.plugins = [
   plugins.hotModuleReplacementPlugin,
   plugins.namedModulesPlugin,
   plugins.extractTextPlugin,
+  plugins.commonsChunkPlugin,
   plugins.htmlWebpackPlugin
 ];
 

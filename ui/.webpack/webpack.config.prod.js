@@ -16,6 +16,7 @@ webpackConfig.plugins = [
   plugins.uglifyJsPlugin,
   plugins.occurrenceOrderPlugin,
   plugins.extractTextPlugin,
+  plugins.commonsChunkPlugin,
   plugins.htmlWebpackPlugin
 ];
 

@@ -7,16 +7,16 @@
   "extends": "airbnb",
   "parser": "babel-eslint",
   "rules": {
-    "strict": 0,
-    "func-names": [0],
-    "comma-dangle": [0],
-    "linebreak-style": [0],
-    "import/no-extraneous-dependencies": [0],
-    "react/prop-types": [0],
-    "class-methods-use-this": [0],
-    "no-continue": [0],
-    "no-mixed-operators": [0],
-    "import/prefer-default-export": [0],
-    "react/jsx-wrap-multilines": [0]
+    "strict": "off",
+    "func-names": "off",
+    "comma-dangle": "off",
+    "linebreak-style": "off",
+    "import/no-extraneous-dependencies": "off",
+    "react/prop-types": "off",
+    "class-methods-use-this": "off",
+    "no-continue": "off",
+    "no-mixed-operators": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-wrap-multilines": "off"
   }
 }
