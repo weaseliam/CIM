@@ -1435,7 +1435,7 @@ babel-preset-stage-1@^6.24.1:
     babel-plugin-transform-export-extensions "^6.22.0"
     babel-preset-stage-2 "^6.24.1"
 
-babel-preset-stage-2@6.24.1, babel-preset-stage-2@^6.24.1:
+babel-preset-stage-2@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-preset-stage-2/-/babel-preset-stage-2-6.24.1.tgz#d9e2960fb3d71187f0e64eec62bc07767219bdc1"
   dependencies:
@@ -1444,7 +1444,7 @@ babel-preset-stage-2@6.24.1, babel-preset-stage-2@^6.24.1:
     babel-plugin-transform-decorators "^6.24.1"
     babel-preset-stage-3 "^6.24.1"
 
-babel-preset-stage-3@^6.24.1:
+babel-preset-stage-3@6.24.1, babel-preset-stage-3@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-preset-stage-3/-/babel-preset-stage-3-6.24.1.tgz#836ada0a9e7a7fa37cb138fb9326f87934a48395"
   dependencies:
@@ -6491,13 +6491,9 @@ redux-devtools@3.4.0:
     prop-types "^15.5.7"
     redux-devtools-instrument "^1.0.1"
 
-redux-saga-routines@1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/redux-saga-routines/-/redux-saga-routines-1.1.2.tgz#e1e2f3827cc2bd95eef8ce2c4c5fe247fec0d069"
-
-redux-saga-tester@1.0.353:
-  version "1.0.353"
-  resolved "https://registry.yarnpkg.com/redux-saga-tester/-/redux-saga-tester-1.0.353.tgz#84ee7a59610c4f2ea4cf04292c86170790d78680"
+redux-saga-tester@1.0.358:
+  version "1.0.358"
+  resolved "https://registry.yarnpkg.com/redux-saga-tester/-/redux-saga-tester-1.0.358.tgz#1afd7d9a9eab5d25ebce2776ee4919923c8c91ad"
 
 redux-saga@0.15.6:
   version "0.15.6"

@@ -6,7 +6,7 @@ import { autobind } from 'core-decorators';
 
 import Header from '../components/header';
 import Loading from '../components/loading';
-import { bootstrapAppRoutine, logOutUserRoutine } from '../app-routines';
+import { bootstrapAppAction, logOutUserAction } from '../app-actions';
 import { isNilOrEmpty } from '../../core/util';
 
 import styles from './app.scss';
@@ -26,12 +26,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(bootstrapAppRoutine.trigger());
+    this.props.dispatch(bootstrapAppAction.trigger());
   }
 
   @autobind
   handleLogout() {
-    this.props.dispatch(logOutUserRoutine.trigger());
+    this.props.dispatch(logOutUserAction.trigger());
   }
 
   render() {

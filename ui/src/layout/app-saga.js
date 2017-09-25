@@ -2,10 +2,10 @@ import { takeEvery, call, put } from 'redux-saga/effects';
 
 import { getLoggedInUser, logOutUser } from './app-api';
 import {
-  bootstrapAppRoutine,
-  fetchLoggedInUserRoutine,
-  logOutUserRoutine
-} from './app-routines';
+  bootstrapAppAction,
+  fetchLoggedInUserAction,
+  logOutUserAction
+} from './app-actions';
 import { changeLanguageSaga } from '../i18n/i18n-saga';
 
 /**
@@ -15,9 +15,9 @@ function* fetchLoggedInUserSaga() {
   try {
     const user = yield call(getLoggedInUser);
 
-    yield put(fetchLoggedInUserRoutine.success(user));
+    yield put(fetchLoggedInUserAction.success(user));
   } catch (error) {
-    yield put(fetchLoggedInUserRoutine.failure(error.response.data));
+    yield put(fetchLoggedInUserAction.failure(error.response.data));
   }
 }
 
@@ -29,11 +29,11 @@ function* bootstrapAppSaga() {
     yield call(fetchLoggedInUserSaga);
     yield call(changeLanguageSaga, {});
 
-    yield put(bootstrapAppRoutine.success());
+    yield put(bootstrapAppAction.success());
   } catch (error) {
-    yield put(bootstrapAppRoutine.failure(error.response.data));
+    yield put(bootstrapAppAction.failure(error.response.data));
   } finally {
-    yield put(bootstrapAppRoutine.fulfill());
+    yield put(bootstrapAppAction.fulfill());
   }
 }
 
@@ -44,11 +44,11 @@ function* logOutUserSaga() {
   try {
     yield call(logOutUser);
 
-    yield put(logOutUserRoutine.success());
+    yield put(logOutUserAction.success());
   } catch (error) {
-    yield put(logOutUserRoutine.failure());
+    yield put(logOutUserAction.failure());
   } finally {
-    yield put(logOutUserRoutine.fulfill());
+    yield put(logOutUserAction.fulfill());
   }
 }
 
@@ -61,7 +61,7 @@ function* afterLogOutUserSaga() {
 }
 
 export function* appSagas() {
-  yield takeEvery(bootstrapAppRoutine.TRIGGER, bootstrapAppSaga);
-  yield takeEvery(logOutUserRoutine.TRIGGER, logOutUserSaga);
-  yield takeEvery(logOutUserRoutine.FULFILL, afterLogOutUserSaga);
+  yield takeEvery(bootstrapAppAction.TRIGGER, bootstrapAppSaga);
+  yield takeEvery(logOutUserAction.TRIGGER, logOutUserSaga);
+  yield takeEvery(logOutUserAction.FULFILL, afterLogOutUserSaga);
 }

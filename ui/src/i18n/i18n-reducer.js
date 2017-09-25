@@ -1,4 +1,4 @@
-import { changeLanguageRoutine } from './i18n-routines';
+import { changeLanguageAction } from './i18n-actions';
 
 export const INITIAL_STATE = {
   language: '',
@@ -7,7 +7,7 @@ export const INITIAL_STATE = {
 
 export const i18nReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case changeLanguageRoutine.SUCCESS: {
+    case changeLanguageAction.SUCCESS: {
       const newState = action.payload;
 
       return newState;

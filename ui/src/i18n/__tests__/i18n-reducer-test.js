@@ -1,5 +1,5 @@
 import { i18nReducer, INITIAL_STATE } from '../i18n-reducer';
-import { changeLanguageRoutine } from '../i18n-routines';
+import { changeLanguageAction } from '../i18n-actions';
 
 describe('i18n-reducer-test', () => {
   it('should return initial state', () => {
@@ -8,14 +8,14 @@ describe('i18n-reducer-test', () => {
     expect(state).toEqual(INITIAL_STATE);
   });
 
-  it('should handle changeLanguageRoutine.SUCCESS', () => {
+  it('should handle changeLanguageAction.SUCCESS', () => {
     const payload = {
       language: 'en',
       messages: {
         'security.context.auth.error': 'Spring security context authentication is null.'
       }
     };
-    const action = changeLanguageRoutine.success(payload);
+    const action = changeLanguageAction.success(payload);
     const state = i18nReducer(undefined, action);
 
     expect(state).toEqual(payload);

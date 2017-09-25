@@ -4,7 +4,7 @@ import SagaTester from 'redux-saga-tester';
 
 import { i18nReducer, INITIAL_STATE } from '../i18n-reducer';
 import { i18nSagas } from '../i18n-saga';
-import { changeLanguageRoutine } from '../i18n-routines';
+import { changeLanguageAction } from '../i18n-actions';
 
 describe('i18n-saga-test', () => {
   it('should handle change language success', async () => {
@@ -25,11 +25,11 @@ describe('i18n-saga-test', () => {
     sagaTester.start(i18nSagas);
     expect(sagaTester.getState()).toEqual(INITIAL_STATE);
 
-    sagaTester.dispatch(changeLanguageRoutine.trigger('en'));
-    expect(sagaTester.wasCalled(changeLanguageRoutine.TRIGGER)).toBe(true);
+    sagaTester.dispatch(changeLanguageAction.trigger('en'));
+    expect(sagaTester.wasCalled(changeLanguageAction.TRIGGER)).toBe(true);
 
-    await sagaTester.waitFor(changeLanguageRoutine.SUCCESS);
-    expect(sagaTester.wasCalled(changeLanguageRoutine.SUCCESS)).toBe(true);
+    await sagaTester.waitFor(changeLanguageAction.SUCCESS);
+    expect(sagaTester.wasCalled(changeLanguageAction.SUCCESS)).toBe(true);
     expect(sagaTester.getState()).toEqual(payload);
   });
 
@@ -45,11 +45,11 @@ describe('i18n-saga-test', () => {
     sagaTester.start(i18nSagas);
     expect(sagaTester.getState()).toEqual(INITIAL_STATE);
 
-    sagaTester.dispatch(changeLanguageRoutine.trigger());
-    expect(sagaTester.wasCalled(changeLanguageRoutine.TRIGGER)).toBe(true);
+    sagaTester.dispatch(changeLanguageAction.trigger());
+    expect(sagaTester.wasCalled(changeLanguageAction.TRIGGER)).toBe(true);
 
-    await sagaTester.waitFor(changeLanguageRoutine.FAILURE);
-    expect(sagaTester.wasCalled(changeLanguageRoutine.FAILURE)).toBe(true);
+    await sagaTester.waitFor(changeLanguageAction.FAILURE);
+    expect(sagaTester.wasCalled(changeLanguageAction.FAILURE)).toBe(true);
     expect(sagaTester.getState()).toEqual(INITIAL_STATE);
   });
 });

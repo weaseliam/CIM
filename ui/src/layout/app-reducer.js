@@ -1,4 +1,4 @@
-import { fetchLoggedInUserRoutine } from './app-routines';
+import { fetchLoggedInUserAction } from './app-actions';
 
 export const INITIAL_STATE = {
   session: {
@@ -13,7 +13,7 @@ export const INITIAL_STATE = {
 
 export const appReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case fetchLoggedInUserRoutine.SUCCESS: {
+    case fetchLoggedInUserAction.SUCCESS: {
       const newState = { ...state };
       newState.session.user = action.payload;
 
