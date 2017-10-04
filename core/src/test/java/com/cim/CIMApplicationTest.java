@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories("com.cim")
 @EntityScan("com.cim")
 @SpringBootApplication
-public class TestCIMApplication 
+public class CIMApplicationTest 
 {
 }

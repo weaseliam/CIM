@@ -21,8 +21,8 @@
 	
 	<properties>
 		<java.version>1.8</java.version>
-		<rest-assured.version>3.0.2</rest-assured.version>
-		<swagger.version>2.6.1</swagger.version>
+		<rest-assured.version>3.0.3</rest-assured.version>
+		<swagger.version>2.7.0</swagger.version>
 		<apache.commons.lang.version>3.5</apache.commons.lang.version>
 	</properties>
 

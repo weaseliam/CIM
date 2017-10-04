@@ -3,34 +3,29 @@ package com.cim.core.app;
 import static io.restassured.RestAssured.given;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.context.embedded.LocalServerPort;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.http.HttpStatus;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class AppControllerTest
+import com.cim.BaseRestTest;
+
+public class AppControllerTest extends BaseRestTest
 {
-    @LocalServerPort
-    int port;
-	
 	@Test
 	public void testRoot()
 	{
-		given().
-			port(port).
-		when().
-			get("/");
+		given()
+		.when()
+			.get("/")
+		.then()
+		    .statusCode(HttpStatus.OK.value());
 	}
 	
 	@Test
 	public void testLogin()
 	{
-		given().
-			port(port).
-		when().
-			get("/login");
+		given()
+		.when()
+			.get("/login")
+		.then()
+		    .statusCode(HttpStatus.OK.value());
 	}
 }
