@@ -15,6 +15,9 @@ public class AppUserServiceTest extends BaseRestTest
 	@Autowired
 	private AppUserService userService;
 	
+	@Autowired
+	private AppUserRepository userRepository;
+	
 	@Test
 	public void testListUsers()
 	{
@@ -24,20 +27,51 @@ public class AppUserServiceTest extends BaseRestTest
 	}
 	
 	@Test
-	public void testAdminUser()
+	public void testPredefinedAdminUser()
 	{
 		List<AppUser> users = userService.listUsers();
 		
-		boolean foundAdmin = false;
+		boolean found = false;
 		for (AppUser user : users)
 		{
-			if (user.getUserName().equalsIgnoreCase("admin"))
+			if ("admin".equals(user.getUserName()))
 			{
-				foundAdmin = true;
+				found = true;
 				break;
 			}
 		}
 		
-		assertTrue(foundAdmin);
+		assertTrue(found);
+	}
+	
+	@Test
+	public void testNewlyAddedUser()
+	{
+		addNewUser("john_doe", "1234", "John", "Doe");
+
+		List<AppUser> users = userService.listUsers();
+		
+		boolean found = false;
+		for (AppUser user : users)
+		{
+			if ("john_doe".equals(user.getUserName()))
+			{
+				found = true;
+				break;
+			}
+		}
+		
+		assertTrue(found);
+	}
+	
+	private void addNewUser(String userName, String passWord, String firstName, String lastName)
+	{
+		AppUser user = new AppUser();
+		user.setUserName(userName);
+		user.setPassword(passWord);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		
+		userRepository.save(user);
 	}
 }

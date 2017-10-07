@@ -1,9 +1,9 @@
 package com.cim.core.app;
 
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.get;
+import static org.hamcrest.CoreMatchers.equalTo;
 
 import org.junit.Test;
-import org.springframework.http.HttpStatus;
 
 import com.cim.BaseRestTest;
 
@@ -12,20 +12,16 @@ public class AppControllerTest extends BaseRestTest
 	@Test
 	public void testRoot()
 	{
-		given()
-		.when()
-			.get("/")
+		get("/")
 		.then()
-		    .statusCode(HttpStatus.OK.value());
+		    .body("path", equalTo("/"));
 	}
 	
 	@Test
 	public void testLogin()
 	{
-		given()
-		.when()
-			.get("/login")
+		get("/login")
 		.then()
-		    .statusCode(HttpStatus.OK.value());
+			.body("path", equalTo("/login"));
 	}
 }

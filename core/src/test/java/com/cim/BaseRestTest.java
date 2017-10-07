@@ -1,19 +1,19 @@
 package com.cim;
 
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import io.restassured.RestAssured;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class BaseRestTest
+public abstract class BaseRestTest
 {
-    @LocalServerPort
+	@LocalServerPort
     private int port;
     
     protected int getLocalServerPort()
@@ -21,9 +21,9 @@ public class BaseRestTest
     	return port;
     }
     
-	@Test
-	public void testPort()
+	@Before
+	public void before()
 	{
-		assertTrue(port > 1024);
+		RestAssured.port = port;
 	}
 }
