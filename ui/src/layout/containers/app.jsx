@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 import { autobind } from 'core-decorators';
+import { Route } from 'react-router-dom';
 
 import Header from '../components/header';
 import Loading from '../components/loading';
 import { bootstrapAppAction, logOutUserAction } from '../app-actions';
 import { isNilOrEmpty } from '../../core/util';
+import Page1 from './page1';
 
 import styles from './app.scss';
 
@@ -17,14 +18,6 @@ const mapStateToProps = state => ({
 
 @connect(mapStateToProps)
 class App extends Component {
-  static propTypes = {
-    children: PropTypes.node
-  }
-
-  static defaultProps = {
-    children: []
-  }
-
   componentDidMount() {
     this.props.dispatch(bootstrapAppAction.trigger());
   }
@@ -52,7 +45,7 @@ class App extends Component {
           </div>
         </div>
 
-        {this.props.children}
+        <Route exact path="/" component={Page1} />
       </div>
     );
   }
