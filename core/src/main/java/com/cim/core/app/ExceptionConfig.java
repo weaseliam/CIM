@@ -18,26 +18,27 @@ import com.cim.core.dictionary.DictionaryService;
 @ControllerAdvice
 public class ExceptionConfig
 {
-	private static Logger log = LoggerFactory.getLogger(ExceptionConfig.class);
+	private static Logger		log	= LoggerFactory.getLogger(ExceptionConfig.class);
 
-	private DictionaryService dictionaryService;
-	
+	private DictionaryService	dictionaryService;
+
 	@Autowired
 	ExceptionConfig(DictionaryService dictionaryService)
 	{
 		Assert.notNull(dictionaryService, "dictionaryService must not be null");
-		
+
 		this.dictionaryService = dictionaryService;
 	}
-	
+
 	@ExceptionHandler({ Exception.class })
 	public ResponseEntity<UiException> handleGlobalException(Exception e, WebRequest request)
 	{
 		log.error("Caught exception in global handler", e);
-		
-		Exception i18nEx = tryToI18N(e, request.getLocale());
 
-		return new ResponseEntity<UiException>(new UiException(i18nEx), HttpStatus.INTERNAL_SERVER_ERROR);
+		Exception i18nEx = tryToI18N(e, request.getLocale());
+		HttpStatus httpStatus = computeHttpStatus(e);
+
+		return new ResponseEntity<UiException>(new UiException(i18nEx), httpStatus);
 	}
 
 	private Exception tryToI18N(Exception e, Locale locale)
@@ -46,21 +47,48 @@ public class ExceptionConfig
 		{
 			return e;
 		}
-		
+
 		AppException appEx = (AppException) e;
-		
-		if (StringUtils.isBlank(appEx.getCode()) ||
-			!StringUtils.isBlank(appEx.getMessage()) &&
+
+		if (StringUtils.isBlank(appEx.getCode()) || 
+				!StringUtils.isBlank(appEx.getMessage()) && 
 				!StringUtils.equals(appEx.getCode(), appEx.getMessage()))
 		{
 			return appEx;
 		}
-		
+
 		String i18nMessage = dictionaryService.getMessage(appEx.getCode(), appEx.getParams());
-		
+
 		return new AppException(appEx.getCode(), 
 								appEx.getParams(), 
 								i18nMessage, 
-								appEx.getCause());
+								appEx.getCause(),
+								appEx.getStatus());
+	}
+
+	private HttpStatus computeHttpStatus(Exception e)
+	{
+		HttpStatus defaultStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+		
+		if (!(e instanceof AppException))
+		{
+			return defaultStatus;
+		}
+
+		try
+		{
+			AppException appEx = (AppException) e;
+			Integer status = appEx.getStatus();
+			if (status == null)
+			{
+				return defaultStatus;
+			}
+
+			return HttpStatus.valueOf(status);
+		}
+		catch (IllegalArgumentException iae)
+		{
+			return defaultStatus;
+		}
 	}
 }

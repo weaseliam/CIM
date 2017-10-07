@@ -8,13 +8,13 @@ import org.springframework.util.Assert;
 
 public class UiException
 {
-	private String code;
-	private String[] params;
-	private String message;
-	private String timestamp;
+	private String							code;
+	private String[]						params;
+	private String							message;
+	private String							timestamp;
 
-	private static final String TIMESTAMP_PATTERN = "yyyy-MM-dd HH:mm:ss";
-	private static final SimpleDateFormat TIMESTAMP_FORMAT = new SimpleDateFormat(TIMESTAMP_PATTERN);
+	private static final String				TIMESTAMP_PATTERN	= "yyyy-MM-dd HH:mm:ss";
+	private static final SimpleDateFormat	TIMESTAMP_FORMAT	= new SimpleDateFormat(TIMESTAMP_PATTERN);
 
 	public UiException()
 	{
@@ -25,11 +25,11 @@ public class UiException
 	{
 		Assert.notNull(t, "Throwable must not be null");
 		updateTimestamp();
-		
+
 		if (t instanceof AppException)
 		{
 			AppException e = (AppException) t;
-			
+
 			setCode(e.getCode());
 			setParams(e.getParams());
 		}
@@ -37,7 +37,7 @@ public class UiException
 		{
 			setCode(t.getClass().getName());
 		}
-		
+
 		setMessage(t.getMessage());
 	}
 

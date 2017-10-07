@@ -17,18 +17,18 @@ import com.cim.core.app.AppException;
 @Transactional(readOnly = true)
 public class SessionService
 {
-	private static Logger log = LoggerFactory.getLogger(SessionService.class);
-	
-	private AppUserRepository userRepo;
-	
+	private static Logger		log	= LoggerFactory.getLogger(SessionService.class);
+
+	private AppUserRepository	userRepo;
+
 	@Autowired
 	public SessionService(AppUserRepository userRepo)
 	{
 		Assert.notNull(userRepo, "userRepo must not be null");
-		
+
 		this.userRepo = userRepo;
 	}
-	
+
 	public AppUser getLoggedInUser()
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -36,10 +36,10 @@ public class SessionService
 		{
 			throw new AppException("security.context.auth.error");
 		}
-		
+
 		String userName = auth.getName();
 		AppUser user = userRepo.findByUserNameIgnoreCase(userName);
-		
+
 		log.debug("Got logged in user {}", user);
 		return user;
 	}
