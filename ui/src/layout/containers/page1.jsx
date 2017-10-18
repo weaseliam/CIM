@@ -13,12 +13,6 @@ const mapStateToProps = state => ({
 @withI18n
 @connect(mapStateToProps)
 class Page1 extends Component {
-  static propTypes = {
-  }
-
-  static defaultProps = {
-  }
-
   render() {
     return (
       <div>

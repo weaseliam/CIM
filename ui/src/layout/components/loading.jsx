@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+const propTypes = {
+  /**
+   * The loading text to be used.
+   */
+  text: PropTypes.string,
+
+  /**
+   * The tick milliseconds for the loading animation.
+   */
+  tickMills: PropTypes.number
+};
+
+const defaultProps = {
+  text: 'Loading',
+  tickMills: 200
+};
+
 /**
  * Loading component
  *
  * @extends {Component}
  */
 class Loading extends Component {
-  static propTypes = {
-    /**
-     * The loading text to be used.
-     */
-    text: PropTypes.string,
-
-    /**
-     * The tick milliseconds for the loading animation.
-     */
-    tickMills: PropTypes.number
-  }
-
-  static defaultProps = {
-    text: 'Loading',
-    tickMills: 200
-  }
-
   constructor(props) {
     super(props);
 
@@ -66,5 +66,8 @@ class Loading extends Component {
     );
   }
 }
+
+Loading.propTypes = propTypes;
+Loading.defaultProps = defaultProps;
 
 export default Loading;

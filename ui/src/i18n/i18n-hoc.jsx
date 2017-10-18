@@ -10,7 +10,13 @@ const mapStateToProps = state => ({
  * I18n high order component.
  * It is recommended to be used as a decorator @withI18n.
  *
- * ! It must be declared before redux connect !
+ * ! It must be declared after redux connect !
+ * ```js
+ * @withI18n
+ * @connect(mapStateToProps)
+ * class Test extends Component {
+ * ...
+ * ```
  *
  * @param {React.Component} BaseComponent
  */
