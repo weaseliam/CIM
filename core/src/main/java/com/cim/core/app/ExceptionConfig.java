@@ -18,9 +18,11 @@ import com.cim.core.dictionary.DictionaryService;
 @ControllerAdvice
 public class ExceptionConfig
 {
-	private static Logger		log	= LoggerFactory.getLogger(ExceptionConfig.class);
+	private static final Logger		log					= LoggerFactory.getLogger(ExceptionConfig.class);
 
-	private DictionaryService	dictionaryService;
+	private static final HttpStatus	DEFAULT_HTTP_STATUS	= HttpStatus.INTERNAL_SERVER_ERROR;
+
+	private DictionaryService		dictionaryService;
 
 	@Autowired
 	ExceptionConfig(DictionaryService dictionaryService)
@@ -50,8 +52,8 @@ public class ExceptionConfig
 
 		AppException appEx = (AppException) e;
 
-		if (StringUtils.isBlank(appEx.getCode()) || 
-				!StringUtils.isBlank(appEx.getMessage()) && 
+		if (StringUtils.isBlank(appEx.getCode()) ||
+				!StringUtils.isBlank(appEx.getMessage()) &&
 				!StringUtils.equals(appEx.getCode(), appEx.getMessage()))
 		{
 			return appEx;
@@ -59,20 +61,18 @@ public class ExceptionConfig
 
 		String i18nMessage = dictionaryService.getMessage(appEx.getCode(), appEx.getParams());
 
-		return new AppException(appEx.getCode(), 
-								appEx.getParams(), 
-								i18nMessage, 
+		return new AppException(appEx.getCode(),
+								appEx.getParams(),
+								i18nMessage,
 								appEx.getCause(),
 								appEx.getStatus());
 	}
 
 	private HttpStatus computeHttpStatus(Exception e)
 	{
-		HttpStatus defaultStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-		
 		if (!(e instanceof AppException))
 		{
-			return defaultStatus;
+			return DEFAULT_HTTP_STATUS;
 		}
 
 		try
@@ -81,14 +81,14 @@ public class ExceptionConfig
 			Integer status = appEx.getStatus();
 			if (status == null)
 			{
-				return defaultStatus;
+				return DEFAULT_HTTP_STATUS;
 			}
 
 			return HttpStatus.valueOf(status);
 		}
 		catch (IllegalArgumentException iae)
 		{
-			return defaultStatus;
+			return DEFAULT_HTTP_STATUS;
 		}
 	}
 }

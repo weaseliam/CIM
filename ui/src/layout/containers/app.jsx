@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 import { autobind } from 'core-decorators';
 import { Route } from 'react-router-dom';
+import axios from 'axios';
 
 import Header from '../components/header';
 import Loading from '../components/loading';
@@ -19,7 +20,27 @@ const mapStateToProps = state => ({
 @connect(mapStateToProps)
 class App extends Component {
   componentDidMount() {
+    this.registerHttpInterceptors();
     this.props.dispatch(bootstrapAppAction.trigger());
+  }
+
+  registerHttpInterceptors() {
+    axios.interceptors.request.use(
+      config => config,
+      (error) => {
+        // eslint-disable-next-line
+        alert(error);
+        return Promise.reject(error);
+      }
+    );
+    axios.interceptors.response.use(
+      config => config,
+      (error) => {
+        // eslint-disable-next-line
+        alert(error);
+        return Promise.reject(error);
+      }
+    );
   }
 
   @autobind
