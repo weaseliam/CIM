@@ -1,7 +1,11 @@
 package com.cim.core.app;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -12,8 +16,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig
+public class AppConfig extends WebMvcConfigurerAdapter
 {
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers)
+	{
+		argumentResolvers.add(acceptLanguageHandler());
+	}
+    
 	@Bean
 	public Docket api()
 	{
@@ -26,5 +36,11 @@ public class SwaggerConfig
 				.apis(RequestHandlerSelectors.basePackage("com.cim"))
 				.paths(PathSelectors.ant(AppController.API_PATH + "/*"))
 				.build();
+	}
+	
+	@Bean
+	public AcceptLanguageHandlerMethodArgumentResolver acceptLanguageHandler()
+	{
+		return new AcceptLanguageHandlerMethodArgumentResolver();
 	}
 }

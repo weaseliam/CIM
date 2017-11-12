@@ -3,8 +3,10 @@ package com.cim.core.dictionary;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
@@ -23,10 +25,11 @@ import org.springframework.util.ResourceUtils;
 @Service
 public class DictionaryService
 {
-	private static final Logger log = LoggerFactory.getLogger(DictionaryService.class);
-	
-	private Map<String, Map<String, String>> dictionaries = new HashMap<>();
-	private String defaultLang = "en";
+	private static final Logger					log				= LoggerFactory.getLogger(DictionaryService.class);
+
+	private Map<String, Map<String, String>>	dictionaries	= new HashMap<>();
+	private List<Locale>						locales			= new ArrayList<>();
+	private String								defaultLang		= "en";
 	
 	@PostConstruct
 	private void init()
@@ -62,11 +65,15 @@ public class DictionaryService
 				String fileName = resource.getFilename();
 				String language = fileName.substring(0, fileName.indexOf('.'));
 				dictionaries.put(language, (Map) messages);
+				locales.add(new Locale(language));
 
 				log.debug("Loaded {} dictionary from {}", language, resource);
 			}
 			
 			log.info("Loaded {} dictionaries {}", dictionaries.size(), dictionaries.keySet());
+			
+			dictionaries = Collections.unmodifiableMap(dictionaries);
+			locales = Collections.unmodifiableList(locales);
 		}
 		catch (IOException e)
 		{
@@ -113,7 +120,7 @@ public class DictionaryService
 		return defaultLang;
 	}
 	
-	public List<String> listSupportedLanguages()
+	public List<String> getSupportedLanguages()
 	{
 		return new ArrayList<String>(dictionaries.keySet());
 	}
@@ -158,6 +165,11 @@ public class DictionaryService
 		}
 		
 		return formatMessage(message, params);
+	}
+	
+	public List<Locale> getSupportedLocales()
+	{
+		return locales;
 	}
 
 	private String formatMessage(String message, String[] params)

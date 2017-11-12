@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cim.core.app.AcceptLanguageHandlerMethodArgumentResolver.AcceptLanguage;
 import com.cim.core.app.AppController;
 
 @RestController
@@ -32,15 +33,15 @@ public class DictionaryRest
 	}
 	
 	@GetMapping
-	public ResponseEntity<DictionaryUi> getDictionary()
+	public ResponseEntity<DictionaryUi> getDictionaryForAcceptLang(
+			@AcceptLanguage String acceptLanguage)
 	{
-		String lang = dictionaryService.getDefaultLanguage();
-		
-		return getDictionary(lang);
+		return getDictionary(acceptLanguage);
 	}
 
 	@GetMapping(value="/{lang}")
-	public ResponseEntity<DictionaryUi> getDictionaryForLang(@PathVariable("lang") String lang)
+	public ResponseEntity<DictionaryUi> getDictionaryForLang(
+			@PathVariable("lang") String lang)
 	{
 		return getDictionary(lang);
 	}
