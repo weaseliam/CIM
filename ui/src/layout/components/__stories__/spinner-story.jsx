@@ -2,16 +2,16 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, number } from '@storybook/addon-knobs';
 
-import Loading from '../loading';
+import Spinner from '../spinner';
 
-const stories = storiesOf('Loading', module);
+const stories = storiesOf('Spinner', module);
 stories.addDecorator(withKnobs);
 
 stories.add('default', () => (
   <div>
-    <Loading
-      text={text('Text', 'Loading')}
-      tickMills={number('Tick mills', 500)}
+    <Spinner
+      text={text('Text', '')}
+      tickMills={number('Tick mills', 200)}
     />
   </div>
 ));

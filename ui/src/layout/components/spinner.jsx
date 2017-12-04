@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { isNilOrEmpty } from '../../core/util';
+
 const propTypes = {
   /**
    * The loading text to be used.
@@ -14,20 +16,20 @@ const propTypes = {
 };
 
 const defaultProps = {
-  text: 'Loading',
+  text: '',
   tickMills: 200
 };
 
 /**
- * Loading component
+ * Spinner component
  *
  * @extends {Component}
  */
-class Loading extends Component {
+class Spinner extends Component {
   constructor(props) {
     super(props);
 
-    this.sprites = ['|', '/', '-', '\\'];
+    this.sprites = ['◷', '◶', '◵', '◴'];
 
     this.state = {
       index: -1
@@ -61,13 +63,13 @@ class Loading extends Component {
   }
 
   render() {
-    return (
-      <div>{this.props.text}&nbsp;{this.sprites[this.state.index]}</div>
-    );
+    return isNilOrEmpty(this.props.text) ?
+      <div>{this.sprites[this.state.index]}</div> :
+      <div>{this.props.text}&nbsp;{this.sprites[this.state.index]}</div>;
   }
 }
 
-Loading.propTypes = propTypes;
-Loading.defaultProps = defaultProps;
+Spinner.propTypes = propTypes;
+Spinner.defaultProps = defaultProps;
 
-export default Loading;
+export default Spinner;

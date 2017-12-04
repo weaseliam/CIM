@@ -6,14 +6,14 @@ import { Route } from 'react-router-dom';
 import axios from 'axios';
 
 import Header from '../components/header';
-import Loading from '../components/loading';
+import Spinner from '../components/spinner';
 import { bootstrapAppAction, logOutUserAction } from '../app-actions';
 import { isNilOrEmpty } from '../../core/util';
-import Page1 from './page1';
 
 import styles from './app.scss';
 
 const mapStateToProps = state => ({
+  loading: state.app.loading,
   user: state.app.session.user
 });
 
@@ -49,8 +49,8 @@ class App extends Component {
   }
 
   render() {
-    if (isNilOrEmpty(this.props.user) || isNilOrEmpty(this.props.user.userName)) {
-      return <Loading />;
+    if (this.props.loading) {
+      return <Spinner />;
     }
 
     return (
@@ -66,7 +66,7 @@ class App extends Component {
           </div>
         </div>
 
-        <Route exact path="/" component={Page1} />
+        <Route exact path="/" render={() => <div>It works</div>} />
       </div>
     );
   }

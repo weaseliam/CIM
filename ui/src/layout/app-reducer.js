@@ -1,4 +1,4 @@
-import { fetchLoggedInUserAction } from './app-actions';
+import { fetchLoggedInUserAction, bootstrapAppAction } from './app-actions';
 
 export const INITIAL_STATE = {
   session: {
@@ -8,7 +8,8 @@ export const INITIAL_STATE = {
       lastName: '',
       email: ''
     }
-  }
+  },
+  loading: false
 };
 
 export const appReducer = (state = INITIAL_STATE, action) => {
@@ -19,6 +20,18 @@ export const appReducer = (state = INITIAL_STATE, action) => {
         session: {
           user: action.payload
         }
+      };
+
+    case bootstrapAppAction.TRIGGER:
+      return {
+        ...state,
+        loading: true
+      };
+
+    case bootstrapAppAction.FULFILL:
+      return {
+        ...state,
+        loading: false
       };
 
     default:
