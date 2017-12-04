@@ -12,7 +12,7 @@ export function* changeLanguageSaga(action) {
 
     yield put(changeLanguageAction.success(dictionary));
   } catch (error) {
-    yield put(changeLanguageAction.failure(error.response.data));
+    yield put(changeLanguageAction.failure());
   }
 }
 

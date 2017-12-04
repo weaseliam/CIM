@@ -13,12 +13,13 @@ export const INITIAL_STATE = {
 
 export const appReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case fetchLoggedInUserAction.SUCCESS: {
-      const newState = { ...state };
-      newState.session.user = action.payload;
-
-      return newState;
-    }
+    case fetchLoggedInUserAction.SUCCESS:
+      return {
+        ...state,
+        session: {
+          user: action.payload
+        }
+      };
 
     default:
       return state;

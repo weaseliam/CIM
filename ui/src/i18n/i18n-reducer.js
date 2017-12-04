@@ -7,11 +7,11 @@ export const INITIAL_STATE = {
 
 export const i18nReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case changeLanguageAction.SUCCESS: {
-      const newState = action.payload;
-
-      return newState;
-    }
+    case changeLanguageAction.SUCCESS:
+      return {
+        ...state,
+        ...action.payload
+      };
 
     default:
       return state;

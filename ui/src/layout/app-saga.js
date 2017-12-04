@@ -17,7 +17,7 @@ function* fetchLoggedInUserSaga() {
 
     yield put(fetchLoggedInUserAction.success(user));
   } catch (error) {
-    yield put(fetchLoggedInUserAction.failure(error.response.data));
+    yield put(fetchLoggedInUserAction.failure());
   }
 }
 
@@ -31,7 +31,7 @@ function* bootstrapAppSaga() {
 
     yield put(bootstrapAppAction.success());
   } catch (error) {
-    yield put(bootstrapAppAction.failure(error.response.data));
+    yield put(bootstrapAppAction.failure());
   } finally {
     yield put(bootstrapAppAction.fulfill());
   }
