@@ -8,7 +8,6 @@ import axios from 'axios';
 import Header from '../components/header';
 import Spinner from '../components/spinner';
 import { bootstrapAppAction, logOutUserAction } from '../app-actions';
-import { isNilOrEmpty } from '../../core/util';
 
 import styles from './app.scss';
 
