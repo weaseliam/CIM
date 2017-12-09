@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Row, Col } from 'react-bootstrap';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,6 +7,8 @@ import Spinner from '../../components/spinner';
 import { bootstrapAppAction } from '../app-actions';
 import AdminPage from '../../admin/components/admin-page';
 import Header from './header';
+
+import styles from './app.scss';
 
 const mapStateToProps = state => ({
   loading: state.app.loading
@@ -45,19 +46,10 @@ class App extends Component {
     }
 
     return (
-      <Grid fluid>
-        <Row>
-          <Col md={12}>
-            <Header />
-          </Col>
-        </Row>
-
-        <Row>
-          <Col md={12}>
-            <Route exact path="/" component={AdminPage} />
-          </Col>
-        </Row>
-      </Grid>
+      <div className={styles.container}>
+        <Header />
+        <Route exact path="/" component={AdminPage} />
+      </div>
     );
   }
 }

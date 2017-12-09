@@ -1,3 +1,5 @@
 .container {
-  min-height: 400px;
+  flex-grow: 5;
+  min-height: 500px;
+  border: 1px dashed gray;
 }
