@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { isNilOrEmpty } from '../../core/util';
+import { isNilOrEmpty } from '../core/util';
 
 const propTypes = {
   /**

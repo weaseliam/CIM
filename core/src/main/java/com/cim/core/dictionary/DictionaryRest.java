@@ -1,11 +1,11 @@
 package com.cim.core.dictionary;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,7 +53,7 @@ public class DictionaryRest
 		Map<String, String> messages = dictionaryService.getDictionary(lang);
 		if (messages == null)
 		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+			messages = new HashMap<>();
 		}
 		
 		DictionaryUi dictionary = DictionaryAssembler.toResource(lang, messages);

@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { DropdownButton, MenuItem } from 'react-bootstrap';
-import { autobind } from 'core-decorators';
+import { Grid, Row, Col } from 'react-bootstrap';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
 
-import Header from '../components/header';
-import Spinner from '../components/spinner';
-import { bootstrapAppAction, logOutUserAction } from '../app-actions';
-
-import styles from './app.scss';
+import Spinner from '../../components/spinner';
+import { bootstrapAppAction } from '../app-actions';
+import AdminPage from '../../admin/components/admin-page';
+import Header from './header';
 
 const mapStateToProps = state => ({
-  loading: state.app.loading,
-  user: state.app.session.user
+  loading: state.app.loading
 });
 
 @connect(mapStateToProps)
@@ -42,31 +39,25 @@ class App extends Component {
     );
   }
 
-  @autobind
-  handleLogout() {
-    this.props.dispatch(logOutUserAction.trigger());
-  }
-
   render() {
     if (this.props.loading) {
       return <Spinner />;
     }
 
     return (
-      <div>
-        <div className={styles.headerContainer}>
-          <div className={styles.header}>
-            <Header companyTitle="CIM Company" userName={this.props.user.userName} />
-          </div>
-          <div className={styles.userMenu}>
-            <DropdownButton bsStyle="default" bsSize="xsmall" pullRight>
-              <MenuItem onSelect={this.handleLogout}>Sign out</MenuItem>
-            </DropdownButton>
-          </div>
-        </div>
+      <Grid fluid>
+        <Row>
+          <Col md={12}>
+            <Header />
+          </Col>
+        </Row>
 
-        <Route exact path="/" render={() => <div>It works</div>} />
-      </div>
+        <Row>
+          <Col md={12}>
+            <Route exact path="/" component={AdminPage} />
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
