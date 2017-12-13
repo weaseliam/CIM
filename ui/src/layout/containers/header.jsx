@@ -6,7 +6,7 @@ import {
   Nav,
   NavItem
 } from 'react-bootstrap';
-import { autobind } from 'core-decorators';
+import { withRouter } from 'react-router';
 
 import { logOutUserAction } from '../app-actions';
 
@@ -18,13 +18,33 @@ const mapStateToProps = state => ({
 
 @connect(mapStateToProps)
 class Header extends Component {
-  @autobind
-  handleLogout() {
+  handleLogout = () => {
     this.props.dispatch(logOutUserAction.trigger());
   }
 
-  handleSelect(eventKey) {
-    console.log(`selected ${eventKey}`);
+  handleSelect = (eventKey) => {
+    switch (eventKey) {
+      case 'admin':
+        this.props.history.push('/');
+        break;
+
+      case 'report':
+        this.props.history.push('/report');
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  computeActiveKey = () => {
+    switch (this.props.location.pathname) {
+      case '/report':
+        return 'report';
+
+      default:
+        return 'admin';
+    }
   }
 
   render() {
@@ -34,10 +54,9 @@ class Header extends Component {
           <div className={styles.company} />
 
           <div className={styles.nav}>
-            <Nav bsStyle="tabs" activeKey="1" onSelect={this.handleSelect}>
-              <NavItem eventKey="1">Administration</NavItem>
-              <NavItem eventKey="2">Reports</NavItem>
-              <NavItem eventKey="3">Others</NavItem>
+            <Nav bsStyle="tabs" activeKey={this.computeActiveKey()} onSelect={this.handleSelect}>
+              <NavItem eventKey="admin">Administration</NavItem>
+              <NavItem eventKey="report">Reports</NavItem>
             </Nav>
           </div>
         </div>
@@ -61,4 +80,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);

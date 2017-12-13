@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import axios from 'axios';
+import { withRouter } from 'react-router';
 
 import Spinner from '../../components/spinner';
 import { bootstrapAppAction } from '../app-actions';
 import AdminPage from '../../admin/components/admin-page';
 import Header from './header';
+import ReportPage from '../../report/components/report-page';
 
 import styles from './app.scss';
 
@@ -49,9 +51,10 @@ class App extends Component {
       <div className={styles.container}>
         <Header />
         <Route exact path="/" component={AdminPage} />
+        <Route path="/report" component={ReportPage} />
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
