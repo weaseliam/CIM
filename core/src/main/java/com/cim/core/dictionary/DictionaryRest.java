@@ -1,6 +1,7 @@
 package com.cim.core.dictionary;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -39,13 +40,24 @@ public class DictionaryRest
 		return getDictionary(acceptLanguage);
 	}
 
-	@GetMapping(value="/{lang}")
+	@GetMapping(value = "/{lang}")
 	public ResponseEntity<DictionaryUi> getDictionaryForLang(
 			@PathVariable("lang") String lang)
 	{
 		return getDictionary(lang);
 	}
 	
+	@GetMapping(path = "/list")
+	public ResponseEntity<List<String>> getSupportedLanguages()
+	{
+		log.debug("Fetching supported languages");
+
+		List<String> supportedLanguages = dictionaryService.getSupportedLanguages();
+
+		log.debug("Response {}", supportedLanguages);
+		return ResponseEntity.ok(supportedLanguages);
+	}
+
 	private ResponseEntity<DictionaryUi> getDictionary(String lang)
 	{
 		log.debug("Fetching dictionary for language {}", lang);

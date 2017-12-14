@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, call, put, all } from 'redux-saga/effects';
 
 import { getLoggedInUser, logOutUser } from './app-api';
 import {
@@ -6,7 +6,7 @@ import {
   fetchLoggedInUserAction,
   logOutUserAction
 } from './app-actions';
-import { changeLanguageSaga } from '../i18n/i18n-saga';
+import { changeLanguageSaga, fetchSupportedLanguagesSaga } from '../i18n/i18n-saga';
 
 /**
  * Fetch current logged in user detail saga.
@@ -26,8 +26,11 @@ function* fetchLoggedInUserSaga() {
  */
 function* bootstrapAppSaga() {
   try {
-    yield call(fetchLoggedInUserSaga);
-    yield call(changeLanguageSaga, {});
+    yield all([
+      call(fetchLoggedInUserSaga),
+      call(changeLanguageSaga, {}),
+      call(fetchSupportedLanguagesSaga)
+    ]);
 
     yield put(bootstrapAppAction.success());
   } catch (error) {

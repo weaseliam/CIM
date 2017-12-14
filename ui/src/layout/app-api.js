@@ -7,16 +7,15 @@ import { API_PATH } from '../core/constants';
  *
  * @returns {Promise}
  */
-export const getLoggedInUser = () => (
+export const getLoggedInUser = () =>
   axios.get(`${API_PATH}/session`)
-    .then(response => (response.data))
-);
+    .then(response => response.data);
 
 /**
  * Log out current user REST call.
  *
  * @returns {Promise}
  */
-export const logOutUser = () => {
+export const logOutUser = () =>
   axios.post('/logout');
-};
+

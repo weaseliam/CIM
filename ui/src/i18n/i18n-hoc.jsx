@@ -20,7 +20,7 @@ const mapStateToProps = state => ({
  *
  * @param {React.Component} BaseComponent
  */
-const withI18N = BaseComponent =>
+const withI18n = BaseComponent =>
   connect(mapStateToProps)(props =>
     <BaseComponent
       {...props}
@@ -28,4 +28,4 @@ const withI18N = BaseComponent =>
         translate(props.i18n.messages, code, params)}
     />);
 
-export default withI18N;
+export default withI18n;

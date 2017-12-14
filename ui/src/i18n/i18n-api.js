@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { API_PATH } from '../core/constants';
+import { API_DICTIONARY } from '../core/constants';
 
 /**
  * Fetch dictionary REST call.
@@ -11,6 +11,10 @@ import { API_PATH } from '../core/constants';
 export const fetchDictionary = (language) => {
   const languageParam = language ? `/${language}` : '';
 
-  return axios.get(`${API_PATH}/dictionary${languageParam}`)
-    .then(response => (response.data));
+  return axios.get(`${API_DICTIONARY}${languageParam}`)
+    .then(response => response.data);
 };
+
+export const fetchSupportedLanguages = () =>
+  axios.get(`${API_DICTIONARY}/list`)
+    .then(response => response.data);

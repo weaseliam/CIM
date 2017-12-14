@@ -9,20 +9,25 @@ import {
 import { withRouter } from 'react-router';
 
 import { logOutUserAction } from '../app-actions';
+import { loggedInUserSelector } from '../app-selector';
+import withI18n from '../../i18n/i18n-hoc';
+import { changeLanguageAction } from '../../i18n/i18n-actions';
 
 import styles from './header.scss';
 
 const mapStateToProps = state => ({
-  user: state.app.session.user
+  user: loggedInUserSelector(state)
 });
 
+@withRouter
+@withI18n
 @connect(mapStateToProps)
 class Header extends Component {
   handleLogout = () => {
     this.props.dispatch(logOutUserAction.trigger());
   }
 
-  handleSelect = (eventKey) => {
+  handleSelectPage = (eventKey) => {
     switch (eventKey) {
       case 'admin':
         this.props.history.push('/');
@@ -47,6 +52,10 @@ class Header extends Component {
     }
   }
 
+  handleChangeLanguage = (language) => {
+    this.props.dispatch(changeLanguageAction.trigger(language));
+  }
+
   render() {
     return (
       <div className={styles.header}>
@@ -54,7 +63,7 @@ class Header extends Component {
           <div className={styles.company} />
 
           <div className={styles.nav}>
-            <Nav bsStyle="tabs" activeKey={this.computeActiveKey()} onSelect={this.handleSelect}>
+            <Nav bsStyle="tabs" activeKey={this.computeActiveKey()} onSelect={this.handleSelectPage}>
               <NavItem eventKey="admin">Administration</NavItem>
               <NavItem eventKey="report">Reports</NavItem>
             </Nav>
@@ -69,10 +78,20 @@ class Header extends Component {
             bsSize="xsmall"
             pullRight
           >
-            <MenuItem>Romana</MenuItem>
-            <MenuItem>English</MenuItem>
+            {this.props.i18n.languages.map(language =>
+              <MenuItem
+                key={language}
+                eventKey={language}
+                onSelect={this.handleChangeLanguage}
+                disabled={this.props.i18n.language === language}
+              >
+                {this.props.t(`ui.usermenu.language.${language}`)}
+              </MenuItem>
+            )}
             <MenuItem divider />
-            <MenuItem onSelect={this.handleLogout}>Sign out</MenuItem>
+            <MenuItem onSelect={this.handleLogout}>
+              {this.props.t('ui.usermenu.logout')}
+            </MenuItem>
           </DropdownButton>
         </div>
       </div>
@@ -80,4 +99,4 @@ class Header extends Component {
   }
 }
 
-export default withRouter(Header);
+export default Header;

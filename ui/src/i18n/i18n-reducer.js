@@ -1,8 +1,9 @@
-import { changeLanguageAction } from './i18n-actions';
+import { changeLanguageAction, fetchSupportedLanguagesAction } from './i18n-actions';
 
 export const INITIAL_STATE = {
   language: '',
-  messages: {}
+  messages: {},
+  languages: []
 };
 
 export const i18nReducer = (state = INITIAL_STATE, action) => {
@@ -11,6 +12,12 @@ export const i18nReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         ...action.payload
+      };
+
+    case fetchSupportedLanguagesAction.SUCCESS:
+      return {
+        ...state,
+        languages: action.payload
       };
 
     default:
