@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "joelday.docthis",
+    "alphabotsec.vscode-eclipse-keybindings",
+    "dbaeumer.vscode-eslint",
+    "krizzdewizz.goto-last-edit-location",
+    "vscjava.vscode-java-pack",
+    "eskibear.vscode-maven",
+    "joshpeng.sublime-babel-vscode",
+    "joshpeng.theme-tomorrowkit-sublime",
+    "donjayamanne.githistory",
+    "vscjava.vscode-java-test"
+  ]
+}

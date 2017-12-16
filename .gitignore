@@ -1,5 +1,5 @@
 
-# Created by https://www.gitignore.io/api/maven,eclipse
+# Created by https://www.gitignore.io/api/maven,eclipse,visualstudiocode
 
 ### Eclipse ###
 
@@ -15,9 +15,6 @@ local.properties
 .loadpath
 .recommenders
 
-# Eclipse Core
-.project
-
 # External tool builders
 .externalToolBuilders/
 
@@ -29,9 +26,6 @@ local.properties
 
 # CDT-specific (C/C++ Development Tooling)
 .cproject
-
-# JDT-specific (Eclipse Java Development Tools)
-.classpath
 
 # Java annotation processor (APT)
 .factorypath
@@ -54,6 +48,18 @@ local.properties
 # Code Recommenders
 .recommenders/
 
+# Scala IDE specific (Scala & Java development for Eclipse)
+.cache-main
+.scala_dependencies
+.worksheet
+
+### Eclipse Patch ###
+# Eclipse Core		
+.project
+
+# JDT-specific (Eclipse Java Development Tools)		
+.classpath
+
 ### Maven ###
 target/
 pom.xml.tag
@@ -65,8 +71,15 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
-# Exclude maven wrapper
+# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
 
-# End of https://www.gitignore.io/api/maven,eclipse
-0
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history
+
+# End of https://www.gitignore.io/api/maven,eclipse,visualstudiocode
