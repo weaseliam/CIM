@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import axios from 'axios';
 import { withRouter } from 'react-router';
 
-import Spinner from '../../components/spinner';
+import Loader from '../../components/loader';
 import { bootstrapAppAction } from '../app-actions';
 import AdminPage from '../../admin/components/admin-page';
 import Header from './header';
@@ -45,7 +45,7 @@ class App extends Component {
 
   render() {
     if (this.props.loading) {
-      return <Spinner />;
+      return <Loader />;
     }
 
     return (
