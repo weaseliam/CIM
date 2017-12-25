@@ -17,7 +17,7 @@ const defaultProps = {
   children: [],
   renderChildren: true,
   color: '#3399ff',
-  size: 80,
+  size: 60,
   loading: true,
   fillContainer: true
 };

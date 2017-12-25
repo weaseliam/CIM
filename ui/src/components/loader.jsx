@@ -1,23 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { PulseLoader } from 'halogen';
 
-import { isNilOrEmpty } from '../core/util';
+import style from './loader.scss';
 
 const propTypes = {
-  /**
-   * The loading text to be used.
-   */
-  text: PropTypes.string,
-
-  /**
-   * The tick milliseconds for the loading animation.
-   */
-  tickMills: PropTypes.number
+  color: PropTypes.string,
+  size: PropTypes.number,
+  loading: PropTypes.bool,
 };
 
 const defaultProps = {
-  text: '',
-  tickMills: 200
+  color: '#3399ff',
+  size: 10,
+  loading: true
 };
 
 /**
@@ -25,49 +21,9 @@ const defaultProps = {
  *
  * @extends {Component}
  */
-class Loader extends Component {
-  constructor(props) {
-    super(props);
-
-    this.sprites = ['◷', '◶', '◵', '◴'];
-
-    this.state = {
-      index: -1
-    };
-  }
-
-  componentDidMount() {
-    this.setTimer(this.props.tickMills);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    clearInterval(this.timer);
-    this.setTimer(nextProps.tickMills);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
-
-  setTimer(tickMills) {
-    this.timer = setInterval(
-      () => this.tick(),
-      tickMills
-    );
-  }
-
-  tick() {
-    this.setState({
-      index: (this.state.index + 1) % this.sprites.length
-    });
-  }
-
-  render() {
-    return isNilOrEmpty(this.props.text) ?
-      <div>{this.sprites[this.state.index]}</div> :
-      <div>{this.props.text}&nbsp;{this.sprites[this.state.index]}</div>;
-  }
-}
+const Loader = ({ color, size, loading }) => (
+  <PulseLoader className={style.loader} color={color} size={size} loading={loading} />
+);
 
 Loader.propTypes = propTypes;
 Loader.defaultProps = defaultProps;
