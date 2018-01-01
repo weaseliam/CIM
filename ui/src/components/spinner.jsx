@@ -5,7 +5,6 @@ import { BounceLoader } from 'halogen';
 import styles from './spinner.scss';
 
 const propTypes = {
-  children: PropTypes.anyOf,
   renderChildren: PropTypes.bool,
   color: PropTypes.string,
   size: PropTypes.number,

@@ -1,4 +1,4 @@
-package com.cim.core.app;
+package com.cim.web.config;
 
 import java.util.List;
 
@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import com.cim.core.app.AcceptLanguageHandlerMethodArgumentResolver;
+import com.cim.core.app.AppConstants;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -16,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class AppConfig extends WebMvcConfigurerAdapter
+public class WebConfig extends WebMvcConfigurerAdapter
 {
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers)
@@ -34,7 +37,7 @@ public class AppConfig extends WebMvcConfigurerAdapter
 						.build())
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("com.cim"))
-				.paths(PathSelectors.ant(AppController.API_PATH + "/*"))
+				.paths(PathSelectors.ant(AppConstants.API_PATH + "/*"))
 				.build();
 	}
 	

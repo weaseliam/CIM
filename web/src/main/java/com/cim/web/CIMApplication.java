@@ -12,14 +12,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories("com.cim")
 @EntityScan("com.cim")
 @SpringBootApplication
-public class CIMApplication 
+public class CIMApplication
 {
 	private static final Logger log = LoggerFactory.getLogger(CIMApplication.class);
-	
-    public static void main(String[] args) throws Exception 
+
+	public static void main(String[] args) throws Exception
 	{
-    	log.info("Staring application from Spring Boot main");
-    	
-        SpringApplication.run(CIMApplication.class, args);
-    }
+		log.info("Staring web application from embedded Tomcat");
+
+		SpringApplication.run(CIMApplication.class, args);
+	}
 }

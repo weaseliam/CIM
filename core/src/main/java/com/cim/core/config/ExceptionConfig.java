@@ -1,4 +1,4 @@
-package com.cim.core.app;
+package com.cim.core.config;
 
 import java.util.Locale;
 
@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
+import com.cim.core.app.AppException;
+import com.cim.core.app.UiException;
 import com.cim.core.dictionary.DictionaryService;
 
 @ControllerAdvice

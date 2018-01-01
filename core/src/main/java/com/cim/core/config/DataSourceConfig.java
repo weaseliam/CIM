@@ -1,4 +1,4 @@
-package com.cim.core.app;
+package com.cim.core.config;
 
 import org.springframework.context.annotation.Configuration;
 

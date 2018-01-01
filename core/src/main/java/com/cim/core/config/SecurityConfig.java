@@ -1,4 +1,4 @@
-package com.cim.core.app;
+package com.cim.core.config;
 
 import java.util.List;
 
@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import com.cim.core.app.AppConstants;
 import com.cim.core.user.AppUser;
 import com.cim.core.user.AppUserService;
 
@@ -48,7 +49,7 @@ class SecurityConfig
 
 	@Configuration
 	@Order(1)
-	@Profile(AppProfiles.PRODUCTION)
+	@Profile(AppConstants.PROFILE_PROD)
 	public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter
 	{
 		protected void configure(HttpSecurity http) throws Exception
@@ -56,7 +57,7 @@ class SecurityConfig
 			log.info("Running PRODUCTION rest api security configuration");
 
 			http
-				.antMatcher(AppController.API_PATH + "/**")
+				.antMatcher(AppConstants.API_PATH + "/**")
 					.authorizeRequests()
 						.anyRequest()
 						.hasRole("USER")
@@ -66,7 +67,7 @@ class SecurityConfig
 	}
 
 	@Configuration
-	@Profile(AppProfiles.PRODUCTION)
+	@Profile(AppConstants.PROFILE_PROD)
 	public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter
 	{
 		@Override
@@ -101,7 +102,7 @@ class SecurityConfig
 	}
 
 	@Configuration
-	@Profile(AppProfiles.DEVELOPMENT)
+	@Profile(AppConstants.PROFILE_DEV)
 	public static class DevWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter
 	{
 		@Override

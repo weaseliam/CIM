@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cim.core.app.AcceptLanguageHandlerMethodArgumentResolver.AcceptLanguage;
-import com.cim.core.app.AppController;
+import com.cim.core.app.AppConstants;
 
 @RestController
-@RequestMapping(AppController.API_PATH + "/dictionary")
+@RequestMapping(AppConstants.API_PATH + "/dictionary")
 public class DictionaryRest
 {
 	private static final Logger log = LoggerFactory.getLogger(DictionaryRest.class);

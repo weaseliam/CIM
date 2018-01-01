@@ -12,12 +12,15 @@ describe('i18n-reducer-test', () => {
     const payload = {
       language: 'en',
       messages: {
-        'security.context.auth.error': 'Spring security context authentication is null.'
+        'ui.usermenu.logout': 'Log out'
       }
     };
     const action = changeLanguageAction.success(payload);
     const state = i18nReducer(undefined, action);
 
-    expect(state).toEqual(payload);
+    expect(state).toEqual({
+      ...INITIAL_STATE,
+      ...payload
+    });
   });
 });
