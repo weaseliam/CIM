@@ -38,30 +38,17 @@
 			</plugin>
 
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>unpack-ui-resources</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>com.cim</groupId>
-									<artifactId>cim-ui</artifactId>
-									<version>${project.version}</version>
-									<type>zip</type>
-									<classifier>dist</classifier>
-									<overWrite>true</overWrite>
-									<outputDirectory>${project.basedir}/src/main/webapp</outputDirectory>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-war-plugin</artifactId>
+			    <configuration>
+			        <overlays>
+			            <overlay>
+			                <groupId>com.cim</groupId>
+			                <artifactId>cim-ui</artifactId>
+							<type>war</type>
+			            </overlay>
+			        </overlays>
+			    </configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -92,6 +79,14 @@
 
 
 		<!-- Provided -->
+		<dependency>
+			<groupId>com.cim</groupId>
+			<artifactId>cim-ui</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+			<scope>provided</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

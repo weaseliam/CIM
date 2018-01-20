@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>cim-ui</artifactId>
-	<packaging>pom</packaging>
+	<packaging>war</packaging>
 
 	<name>CIM UI</name>
 	<description>CIM user interface module</description>
@@ -16,8 +16,8 @@
 	</parent>
 
 	<properties>
-		<node.version>v8.9.1</node.version>
-		<npm.version>5.4.2</npm.version>
+		<node.version>v8.9.4</node.version>
+		<yarn.version>v1.3.2</yarn.version>
 	</properties>
 
 	<build>
@@ -25,25 +25,25 @@
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
 				<artifactId>frontend-maven-plugin</artifactId>
-				<version>1.5</version>
+				<version>1.6</version>
 				<configuration>
 					<nodeVersion>${node.version}</nodeVersion>
-					<npmVersion>${npm.version}</npmVersion>
+					<yarnVersion>${yarn.version}</yarnVersion>
 				</configuration>
 				<executions>
 					<execution>
-						<id>install node and npm</id>
+						<id>install node and yarn</id>
 						<phase>initialize</phase>
 						<goals>
-							<goal>install-node-and-npm</goal>
+							<goal>install-node-and-yarn</goal>
 						</goals>
 					</execution>
 
 					<execution>
-						<id>npm install</id>
+						<id>yarn install</id>
 						<phase>initialize</phase>
 						<goals>
-							<goal>npm</goal>
+							<goal>yarn</goal>
 						</goals>
 						<configuration>
 							<arguments>install</arguments>
@@ -51,32 +51,30 @@
 					</execution>
 
 					<execution>
-						<id>Frontend production build</id>
-						<phase>compile</phase>
+						<id>yarn build</id>
+						<phase>generate-resources</phase>
 						<goals>
-							<goal>npm</goal>
+							<goal>yarn</goal>
 						</goals>
 						<configuration>
-							<arguments>run build</arguments>
+							<arguments>build</arguments>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 
 			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.0</version>
 				<configuration>
-					<descriptor>pom.assembly.xml</descriptor>
+					<webResources>
+						<resource>
+							<directory>${project.build.directory}/dist</directory>
+						</resource>
+					</webResources>
+					<packagingExcludes>META-INF/, WEB-INF/</packagingExcludes>
 				</configuration>
-				<executions>
-					<execution>
-						<id>create-archive</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
