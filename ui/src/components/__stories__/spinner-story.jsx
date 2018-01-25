@@ -8,17 +8,17 @@ const stories = storiesOf('Spinner', module);
 stories.addDecorator(withKnobs);
 
 stories.add('default', () => (
-  <div style={{ width: '100px', height: '100px' }}>
+  <div style={{ width: '400px', height: '200px', border: '1px dotted black' }}>
     <Spinner />
   </div>
 ));
 
 stories.add('with text children', () => (
-  <div style={{ width: '100%', height: '100%' }}>
+  <div style={{ width: '100%', height: '100%', border: '1px dotted black' }}>
     <Spinner
       loading={boolean('Loading', true)}
       color={text('Color', '#3399ff')}
-      size={number('Size', 80)}
+      size={number('Size', 40)}
     >
       Lorem ipsum dolor sit amet, vix ad omnis dicunt nonumes. Cu recusabo euripidis duo,
       vim tale tempor reprehendunt id. Tamquam tincidunt no cum, mandamus erroribus no eam,
@@ -50,7 +50,7 @@ stories.add('with div child', () => (
     fillContainer={false}
     loading={boolean('Loading', true)}
     color={text('Color', '#3399ff')}
-    size={number('Size', 80)}
+    size={number('Size', 40)}
   >
     <div style={{ width: 600, height: 600, border: '1px dotted black' }}>
       Lorem ipsum dolor sit amet, vix ad omnis dicunt nonumes. Cu recusabo euripidis duo,

@@ -17,6 +17,8 @@
     "no-continue": "off",
     "no-mixed-operators": "off",
     "import/prefer-default-export": "off",
-    "react/jsx-wrap-multilines": "off"
+    "react/jsx-wrap-multilines": "off",
+    "object-curly-newline": "off",
+    "function-paren-newline": "off"
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { HashRouter as Router } from 'react-router-dom';
+import { hot } from 'react-hot-loader';
 
 import { store } from './store';
 import App from '../layout/containers/app';
@@ -17,4 +18,4 @@ const Root = () => (
   </Provider>
 );
 
-export default Root;
+export default hot(module)(Root);

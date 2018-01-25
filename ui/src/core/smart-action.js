@@ -10,17 +10,17 @@ const identity = i => i;
 
 /**
  * Create a smart action for the specified action name.
- * 
+ *
  * Supports 5 constants: TRIGGER, REQUEST, SUCCESS, FAILURE, FULFILL.
- * 
+ *
  * Supports 5 functions: trigger(payload), request(payload), success(payload),
  * failure(payload), fulfill(payload).
- * 
+ *
  * A payloadCreator function can be provided, it will be called for each supported function call.
- * 
- * @param {string} [actionName=''] 
- * @param {function} [payloadCreator=identity] 
- * @returns 
+ *
+ * @param {string} [actionName='']
+ * @param {function} [payloadCreator=identity]
+ * @returns
  */
 export const createAction = (actionName = '', payloadCreator = identity) => {
   if (typeof actionName !== 'string') {

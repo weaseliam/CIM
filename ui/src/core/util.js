@@ -1,4 +1,4 @@
-import R from 'ramda';
+import { isNil, isEmpty } from 'ramda';
 
 /**
  * Check if the provided value is nil or empty using ramda.
@@ -7,5 +7,5 @@ import R from 'ramda';
  * @param {any} value
  */
 export const isNilOrEmpty = value => (
-  R.isNil(value) || R.isEmpty(value)
+  isNil(value) || isEmpty(value)
 );

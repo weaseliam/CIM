@@ -72,7 +72,7 @@ class Header extends Component {
 
         <div className={styles.user}>
           <DropdownButton
-            id={'header-user-menu'}
+            id="header-user-menu"
             title={this.props.user.userName}
             bsStyle="default"
             bsSize="xsmall"

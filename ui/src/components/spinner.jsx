@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BounceLoader } from 'halogen';
 
 import styles from './spinner.scss';
 
 const propTypes = {
+  children: PropTypes.arrayOf(PropTypes.element),
   renderChildren: PropTypes.bool,
   color: PropTypes.string,
   size: PropTypes.number,
@@ -16,7 +16,7 @@ const defaultProps = {
   children: [],
   renderChildren: true,
   color: '#3399ff',
-  size: 60,
+  size: 40,
   loading: true,
   fillContainer: true
 };
@@ -30,7 +30,9 @@ const Spinner = ({ children, color, size, renderChildren, loading, fillContainer
   <div className={fillContainer || !renderChildren ? styles.fillContainer : styles.container}>
     {loading ?
       <div className={styles.background}>
-        <BounceLoader className={styles.loader} color={color} size={size} />
+        <div className={styles.loader} style={{ color, fontSize: size }}>
+          Spinning...
+        </div>
       </div> :
       null}
     {renderChildren ? children : null}

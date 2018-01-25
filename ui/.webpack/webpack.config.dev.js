@@ -8,12 +8,6 @@ const SERVER_PORT = '8080';
 
 const webpackConfig = baseConfig;
 
-webpackConfig.entry.app.unshift(
-  `webpack-dev-server/client?http://${HOST}:${PORT}`,
-  'webpack/hot/only-dev-server',
-  'react-hot-loader/patch'
-);
-
 webpackConfig.devtool = 'inline-source-map';
 
 webpackConfig.module.loaders.push({

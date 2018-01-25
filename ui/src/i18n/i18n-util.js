@@ -1,4 +1,4 @@
-import R from 'ramda';
+import { isNil } from 'ramda';
 
 import { isNilOrEmpty } from '../core/util';
 
@@ -60,7 +60,7 @@ export const translate = (messages, code, params) => {
   }
 
   const message = messages[code];
-  if (R.isNil(message)) {
+  if (isNil(message)) {
     return code;
   }
 

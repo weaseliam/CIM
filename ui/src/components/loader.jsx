@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PulseLoader } from 'halogen';
 
 import style from './loader.scss';
 
@@ -22,7 +21,11 @@ const defaultProps = {
  * @extends {Component}
  */
 const Loader = ({ color, size, loading }) => (
-  <PulseLoader className={style.loader} color={color} size={size} loading={loading} />
+  loading ?
+    <div className={style.loader} style={{ color, fontSize: size }}>
+      &nbsp;Loading...
+    </div> :
+    null
 );
 
 Loader.propTypes = propTypes;
