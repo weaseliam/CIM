@@ -77,7 +77,7 @@ class SecurityConfig
 
 			http
 				.authorizeRequests()
-					.antMatchers("/templates/**").permitAll()
+					.antMatchers("/templates/**", "/login**").permitAll()
 					.anyRequest().fullyAuthenticated()
 					.and()
 				.formLogin()
@@ -86,6 +86,7 @@ class SecurityConfig
 					.and()
 				.logout()
 					.logoutUrl("/logout")
+					.logoutSuccessUrl("/login")
 					.deleteCookies("JSESSIONID")
 					.invalidateHttpSession(true)
 					.and()
