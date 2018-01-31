@@ -5,9 +5,9 @@ module.exports = function(config, env) {
   var config = genDefaultConfig(config, env);
 
   config.module = baseConfig.module;
-  config.module.loaders.push({
+  config.module.rules.push({
     test: /\.scss$/,
-    loaders: ['style-loader', 'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]', 'postcss-loader', 'sass-loader'],
+    use: ['style-loader', 'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]', 'postcss-loader', 'sass-loader'],
     exclude: ['node_modules']
   });
 

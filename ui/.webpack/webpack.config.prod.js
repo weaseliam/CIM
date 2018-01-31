@@ -1,12 +1,10 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const baseConfig = require('./webpack.config.base');
+const webpackConfig = require('./webpack.config.base');
 const plugins = require('./webpack.plugins');
 
-const webpackConfig = baseConfig;
-
-webpackConfig.module.loaders.push({
+webpackConfig.module.rules.push({
   test: /\.scss$/,
-  loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader?sourceMap&modules&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader!sass-loader?outputStyle=expanded' }),
+  use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader?sourceMap&modules&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader!sass-loader?outputStyle=expanded' }),
   exclude: ['node', 'node_modules']
 });
 

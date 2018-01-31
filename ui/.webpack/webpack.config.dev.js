@@ -1,4 +1,4 @@
-const baseConfig = require('./webpack.config.base');
+const webpackConfig = require('./webpack.config.base');
 const plugins = require('./webpack.plugins');
 
 const HOST = process.env.HOST || '127.0.0.1';
@@ -6,13 +6,11 @@ const PORT = process.env.PORT || '3000';
 const SERVER_HOST = HOST || '127.0.0.1';
 const SERVER_PORT = '8080';
 
-const webpackConfig = baseConfig;
-
 webpackConfig.devtool = 'inline-source-map';
 
-webpackConfig.module.loaders.push({
+webpackConfig.module.rules.push({
   test: /\.scss$/,
-  loaders: ['style-loader', 'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]', 'postcss-loader', 'sass-loader'],
+  use: ['style-loader', 'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]', 'postcss-loader', 'sass-loader'],
   exclude: ['node', 'node_modules']
 });
 

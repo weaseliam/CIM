@@ -63,7 +63,12 @@ module.exports = function (config) {
         'react/lib/ReactContext': true
       }
     },
+
     webpackServer: {
+      noInfo: true
+    },
+
+    webpackMiddleware: {
       noInfo: true
     }
   });

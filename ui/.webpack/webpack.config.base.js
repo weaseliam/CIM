@@ -1,5 +1,5 @@
 const path = require('path');
-const loaders = require('./webpack.loaders');
+const rules = require('./webpack.rules');
 const pkgJson = require('../package.json');
 
 module.exports = {
@@ -22,6 +22,6 @@ module.exports = {
 
   module: {
     exprContextCritical: false,
-    loaders
+    rules
   }
 };
