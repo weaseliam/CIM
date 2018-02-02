@@ -1,4 +1,4 @@
-package com.cim.tools;
+package com.cim.clr;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +9,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan("com.cim")
 @SpringBootApplication
-public class CIMTools implements CommandLineRunner
+public class CIMClr implements CommandLineRunner
 {
-	private static final Logger log = LoggerFactory.getLogger(CIMTools.class);
+	private static final Logger log = LoggerFactory.getLogger(CIMClr.class);
 
 	@Override
 	public void run(String... args) throws Exception
@@ -21,6 +21,6 @@ public class CIMTools implements CommandLineRunner
 
 	public static void main(String[] args) throws Exception
 	{
-		SpringApplication.run(CIMTools.class, args);
+		SpringApplication.run(CIMClr.class, args);
 	}
 }

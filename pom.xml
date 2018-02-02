@@ -31,7 +31,7 @@
 		<module>core</module>
 		<module>ui</module>
 		<module>web</module>
-		<module>tools</module>
+		<module>clr</module>
 	</modules>
 
 </project>

@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>cim-tools</artifactId>
+	<artifactId>cim-clr</artifactId>
 	<packaging>jar</packaging>
 
-	<name>CIM Tools</name>
-	<description>CIM Tools module</description>
+	<name>CIM CLR</name>
+	<description>CIM CLR module</description>
 
 	<parent>
 		<groupId>com.cim</groupId>
@@ -17,7 +17,6 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<main.basedir>${basedir}/../..</main.basedir>
 	</properties>
 
 	<build>
