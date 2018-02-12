@@ -63,6 +63,10 @@ class SecurityConfig
 						.hasRole("USER")
 						.and()
 					.httpBasic();
+			
+			// TODO: Remove these in the future
+			http.csrf().disable();
+			http.headers().frameOptions().sameOrigin();
 		}
 	}
 
@@ -111,10 +115,9 @@ class SecurityConfig
 		{
 			log.info("Running DEVELOPMENT security configuration");
 
-			http
-				.authorizeRequests()
-					.anyRequest()
-					.permitAll();
+			http.authorizeRequests().anyRequest().permitAll();
+			http.csrf().disable();
+			http.headers().frameOptions().sameOrigin();
 		}
 	}
 }
