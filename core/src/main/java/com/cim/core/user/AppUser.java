@@ -10,17 +10,23 @@ public class AppUser
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	private String userName;
-	
-	private String password;
-	
-	private String firstName;
-	
-	private String lastName;
-	
-	private String email;
+	private Long	id;
+
+	private String	userName;
+	private String	password;
+	private String	firstName;
+	private String	lastName;
+	private String	email;
+
+	public Long getId()
+	{
+		return id;
+	}
+
+	public void setId(long id)
+	{
+		this.id = id;
+	}
 
 	public String getUserName()
 	{
