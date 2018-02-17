@@ -22,7 +22,8 @@ public class Grave
 	@NotNull
 	private Long		graveyardId;
 
-	private Long		exemptedId;
+	private Long		marca;
+	private Long		exemptId;
 	private Integer		codZona;
 	private String		sector;
 	private String		rind;
@@ -55,6 +56,16 @@ public class Grave
 		this.id = id;
 	}
 
+	public Long getMarca()
+	{
+		return marca;
+	}
+
+	public void setMarca(Long marca)
+	{
+		this.marca = marca;
+	}
+
 	public Long getGraveownerId()
 	{
 		return graveownerId;
@@ -75,14 +86,14 @@ public class Grave
 		this.graveyardId = graveyardId;
 	}
 
-	public Long getExemptedId()
+	public Long getExemptId()
 	{
-		return exemptedId;
+		return exemptId;
 	}
 
-	public void setExemptedId(long exemptedId)
+	public void setExemptId(long exemptId)
 	{
-		this.exemptedId = exemptedId;
+		this.exemptId = exemptId;
 	}
 
 	public Integer getCodZona()
@@ -298,12 +309,12 @@ public class Grave
 	@Override
 	public String toString()
 	{
-		return "Grave [id=" + id + ", graveownerId=" + graveownerId + ", graveyardId=" + graveyardId + ", exemptedId="
-				+ exemptedId + ", codZona=" + codZona + ", sector=" + sector + ", rind=" + rind + ", pozitie=" + pozitie
-				+ ", nrLocuri=" + nrLocuri + ", ani=" + ani + ", dataIncep=" + dataIncep + ", dataExp=" + dataExp
-				+ ", nrCh=" + nrCh + ", dataCh=" + dataCh + ", suma=" + suma + ", contract=" + contract + ", nrContr="
-				+ nrContr + ", dataContr=" + dataContr + ", ind=" + ind + ", stare=" + stare + ", dataStare="
-				+ dataStare + ", transe=" + transe + ", codCs=" + codCs + ", matricola=" + matricola + ", modif="
-				+ modif + "]";
+		return "Grave [id=" + id + ", graveownerId=" + graveownerId + ", graveyardId=" + graveyardId + ", marca="
+				+ marca + ", exemptId=" + exemptId + ", codZona=" + codZona + ", sector=" + sector + ", rind=" + rind
+				+ ", pozitie=" + pozitie + ", nrLocuri=" + nrLocuri + ", ani=" + ani + ", dataIncep=" + dataIncep
+				+ ", dataExp=" + dataExp + ", nrCh=" + nrCh + ", dataCh=" + dataCh + ", suma=" + suma + ", contract="
+				+ contract + ", nrContr=" + nrContr + ", dataContr=" + dataContr + ", ind=" + ind + ", stare=" + stare
+				+ ", dataStare=" + dataStare + ", transe=" + transe + ", codCs=" + codCs + ", matricola=" + matricola
+				+ ", modif=" + modif + "]";
 	}
 }

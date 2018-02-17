@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
-import org.springframework.util.Assert;
+import javax.validation.constraints.NotNull;
 
 public class UiException
 {
@@ -21,9 +21,8 @@ public class UiException
 		updateTimestamp();
 	}
 
-	public UiException(Throwable t)
+	public UiException(@NotNull Throwable t)
 	{
-		Assert.notNull(t, "Throwable must not be null");
 		updateTimestamp();
 
 		if (t instanceof AppException)

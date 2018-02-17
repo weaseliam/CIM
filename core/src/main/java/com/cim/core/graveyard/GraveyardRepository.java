@@ -4,4 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface GraveyardRepository extends JpaRepository<Graveyard, Long>
 {
+	Graveyard findFirstByNume(String nume);
 }

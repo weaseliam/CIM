@@ -1,10 +1,11 @@
 package com.cim.core.migration;
 
+import javax.validation.constraints.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,10 +23,8 @@ public class MigrationRest
 	private MigrationService	migrationService;
 
 	@Autowired
-	public MigrationRest(MigrationService migrationService)
+	public MigrationRest(@NotNull MigrationService migrationService)
 	{
-		Assert.notNull(migrationService, "migrationService must not be null");
-
 		this.migrationService = migrationService;
 	}
 

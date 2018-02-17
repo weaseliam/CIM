@@ -1,4 +1,4 @@
-package com.cim.core.exempted;
+package com.cim.core.exempt;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,11 +7,14 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Exempted
+public class Exempt
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long	id;
+
+	@NotNull
+	private Integer	cod;
 
 	@NotNull
 	private String	nume;
@@ -24,6 +27,16 @@ public class Exempted
 	public void setId(long id)
 	{
 		this.id = id;
+	}
+
+	public Integer getCod()
+	{
+		return cod;
+	}
+
+	public void setCod(Integer cod)
+	{
+		this.cod = cod;
 	}
 
 	public String getNume()
@@ -39,6 +52,6 @@ public class Exempted
 	@Override
 	public String toString()
 	{
-		return "Exempted [id=" + id + ", nume=" + nume + "]";
+		return "Exempt [id=" + id + ", cod=" + cod + ", nume=" + nume + "]";
 	}
 }

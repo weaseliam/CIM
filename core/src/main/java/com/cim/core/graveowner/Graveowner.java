@@ -21,6 +21,7 @@ public class Graveowner
 	@NotNull
 	private String	prenume;
 
+	private Long	marca;
 	private String	cnp;
 	private Integer	codLoc;
 	private String	localitate;
@@ -45,6 +46,7 @@ public class Graveowner
 	private String	emitator;
 	private Date	dataAct;
 	private String	dubiu;
+	private Date	dataDubiu;
 	private String	avans;
 	private Integer	anDebut;
 	private Integer	anFinal;
@@ -60,6 +62,16 @@ public class Graveowner
 	public void setId(long id)
 	{
 		this.id = id;
+	}
+
+	public Long getMarca()
+	{
+		return marca;
+	}
+
+	public void setMarca(Long marca)
+	{
+		this.marca = marca;
 	}
 
 	public String getNume()
@@ -322,6 +334,16 @@ public class Graveowner
 		this.dubiu = dubiu;
 	}
 
+	public Date getDataDubiu()
+	{
+		return dataDubiu;
+	}
+
+	public void setDataDubiu(Date dataDubiu)
+	{
+		this.dataDubiu = dataDubiu;
+	}
+
 	public String getAvans()
 	{
 		return avans;
@@ -385,13 +407,13 @@ public class Graveowner
 	@Override
 	public String toString()
 	{
-		return "Graveowner [id=" + id + ", nume=" + nume + ", prenume=" + prenume + ", cnp=" + cnp + ", codLoc="
-				+ codLoc + ", localitate=" + localitate + ", judet=" + judet + ", tara=" + tara + ", str=" + str
-				+ ", nr=" + nr + ", bl=" + bl + ", sc=" + sc + ", et=" + et + ", ap=" + ap + ", codPost=" + codPost
-				+ ", tel=" + tel + ", fax=" + fax + ", mail=" + mail + ", nrContr=" + nrContr + ", dataContr="
+		return "Graveowner [id=" + id + ", nume=" + nume + ", prenume=" + prenume + ", marca=" + marca + ", cnp=" + cnp
+				+ ", codLoc=" + codLoc + ", localitate=" + localitate + ", judet=" + judet + ", tara=" + tara + ", str="
+				+ str + ", nr=" + nr + ", bl=" + bl + ", sc=" + sc + ", et=" + et + ", ap=" + ap + ", codPost="
+				+ codPost + ", tel=" + tel + ", fax=" + fax + ", mail=" + mail + ", nrContr=" + nrContr + ", dataContr="
 				+ dataContr + ", contract=" + contract + ", act=" + act + ", seria=" + seria + ", nrAct=" + nrAct
-				+ ", emitator=" + emitator + ", dataAct=" + dataAct + ", dubiu=" + dubiu + ", avans=" + avans
-				+ ", anDebut=" + anDebut + ", anFinal=" + anFinal + ", modif=" + modif + ", avizat=" + avizat
-				+ ", dataAviz=" + dataAviz + "]";
+				+ ", emitator=" + emitator + ", dataAct=" + dataAct + ", dubiu=" + dubiu + ", dataDubiu=" + dataDubiu
+				+ ", avans=" + avans + ", anDebut=" + anDebut + ", anFinal=" + anFinal + ", modif=" + modif
+				+ ", avizat=" + avizat + ", dataAviz=" + dataAviz + "]";
 	}
 }
