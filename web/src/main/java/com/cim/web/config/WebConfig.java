@@ -36,9 +36,9 @@ public class WebConfig extends WebMvcConfigurerAdapter
 						.title("CIM REST API")
 						.build())
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.cim"))
-				.paths(PathSelectors.ant(AppConstants.API_PATH + "/*"))
-				.build();
+					.apis(RequestHandlerSelectors.basePackage("com.cim"))
+					.paths(PathSelectors.ant(AppConstants.API_PATH + "/**"))
+					.build();
 	}
 	
 	@Bean

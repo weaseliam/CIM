@@ -1,27 +1,25 @@
 package com.cim.core.user;
 
-import org.springframework.util.Assert;
+import javax.validation.constraints.NotNull;
 
 public class AppUserUi
 {
-	private String userName;
-	
-	private String firstName;
-	
-	private String lastName;
-	
-	private String email;
+	private String	userName;
 
-	public AppUserUi(AppUser appUser)
+	private String	firstName;
+
+	private String	lastName;
+
+	private String	email;
+
+	public AppUserUi(@NotNull AppUser appUser)
 	{
-		Assert.notNull(appUser, "appUser must not be null");
-		
 		setUserName(appUser.getUserName());
 		setFirstName(appUser.getFirstName());
 		setLastName(appUser.getLastName());
 		setEmail(appUser.getEmail());
 	}
-	
+
 	public String getUserName()
 	{
 		return userName;

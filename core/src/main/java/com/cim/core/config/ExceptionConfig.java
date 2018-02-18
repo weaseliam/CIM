@@ -2,13 +2,14 @@ package com.cim.core.config;
 
 import java.util.Locale;
 
+import javax.validation.constraints.NotNull;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -27,10 +28,8 @@ public class ExceptionConfig
 	private DictionaryService		dictionaryService;
 
 	@Autowired
-	ExceptionConfig(DictionaryService dictionaryService)
+	ExceptionConfig(@NotNull DictionaryService dictionaryService)
 	{
-		Assert.notNull(dictionaryService, "dictionaryService must not be null");
-
 		this.dictionaryService = dictionaryService;
 	}
 
