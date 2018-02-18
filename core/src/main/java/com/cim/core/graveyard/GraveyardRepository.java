@@ -1,8 +1,8 @@
 package com.cim.core.graveyard;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface GraveyardRepository extends JpaRepository<Graveyard, Long>
+public interface GraveyardRepository extends PagingAndSortingRepository<Graveyard, Long>
 {
 	Graveyard findFirstByNume(String nume);
 }

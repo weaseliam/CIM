@@ -1,8 +1,8 @@
 package com.cim.core.graveowner;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface GraveownerRepository extends JpaRepository<Graveowner, Long>
+public interface GraveownerRepository extends PagingAndSortingRepository<Graveowner, Long>
 {
 	Graveowner findFirstByMarca(Long marca);
 }

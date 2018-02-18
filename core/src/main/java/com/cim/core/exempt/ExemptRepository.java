@@ -1,8 +1,8 @@
 package com.cim.core.exempt;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface ExemptRepository extends JpaRepository<Exempt, Long>
+public interface ExemptRepository extends PagingAndSortingRepository<Exempt, Long>
 {
 	Exempt findFirstByCod(Integer cod);
 }

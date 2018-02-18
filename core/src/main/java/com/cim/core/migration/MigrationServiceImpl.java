@@ -17,34 +17,33 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.cim.core.exempt.Exempt;
-import com.cim.core.exempt.ExemptRepository;
+import com.cim.core.exempt.ExemptService;
 import com.cim.core.grave.Grave;
-import com.cim.core.grave.GraveRepository;
+import com.cim.core.grave.GraveService;
 import com.cim.core.graveowner.Graveowner;
-import com.cim.core.graveowner.GraveownerRepository;
+import com.cim.core.graveowner.GraveownerService;
 import com.cim.core.graveyard.Graveyard;
-import com.cim.core.graveyard.GraveyardRepository;
+import com.cim.core.graveyard.GraveyardService;
 
 @Service
 @Repository
 public class MigrationServiceImpl implements MigrationService
 {
-	private static final Logger		log	= LoggerFactory.getLogger(MigrationServiceImpl.class);
+	private static final Logger	log	= LoggerFactory.getLogger(MigrationServiceImpl.class);
 
-	private GraveownerRepository	graveownerRepository;
-	private GraveyardRepository		graveyardRepository;
-	private ExemptRepository		exemptRepository;
-	private GraveRepository			graveRepository;
+	private GraveownerService	graveownerService;
+	private GraveyardService	graveyardService;
+	private ExemptService		exemptService;
+	private GraveService		graveService;
 
 	@Autowired
-	public MigrationServiceImpl(@NotNull ExemptRepository exemptRepository,
-			@NotNull GraveyardRepository graveyardRepository, @NotNull GraveownerRepository graveownerRepository,
-			@NotNull GraveRepository graveRepository)
+	public MigrationServiceImpl(@NotNull ExemptService exemptService, @NotNull GraveyardService graveyardService,
+			@NotNull GraveownerService graveownerService, @NotNull GraveService graveService)
 	{
-		this.graveownerRepository = graveownerRepository;
-		this.graveyardRepository = graveyardRepository;
-		this.exemptRepository = exemptRepository;
-		this.graveRepository = graveRepository;
+		this.graveownerService = graveownerService;
+		this.graveyardService = graveyardService;
+		this.exemptService = exemptService;
+		this.graveService = graveService;
 	}
 
 	@Override
@@ -152,7 +151,7 @@ public class MigrationServiceImpl implements MigrationService
 				break;
 			}
 			
-			cursor += graveownerRepository.save(graveowners).size();
+			cursor += graveownerService.save(graveowners).size();
 		}
 
 		response.addTable(tableName, cursor);
@@ -178,7 +177,7 @@ public class MigrationServiceImpl implements MigrationService
 			}
 		});
 
-		response.addTable(tableName, graveyardRepository.save(graveyards).size());
+		response.addTable(tableName, graveyardService.save(graveyards).size());
 	}
 
 	private void migrateExempts(JdbcTemplate jdbcTemplate, String tableName, MigrationResponse response)
@@ -197,7 +196,7 @@ public class MigrationServiceImpl implements MigrationService
 			}
 		});
 
-		response.addTable(tableName, exemptRepository.save(exempts).size());
+		response.addTable(tableName, exemptService.save(exempts).size());
 	}
 
 	private void migrateGraves(JdbcTemplate jdbcTemplate, String tableName, MigrationResponse response)
@@ -236,14 +235,14 @@ public class MigrationServiceImpl implements MigrationService
 					
 					// update foreign keys
 					int scutit = rs.getInt("SCUTIT");
-					Exempt exempt = scutit > 0 ? exemptRepository.findFirstByCod(scutit) : null;
+					Exempt exempt = scutit > 0 ? exemptService.findFirstByCod(scutit) : null;
 					if (exempt != null)
 					{
 						grave.setExemptId(exempt.getId());
 					}
 					
 					String cimitir = rs.getString("CIMITIR");
-					Graveyard graveyard = cimitir.length() > 0 ? graveyardRepository.findFirstByNume(cimitir.trim()) : null;
+					Graveyard graveyard = cimitir.length() > 0 ? graveyardService.findFirstByNume(cimitir.trim()) : null;
 					if (graveyard != null)
 					{
 						grave.setGraveyardId(graveyard.getId());
@@ -254,7 +253,7 @@ public class MigrationServiceImpl implements MigrationService
 					}
 					
 					long marca = rs.getLong("MARCA");
-					Graveowner graveowner = marca > 0 ? graveownerRepository.findFirstByMarca(marca) : null;
+					Graveowner graveowner = marca > 0 ? graveownerService.findFirstByMarca(marca) : null;
 					if (graveowner != null)
 					{
 						grave.setGraveownerId(graveowner.getId());
@@ -273,7 +272,7 @@ public class MigrationServiceImpl implements MigrationService
 				break;
 			}
 			
-			cursor += graveRepository.save(graves).size();
+			cursor += graveService.save(graves).size();
 		}
 
 		response.addTable(tableName, cursor);

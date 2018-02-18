@@ -1,7 +1,7 @@
 package com.cim.core.grave;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface GraveRepository extends JpaRepository<Grave, Long>
+public interface GraveRepository extends PagingAndSortingRepository<Grave, Long>
 {
 }
