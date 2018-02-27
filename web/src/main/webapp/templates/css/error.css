@@ -1,0 +1,12 @@
+body {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+.container {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: auto;
+	margin-top: auto;
+}

@@ -11,35 +11,62 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	
 	<link rel="icon" href="/templates/assets/favicon.ico" />
-	<link rel="stylesheet" th:href="@{/templates/css/bootstrap.min.css}" 
-		href="/templates/css/bootstrap.min.css" />
+	<link rel="stylesheet" th:href="@{/templates/css/fabric.min.css}" 
+		href="/templates/css/fabric.min.css" />
+	<link rel="stylesheet" th:href="@{/templates/css/fabric.components.min.css}" 
+		href="/templates/css/fabric.components.min.css" />
 	<link rel="stylesheet" th:href="@{/templates/css/login.css}" 
 		href="/templates/css/login.css" />
 </head>
 
-<body>
+<body class="ms-Fabric ms-font-m">
 	<form class="form-signin" th:action="@{/login}" action="/login" method="POST">
-		<h2 class="form-signin-heading">&nbsp;</h2>
-		<div th:if="${param.error}"  class="alert alert-danger">Invalid username and password.</div>
-		<div th:if="${param.logout}" class="alert alert-info">You have been logged out.</div>
+		<div th:if="${param.error}" class="ms-MessageBar ms-MessageBar--blocked">
+			<div class="ms-MessageBar-content">
+				<div class="ms-MessageBar-icon">
+					<i class="ms-Icon ms-Icon--Blocked"></i>
+				</div>
+				<div class="ms-MessageBar-text">
+					Invalid username and password.
+				</div>
+			</div>
+		</div>
 
-		<label for="inputUser" class="sr-only">User name</label>
-		<div class="input-group">
-			<span class="input-group-addon glyphicon glyphicon-user" aria-hidden="true" />
-			<input type="text" name="username" id="inputUser"
-				   class="form-control" placeholder="User name" required="" autofocus="" />
+		<div th:if="${param.logout}" class="ms-MessageBar">
+			<div class="ms-MessageBar-content">
+				<div class="ms-MessageBar-icon">
+					<i class="ms-Icon ms-Icon--Info"></i>
+				</div>
+				<div class="ms-MessageBar-text">
+					You have been logged out.
+				</div>
+			</div>
 		</div>
 		
-		<label for="inputPass" class="sr-only">Password</label>
-		<div class="input-group">
-			<span class="input-group-addon glyphicon glyphicon-pencil" aria-hidden="true" />
-			<input type="password" name="password" id="inputPass"
-				   class="form-control" placeholder="Password" required="" />
+		<br />
+
+		<label for="inputUser" class="ms-u-screenReaderOnly">User name</label>
+		<div class="ms-TextField ms-TextField--underlined">
+			<label class="ms-Label">
+				<i class="ms-Icon ms-Icon--Contact" aria-hidden="true"></i>
+			</label>
+			<input class="ms-TextField-field" type="text" name="username" id="inputUser" 
+				required="true" autofocus="true" />
 		</div>
-		
-		<button class="btn btn-lg btn-primary btn-block" type="submit">
-			Sign in &nbsp;
-			<span class="glyphicon glyphicon-log-in" aria-hidden="true" />
+
+		<label for="inputPass" class="ms-u-screenReaderOnly">Password</label>
+		<div class="ms-TextField ms-TextField--underlined">
+			<label class="ms-Label">
+				<i class="ms-Icon ms-Icon--EditMirrored" aria-hidden="true"></i>
+			</label> 
+			<input class="ms-TextField-field" type="password" name="password" id="inputPass" 
+				required="true" />
+		</div>
+
+		<button class="ms-Button ms-Button--primary" type="submit" id="buttonSubmit">
+			<span class="ms-Button-label">
+				<i class="ms-Icon ms-Icon--Forward" aria-hidden="true"></i>
+			</span>
 		</button>
 	</form>
 </body>
