@@ -49,10 +49,12 @@ class App extends Component {
     }
 
     return (
-      <div className={styles.container}>
+      <div className={styles.app}>
         <Header />
-        <Route exact path="/" component={AdminPage} />
-        <Route path="/report" component={ReportPage} />
+        <div className={styles.content}>
+          <Route exact path="/" component={AdminPage} />
+          <Route path="/report" component={ReportPage} />
+        </div>
       </div>
     );
   }

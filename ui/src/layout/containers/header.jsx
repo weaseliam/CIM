@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  DropdownButton,
-  MenuItem,
-  Nav,
-  NavItem
-} from 'react-bootstrap';
+import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
+import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { withRouter } from 'react-router';
 
 import { logOutUserAction } from '../app-actions';
@@ -23,12 +19,18 @@ const mapStateToProps = state => ({
 @withI18n
 @connect(mapStateToProps)
 class Header extends Component {
-  handleLogout = () => {
-    this.props.dispatch(logOutUserAction.trigger());
+  getSelectedPage = () => {
+    switch (this.props.location.pathname) {
+      case '/report':
+        return 'report';
+
+      default:
+        return 'admin';
+    }
   }
 
-  handleSelectPage = (eventKey) => {
-    switch (eventKey) {
+  handleSelectPage = (e, pageItem) => {
+    switch (pageItem.key) {
       case 'admin':
         this.props.history.push('/');
         break;
@@ -42,57 +44,97 @@ class Header extends Component {
     }
   }
 
-  computeActiveKey = () => {
-    switch (this.props.location.pathname) {
-      case '/report':
-        return 'report';
-
-      default:
-        return 'admin';
-    }
+  handleLogout = () => {
+    this.props.dispatch(logOutUserAction.trigger());
   }
 
-  handleChangeLanguage = (language) => {
-    this.props.dispatch(changeLanguageAction.trigger(language));
+  handleChangeLanguage = (e, languageItem) => {
+    this.props.dispatch(changeLanguageAction.trigger(languageItem.key));
+  }
+
+  createUserMenuItems = () => {
+    // language options
+    const items = this.props.i18n.languages.map(language => ({
+      key: language,
+      name: this.props.t(`ui.usermenu.language.${language}`),
+      disabled: this.props.i18n.language === language,
+      onClick: this.handleChangeLanguage
+    }));
+
+    // divider
+    items.push({
+      key: 'divider1',
+      itemType: ContextualMenuItemType.Divider
+    });
+
+    // logout
+    items.push({
+      key: 'logout',
+      name: this.props.t('ui.usermenu.logout'),
+      onClick: this.handleLogout
+    });
+
+    return items;
+  }
+
+  createItems = () => {
+    const items = [];
+
+    // admin
+    items.push({
+      name: 'Administration',
+      key: 'admin',
+      itemType: ContextualMenuItemType.Header,
+      iconProps: {
+        iconName: 'Admin'
+      },
+      disabled: this.getSelectedPage() === 'admin',
+      onClick: this.handleSelectPage
+    });
+
+    // report
+    items.push({
+      name: 'Reports',
+      key: 'report',
+      itemType: ContextualMenuItemType.Header,
+      iconProps: {
+        iconName: 'Chart'
+      },
+      disabled: this.getSelectedPage() === 'report',
+      onClick: this.handleSelectPage
+    });
+
+    return items;
+  }
+
+  createFarItems = () => {
+    const farItems = [];
+
+    // user menu
+    farItems.push({
+      name: this.props.user.userName,
+      key: 'userMenu',
+      itemType: ContextualMenuItemType.Header,
+      iconProps: {
+        iconName: 'Contact'
+      },
+      subMenuProps: {
+        items: this.createUserMenuItems()
+      }
+    });
+
+    return farItems;
   }
 
   render() {
     return (
       <div className={styles.header}>
-        <div className={styles.companyAndNav}>
-          <div className={styles.company} />
-
-          <div className={styles.nav}>
-            <Nav bsStyle="tabs" activeKey={this.computeActiveKey()} onSelect={this.handleSelectPage}>
-              <NavItem eventKey="admin">Administration</NavItem>
-              <NavItem eventKey="report">Reports</NavItem>
-            </Nav>
-          </div>
-        </div>
-
-        <div className={styles.user}>
-          <DropdownButton
-            id="header-user-menu"
-            title={this.props.user.userName}
-            bsStyle="default"
-            bsSize="xsmall"
-            pullRight
-          >
-            {this.props.i18n.languages.map(language =>
-              <MenuItem
-                key={language}
-                eventKey={language}
-                onSelect={this.handleChangeLanguage}
-                disabled={this.props.i18n.language === language}
-              >
-                {this.props.t(`ui.usermenu.language.${language}`)}
-              </MenuItem>
-            )}
-            <MenuItem divider />
-            <MenuItem onSelect={this.handleLogout}>
-              {this.props.t('ui.usermenu.logout')}
-            </MenuItem>
-          </DropdownButton>
+        <div className={styles.company} />
+        <div className={styles.commandbar} >
+          <CommandBar
+            items={this.createItems()}
+            farItems={this.createFarItems()}
+          />
         </div>
       </div>
     );

@@ -1,47 +1,23 @@
 .header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 40px;
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 4px;
 
-  .companyAndNav {
+  .company {
     display: flex;
+    justify-content: center;
     align-items: center;
-  
-    .company {
-      margin-left: 5px;
-      margin-right: 10px;
-    
-      &:before {
-        content: " ";
-        display: inline-block;
-        width: 100px;
-        height: 40px;
-        margin-right: 5px;
-        background: url("../../styles/assets/company-logo.png") no-repeat;
-      }
-    }
-    
-    .nav {
-      margin-top: 1px;
-      font-size: 1.3rem;
+    background-color: #f4f4f4;
+    padding-left: 5px;
+
+    &:before {
+      content: " ";
+      display: inline-block;
+      width: 96px;
+      height: 32px;
+      background: url("../../styles/assets/company-logo.png") no-repeat;
     }
   }
 
-  .user {
-    margin-right: 5px;
-  
-    &:before {
-      content: "\f2c0";
-      font: normal normal normal 14px/1 FontAwesome;
-      font-size: 1.6rem;
-      display: inline-block;
-      border-radius: 50%;
-      border: solid 1px #ccc;
-      margin-right: 5px;
-      padding: 8px;
-    }
+  .commandbar {
+    flex-grow: 1;
   }
 }

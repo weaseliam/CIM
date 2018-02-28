@@ -2,11 +2,12 @@ import 'babel-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { initializeIcons } from 'office-ui-fabric-react/lib/Icons';
 
 import Root from './core/root';
 
+import '../node_modules/office-ui-fabric-react/dist/css/fabric.css';
 import '../node_modules/font-awesome/css/font-awesome.css';
-import '../node_modules/bootstrap-css-only/css/bootstrap.css';
 import './styles/styles.css';
 
 const render = (Component) => {
@@ -17,4 +18,5 @@ const render = (Component) => {
   );
 };
 
+initializeIcons();
 render(Root);
