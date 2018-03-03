@@ -13,12 +13,12 @@ stories.add('default', () => (
   </div>
 ));
 
-stories.add('with text children', () => (
+stories.add('with text children and label', () => (
   <div style={{ width: '100%', height: '100%', border: '1px dotted black' }}>
     <Spinner
       loading={boolean('Loading', true)}
-      color={text('Color', '#3399ff')}
-      size={number('Size', 40)}
+      label={text('Label', 'Spinning ...')}
+      size={number('Size', 3)}
     >
       Lorem ipsum dolor sit amet, vix ad omnis dicunt nonumes. Cu recusabo euripidis duo,
       vim tale tempor reprehendunt id. Tamquam tincidunt no cum, mandamus erroribus no eam,
@@ -45,12 +45,12 @@ stories.add('with text children', () => (
   </div>
 ));
 
-stories.add('with div child', () => (
+stories.add('with div child and label', () => (
   <Spinner
     fillContainer={false}
     loading={boolean('Loading', true)}
-    color={text('Color', '#3399ff')}
-    size={number('Size', 40)}
+    label={text('Label', 'Spinning ...')}
+    size={number('Size', 3)}
   >
     <div style={{ width: 600, height: 600, border: '1px dotted black' }}>
       Lorem ipsum dolor sit amet, vix ad omnis dicunt nonumes. Cu recusabo euripidis duo,

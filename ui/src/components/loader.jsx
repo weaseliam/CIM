@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 
 import style from './loader.scss';
 
 const propTypes = {
-  color: PropTypes.string,
-  size: PropTypes.number,
   loading: PropTypes.bool,
+  size: PropTypes.number
 };
 
 const defaultProps = {
-  color: '#3399ff',
-  size: 10,
-  loading: true
+  loading: true,
+  size: 30
 };
 
 /**
@@ -20,10 +19,10 @@ const defaultProps = {
  *
  * @extends {Component}
  */
-const Loader = ({ color, size, loading }) => (
+const Loader = ({ loading, size }) => (
   loading ?
-    <div className={style.loader} style={{ color, fontSize: size }}>
-      &nbsp;Loading...
+    <div className={style.loader} style={{ width: size }}>
+      <ProgressIndicator />
     </div> :
     null
 );

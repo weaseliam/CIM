@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, text, number, boolean } from '@storybook/addon-knobs';
+import { withKnobs, number, boolean } from '@storybook/addon-knobs';
 
 import Loader from '../loader';
 
@@ -11,13 +11,12 @@ stories.add('default', () => (
   <Loader />
 ));
 
-stories.add('with title', () => (
+stories.add('with label', () => (
   <div>
     Title
     <Loader
       loading={boolean('Loading', true)}
-      color={text('Color', '#3399ff')}
-      size={number('Size', 10)}
+      size={number('Size', 30)}
     />
   </div>
 ));
