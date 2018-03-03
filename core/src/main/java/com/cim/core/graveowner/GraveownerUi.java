@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 public class GraveownerUi
 {
 	private Long	id;
+	private String	cnp;
 	private String	nume;
 	private String	prenume;
 	private String	localitate;
@@ -23,6 +24,7 @@ public class GraveownerUi
 	public GraveownerUi(@NotNull Graveowner graveowner)
 	{
 		id = graveowner.getId();
+		cnp = graveowner.getCnp();
 		nume = graveowner.getNume();
 		prenume = graveowner.getPrenume();
 		localitate = graveowner.getLocalitate();
@@ -43,6 +45,16 @@ public class GraveownerUi
 	public void setId(Long id)
 	{
 		this.id = id;
+	}
+
+	public String getCnp()
+	{
+		return cnp;
+	}
+
+	public void setCnp(String cnp)
+	{
+		this.cnp = cnp;
 	}
 
 	public String getNume()
@@ -148,8 +160,8 @@ public class GraveownerUi
 	@Override
 	public String toString()
 	{
-		return "GraveownerUi [id=" + id + ", nume=" + nume + ", prenume=" + prenume + ", localitate=" + localitate
-				+ ", judet=" + judet + ", str=" + str + ", nr=" + nr + ", bl=" + bl + ", sc=" + sc + ", et=" + et
-				+ ", ap=" + ap + "]";
+		return "GraveownerUi [id=" + id + ", cnp=" + cnp + ", nume=" + nume + ", prenume=" + prenume + ", localitate="
+				+ localitate + ", judet=" + judet + ", str=" + str + ", nr=" + nr + ", bl=" + bl + ", sc=" + sc
+				+ ", et=" + et + ", ap=" + ap + "]";
 	}
 }

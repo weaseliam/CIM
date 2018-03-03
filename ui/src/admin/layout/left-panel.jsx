@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './left-panel.scss';
 
 const LeftPanel = () => (
-  <div className={styles.container}>
+  <div className={styles.leftPanel}>
     {'Filter'}
   </div>
 );

@@ -1,9 +1,11 @@
 {
   "env": {
-      "jasmine": true,
-      "node": true
+    "jasmine": true,
+    "node": true
   },
-  "plugins": ["jasmine"],
+  "plugins": [
+    "jasmine"
+  ],
   "extends": "airbnb",
   "parser": "babel-eslint",
   "rules": {
@@ -19,6 +21,7 @@
     "import/prefer-default-export": "off",
     "react/jsx-wrap-multilines": "off",
     "object-curly-newline": "off",
-    "function-paren-newline": "off"
+    "function-paren-newline": "off",
+    "no-restricted-syntax": "off"
   }
 }

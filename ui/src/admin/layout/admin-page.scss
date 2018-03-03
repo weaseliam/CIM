@@ -1,11 +1,11 @@
-.container {
+.admin {
   display: flex;
   flex-direction: row;
   flex-grow: 1;
 }
 
 @media screen and (max-width: 899px) {
-  .container {
+  .admin {
     flex-direction: column;
   }
 }

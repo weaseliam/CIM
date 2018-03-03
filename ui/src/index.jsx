@@ -8,6 +8,7 @@ import Root from './core/root';
 
 import '../node_modules/office-ui-fabric-react/dist/css/fabric.css';
 import '../node_modules/font-awesome/css/font-awesome.css';
+import '../node_modules/react-virtualized/styles.css';
 import './styles/styles.css';
 
 const render = (Component) => {

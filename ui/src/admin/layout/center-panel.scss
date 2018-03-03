@@ -1,4 +1,5 @@
-.container {
+.centerPanel {
+  display: flex;
   flex-grow: 5;
   min-height: 500px;
   border: 1px dashed gray;

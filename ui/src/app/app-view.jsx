@@ -4,13 +4,13 @@ import { Route } from 'react-router-dom';
 import axios from 'axios';
 import { withRouter } from 'react-router';
 
-import Loader from '../../components/loader';
-import { bootstrapAppAction } from '../app-actions';
-import AdminPage from '../../admin/components/admin-page';
-import Header from './header';
-import ReportPage from '../../report/components/report-page';
+import Loader from '../components/loader';
+import { bootstrapAppAction } from './app-actions';
+import AdminPage from '../admin/layout/admin-page';
+import HeaderView from './header-view';
+import ReportPage from '../report/layout/report-page';
 
-import styles from './app.scss';
+import styles from './app-view.scss';
 
 const mapStateToProps = state => ({
   loading: state.app.loading
@@ -18,7 +18,7 @@ const mapStateToProps = state => ({
 
 @withRouter
 @connect(mapStateToProps)
-class App extends Component {
+class AppView extends Component {
   componentDidMount() {
     this.registerHttpInterceptors();
     this.props.dispatch(bootstrapAppAction.trigger());
@@ -50,7 +50,7 @@ class App extends Component {
 
     return (
       <div className={styles.app}>
-        <Header />
+        <HeaderView />
         <div className={styles.content}>
           <Route exact path="/" component={AdminPage} />
           <Route path="/report" component={ReportPage} />
@@ -60,4 +60,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default AppView;

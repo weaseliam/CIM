@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './report-page.scss';
 
 const ReportPage = () => (
-  <div className={styles.container}>
+  <div className={styles.report}>
     Not implemented
   </div>
 );

@@ -4,12 +4,12 @@ import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { withRouter } from 'react-router';
 
-import { logOutUserAction } from '../app-actions';
-import { loggedInUserSelector } from '../app-selector';
-import withI18n from '../../i18n/i18n-hoc';
-import { changeLanguageAction } from '../../i18n/i18n-actions';
+import { logOutUserAction } from './app-actions';
+import { loggedInUserSelector } from './app-selector';
+import withI18n from '../i18n/i18n-hoc';
+import { changeLanguageAction } from '../i18n/i18n-actions';
 
-import styles from './header.scss';
+import styles from './header-view.scss';
 
 const mapStateToProps = state => ({
   user: loggedInUserSelector(state)
@@ -18,7 +18,7 @@ const mapStateToProps = state => ({
 @withRouter
 @withI18n
 @connect(mapStateToProps)
-class Header extends Component {
+class HeaderView extends Component {
   getSelectedPage = () => {
     switch (this.props.location.pathname) {
       case '/report':
@@ -141,4 +141,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default HeaderView;

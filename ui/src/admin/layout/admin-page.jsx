@@ -7,7 +7,7 @@ import RightPanel from './right-panel';
 import styles from './admin-page.scss';
 
 const AdminPage = () => (
-  <div className={styles.container}>
+  <div className={styles.admin}>
     <LeftPanel />
     <CenterPanel />
     <RightPanel />

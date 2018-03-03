@@ -4,14 +4,14 @@ import { HashRouter as Router } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
 
 import { store } from './store';
-import App from '../layout/containers/app';
+import AppView from '../app/app-view';
 import DevTools from './dev-tools';
 
 const Root = () => (
   <Provider store={store}>
     <div>
       <Router>
-        <App />
+        <AppView />
       </Router>
       {process.env.NODE_ENV !== 'production' ? <DevTools /> : null}
     </div>
