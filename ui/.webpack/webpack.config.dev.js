@@ -1,9 +1,9 @@
 const webpackConfig = require('./webpack.config.base');
 const plugins = require('./webpack.plugins');
 
-const HOST = process.env.HOST || '127.0.0.1';
-const PORT = process.env.PORT || '3000';
-const SERVER_HOST = HOST || '127.0.0.1';
+const HOST = '127.0.0.1';
+const PORT = '3000';
+const SERVER_HOST = HOST;
 const SERVER_PORT = '8080';
 
 webpackConfig.devtool = 'inline-source-map';
