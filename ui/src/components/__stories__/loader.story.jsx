@@ -8,15 +8,15 @@ const stories = storiesOf('Loader', module);
 stories.addDecorator(withKnobs);
 
 stories.add('default', () => (
-  <Loader />
+  <Loader loading />
 ));
 
 stories.add('with label', () => (
   <div>
     Title
     <Loader
-      loading={boolean('Loading', true)}
-      size={number('Size', 30)}
+      loading={boolean('loading', true)}
+      size={number('size', 30)}
     />
   </div>
 ));

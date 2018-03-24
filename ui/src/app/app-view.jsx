@@ -45,7 +45,7 @@ class AppView extends Component {
 
   render() {
     if (this.props.loading) {
-      return <Loader />;
+      return <div>Loading... <Loader loading /></div>;
     }
 
     return (

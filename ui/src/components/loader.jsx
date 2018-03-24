@@ -10,7 +10,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  loading: true,
+  loading: false,
   size: 30
 };
 
@@ -20,11 +20,10 @@ const defaultProps = {
  * @extends {Component}
  */
 const Loader = ({ loading, size }) => (
-  loading ?
-    <div className={style.loader} style={{ width: size }}>
-      <ProgressIndicator />
-    </div> :
-    null
+  loading &&
+  <div className={style.loader} style={{ width: size }}>
+    <ProgressIndicator />
+  </div>
 );
 
 Loader.propTypes = propTypes;

@@ -14,8 +14,6 @@ function* fetchGraveownerListSaga(action) {
     yield put(fetchGraveownerListAction.success(graveownerList));
   } catch (error) {
     yield put(fetchGraveownerListAction.failure());
-  } finally {
-    yield put(fetchGraveownerListAction.fulfill());
   }
 }
 

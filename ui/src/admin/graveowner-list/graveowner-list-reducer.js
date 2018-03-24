@@ -10,7 +10,8 @@ export const graveownerListReducer = (state = INITIAL_STATE, action) => {
     case fetchGraveownerListAction.SUCCESS:
       return {
         ...state,
-        list: action.payload
+        list: action.payload,
+        loading: false
       };
 
     case fetchGraveownerListAction.TRIGGER:
@@ -19,7 +20,7 @@ export const graveownerListReducer = (state = INITIAL_STATE, action) => {
         loading: true
       };
 
-    case fetchGraveownerListAction.FULFILL:
+    case fetchGraveownerListAction.FAILURE:
       return {
         ...state,
         loading: false

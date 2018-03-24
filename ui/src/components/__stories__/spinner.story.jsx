@@ -8,17 +8,23 @@ const stories = storiesOf('Spinner', module);
 stories.addDecorator(withKnobs);
 
 stories.add('default', () => (
+  <Spinner loading>
+    <div style={{ width: '400px', height: '200px', border: '1px dotted black' }} />
+  </Spinner>
+));
+
+stories.add('with fillContainer', () => (
   <div style={{ width: '400px', height: '200px', border: '1px dotted black' }}>
-    <Spinner />
+    <Spinner loading fillContainer />
   </div>
 ));
 
 stories.add('with text children and label', () => (
   <div style={{ width: '100%', height: '100%', border: '1px dotted black' }}>
     <Spinner
-      loading={boolean('Loading', true)}
-      label={text('Label', 'Spinning ...')}
-      size={number('Size', 3)}
+      loading={boolean('loading', true)}
+      label={text('label', 'Spinning ...')}
+      size={number('size', 3)}
     >
       Lorem ipsum dolor sit amet, vix ad omnis dicunt nonumes. Cu recusabo euripidis duo,
       vim tale tempor reprehendunt id. Tamquam tincidunt no cum, mandamus erroribus no eam,
@@ -47,10 +53,10 @@ stories.add('with text children and label', () => (
 
 stories.add('with div child and label', () => (
   <Spinner
-    fillContainer={false}
-    loading={boolean('Loading', true)}
-    label={text('Label', 'Spinning ...')}
-    size={number('Size', 3)}
+    fillContainer={boolean('fillContainer', false)}
+    loading={boolean('loading', true)}
+    label={text('label', 'Spinning ...')}
+    size={number('size', 3)}
   >
     <div style={{ width: 600, height: 600, border: '1px dotted black' }}>
       Lorem ipsum dolor sit amet, vix ad omnis dicunt nonumes. Cu recusabo euripidis duo,
