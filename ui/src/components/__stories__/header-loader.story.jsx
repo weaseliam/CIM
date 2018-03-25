@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, number, boolean } from '@storybook/addon-knobs';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import HeaderLoader from '../header-loader';
 
@@ -13,8 +13,6 @@ stories.add('default', () => (
 
 stories.add('custom', () => (
   <HeaderLoader
-    loading={boolean('loading', false)}
-    incrementValue={number('incrementValue', 0.01)}
-    incrementDelay={number('incrementDelay', 100)}
+    loading={boolean('loading', true)}
   />
 ));

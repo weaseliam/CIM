@@ -10,7 +10,7 @@ import style from './graveowner-list-view.scss';
 const colWidth = {
   SMALL: 50,
   MEDIUM: 100,
-  LARGE: 160
+  LARGE: 150
 };
 
 const mapStateToProps = state => ({
@@ -22,6 +22,16 @@ const mapStateToProps = state => ({
 class GraveownerListView extends Component {
   componentDidMount() {
     this.props.dispatch(fetchGraveownerListAction.trigger());
+  }
+
+  handleRowClassName = ({ index }) => {
+    if (index < 0) {
+      return style.tableHeaderRow;
+    }
+
+    return index % 2 === 0
+      ? style.tableEvenRow
+      : style.tableOddRow;
   }
 
   render() {
@@ -36,13 +46,15 @@ class GraveownerListView extends Component {
             <Table
               width={width}
               height={height}
-              headerHeight={20}
-              rowHeight={30}
+              headerHeight={25}
+              rowHeight={35}
+              headerClassName={style.tableHeaderColumn}
+              rowClassName={this.handleRowClassName}
               rowCount={graveowners.length}
               rowGetter={({ index }) => graveowners[index]}
             >
               <Column label="Id" dataKey="id" width={colWidth.SMALL} />
-              <Column label="CNP" dataKey="cnp" width={colWidth.MEDIUM} />
+              <Column label="CNP" dataKey="cnp" width={colWidth.LARGE} />
               <Column label="Nume" dataKey="nume" width={colWidth.LARGE} />
               <Column label="Prenume" dataKey="prenume" width={colWidth.LARGE} />
               <Column label="Localitate" dataKey="localitate" width={colWidth.MEDIUM} />

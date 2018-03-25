@@ -4,6 +4,9 @@ import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator'
 
 import style from './header-loader.scss';
 
+const LOADER_ANIMATION_DURATION = 3000;
+const LOADER_ANIMATION_THRESHOLD = 2500;
+
 /**
  * HeaderLoader component
  *
@@ -11,25 +14,28 @@ import style from './header-loader.scss';
  */
 class HeaderLoader extends Component {
   static propTypes = {
-    loading: PropTypes.bool,
-    incrementValue: PropTypes.number,
-    incrementDelay: PropTypes.number
+    loading: PropTypes.bool
   };
 
   static defaultProps = {
-    loading: false,
-    incrementValue: 0.01,
-    incrementDelay: 100
+    loading: false
   };
 
   constructor(props) {
     super(props);
 
-    this.loadingInterval = null;
+    this.loadingStartTime = null;
+    this.delayInterval = null;
   }
 
   state = {
-    loadingPercent: 0
+    loadingDelayed: false
+  };
+
+  componentWillMount() {
+    if (this.props.loading === true) {
+      this.activateLoading();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -37,27 +43,43 @@ class HeaderLoader extends Component {
       return;
     }
 
-    if (nextProps.loading) {
-      this.setState({ loadingPercent: 0 });
-      this.loadingInterval = setInterval(this.tickLoading, nextProps.incrementDelay);
-    } else if (this.loadingInterval) {
-      clearInterval(this.loadingInterval);
+    if (nextProps.loading === true) {
+      this.activateLoading();
+    } else {
+      this.deactivateLoading();
     }
   }
 
-  tickLoading = () => {
-    const loadingPercent = this.state.loadingPercent + this.props.incrementValue;
-    this.setState({ loadingPercent: loadingPercent > 1 ? 0 : loadingPercent });
+  activateLoading = () => {
+    this.delayInterval && clearInterval(this.delayInterval);
+    const date = new Date();
+    this.loadingStartTime = date.getTime();
+    this.setState({ loadingDelayed: true });
+  }
+
+  deactivateLoading = () => {
+    const date = new Date();
+    const stopTime = date.getTime();
+    const duration = stopTime - this.loadingStartTime;
+    if (duration <= LOADER_ANIMATION_THRESHOLD) {
+      this.delayInterval = setInterval(this.handleDelay, LOADER_ANIMATION_DURATION - duration);
+    } else {
+      this.setState({ loadingDelayed: false });
+    }
+  }
+
+  handleDelay = () => {
+    this.setState({ loadingDelayed: false });
+    clearInterval(this.delayInterval);
+    this.delayInterval = null;
   }
 
   render() {
-    const { loading } = this.props;
-    const { loadingPercent } = this.state;
+    const { loadingDelayed } = this.state;
 
-    return <ProgressIndicator
-      percentComplete={loading ? loadingPercent : 1}
-      className={style.headerLoader}
-    />;
+    return loadingDelayed
+      ? <ProgressIndicator className={style.headerLoaderActive} />
+      : <div className={style.headerLoaderInactive} />;
   }
 }
 
