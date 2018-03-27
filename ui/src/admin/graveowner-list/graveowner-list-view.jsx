@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table, Column, AutoSizer } from 'react-virtualized';
 
-import Loader from '../../components/loader';
-import { graveownerListSelector, graveownerListLoadingSelector } from './graveowner-list-selector';
+import { graveownerListSelector } from './graveowner-list-selector';
 import { fetchGraveownerListAction } from './graveowner-list-actions';
 import style from './graveowner-list-view.scss';
 
@@ -14,8 +13,7 @@ const colWidth = {
 };
 
 const mapStateToProps = state => ({
-  graveownerList: graveownerListSelector(state),
-  loading: graveownerListLoadingSelector(state)
+  graveownerList: graveownerListSelector(state)
 });
 
 @connect(mapStateToProps)
@@ -36,11 +34,9 @@ class GraveownerListView extends Component {
 
   render() {
     const { graveowners = [] } = this.props.graveownerList || {};
-    const { loading } = this.props;
 
     return (
       <div className={style.graveownerList}>
-        <Loader loading={loading} />
         <AutoSizer>
           {({ width, height }) => (
             <Table

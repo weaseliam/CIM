@@ -5,14 +5,16 @@ import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMen
 import { withRouter } from 'react-router';
 
 import { logOutUserAction } from './app-actions';
-import { loggedInUserSelector } from './app-selector';
+import { loggedInUserSelector, appLoadingContentSelector } from './app-selector';
 import withI18n from '../i18n/i18n-hoc';
 import { changeLanguageAction } from '../i18n/i18n-actions';
+import Loader from '../components/loader';
 
 import styles from './header-view.scss';
 
 const mapStateToProps = state => ({
-  user: loggedInUserSelector(state)
+  user: loggedInUserSelector(state),
+  loadingContent: appLoadingContentSelector(state)
 });
 
 @withRouter
@@ -127,15 +129,20 @@ class HeaderView extends Component {
   }
 
   render() {
+    const { loadingContent } = this.props;
+
     return (
       <div className={styles.header}>
-        <div className={styles.company} />
-        <div className={styles.commandbar} >
-          <CommandBar
-            items={this.createItems()}
-            farItems={this.createFarItems()}
-          />
+        <div className={styles.nav} >
+          <div className={styles.company} />
+          <div className={styles.commandbar} >
+            <CommandBar
+              items={this.createItems()}
+              farItems={this.createFarItems()}
+            />
+          </div>
         </div>
+        <Loader loading={loadingContent} />
       </div>
     );
   }

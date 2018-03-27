@@ -1,23 +1,28 @@
 .header {
   display: flex;
+  flex-direction: column;
 
-  .company {
+  .nav {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f4f4f4;
-    padding-left: 5px;
+    
+    .company {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f4f4f4;
+      padding-left: 5px;
 
-    &:before {
-      content: " ";
-      display: inline-block;
-      width: 96px;
-      height: 32px;
-      background: url("../styles/assets/company-logo.png") no-repeat;
+      &:before {
+        content: " ";
+        display: inline-block;
+        width: 96px;
+        height: 32px;
+        background: url("../styles/assets/company-logo.png") no-repeat;
+      }
     }
-  }
 
-  .commandbar {
-    flex-grow: 1;
+    .commandbar {
+      flex-grow: 1;
+    }
   }
 }

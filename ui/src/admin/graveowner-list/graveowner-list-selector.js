@@ -1,7 +1,5 @@
-export const graveownerListLoadingSelector = state => (
-  state.graveownerList.loading
-);
+const getRootState = state =>
+  state.graveownerList;
 
-export const graveownerListSelector = state => (
-  state.graveownerList.list
-);
+export const graveownerListSelector = state =>
+  getRootState(state).list;

@@ -1,2 +1,8 @@
+const getRootState = state =>
+  state.app;
+
 export const loggedInUserSelector = state =>
-  state.app.session.user;
+  getRootState(state).session.user;
+
+export const appLoadingContentSelector = state =>
+  getRootState(state).loadingContent;
