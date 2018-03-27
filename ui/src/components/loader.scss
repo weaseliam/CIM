@@ -1,4 +1,12 @@
-.loader {
-  display: inline-block;
-  transform: translate(9px, -14px);
+.loaderActive {
+  overflow: hidden;
+}
+
+.loaderActive  > div {
+  padding: 0px;
+}
+
+.loaderInactive {
+  height: 2px;
+  background-color: #eaeaea;
 }

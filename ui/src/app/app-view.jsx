@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import axios from 'axios';
 import { withRouter } from 'react-router';
 
-import Loader from '../components/loader';
+import Spinner from '../components/spinner';
 import { bootstrapAppAction } from './app-actions';
 import AdminPage from '../admin/layout/admin-page';
 import HeaderView from './header-view';
@@ -44,18 +44,22 @@ class AppView extends Component {
   }
 
   render() {
-    if (this.props.loading) {
-      return <div>Loading... <Loader loading /></div>;
-    }
+    const { loading } = this.props;
 
     return (
-      <div className={styles.app}>
+      <Spinner
+        loading={loading}
+        fillContainer
+        renderChildren={false}
+        className={styles.app}
+        classNameWhenLoading={styles.loading}
+      >
         <HeaderView />
         <div className={styles.content}>
           <Route exact path="/" component={AdminPage} />
           <Route path="/report" component={ReportPage} />
         </div>
-      </div>
+      </Spinner>
     );
   }
 }

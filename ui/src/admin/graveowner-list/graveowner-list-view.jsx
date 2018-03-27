@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table, Column, AutoSizer } from 'react-virtualized';
 
-import HeaderLoader from '../../components/header-loader';
+import Loader from '../../components/loader';
 import { graveownerListSelector, graveownerListLoadingSelector } from './graveowner-list-selector';
 import { fetchGraveownerListAction } from './graveowner-list-actions';
 import style from './graveowner-list-view.scss';
@@ -40,7 +40,7 @@ class GraveownerListView extends Component {
 
     return (
       <div className={style.graveownerList}>
-        <HeaderLoader loading={loading} />
+        <Loader loading={loading} />
         <AutoSizer>
           {({ width, height }) => (
             <Table

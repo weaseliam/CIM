@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Spinner as MSpinner } from 'office-ui-fabric-react/lib/Spinner';
+import classNames from 'classnames';
 
 import styles from './spinner.scss';
 
@@ -10,7 +11,9 @@ const propTypes = {
   label: PropTypes.string,
   size: PropTypes.number,
   loading: PropTypes.bool,
-  fillContainer: PropTypes.bool
+  fillContainer: PropTypes.bool,
+  className: PropTypes.string,
+  classNameWhenLoading: PropTypes.string
 };
 
 const defaultProps = {
@@ -19,7 +22,9 @@ const defaultProps = {
   label: '',
   size: 3,
   loading: false,
-  fillContainer: false
+  fillContainer: false,
+  className: '',
+  classNameWhenLoading: ''
 };
 
 /**
@@ -27,8 +32,14 @@ const defaultProps = {
  *
  * @extends {Component}
  */
-const Spinner = ({ children, label, size, renderChildren, loading, fillContainer }) => (
-  <div className={fillContainer || !renderChildren ? styles.fillContainer : styles.container}>
+const Spinner = ({
+  children, label, size, renderChildren, loading, fillContainer, className, classNameWhenLoading
+}) => (
+  <div className={classNames(
+    { [classNameWhenLoading]: loading },
+    className,
+    fillContainer || !renderChildren ? styles.fillContainer : styles.container)}
+  >
     {
       loading &&
       <div className={styles.background}>
@@ -37,7 +48,7 @@ const Spinner = ({ children, label, size, renderChildren, loading, fillContainer
         </div>
       </div>
     }
-    {renderChildren && children}
+    {(!loading || loading && renderChildren) && children}
   </div>
 );
 
