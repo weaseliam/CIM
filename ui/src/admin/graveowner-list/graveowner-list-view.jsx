@@ -32,8 +32,20 @@ class GraveownerListView extends Component {
       : style.tableOddRow;
   }
 
+  handleTableScroll = ({ clientHeight, scrollHeight, scrollTop }) => {
+    const refHeight = scrollHeight - clientHeight;
+    if (scrollTop < refHeight - 1000) {
+      return;
+    }
+
+    const { page, totalPages } = this.props.graveownerList;
+    if (page < totalPages) {
+      this.props.dispatch(fetchGraveownerListAction.trigger({ page: page + 1 }));
+    }
+  }
+
   render() {
-    const { graveowners = [] } = this.props.graveownerList || {};
+    const { graveowners = [] } = this.props.graveownerList;
 
     return (
       <div className={style.graveownerList}>
@@ -48,6 +60,7 @@ class GraveownerListView extends Component {
               rowClassName={this.handleRowClassName}
               rowCount={graveowners.length}
               rowGetter={({ index }) => graveowners[index]}
+              onScroll={this.handleTableScroll}
             >
               <Column label="Id" dataKey="id" width={colWidth.SMALL} />
               <Column label="CNP" dataKey="cnp" width={colWidth.LARGE} />
