@@ -7,6 +7,6 @@ import { API_PATH } from '../../core/constants';
  *
  * @returns {Promise}
  */
-export const fetchGraveownerList = (page = 1, size = 100) =>
-  axios.get(`${API_PATH}/graveowner/list`, { params: { page, size } })
+export const fetchGraveownerList = ({ page, size, sort }) =>
+  axios.get(`${API_PATH}/graveowner/list`, { params: { page, size, sort } })
     .then(response => response.data);

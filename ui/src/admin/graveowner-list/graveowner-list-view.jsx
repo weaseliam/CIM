@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, Column, AutoSizer } from 'react-virtualized';
+import { Table, Column, AutoSizer, SortDirection } from 'react-virtualized';
+import { isNil } from 'ramda';
 
 import { graveownerListSelector } from './graveowner-list-selector';
 import { fetchGraveownerListAction } from './graveowner-list-actions';
@@ -18,8 +19,19 @@ const mapStateToProps = state => ({
 
 @connect(mapStateToProps)
 class GraveownerListView extends Component {
+  state = {
+    scrollToIndex: undefined
+  }
+
   componentDidMount() {
     this.props.dispatch(fetchGraveownerListAction.trigger());
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { sort } = this.props.graveownerList;
+    const nextSort = nextProps.graveownerList.sort;
+
+    this.setState({ scrollToIndex: sort !== nextSort ? 0 : undefined });
   }
 
   handleRowClassName = ({ index }) => {
@@ -38,14 +50,47 @@ class GraveownerListView extends Component {
       return;
     }
 
-    const { page, totalPages } = this.props.graveownerList;
+    const { page, totalPages, sort } = this.props.graveownerList;
     if (page < totalPages) {
-      this.props.dispatch(fetchGraveownerListAction.trigger({ page: page + 1 }));
+      this.props.dispatch(fetchGraveownerListAction.trigger({ page: page + 1, sort }));
     }
+  }
+
+  handleNoRows = () => (
+    // TODO i18n
+    <div>No results</div>
+  )
+
+  handleSort = ({ sortBy, sortDirection }) => {
+    const { graveowners = [] } = this.props.graveownerList;
+    if (graveowners.length === 0) {
+      return;
+    }
+
+    const sort = sortDirection === SortDirection.DESC ? `-${sortBy}` : sortBy;
+    this.props.dispatch(fetchGraveownerListAction.trigger({ sort }));
+  }
+
+  buildTableSort = () => {
+    const { sort } = this.props.graveownerList;
+    let sortBy = 'id';
+    let sortDirection = SortDirection.ASC;
+
+    if (!isNil(sort)) {
+      sortDirection = sort.startsWith('-') ? SortDirection.DESC : SortDirection.ASC;
+      sortBy = sort.startsWith('-') ? sort.substring(1) : sort;
+    }
+
+    return {
+      sortBy,
+      sortDirection
+    };
   }
 
   render() {
     const { graveowners = [] } = this.props.graveownerList;
+    const { scrollToIndex } = this.state;
+    const { sortBy, sortDirection } = this.buildTableSort();
 
     return (
       <div className={style.graveownerList}>
@@ -61,6 +106,11 @@ class GraveownerListView extends Component {
               rowCount={graveowners.length}
               rowGetter={({ index }) => graveowners[index]}
               onScroll={this.handleTableScroll}
+              noRowsRenderer={this.handleNoRows}
+              sort={this.handleSort}
+              sortBy={sortBy}
+              sortDirection={sortDirection}
+              scrollToIndex={scrollToIndex}
             >
               <Column label="Id" dataKey="id" width={colWidth.SMALL} />
               <Column label="CNP" dataKey="cnp" width={colWidth.LARGE} />
