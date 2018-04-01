@@ -19,10 +19,6 @@ const mapStateToProps = state => ({
 
 @connect(mapStateToProps)
 class GraveownerListView extends Component {
-  state = {
-    scrollToIndex: undefined
-  }
-
   componentDidMount() {
     this.props.dispatch(fetchGraveownerListAction.trigger());
   }
@@ -31,7 +27,9 @@ class GraveownerListView extends Component {
     const { sort } = this.props.graveownerList;
     const nextSort = nextProps.graveownerList.sort;
 
-    this.setState({ scrollToIndex: sort !== nextSort ? 0 : undefined });
+    if (sort !== nextSort && this.tableRef) {
+      this.tableRef.scrollToPosition(0);
+    }
   }
 
   handleRowClassName = ({ index }) => {
@@ -89,7 +87,6 @@ class GraveownerListView extends Component {
 
   render() {
     const { graveowners = [] } = this.props.graveownerList;
-    const { scrollToIndex } = this.state;
     const { sortBy, sortDirection } = this.buildTableSort();
 
     return (
@@ -97,6 +94,7 @@ class GraveownerListView extends Component {
         <AutoSizer>
           {({ width, height }) => (
             <Table
+              ref={(ref) => { this.tableRef = ref; }}
               width={width}
               height={height}
               headerHeight={25}
@@ -110,14 +108,13 @@ class GraveownerListView extends Component {
               sort={this.handleSort}
               sortBy={sortBy}
               sortDirection={sortDirection}
-              scrollToIndex={scrollToIndex}
             >
               <Column label="Id" dataKey="id" width={colWidth.SMALL} />
               <Column label="CNP" dataKey="cnp" width={colWidth.LARGE} />
               <Column label="Nume" dataKey="nume" width={colWidth.LARGE} />
               <Column label="Prenume" dataKey="prenume" width={colWidth.LARGE} />
               <Column label="Localitate" dataKey="localitate" width={colWidth.MEDIUM} />
-              <Column label="Judet" dataKey="judet" width={colWidth.SMALL} />
+              <Column label="Jud" dataKey="judet" width={colWidth.SMALL} />
               <Column label="Str" dataKey="str" width={colWidth.LARGE} />
               <Column label="Nr" dataKey="nr" width={colWidth.SMALL} />
               <Column label="Bl" dataKey="bl" width={colWidth.SMALL} />
