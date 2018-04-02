@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, Column, AutoSizer, SortDirection } from 'react-virtualized';
+import { Table, Column, AutoSizer, SortDirection, SortIndicator } from 'react-virtualized';
 import { isNil } from 'ramda';
+import { TextField } from 'office-ui-fabric-react/lib/TextField';
 
 import { graveownerListSelector } from './graveowner-list-selector';
 import { fetchGraveownerListAction } from './graveowner-list-actions';
-import style from './graveowner-list-view.scss';
+import { debounce } from '../../core/util';
+
+import styles from './graveowner-list-view.scss';
 
 const colWidth = {
   SMALL: 50,
@@ -34,12 +37,12 @@ class GraveownerListView extends Component {
 
   handleRowClassName = ({ index }) => {
     if (index < 0) {
-      return style.tableHeaderRow;
+      return styles.tableHeaderRow;
     }
 
     return index % 2 === 0
-      ? style.tableEvenRow
-      : style.tableOddRow;
+      ? styles.tableEvenRow
+      : styles.tableOddRow;
   }
 
   handleTableScroll = ({ clientHeight, scrollHeight, scrollTop }) => {
@@ -54,12 +57,12 @@ class GraveownerListView extends Component {
     }
   }
 
-  handleNoRows = () => (
+  handleTableNoRows = () => (
     // TODO i18n
     <div>No results</div>
   )
 
-  handleSort = ({ sortBy, sortDirection }) => {
+  handleTableSort = ({ sortBy, sortDirection }) => {
     const { graveowners = [] } = this.props.graveownerList;
     if (graveowners.length === 0) {
       return;
@@ -85,42 +88,119 @@ class GraveownerListView extends Component {
     };
   }
 
+  inputHeaderRenderer = ({ dataKey, label, sortBy, sortDirection }) => (
+    <div>
+      {label}
+      {sortBy === dataKey && <SortIndicator sortDirection={sortDirection} />}
+      <TextField
+        inputClassName={styles.tableHeaderColumnInput}
+        onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+        onKeyDown={e => (e.keyCode === 13 || e.keyCode === 32) && e.stopPropagation()}
+        onChanged={newValue => this.handleTableHeaderInputChange(dataKey, newValue)}
+      />
+    </div>
+  )
+
+  handleTableHeaderInputChange = debounce((dataKey, newValue) => {
+    console.log('TableHeaderInputChange', dataKey, newValue);
+  }, 750)
+
   render() {
     const { graveowners = [] } = this.props.graveownerList;
     const { sortBy, sortDirection } = this.buildTableSort();
 
     return (
-      <div className={style.graveownerList}>
+      <div className={styles.graveownerList}>
         <AutoSizer>
           {({ width, height }) => (
             <Table
               ref={(ref) => { this.tableRef = ref; }}
               width={width}
               height={height}
-              headerHeight={25}
+              headerHeight={65}
               rowHeight={35}
-              headerClassName={style.tableHeaderColumn}
+              headerClassName={styles.tableHeaderColumn}
               rowClassName={this.handleRowClassName}
               rowCount={graveowners.length}
               rowGetter={({ index }) => graveowners[index]}
               onScroll={this.handleTableScroll}
-              noRowsRenderer={this.handleNoRows}
-              sort={this.handleSort}
+              noRowsRenderer={this.handleTableNoRows}
+              sort={this.handleTableSort}
               sortBy={sortBy}
               sortDirection={sortDirection}
             >
-              <Column label="Id" dataKey="id" width={colWidth.SMALL} />
-              <Column label="CNP" dataKey="cnp" width={colWidth.LARGE} />
-              <Column label="Nume" dataKey="nume" width={colWidth.LARGE} />
-              <Column label="Prenume" dataKey="prenume" width={colWidth.LARGE} />
-              <Column label="Localitate" dataKey="localitate" width={colWidth.MEDIUM} />
-              <Column label="Jud" dataKey="judet" width={colWidth.SMALL} />
-              <Column label="Str" dataKey="str" width={colWidth.LARGE} />
-              <Column label="Nr" dataKey="nr" width={colWidth.SMALL} />
-              <Column label="Bl" dataKey="bl" width={colWidth.SMALL} />
-              <Column label="Sc" dataKey="sc" width={colWidth.SMALL} />
-              <Column label="Et" dataKey="et" width={colWidth.SMALL} />
-              <Column label="Ap" dataKey="ap" width={colWidth.SMALL} />
+              <Column
+                label="Id"
+                dataKey="id"
+                width={colWidth.SMALL}
+                headerRenderer={this.inputHeaderRenderer}
+              />
+              <Column
+                label="CNP"
+                dataKey="cnp"
+                width={colWidth.LARGE}
+                headerRenderer={this.inputHeaderRenderer}
+              />
+              <Column
+                label="Nume"
+                dataKey="nume"
+                width={colWidth.LARGE}
+                headerRenderer={this.inputHeaderRenderer}
+              />
+              <Column
+                label="Prenume"
+                dataKey="prenume"
+                width={colWidth.LARGE}
+                headerRenderer={this.inputHeaderRenderer}
+              />
+              <Column
+                label="Localitate"
+                dataKey="localitate"
+                width={colWidth.MEDIUM}
+                headerRenderer={this.inputHeaderRenderer}
+              />
+              <Column
+                label="Jud"
+                dataKey="judet"
+                width={colWidth.SMALL}
+                headerRenderer={this.inputHeaderRenderer}
+              />
+              <Column
+                label="Str"
+                dataKey="str"
+                width={colWidth.LARGE}
+                headerRenderer={this.inputHeaderRenderer}
+              />
+              <Column
+                label="Nr"
+                dataKey="nr"
+                width={colWidth.SMALL}
+                headerRenderer={this.inputHeaderRenderer}
+              />
+              <Column
+                label="Bl"
+                dataKey="bl"
+                width={colWidth.SMALL}
+                headerRenderer={this.inputHeaderRenderer}
+              />
+              <Column
+                label="Sc"
+                dataKey="sc"
+                width={colWidth.SMALL}
+                headerRenderer={this.inputHeaderRenderer}
+              />
+              <Column
+                label="Et"
+                dataKey="et"
+                width={colWidth.SMALL}
+                headerRenderer={this.inputHeaderRenderer}
+              />
+              <Column
+                label="Ap"
+                dataKey="ap"
+                width={colWidth.SMALL}
+                headerRenderer={this.inputHeaderRenderer}
+              />
             </Table>
           )}
         </AutoSizer>
