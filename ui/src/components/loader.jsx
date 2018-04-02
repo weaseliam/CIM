@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 
-import style from './loader.scss';
+import styles from './loader.scss';
 
 const LOADER_ANIMATION_DURATION = 3000;
 const LOADER_ANIMATION_THRESHOLD = 2500;
@@ -78,8 +78,8 @@ class Loader extends Component {
     const { loadingDelayed } = this.state;
 
     return loadingDelayed
-      ? <ProgressIndicator className={style.loaderActive} />
-      : <div className={style.loaderInactive} />;
+      ? <ProgressIndicator className={styles.loaderActive} />
+      : <div className={styles.loaderInactive} />;
   }
 }
 
