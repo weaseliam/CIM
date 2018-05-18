@@ -1,14 +1,7 @@
 import { fetchLoggedInUserAction, bootstrapAppAction, setAppLoadingContentAction } from './app-actions';
 
 export const INITIAL_STATE = {
-  session: {
-    user: {
-      userName: '',
-      firstName: '',
-      lastName: '',
-      email: ''
-    }
-  },
+  session: null,
   loading: false,
   loadingContent: false
 };

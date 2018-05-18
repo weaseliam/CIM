@@ -1,5 +1,8 @@
+const getRoot = state =>
+  state.i18n;
+
 export const supportedLanguagesSelector = state =>
-  state.i18n.supportedLanguages;
+  getRoot(state).supportedLanguages;
 
 export const currentLanguageSelector = state =>
-  state.i18n.language;
+  getRoot(state).language;

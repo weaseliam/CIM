@@ -1,8 +1,5 @@
-.loading {
-  height: 100vh;
-}
-
 .app {
+  position: relative;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;

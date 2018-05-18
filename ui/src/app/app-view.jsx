@@ -9,11 +9,13 @@ import { bootstrapAppAction } from './app-actions';
 import AdminPage from '../admin/layout/admin-page';
 import HeaderView from './header-view';
 import ReportPage from '../report/layout/report-page';
+import { appLoadingSelector, appSessionSelector } from '../app/app-selector';
 
 import styles from './app-view.scss';
 
 const mapStateToProps = state => ({
-  loading: state.app.loading
+  session: appSessionSelector(state),
+  loading: appLoadingSelector(state)
 });
 
 @withRouter
@@ -44,22 +46,21 @@ class AppView extends Component {
   }
 
   render() {
-    const { loading } = this.props;
+    const { loading, session } = this.props;
+
+    if (!session) {
+      return 'Loading...';
+    }
 
     return (
-      <Spinner
-        loading={loading}
-        fillContainer
-        renderChildren={false}
-        className={styles.app}
-        classNameWhenLoading={styles.loading}
-      >
+      <div className={styles.app}>
+        <Spinner loading={loading} fillContainer />
         <HeaderView />
         <div className={styles.content}>
           <Route exact path="/" component={AdminPage} />
           <Route path="/report" component={ReportPage} />
         </div>
-      </Spinner>
+      </div>
     );
   }
 }

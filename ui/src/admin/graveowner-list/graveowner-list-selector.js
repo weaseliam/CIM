@@ -1,5 +1,5 @@
-const getRootState = state =>
+const getRoot = state =>
   state.graveownerList;
 
 export const graveownerListSelector = state =>
-  getRootState(state).list;
+  getRoot(state).list;

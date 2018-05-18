@@ -5,7 +5,7 @@ import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMen
 import { withRouter } from 'react-router';
 
 import { logOutUserAction } from './app-actions';
-import { loggedInUserSelector, appLoadingContentSelector } from './app-selector';
+import { appSessionSelector, appLoadingContentSelector } from './app-selector';
 import withI18n from '../i18n/i18n-hoc';
 import { changeLanguageAction } from '../i18n/i18n-actions';
 import Loader from '../components/loader';
@@ -13,7 +13,7 @@ import Loader from '../components/loader';
 import styles from './header-view.scss';
 
 const mapStateToProps = state => ({
-  user: loggedInUserSelector(state),
+  session: appSessionSelector(state),
   loadingContent: appLoadingContentSelector(state)
 });
 
@@ -114,7 +114,7 @@ class HeaderView extends Component {
 
     // user menu
     farItems.push({
-      name: this.props.user.userName,
+      name: this.props.session.user.userName,
       key: 'userMenu',
       itemType: ContextualMenuItemType.Header,
       iconProps: {

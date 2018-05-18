@@ -1,8 +1,11 @@
-const getRootState = state =>
+const getRoot = state =>
   state.app;
 
-export const loggedInUserSelector = state =>
-  getRootState(state).session.user;
-
 export const appLoadingContentSelector = state =>
-  getRootState(state).loadingContent;
+  getRoot(state).loadingContent;
+
+export const appLoadingSelector = state =>
+  getRoot(state).loading;
+
+export const appSessionSelector = state =>
+  getRoot(state).session;

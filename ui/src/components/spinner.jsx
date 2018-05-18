@@ -7,7 +7,6 @@ import styles from './spinner.scss';
 
 const propTypes = {
   children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  renderChildren: PropTypes.bool,
   label: PropTypes.string,
   size: PropTypes.number,
   loading: PropTypes.bool,
@@ -18,7 +17,6 @@ const propTypes = {
 
 const defaultProps = {
   children: [],
-  renderChildren: true,
   label: '',
   size: 3,
   loading: false,
@@ -33,12 +31,12 @@ const defaultProps = {
  * @extends {Component}
  */
 const Spinner = ({
-  children, label, size, renderChildren, loading, fillContainer, className, classNameWhenLoading
+  children, label, size, loading, fillContainer, className, classNameWhenLoading
 }) => (
   <div className={classNames(
     { [classNameWhenLoading]: loading },
     className,
-    fillContainer || !renderChildren ? styles.fillContainer : styles.container)}
+    fillContainer ? styles.fillContainer : styles.wrapContainer)}
   >
     {
       loading &&
@@ -48,7 +46,7 @@ const Spinner = ({
         </div>
       </div>
     }
-    {(!loading || loading && renderChildren) && children}
+    { children }
   </div>
 );
 
