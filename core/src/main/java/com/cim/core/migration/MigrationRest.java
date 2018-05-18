@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cim.core.app.AppConstants;
-import com.cim.core.user.SessionRest;
 
 @RestController
 @RequestMapping(AppConstants.API_PATH + "/migration")
 public class MigrationRest
 {
-	private static final Logger	log	= LoggerFactory.getLogger(SessionRest.class);
+	private static final Logger	log	= LoggerFactory.getLogger(MigrationRest.class);
 
 	private MigrationService	migrationService;
 

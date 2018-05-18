@@ -9,3 +9,6 @@ export const appLoadingSelector = state =>
 
 export const appSessionSelector = state =>
   getRoot(state).session;
+
+export const appBootstrapSelector = state =>
+  getRoot(state).bootstrap;

@@ -1,4 +1,4 @@
-package com.cim.core.user;
+package com.cim.core.session;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cim.core.app.AppConstants;
+import com.cim.core.session.user.AppUser;
 
 @RestController
 @RequestMapping(AppConstants.API_PATH + "/session")
@@ -28,9 +29,9 @@ public class SessionRest
 	}
 
 	@GetMapping
-	public ResponseEntity<AppUserUi> getLoggedInUser()
+	public ResponseEntity<SessionUi> getSession()
 	{
-		log.debug("Fetching current logged in user");
+		log.debug("Fetching session");
 
 		AppUser user = sessionService.getLoggedInUser();
 		if (user == null)
@@ -38,9 +39,9 @@ public class SessionRest
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 
-		AppUserUi uiUser = SessionAssembler.toResource(user);
+		SessionUi uiSession = SessionAssembler.toResource(user);
 
-		log.debug("Response {}", uiUser);
-		return ResponseEntity.ok(uiUser);
+		log.debug("Response {}", uiSession);
+		return ResponseEntity.ok(uiSession);
 	}
 }

@@ -1,4 +1,4 @@
-package com.cim.core.user;
+package com.cim.core.session.user;
 
 import javax.validation.constraints.NotNull;
 

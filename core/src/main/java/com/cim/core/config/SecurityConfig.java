@@ -17,8 +17,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 import com.cim.core.app.AppConstants;
-import com.cim.core.user.AppUser;
-import com.cim.core.user.AppUserService;
+import com.cim.core.session.user.AppUser;
+import com.cim.core.session.user.AppUserService;
 
 @EnableWebSecurity
 class SecurityConfig

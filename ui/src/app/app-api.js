@@ -3,11 +3,11 @@ import axios from 'axios';
 import { API_PATH } from '../core/constants';
 
 /**
- * Get current logged in user detail REST call.
+ * Get current app session REST call.
  *
  * @returns {Promise}
  */
-export const getLoggedInUser = () =>
+export const getAppSession = () =>
   axios.get(`${API_PATH}/session`)
     .then(response => response.data);
 
@@ -18,4 +18,3 @@ export const getLoggedInUser = () =>
  */
 export const logOutUser = () =>
   axios.post('/logout');
-

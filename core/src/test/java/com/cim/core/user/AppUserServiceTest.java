@@ -9,6 +9,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cim.BaseRestTest;
+import com.cim.core.session.user.AppUser;
+import com.cim.core.session.user.AppUserRepository;
+import com.cim.core.session.user.AppUserService;
 
 public class AppUserServiceTest extends BaseRestTest
 {

@@ -9,12 +9,12 @@ import { bootstrapAppAction } from './app-actions';
 import AdminPage from '../admin/layout/admin-page';
 import HeaderView from './header-view';
 import ReportPage from '../report/layout/report-page';
-import { appLoadingSelector, appSessionSelector } from '../app/app-selector';
+import { appLoadingSelector, appBootstrapSelector } from '../app/app-selector';
 
 import styles from './app-view.scss';
 
 const mapStateToProps = state => ({
-  session: appSessionSelector(state),
+  bootstrap: appBootstrapSelector(state),
   loading: appLoadingSelector(state)
 });
 
@@ -46,9 +46,9 @@ class AppView extends Component {
   }
 
   render() {
-    const { loading, session } = this.props;
+    const { loading, bootstrap } = this.props;
 
-    if (!session) {
+    if (!bootstrap) {
       return 'Loading...';
     }
 

@@ -1,4 +1,4 @@
-package com.cim.core.user;
+package com.cim.core.session;
 
 import javax.validation.constraints.NotNull;
 
@@ -10,6 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.cim.core.app.AppException;
+import com.cim.core.session.user.AppUser;
+import com.cim.core.session.user.AppUserRepository;
 
 @Service
 public class SessionService
