@@ -23,7 +23,7 @@ public class GraveyardService
 	public List<Graveyard> save(List<Graveyard> graveyards)
 	{
 		List<Graveyard> savedGraveowners = new ArrayList<>();
-		for (Graveyard graveyard : graveyardRepository.save(graveyards))
+		for (Graveyard graveyard : graveyardRepository.saveAll(graveyards))
 		{
 			savedGraveowners.add(graveyard);
 		}

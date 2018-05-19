@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 public class Exempt
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long	id;
 
 	@NotNull

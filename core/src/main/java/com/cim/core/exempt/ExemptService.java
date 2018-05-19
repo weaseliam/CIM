@@ -23,7 +23,7 @@ public class ExemptService
 	public List<Exempt> save(List<Exempt> exempts)
 	{
 		List<Exempt> savedExempts = new ArrayList<>();
-		for (Exempt exempt : exemptRepository.save(exempts))
+		for (Exempt exempt : exemptRepository.saveAll(exempts))
 		{
 			savedExempts.add(exempt);
 		}

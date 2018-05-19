@@ -23,7 +23,7 @@ public class GraveService
 	public List<Grave> save(List<Grave> graves)
 	{
 		List<Grave> savedGraves = new ArrayList<>();
-		for (Grave grave : graveRepository.save(graves))
+		for (Grave grave : graveRepository.saveAll(graves))
 		{
 			savedGraves.add(grave);
 		}

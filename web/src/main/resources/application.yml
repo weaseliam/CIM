@@ -1,6 +1,6 @@
 spring:
   main:
-    web-environment: true
+    web-application-type: servlet
     
   profiles:
     active: prod
@@ -11,9 +11,9 @@ spring:
     password: 
 
 #  datasource:
-#    url: jdbc:mysql://localhost:3306/cim?useSSL=false
-#    username: root
-#    password: 
+#    url: jdbc:postgresql://localhost:5432/cim
+#    username: postgres
+#    password: postgres
 #    dbcp2:
 #      test-while-idle: true
 #      validation-query: SELECT 1
@@ -35,10 +35,10 @@ spring:
       - login
       - error
 
+  flyway:
+    locations: classpath:db/migration/{vendor}
+
 server:
   error:
     whitelabel:
       enabled: false
-
-flyway:
-  locations: classpath:db/migration/{vendor}

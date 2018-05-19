@@ -28,7 +28,7 @@ public class GraveownerService
 	public List<Graveowner> save(List<Graveowner> graveowners)
 	{
 		List<Graveowner> savedGraveowners = new ArrayList<>();
-		for (Graveowner graveowner : graveownerRepository.save(graveowners))
+		for (Graveowner graveowner : graveownerRepository.saveAll(graveowners))
 		{
 			savedGraveowners.add(graveowner);
 		}
@@ -43,7 +43,7 @@ public class GraveownerService
 
 	public Page<Graveowner> list(int page, int size, String sort)
 	{
-		PageRequest pageRequest = new PageRequest(
+		PageRequest pageRequest = PageRequest.of(
 				Math.max(page - 1, 0), 
 				Math.max(size, 1), 
 				computeSort(sort));
@@ -66,7 +66,6 @@ public class GraveownerService
 			order.add(new Order(Direction.ASC, "id"));
 		}
 		
-		Sort sort = new Sort(order);
-		return sort;
+		return Sort.by(order);
 	}
 }

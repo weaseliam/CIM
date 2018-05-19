@@ -16,11 +16,11 @@ import com.cim.core.session.user.AppUserService;
 public class AppUserServiceTest extends BaseRestTest
 {
 	@Autowired
-	private AppUserService userService;
-	
+	private AppUserService		userService;
+
 	@Autowired
-	private AppUserRepository userRepository;
-	
+	private AppUserRepository	userRepository;
+
 	@Test
 	public void testListUsers()
 	{
@@ -28,12 +28,12 @@ public class AppUserServiceTest extends BaseRestTest
 		assertNotNull(users);
 		assertTrue(users.size() > 0);
 	}
-	
+
 	@Test
 	public void testPredefinedAdminUser()
 	{
 		List<AppUser> users = userService.listUsers();
-		
+
 		boolean found = false;
 		for (AppUser user : users)
 		{
@@ -43,17 +43,17 @@ public class AppUserServiceTest extends BaseRestTest
 				break;
 			}
 		}
-		
+
 		assertTrue(found);
 	}
-	
+
 	@Test
 	public void testNewlyAddedUser()
 	{
 		addNewUser("john_doe", "1234", "John", "Doe");
 
 		List<AppUser> users = userService.listUsers();
-		
+
 		boolean found = false;
 		for (AppUser user : users)
 		{
@@ -63,10 +63,10 @@ public class AppUserServiceTest extends BaseRestTest
 				break;
 			}
 		}
-		
+
 		assertTrue(found);
 	}
-	
+
 	private void addNewUser(String userName, String passWord, String firstName, String lastName)
 	{
 		AppUser user = new AppUser();
@@ -74,7 +74,7 @@ public class AppUserServiceTest extends BaseRestTest
 		user.setPassword(passWord);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
-		
+
 		userRepository.save(user);
 	}
 }
