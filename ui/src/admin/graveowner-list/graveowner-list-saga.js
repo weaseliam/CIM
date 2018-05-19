@@ -15,9 +15,7 @@ function* fetchGraveownerListSaga(action) {
     const graveownerList = yield call(fetchGraveownerList, { page, size, sort });
 
     yield put(fetchGraveownerListAction.success(graveownerList));
-    yield put(setAppLoadingContentAction.success(false));
-  } catch (error) {
-    yield put(fetchGraveownerListAction.failure());
+  } finally {
     yield put(setAppLoadingContentAction.success(false));
   }
 }

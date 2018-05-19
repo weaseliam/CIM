@@ -12,45 +12,28 @@ import { changeLanguageSaga, fetchSupportedLanguagesSaga } from '../i18n/i18n-sa
  * Fetch current app session saga.
  */
 function* fetchAppSessionSaga() {
-  try {
-    const session = yield call(getAppSession);
-
-    yield put(fetchAppSessionAction.success(session));
-  } catch (error) {
-    yield put(fetchAppSessionAction.failure());
-  }
+  const session = yield call(getAppSession);
+  yield put(fetchAppSessionAction.success(session));
 }
 
 /**
  * Bootstrap application saga.
  */
 function* bootstrapAppSaga() {
-  try {
-    yield all([
-      call(fetchAppSessionSaga),
-      call(changeLanguageSaga, {}),
-      call(fetchSupportedLanguagesSaga)
-    ]);
+  yield all([
+    call(fetchAppSessionSaga),
+    call(changeLanguageSaga, {}),
+    call(fetchSupportedLanguagesSaga)
+  ]);
 
-    yield put(bootstrapAppAction.success());
-  } catch (error) {
-    yield put(bootstrapAppAction.failure());
-  }
+  yield put(bootstrapAppAction.success());
 }
 
 /**
  * Log out current user saga.
  */
 function* logOutUserSaga() {
-  try {
-    yield call(logOutUser);
-
-    yield put(logOutUserAction.success());
-  } catch (error) {
-    yield put(logOutUserAction.failure());
-  } finally {
-    yield put(logOutUserAction.fulfill());
-  }
+  yield call(logOutUser);
 }
 
 /**

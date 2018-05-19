@@ -22,27 +22,7 @@ const mapStateToProps = state => ({
 @connect(mapStateToProps)
 class AppView extends Component {
   componentDidMount() {
-    this.registerHttpInterceptors();
     this.props.dispatch(bootstrapAppAction.trigger());
-  }
-
-  registerHttpInterceptors() {
-    axios.interceptors.request.use(
-      config => config,
-      (error) => {
-        // eslint-disable-next-line
-        alert(error);
-        return Promise.reject(error);
-      }
-    );
-    axios.interceptors.response.use(
-      config => config,
-      (error) => {
-        // eslint-disable-next-line
-        alert(error);
-        return Promise.reject(error);
-      }
-    );
   }
 
   render() {
