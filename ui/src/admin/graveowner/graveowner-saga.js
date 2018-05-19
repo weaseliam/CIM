@@ -1,7 +1,7 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 
-import { fetchGraveownerList } from './graveowner-list-api';
-import { fetchGraveownerListAction } from './graveowner-list-actions';
+import { fetchGraveownerList } from './graveowner-api';
+import { fetchGraveownerListAction } from './graveowner-actions';
 import { setAppLoadingContentAction } from '../../app/app-actions';
 
 /**
@@ -20,6 +20,6 @@ function* fetchGraveownerListSaga(action) {
   }
 }
 
-export function* graveownerListSagas() {
+export function* graveownerSagas() {
   yield takeLatest(fetchGraveownerListAction.TRIGGER, fetchGraveownerListSaga);
 }

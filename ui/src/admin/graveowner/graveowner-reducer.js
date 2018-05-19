@@ -1,10 +1,10 @@
-import { fetchGraveownerListAction } from './graveowner-list-actions';
+import { fetchGraveownerListAction } from './graveowner-actions';
 
 export const INITIAL_STATE = {
   list: {}
 };
 
-export const graveownerListReducer = (state = INITIAL_STATE, action) => {
+export const graveownerReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case fetchGraveownerListAction.SUCCESS: {
       const { graveowners = [] } = state.list;

@@ -2,12 +2,12 @@ import { spawn, call } from 'redux-saga/effects';
 
 import { appSagas } from '../app/app-saga';
 import { i18nSagas } from '../i18n/i18n-saga';
-import { graveownerListSagas } from '../admin/graveowner-list/graveowner-list-saga';
+import { graveownerSagas } from '../admin/graveowner/graveowner-saga';
 
 const sagas = [
   appSagas,
   i18nSagas,
-  graveownerListSagas
+  graveownerSagas
 ];
 
 export function* rootSaga() {

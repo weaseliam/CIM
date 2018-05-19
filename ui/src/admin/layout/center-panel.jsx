@@ -1,6 +1,6 @@
 import React from 'react';
 
-import GraveownerListView from '../graveowner-list/graveowner-list-view';
+import GraveownerListView from '../graveowner/graveowner-list-view';
 
 import styles from './center-panel.scss';
 
