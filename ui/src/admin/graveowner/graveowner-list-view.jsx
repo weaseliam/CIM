@@ -47,9 +47,14 @@ class GraveownerListView extends Component {
 
   handleTableScroll = ({ clientHeight, scrollHeight, scrollTop }) => {
     const refHeight = scrollHeight - clientHeight;
-    if (scrollTop < refHeight - 1000) {
+    const currentTime = (new Date()).getTime();
+    const timeDiff = currentTime - (this.lastTime || 0);
+
+    if (scrollTop < refHeight - 1000 || timeDiff < 2000) {
       return;
     }
+
+    this.lastTime = currentTime;
 
     const { page, totalPages, sort } = this.props.graveownerList;
     if (page < totalPages) {
