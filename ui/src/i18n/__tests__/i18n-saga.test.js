@@ -35,7 +35,6 @@ describe('i18n-saga-test', () => {
     expect(sagaTester.wasCalled(changeLanguageAction.TRIGGER)).toBe(true);
 
     await sagaTester.waitFor(changeLanguageAction.SUCCESS);
-    expect(sagaTester.wasCalled(changeLanguageAction.SUCCESS)).toBe(true);
     expect(sagaTester.getState().i18n).toEqual({
       ...I18N_INITIAL_STATE,
       ...payload
@@ -59,8 +58,8 @@ describe('i18n-saga-test', () => {
     sagaTester.dispatch(changeLanguageAction.trigger());
     expect(sagaTester.wasCalled(changeLanguageAction.TRIGGER)).toBe(true);
 
-    await sagaTester.waitFor(changeLanguageAction.FAILURE);
-    expect(sagaTester.wasCalled(changeLanguageAction.FAILURE)).toBe(true);
+    expect(sagaTester.wasCalled(changeLanguageAction.SUCCESS)).toBe(false);
+
     expect(sagaTester.getState()).toEqual(INITIAL_STATE);
   });
 });

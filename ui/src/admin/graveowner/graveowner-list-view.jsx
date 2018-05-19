@@ -50,7 +50,7 @@ class GraveownerListView extends Component {
     const currentTime = (new Date()).getTime();
     const timeDiff = currentTime - (this.lastTime || 0);
 
-    if (scrollTop < refHeight - 1000 || timeDiff < 2000) {
+    if (scrollTop < refHeight - 1000 || timeDiff < 1000) {
       return;
     }
 

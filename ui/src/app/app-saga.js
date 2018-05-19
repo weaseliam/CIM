@@ -33,19 +33,17 @@ function* bootstrapAppSaga() {
  * Log out current user saga.
  */
 function* logOutUserSaga() {
-  yield call(logOutUser);
-}
+  try {
+    yield call(logOutUser);
 
-/**
- * After successful log out user saga.
- */
-function* afterLogOutUserSaga() {
-  // eslint-disable-next-line no-undef
-  yield window.location = '/login?logout';
+    // eslint-disable-next-line no-undef
+    yield window.location = '/login?logout';
+  } finally {
+    yield put(logOutUserAction.FULFILL);
+  }
 }
 
 export function* appSagas() {
   yield takeEvery(bootstrapAppAction.TRIGGER, bootstrapAppSaga);
   yield takeEvery(logOutUserAction.TRIGGER, logOutUserSaga);
-  yield takeEvery(logOutUserAction.FULFILL, afterLogOutUserSaga);
 }

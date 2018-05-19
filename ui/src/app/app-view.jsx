@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import axios from 'axios';
 import { withRouter } from 'react-router';
 
 import Spinner from '../components/spinner';
