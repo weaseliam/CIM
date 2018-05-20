@@ -20,6 +20,9 @@ public class Graveowner
 
 	@NotNull
 	private String	prenume;
+	
+	@NotNull
+	private String	adresa;
 
 	private Long	marca;
 	private String	cnp;
@@ -404,16 +407,26 @@ public class Graveowner
 		this.dataAviz = dataAviz;
 	}
 
+	public String getAdresa()
+	{
+		return adresa;
+	}
+
+	public void setAdresa(String adresa)
+	{
+		this.adresa = adresa;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Graveowner [id=" + id + ", nume=" + nume + ", prenume=" + prenume + ", marca=" + marca + ", cnp=" + cnp
-				+ ", codLoc=" + codLoc + ", localitate=" + localitate + ", judet=" + judet + ", tara=" + tara + ", str="
-				+ str + ", nr=" + nr + ", bl=" + bl + ", sc=" + sc + ", et=" + et + ", ap=" + ap + ", codPost="
-				+ codPost + ", tel=" + tel + ", fax=" + fax + ", mail=" + mail + ", nrContr=" + nrContr + ", dataContr="
-				+ dataContr + ", contract=" + contract + ", act=" + act + ", seria=" + seria + ", nrAct=" + nrAct
-				+ ", emitator=" + emitator + ", dataAct=" + dataAct + ", dubiu=" + dubiu + ", dataDubiu=" + dataDubiu
-				+ ", avans=" + avans + ", anDebut=" + anDebut + ", anFinal=" + anFinal + ", modif=" + modif
-				+ ", avizat=" + avizat + ", dataAviz=" + dataAviz + "]";
+		return "Graveowner [id=" + id + ", nume=" + nume + ", prenume=" + prenume + ", adresa=" + adresa + ", marca="
+				+ marca + ", cnp=" + cnp + ", codLoc=" + codLoc + ", localitate=" + localitate + ", judet=" + judet
+				+ ", tara=" + tara + ", str=" + str + ", nr=" + nr + ", bl=" + bl + ", sc=" + sc + ", et=" + et
+				+ ", ap=" + ap + ", codPost=" + codPost + ", tel=" + tel + ", fax=" + fax + ", mail=" + mail
+				+ ", nrContr=" + nrContr + ", dataContr=" + dataContr + ", contract=" + contract + ", act=" + act
+				+ ", seria=" + seria + ", nrAct=" + nrAct + ", emitator=" + emitator + ", dataAct=" + dataAct
+				+ ", dubiu=" + dubiu + ", dataDubiu=" + dataDubiu + ", avans=" + avans + ", anDebut=" + anDebut
+				+ ", anFinal=" + anFinal + ", modif=" + modif + ", avizat=" + avizat + ", dataAviz=" + dataAviz + "]";
 	}
 }

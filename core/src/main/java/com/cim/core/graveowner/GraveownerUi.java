@@ -10,12 +10,7 @@ public class GraveownerUi
 	private String	prenume;
 	private String	localitate;
 	private String	judet;
-	private String	str;
-	private String	nr;
-	private String	bl;
-	private String	sc;
-	private String	et;
-	private String	ap;
+	private String	adresa;
 
 	public GraveownerUi()
 	{
@@ -29,12 +24,7 @@ public class GraveownerUi
 		prenume = graveowner.getPrenume();
 		localitate = graveowner.getLocalitate();
 		judet = graveowner.getJudet();
-		str = graveowner.getStr();
-		nr = graveowner.getNr();
-		bl = graveowner.getBl();
-		sc = graveowner.getSc();
-		et = graveowner.getEt();
-		ap = graveowner.getAp();
+		adresa = graveowner.getAdresa();
 	}
 
 	public Long getId()
@@ -97,71 +87,20 @@ public class GraveownerUi
 		this.judet = judet;
 	}
 
-	public String getStr()
+	public String getAdresa()
 	{
-		return str;
+		return adresa;
 	}
 
-	public void setStr(String str)
+	public void setAdresa(String adresa)
 	{
-		this.str = str;
-	}
-
-	public String getNr()
-	{
-		return nr;
-	}
-
-	public void setNr(String nr)
-	{
-		this.nr = nr;
-	}
-
-	public String getBl()
-	{
-		return bl;
-	}
-
-	public void setBl(String bl)
-	{
-		this.bl = bl;
-	}
-
-	public String getSc()
-	{
-		return sc;
-	}
-
-	public void setSc(String sc)
-	{
-		this.sc = sc;
-	}
-
-	public String getEt()
-	{
-		return et;
-	}
-
-	public void setEt(String et)
-	{
-		this.et = et;
-	}
-
-	public String getAp()
-	{
-		return ap;
-	}
-
-	public void setAp(String ap)
-	{
-		this.ap = ap;
+		this.adresa = adresa;
 	}
 
 	@Override
 	public String toString()
 	{
 		return "GraveownerUi [id=" + id + ", cnp=" + cnp + ", nume=" + nume + ", prenume=" + prenume + ", localitate="
-				+ localitate + ", judet=" + judet + ", str=" + str + ", nr=" + nr + ", bl=" + bl + ", sc=" + sc
-				+ ", et=" + et + ", ap=" + ap + "]";
+				+ localitate + ", judet=" + judet + ", adresa=" + adresa + "]";
 	}
 }

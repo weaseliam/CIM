@@ -42,7 +42,7 @@ class SecurityConfig
 					.withDefaultPasswordEncoder()
 					.username(userName)
 					.password(password)
-					.roles("ADMIN")
+					.roles("USER")
 					.build());
 		}
 
@@ -63,11 +63,11 @@ class SecurityConfig
 				.antMatcher(AppConstants.API_PATH + "/**")
 					.authorizeRequests()
 						.anyRequest()
-						.permitAll()
+						.hasRole("USER")
 						.and()
 					.httpBasic();
 			
-			// TODO: Remove these in the future
+			// TODO review these in the future
 			http.csrf().disable();
 			http.headers().frameOptions().sameOrigin();
 		}

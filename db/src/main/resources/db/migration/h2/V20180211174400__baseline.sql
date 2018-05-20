@@ -4,6 +4,7 @@ CREATE TABLE graveowner (
 	cnp VARCHAR(32),
 	nume VARCHAR(128) NOT NULL,
 	prenume VARCHAR(128) NOT NULL,
+	adresa VARCHAR(256) NOT NULL,
 	cod_loc INT,
 	localitate VARCHAR(128),
 	judet VARCHAR(64),

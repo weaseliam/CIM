@@ -102,8 +102,10 @@ public class MigrationServiceImpl implements MigrationService
 		long cursor = 0;
 		for (;;)
 		{
+			// TODO use prepared statement
 			List<Graveowner> graveowners = jdbcTemplate.query("SELECT * FROM " + tableName + " LIMIT " + cursor + ", " + batchSize,  new RowMapper<Graveowner>()
 			{
+				@Override
 				public Graveowner mapRow(ResultSet rs, int rowNum) throws SQLException
 				{
 					Graveowner graveowner = new Graveowner();
@@ -141,8 +143,33 @@ public class MigrationServiceImpl implements MigrationService
 					graveowner.setModif(rs.getString("MODIF"));
 					graveowner.setAvizat(rs.getString("AVIZAT"));
 					graveowner.setDataAviz(rs.getDate("DATA_AVIZ"));
+					
+					String address = buildAddress(graveowner);
+					graveowner.setAdresa(address);
 
 					return graveowner;
+				}
+
+				private String buildAddress(Graveowner graveowner)
+				{
+					StringBuilder sb = new StringBuilder();
+					String separator = ",";
+					
+					sb.append(safeGet(graveowner.getStr()))
+						.append(separator).append(safeGet(graveowner.getNr()))
+						.append(separator).append(safeGet(graveowner.getBl()))
+						.append(separator).append(safeGet(graveowner.getSc()))
+						.append(separator).append(safeGet(graveowner.getEt()))
+						.append(separator).append(safeGet(graveowner.getAp()));
+					
+					return sb.toString();
+				}
+
+				private String safeGet(String str)
+				{
+					return str == null || "null".equals(str.trim().toLowerCase()) 
+							? "" 
+							: str.trim();
 				}
 			});
 
@@ -161,8 +188,10 @@ public class MigrationServiceImpl implements MigrationService
 	{
 		log.debug("Migrating {}", tableName);
 		
+		// TODO use prepared statement
 		List<Graveyard> graveyards = jdbcTemplate.query("SELECT * FROM " + tableName, new RowMapper<Graveyard>()
 		{
+			@Override
 			public Graveyard mapRow(ResultSet rs, int rowNum) throws SQLException
 			{
 				Graveyard graveyard = new Graveyard();
@@ -184,8 +213,10 @@ public class MigrationServiceImpl implements MigrationService
 	{
 		log.debug("Migrating {}", tableName);
 		
+		// TODO use prepared statement
 		List<Exempt> exempts = jdbcTemplate.query("SELECT * FROM " + tableName, new RowMapper<Exempt>()
 		{
+			@Override
 			public Exempt mapRow(ResultSet rs, int rowNum) throws SQLException
 			{
 				Exempt exempt = new Exempt();
@@ -205,8 +236,10 @@ public class MigrationServiceImpl implements MigrationService
 		long cursor = 0;
 		for (;;)
 		{
+			// TODO use prepared statement
 			List<Grave> graves = jdbcTemplate.query("SELECT * FROM " + tableName + " LIMIT " + cursor + ", " + batchSize,  new RowMapper<Grave>()
 			{
+				@Override
 				public Grave mapRow(ResultSet rs, int rowNum) throws SQLException
 				{
 					Grave grave = new Grave();

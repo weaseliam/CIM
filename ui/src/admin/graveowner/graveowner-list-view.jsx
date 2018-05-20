@@ -11,9 +11,10 @@ import { debounce } from '../../core/util';
 import styles from './graveowner-list-view.scss';
 
 const colWidth = {
-  SMALL: 50,
-  MEDIUM: 100,
-  LARGE: 150
+  S: 50,
+  M: 150,
+  L: 200,
+  XL: 400
 };
 
 const mapStateToProps = state => ({
@@ -137,73 +138,43 @@ class GraveownerListView extends Component {
               <Column
                 label="Id"
                 dataKey="id"
-                width={colWidth.SMALL}
+                width={colWidth.S}
                 headerRenderer={this.inputHeaderRenderer}
               />
               <Column
                 label="CNP"
                 dataKey="cnp"
-                width={colWidth.LARGE}
+                width={colWidth.L}
                 headerRenderer={this.inputHeaderRenderer}
               />
               <Column
                 label="Nume"
                 dataKey="nume"
-                width={colWidth.LARGE}
+                width={colWidth.L}
                 headerRenderer={this.inputHeaderRenderer}
               />
               <Column
                 label="Prenume"
                 dataKey="prenume"
-                width={colWidth.LARGE}
+                width={colWidth.L}
                 headerRenderer={this.inputHeaderRenderer}
               />
               <Column
                 label="Localitate"
                 dataKey="localitate"
-                width={colWidth.MEDIUM}
+                width={colWidth.M}
                 headerRenderer={this.inputHeaderRenderer}
               />
               <Column
-                label="Jud"
+                label="Judet"
                 dataKey="judet"
-                width={colWidth.SMALL}
+                width={colWidth.S}
                 headerRenderer={this.inputHeaderRenderer}
               />
               <Column
-                label="Str"
-                dataKey="str"
-                width={colWidth.LARGE}
-                headerRenderer={this.inputHeaderRenderer}
-              />
-              <Column
-                label="Nr"
-                dataKey="nr"
-                width={colWidth.SMALL}
-                headerRenderer={this.inputHeaderRenderer}
-              />
-              <Column
-                label="Bl"
-                dataKey="bl"
-                width={colWidth.SMALL}
-                headerRenderer={this.inputHeaderRenderer}
-              />
-              <Column
-                label="Sc"
-                dataKey="sc"
-                width={colWidth.SMALL}
-                headerRenderer={this.inputHeaderRenderer}
-              />
-              <Column
-                label="Et"
-                dataKey="et"
-                width={colWidth.SMALL}
-                headerRenderer={this.inputHeaderRenderer}
-              />
-              <Column
-                label="Ap"
-                dataKey="ap"
-                width={colWidth.SMALL}
+                label="Adresa (str,nr,bl,sc,et,ap)"
+                dataKey="adresa"
+                width={colWidth.XL}
                 headerRenderer={this.inputHeaderRenderer}
               />
             </Table>
