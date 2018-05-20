@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +22,8 @@ import com.cim.core.dictionary.DictionaryService;
 
 public class AcceptLanguageHandlerMethodArgumentResolver extends HandlerMethodArgumentResolverComposite
 {
+	private static final Logger log = LoggerFactory.getLogger(AcceptLanguageHandlerMethodArgumentResolver.class);
+	
 	@Target(ElementType.PARAMETER)
 	@Retention(RetentionPolicy.RUNTIME)
 	public @interface AcceptLanguage
@@ -41,9 +45,11 @@ public class AcceptLanguageHandlerMethodArgumentResolver extends HandlerMethodAr
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception
 	{
 		String acceptLanguage = webRequest.getHeader(HttpHeaders.ACCEPT_LANGUAGE);
+		log.debug("Browser request accept language {}", acceptLanguage);
 		
 		if (StringUtils.isBlank(acceptLanguage))
 		{
+			log.debug("Use service default language");
 			return dictionaryService.getDefaultLanguage();
 		}
 		
@@ -52,9 +58,11 @@ public class AcceptLanguageHandlerMethodArgumentResolver extends HandlerMethodAr
 		
 		if (locale == null)
 		{
+			log.debug("Use service default language");
 			return dictionaryService.getDefaultLanguage();
 		}
 		
+		log.debug("Use language {}", locale.getLanguage());
 		return locale.getLanguage();
 	}
 }

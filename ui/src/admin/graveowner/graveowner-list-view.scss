@@ -5,6 +5,12 @@
 
 .tableHeaderColumn {
   text-transform: none;
+
+  div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .tableHeaderColumnInput {

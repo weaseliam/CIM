@@ -9,6 +9,7 @@ import { appSessionSelector, appLoadingContentSelector } from './app-selector';
 import withI18n from '../i18n/i18n-hoc';
 import { changeLanguageAction } from '../i18n/i18n-actions';
 import Loader from '../components/loader';
+import * as i18nc from '../i18n/i18n-constants';
 
 import styles from './header-view.scss';
 
@@ -22,7 +23,9 @@ const mapStateToProps = state => ({
 @connect(mapStateToProps)
 class HeaderView extends Component {
   getSelectedPage = () => {
-    switch (this.props.location.pathname) {
+    const { location } = this.props;
+
+    switch (location.pathname) {
       case '/report':
         return 'report';
 
@@ -32,13 +35,15 @@ class HeaderView extends Component {
   }
 
   handleSelectPage = (e, pageItem) => {
+    const { history } = this.props;
+
     switch (pageItem.key) {
       case 'admin':
-        this.props.history.push('/');
+        history.push('/');
         break;
 
       case 'report':
-        this.props.history.push('/report');
+        history.push('/report');
         break;
 
       default:
@@ -55,11 +60,13 @@ class HeaderView extends Component {
   }
 
   createUserMenuItems = () => {
+    const { i18n, t } = this.props;
+
     // language options
-    const items = this.props.i18n.languages.map(language => ({
+    const items = i18n.languages.map(language => ({
       key: language,
-      name: this.props.t(`ui.usermenu.language.${language}`),
-      disabled: this.props.i18n.language === language,
+      name: t(`${i18nc.HEADER_USERMENU_LANGUAGE}.${language}`),
+      disabled: i18n.language === language,
       onClick: this.handleChangeLanguage
     }));
 
@@ -72,7 +79,7 @@ class HeaderView extends Component {
     // logout
     items.push({
       key: 'logout',
-      name: this.props.t('ui.usermenu.logout'),
+      name: t(i18nc.HEADER_USERMENU_LOGOUT),
       onClick: this.handleLogout
     });
 
@@ -80,11 +87,12 @@ class HeaderView extends Component {
   }
 
   createItems = () => {
+    const { t } = this.props;
     const items = [];
 
     // admin
     items.push({
-      name: 'Administration',
+      name: t(i18nc.HEADER_ADMINISTRATION),
       key: 'admin',
       itemType: ContextualMenuItemType.Header,
       iconProps: {
@@ -96,7 +104,7 @@ class HeaderView extends Component {
 
     // report
     items.push({
-      name: 'Reports',
+      name: t(i18nc.HEADER_REPORTS),
       key: 'report',
       itemType: ContextualMenuItemType.Header,
       iconProps: {
@@ -110,11 +118,12 @@ class HeaderView extends Component {
   }
 
   createFarItems = () => {
+    const { session } = this.props;
     const farItems = [];
 
     // user menu
     farItems.push({
-      name: this.props.session.user.userName,
+      name: session.user.userName,
       key: 'userMenu',
       itemType: ContextualMenuItemType.Header,
       iconProps: {

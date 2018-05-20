@@ -5,6 +5,7 @@ import SagaTester from 'redux-saga-tester';
 import { i18nReducer, INITIAL_STATE as I18N_INITIAL_STATE } from '../i18n-reducer';
 import { i18nSagas } from '../i18n-saga';
 import { changeLanguageAction } from '../i18n-actions';
+import * as i18nc from '../i18n-constants';
 
 const INITIAL_STATE = {
   i18n: I18N_INITIAL_STATE
@@ -16,7 +17,7 @@ describe('i18n-saga-test', () => {
     const payload = {
       language: 'ro',
       messages: {
-        'ui.usermenu.logout': 'Delogare'
+        [i18nc.HEADER_USERMENU_LOGOUT]: 'Delogare'
       }
     };
     mock.onGet('/api/dictionary/ro').reply(200, payload);

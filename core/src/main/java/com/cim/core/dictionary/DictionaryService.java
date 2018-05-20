@@ -2,6 +2,9 @@ package com.cim.core.dictionary;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -52,9 +55,10 @@ public class DictionaryService
 			for (Resource resource : resources)
 			{
 				Properties messages = new Properties();
-				try (InputStream in = resource.getInputStream())
+				try (InputStream in = resource.getInputStream(); 
+					 Reader reader = new InputStreamReader(in, StandardCharsets.UTF_8))
 				{
-					messages.load(in);
+					messages.load(reader);
 				}
 				catch (IOException e)
 				{
@@ -145,7 +149,7 @@ public class DictionaryService
 		if (StringUtils.isBlank(code) ||
 			StringUtils.isBlank(lang))
 		{
-			log.debug("Failed to read message for lang {}, code {}, params {}", lang, code, params);
+			log.warn("Failed to read message for lang {}, code {}, params {}", lang, code, params);
 			return code;
 		}
 		
@@ -154,7 +158,7 @@ public class DictionaryService
 			dictionary.isEmpty() ||
 			!dictionary.containsKey(code))
 		{
-			log.debug("Failed to read message for lang {}, code {}, params {}", lang, code, params);
+			log.warn("Failed to read message for lang {}, code {}, params {}", lang, code, params);
 			return code;
 		}
 		

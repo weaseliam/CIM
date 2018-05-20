@@ -7,11 +7,14 @@ import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { graveownerListSelector } from './graveowner-selector';
 import { fetchGraveownerListAction } from './graveowner-actions';
 import { debounce } from '../../core/util';
+import withI18n from '../../i18n/i18n-hoc';
+import * as i18nc from '../../i18n/i18n-constants';
 
 import styles from './graveowner-list-view.scss';
 
 const colWidth = {
-  S: 50,
+  XS: 50,
+  S: 100,
   M: 150,
   L: 200,
   XL: 400
@@ -21,6 +24,7 @@ const mapStateToProps = state => ({
   graveownerList: graveownerListSelector(state)
 });
 
+@withI18n
 @connect(mapStateToProps)
 class GraveownerListView extends Component {
   componentDidMount() {
@@ -63,10 +67,10 @@ class GraveownerListView extends Component {
     }
   }
 
-  handleTableNoRows = () => (
-    // TODO i18n
-    <div>No results</div>
-  )
+  handleTableNoRows = () => {
+    const { t } = this.props;
+    return <div>{t(i18nc.GRAVEOWNER_LIST_TABLE_NO_RESULTS)}</div>;
+  }
 
   handleTableSort = ({ sortBy, sortDirection }) => {
     const { graveowners = [] } = this.props.graveownerList;
@@ -95,9 +99,9 @@ class GraveownerListView extends Component {
   }
 
   inputHeaderRenderer = ({ dataKey, label, sortBy, sortDirection }) => (
-    <div>
-      {label}
+    <div title={label}>
       {sortBy === dataKey && <SortIndicator sortDirection={sortDirection} />}
+      {label}
       <TextField
         inputClassName={styles.tableHeaderColumnInput}
         onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
@@ -112,6 +116,7 @@ class GraveownerListView extends Component {
   }, 750)
 
   render() {
+    const { t } = this.props;
     const { graveowners = [] } = this.props.graveownerList;
     const { sortBy, sortDirection } = this.buildTableSort();
 
@@ -136,43 +141,43 @@ class GraveownerListView extends Component {
               sortDirection={sortDirection}
             >
               <Column
-                label="Id"
+                label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_ID)}
                 dataKey="id"
                 width={colWidth.S}
                 headerRenderer={this.inputHeaderRenderer}
               />
               <Column
-                label="CNP"
+                label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_CNP)}
                 dataKey="cnp"
                 width={colWidth.L}
                 headerRenderer={this.inputHeaderRenderer}
               />
               <Column
-                label="Nume"
+                label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_NUME)}
                 dataKey="nume"
                 width={colWidth.L}
                 headerRenderer={this.inputHeaderRenderer}
               />
               <Column
-                label="Prenume"
+                label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_PRENUME)}
                 dataKey="prenume"
                 width={colWidth.L}
                 headerRenderer={this.inputHeaderRenderer}
               />
               <Column
-                label="Localitate"
+                label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_LOC)}
                 dataKey="localitate"
                 width={colWidth.M}
                 headerRenderer={this.inputHeaderRenderer}
               />
               <Column
-                label="Judet"
+                label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_JUD)}
                 dataKey="judet"
                 width={colWidth.S}
                 headerRenderer={this.inputHeaderRenderer}
               />
               <Column
-                label="Adresa (str,nr,bl,sc,et,ap)"
+                label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_ADR)}
                 dataKey="adresa"
                 width={colWidth.XL}
                 headerRenderer={this.inputHeaderRenderer}

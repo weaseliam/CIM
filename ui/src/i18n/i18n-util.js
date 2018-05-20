@@ -56,11 +56,15 @@ export const format = (message, params) => {
  */
 export const translate = (messages, code, params) => {
   if (isNilOrEmpty(code)) {
+    // eslint-disable-next-line no-console
+    console.error('Invalid code provided for translation');
     return code;
   }
 
   const message = messages[code];
   if (isNil(message)) {
+    // eslint-disable-next-line no-console
+    console.error('Not found in dictionary', code, params);
     return code;
   }
 
