@@ -10,6 +10,7 @@ public class GraveownerListUi
 	private Integer				totalPages;
 	private Long				totalResults;
 	private List<GraveownerUi>	graveowners;
+	private GraveownerFilterUi	filter;
 
 	public GraveownerListUi()
 	{
@@ -75,10 +76,20 @@ public class GraveownerListUi
 		this.graveowners = graveowners;
 	}
 
+	public GraveownerFilterUi getFilter()
+	{
+		return filter;
+	}
+
+	public void setFilter(GraveownerFilterUi filter)
+	{
+		this.filter = filter;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "GraveownerListUi [page=" + page + ", size=" + size + ", sort=" + sort + ", totalPages=" + totalPages
-				+ ", totalResults=" + totalResults + ", graveowners=" + graveowners + "]";
+				+ ", totalResults=" + totalResults + ", graveowners=" + graveowners + ", filter=" + filter + "]";
 	}
 }

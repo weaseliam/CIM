@@ -34,50 +34,54 @@ public class GraveownerSpecifications
 		};
 	}
 
-	public static Specification<Graveowner> buildFilterSpecification(Long id, String cnp, String nume, String prenume,
-			String localitate, String judet, String adresa)
+	public static Specification<Graveowner> buildFilterSpecification(GraveownerFilter filter)
 	{
 		Specification<Graveowner> specification = null;
 		
-		if (id != null && id > 0)
+		if (filter == null)
 		{
-			specification = GraveownerSpecifications.equal("id", id);
+			return specification;
+		}
+		
+		if (filter.getId() != null && filter.getId() > 0)
+		{
+			specification = GraveownerSpecifications.equal("id", filter.getId());
 		}
 		else
 		{
-			if (!StringUtils.isBlank(cnp))
+			if (!StringUtils.isBlank(filter.getCnp()))
 			{
-				Specification<Graveowner> spec = GraveownerSpecifications.like("cnp", "%" + cnp.trim() + "%");
+				Specification<Graveowner> spec = GraveownerSpecifications.like("cnp", "%" + filter.getCnp().trim() + "%");
 				specification = specification != null ? specification.and(spec) : spec;
 			}
 			
-			if (!StringUtils.isBlank(nume))
+			if (!StringUtils.isBlank(filter.getNume()))
 			{
-				Specification<Graveowner> spec = GraveownerSpecifications.like("nume", "%" + nume.trim() + "%");
+				Specification<Graveowner> spec = GraveownerSpecifications.like("nume", "%" + filter.getNume().trim() + "%");
 				specification = specification != null ? specification.and(spec) : spec;
 			}
 			
-			if (!StringUtils.isBlank(prenume))
+			if (!StringUtils.isBlank(filter.getPrenume()))
 			{
-				Specification<Graveowner> spec = GraveownerSpecifications.like("prenume", "%" + prenume.trim() + "%");
+				Specification<Graveowner> spec = GraveownerSpecifications.like("prenume", "%" + filter.getPrenume().trim() + "%");
 				specification = specification != null ? specification.and(spec) : spec;
 			}
 			
-			if (!StringUtils.isBlank(localitate))
+			if (!StringUtils.isBlank(filter.getLocalitate()))
 			{
-				Specification<Graveowner> spec = GraveownerSpecifications.like("localitate", "%" + localitate.trim() + "%");
+				Specification<Graveowner> spec = GraveownerSpecifications.like("localitate", "%" + filter.getLocalitate().trim() + "%");
 				specification = specification != null ? specification.and(spec) : spec;
 			}
 			
-			if (!StringUtils.isBlank(judet))
+			if (!StringUtils.isBlank(filter.getJudet()))
 			{
-				Specification<Graveowner> spec = GraveownerSpecifications.like("judet", "%" + judet.trim() + "%");
+				Specification<Graveowner> spec = GraveownerSpecifications.like("judet", "%" + filter.getJudet().trim() + "%");
 				specification = specification != null ? specification.and(spec) : spec;
 			}
 			
-			if (!StringUtils.isBlank(adresa))
+			if (!StringUtils.isBlank(filter.getAdresa()))
 			{
-				Specification<Graveowner> spec = GraveownerSpecifications.like("adresa", "%" + adresa.trim() + "%");
+				Specification<Graveowner> spec = GraveownerSpecifications.like("adresa", "%" + filter.getAdresa().trim() + "%");
 				specification = specification != null ? specification.and(spec) : spec;
 			}
 		}

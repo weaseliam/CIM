@@ -3,11 +3,13 @@ package com.cim.core.graveowner;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.domain.Page;
 
 public class GraveownerAssembler
 {
-	public static GraveownerListUi toResource(Page<Graveowner> page, String sort)
+	public static GraveownerListUi toResource(@NotNull Page<Graveowner> page, String sort, GraveownerFilter filter)
 	{
 		GraveownerListUi response = new GraveownerListUi();
 		response.setPage(page.getNumber() + 1);
@@ -15,6 +17,7 @@ public class GraveownerAssembler
 		response.setSort(sort);
 		response.setTotalPages(page.getTotalPages());
 		response.setTotalResults(page.getTotalElements());
+		response.setFilter(filter != null ? new GraveownerFilterUi(filter) : null);
 		
 		List<GraveownerUi> graveowners = page.getContent().stream()
 				.map(graveowner -> new GraveownerUi(graveowner))

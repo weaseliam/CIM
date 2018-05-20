@@ -67,9 +67,9 @@ public class DictionaryRest
 			messages = new HashMap<>();
 		}
 		
-		DictionaryUi dictionary = DictionaryAssembler.toResource(lang, messages);
+		DictionaryUi uiDictionary = DictionaryAssembler.toResource(lang, messages);
 		
-		log.debug("Response {}", dictionary);
-		return ResponseEntity.ok(dictionary);
+		log.debug("Response {}", uiDictionary);
+		return ResponseEntity.ok(uiDictionary);
 	}
 }

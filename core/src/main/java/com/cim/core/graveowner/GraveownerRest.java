@@ -41,15 +41,20 @@ public class GraveownerRest
 			@RequestParam(required = false) String judet,
 			@RequestParam(required = false) String adresa)
 	{
-		log.debug("Fetching graveowners list for page={}, size={}, sort={}", page, size, sort);
-		log.debug("With filter id={}, cnp={}, nume={}, prenume={}, localitate={}, judet={}, adresa={}", 
-				id, cnp, nume, prenume, localitate, judet, adresa);
+		log.debug("Fetching graveowners for page={}, size={}, sort={}", page, size, sort);
 		
-		Page<Graveowner> graveownersPage = graveownerService.list(page, size, sort, id, cnp, nume, prenume, localitate,
-				judet, adresa);
-		GraveownerListUi graveowners = GraveownerAssembler.toResource(graveownersPage, sort);
+		GraveownerFilter filter = null;
+		if (id != null || cnp != null || nume != null || prenume != null || 
+			localitate != null || judet != null || adresa != null)
+		{
+			filter = new GraveownerFilter(id, cnp, nume, prenume, localitate, judet, adresa);
+			log.debug("Using filter {}", filter);			
+		}
 		
-		log.debug("Response {}", graveowners);
-		return ResponseEntity.ok(graveowners);
+		Page<Graveowner> graveowners = graveownerService.list(page, size, sort, filter);
+		GraveownerListUi uiGraveowners = GraveownerAssembler.toResource(graveowners, sort, filter);
+		
+		log.debug("Response {}", uiGraveowners);
+		return ResponseEntity.ok(uiGraveowners);
 	}
 }
