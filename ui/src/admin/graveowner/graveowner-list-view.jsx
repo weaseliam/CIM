@@ -39,10 +39,11 @@ class GraveownerListView extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { sort } = this.props.graveownerList;
+    const { sort, filter } = this.props.graveownerList;
     const nextSort = nextProps.graveownerList.sort;
+    const nextFilter = nextProps.graveownerList.filter;
 
-    if (sort !== nextSort && this.tableRef) {
+    if (sort !== nextSort || filter !== nextFilter) {
       this.tableRef.scrollToPosition(0);
     }
   }

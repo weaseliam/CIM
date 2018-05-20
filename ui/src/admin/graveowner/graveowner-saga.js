@@ -15,11 +15,11 @@ function* fetchGraveownerListSaga(action) {
       page = 1,
       size = 100,
       sort = 'id',
-      filter = {}
+      filter
     } = action.payload || {};
 
     const graveownerList = yield call(fetchGraveownerList, {
-      page, size, sort, filter
+      page, size, sort, filter: filter || {}
     });
 
     yield put(fetchGraveownerListAction.success(graveownerList));
