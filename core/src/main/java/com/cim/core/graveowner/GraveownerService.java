@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -43,15 +44,25 @@ public class GraveownerService
 
 	public Page<Graveowner> list(int page, int size, String sort)
 	{
+		return list(page, size, sort, null, null, null, null, null, null, null);
+	}
+	
+	public Page<Graveowner> list(int page, int size, String sort, Long id, String cnp, String nume, String prenume,
+			String localitate, String judet, String adresa)
+	{
+		Specification<Graveowner> specification = GraveownerSpecifications.buildFilterSpecification(id, cnp, nume,
+				prenume, localitate, judet, adresa);
+		
 		PageRequest pageRequest = PageRequest.of(
 				Math.max(page - 1, 0), 
 				Math.max(size, 1), 
 				computeSort(sort));
-		Page<Graveowner> graveowners = graveownerRepository.findAll(pageRequest);
+		
+		Page<Graveowner> graveowners = graveownerRepository.findAll(specification, pageRequest);
 		
 		return graveowners;
 	}
-
+	
 	private Sort computeSort(String property)
 	{
 		boolean isDescending = property != null && property.startsWith("-");

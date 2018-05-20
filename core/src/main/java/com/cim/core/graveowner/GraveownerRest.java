@@ -32,11 +32,21 @@ public class GraveownerRest
 	public ResponseEntity<GraveownerListUi> list(
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "100") int size,
-			@RequestParam(defaultValue = "id") String sort)
+			@RequestParam(defaultValue = "id") String sort,
+			@RequestParam(required = false) Long id,
+			@RequestParam(required = false) String cnp,
+			@RequestParam(required = false) String nume,
+			@RequestParam(required = false) String prenume,
+			@RequestParam(required = false) String localitate,
+			@RequestParam(required = false) String judet,
+			@RequestParam(required = false) String adresa)
 	{
-		log.debug("Fetching graveowners list for page {}, size {}, sort {}", page, size, sort);
+		log.debug("Fetching graveowners list for page={}, size={}, sort={}", page, size, sort);
+		log.debug("With filter id={}, cnp={}, nume={}, prenume={}, localitate={}, judet={}, adresa={}", 
+				id, cnp, nume, prenume, localitate, judet, adresa);
 		
-		Page<Graveowner> graveownersPage = graveownerService.list(page, size, sort);
+		Page<Graveowner> graveownersPage = graveownerService.list(page, size, sort, id, cnp, nume, prenume, localitate,
+				judet, adresa);
 		GraveownerListUi graveowners = GraveownerAssembler.toResource(graveownersPage, sort);
 		
 		log.debug("Response {}", graveowners);
