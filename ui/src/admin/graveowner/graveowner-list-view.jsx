@@ -61,9 +61,9 @@ class GraveownerListView extends Component {
 
     this.lastTime = currentTime;
 
-    const { page, totalPages, sort } = this.props.graveownerList;
+    const { page, totalPages, sort, filter } = this.props.graveownerList;
     if (page < totalPages) {
-      this.props.dispatch(fetchGraveownerListAction.trigger({ page: page + 1, sort }));
+      this.props.dispatch(fetchGraveownerListAction.trigger({ page: page + 1, sort, filter }));
     }
   }
 
@@ -73,13 +73,13 @@ class GraveownerListView extends Component {
   }
 
   handleTableSort = ({ sortBy, sortDirection }) => {
-    const { graveowners = [] } = this.props.graveownerList;
+    const { graveowners = [], filter } = this.props.graveownerList;
     if (graveowners.length === 0) {
       return;
     }
 
     const sort = sortDirection === SortDirection.DESC ? `-${sortBy}` : sortBy;
-    this.props.dispatch(fetchGraveownerListAction.trigger({ sort }));
+    this.props.dispatch(fetchGraveownerListAction.trigger({ sort, filter }));
   }
 
   buildTableSort = () => {
@@ -112,7 +112,22 @@ class GraveownerListView extends Component {
   )
 
   handleTableHeaderInputChange = debounce((dataKey, newValue) => {
-    console.log('TableHeaderInputChange', dataKey, newValue);
+    const { sort, filter } = this.props.graveownerList;
+
+    let filterValue = newValue && newValue.trim();
+    if (filterValue === '') {
+      filterValue = null;
+    }
+
+    if ((filter || {})[dataKey] !== filterValue) {
+      this.props.dispatch(fetchGraveownerListAction.trigger({
+        sort,
+        filter: {
+          ...filter,
+          [dataKey]: filterValue
+        }
+      }));
+    }
   }, 750)
 
   render() {
