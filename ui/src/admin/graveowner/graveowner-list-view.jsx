@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table, Column, AutoSizer, SortDirection, SortIndicator } from 'react-virtualized';
-import { isNil } from 'ramda';
+import { isNil, keys, equals } from 'ramda';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 
 import { graveownerListSelector } from './graveowner-selector';
@@ -27,6 +27,13 @@ const mapStateToProps = state => ({
 @withI18n
 @connect(mapStateToProps)
 class GraveownerListView extends Component {
+  constructor(props) {
+    super(props);
+
+    this.tableRef = null;
+    this.tableInputRefs = {};
+  }
+
   componentDidMount() {
     this.props.dispatch(fetchGraveownerListAction.trigger());
   }
@@ -103,6 +110,7 @@ class GraveownerListView extends Component {
       {sortBy === dataKey && <SortIndicator sortDirection={sortDirection} />}
       {label}
       <TextField
+        ref={(ref) => { this.tableInputRefs[dataKey] = ref; }}
         inputClassName={styles.tableHeaderColumnInput}
         onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
         onKeyDown={e => (e.keyCode === 13 || e.keyCode === 32) && e.stopPropagation()}
@@ -111,24 +119,39 @@ class GraveownerListView extends Component {
     </div>
   )
 
-  handleTableHeaderInputChange = debounce((dataKey, newValue) => {
+  handleTableHeaderInputChange = debounce(() => {
     const { sort, filter } = this.props.graveownerList;
 
-    let filterValue = newValue && newValue.trim();
-    if (filterValue === '') {
-      filterValue = null;
-    }
+    // read values from UNCONTROLLED inputs
+    const newFilter = this.readTableInputValues();
 
-    if ((filter || {})[dataKey] !== filterValue) {
+    // deep comparison
+    if (!equals(filter, newFilter)) {
       this.props.dispatch(fetchGraveownerListAction.trigger({
         sort,
         filter: {
           ...filter,
-          [dataKey]: filterValue
+          ...newFilter
         }
       }));
     }
   }, 750)
+
+  readTableInputValues = () => {
+    const dataKeys = keys(this.tableInputRefs);
+    const values = {};
+
+    for (const dataKey of dataKeys) {
+      let { value } = this.tableInputRefs[dataKey];
+      value = value && value.trim();
+      if (value === '') {
+        value = null;
+      }
+      values[dataKey] = value;
+    }
+
+    return values;
+  }
 
   render() {
     const { t } = this.props;
