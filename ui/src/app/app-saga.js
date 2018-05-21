@@ -4,7 +4,8 @@ import { getAppSession, logOutUser } from './app-api';
 import {
   bootstrapAppAction,
   fetchAppSessionAction,
-  logOutUserAction
+  logOutUserAction,
+  setAppLoadingAction
 } from './app-actions';
 import { changeLanguageSaga, fetchSupportedLanguagesSaga } from '../i18n/i18n-saga';
 
@@ -34,12 +35,13 @@ function* bootstrapAppSaga() {
  */
 function* logOutUserSaga() {
   try {
+    yield put(setAppLoadingAction.success(true));
     yield call(logOutUser);
 
     // eslint-disable-next-line no-undef
     yield window.location = '/login?logout';
   } finally {
-    yield put(logOutUserAction.FULFILL);
+    yield put(setAppLoadingAction.success(false));
   }
 }
 

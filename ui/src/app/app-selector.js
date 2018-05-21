@@ -7,8 +7,8 @@ export const appLoadingContentSelector = state =>
 export const appLoadingSelector = state =>
   getRoot(state).loading;
 
-export const appSessionSelector = state =>
-  getRoot(state).session;
+export const appUserSelector = state =>
+  getRoot(state).session.user;
 
 export const appBootstrapSelector = state =>
   getRoot(state).bootstrap;

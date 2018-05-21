@@ -3,18 +3,17 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
-import Spinner from '../components/spinner';
 import { bootstrapAppAction } from './app-actions';
 import AdminPage from '../admin/layout/admin-page';
 import HeaderView from './header-view';
 import ReportPage from '../report/layout/report-page';
-import { appLoadingSelector, appBootstrapSelector } from '../app/app-selector';
+import { appBootstrapSelector } from '../app/app-selector';
+import SpinnerView from './spinner-view';
 
 import styles from './app-view.scss';
 
 const mapStateToProps = state => ({
-  bootstrap: appBootstrapSelector(state),
-  loading: appLoadingSelector(state)
+  bootstrap: appBootstrapSelector(state)
 });
 
 @withRouter
@@ -25,7 +24,7 @@ class AppView extends Component {
   }
 
   render() {
-    const { loading, bootstrap } = this.props;
+    const { bootstrap } = this.props;
 
     if (!bootstrap) {
       return 'Loading...';
@@ -33,7 +32,7 @@ class AppView extends Component {
 
     return (
       <div className={styles.app}>
-        <Spinner loading={loading} fillContainer />
+        <SpinnerView />
         <HeaderView />
         <div className={styles.content}>
           <Route exact path="/" component={AdminPage} />

@@ -2,7 +2,7 @@ import {
   fetchAppSessionAction,
   bootstrapAppAction,
   setAppLoadingContentAction,
-  logOutUserAction
+  setAppLoadingAction
 } from './app-actions';
 
 export const INITIAL_STATE = {
@@ -34,16 +34,10 @@ export const appReducer = (state = INITIAL_STATE, action) => {
         loadingContent: action.payload
       };
 
-    case logOutUserAction.TRIGGER:
+    case setAppLoadingAction.SUCCESS:
       return {
         ...state,
-        loading: true
-      };
-
-    case logOutUserAction.FULFILL:
-      return {
-        ...state,
-        loading: false
+        loading: action.payload
       };
 
     default:

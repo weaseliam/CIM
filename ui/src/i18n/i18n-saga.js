@@ -3,18 +3,25 @@ import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { changeLanguageAction, fetchSupportedLanguagesAction } from './i18n-actions';
 import { fetchDictionary, fetchSupportedLanguages } from './i18n-api';
 import { currentLanguageSelector } from './i18n-selector';
+import { setAppLoadingAction } from '../app/app-actions';
 
 /**
  * Change app language saga
  */
 export function* changeLanguageSaga(action) {
-  const language = yield select(currentLanguageSelector);
-  if (action.payload && action.payload === language) {
-    return;
-  }
+  try {
+    yield put(setAppLoadingAction.success(true));
 
-  const dictionary = yield call(fetchDictionary, action.payload);
-  yield put(changeLanguageAction.success(dictionary));
+    const language = yield select(currentLanguageSelector);
+    if (action.payload && action.payload === language) {
+      return;
+    }
+
+    const dictionary = yield call(fetchDictionary, action.payload);
+    yield put(changeLanguageAction.success(dictionary));
+  } finally {
+    yield put(setAppLoadingAction.success(false));
+  }
 }
 
 /**
