@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  font-family: "Segoe UI Web (West European)", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.text {
+  padding-left: 8px;
+  padding-right: 8px;
+}

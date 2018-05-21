@@ -9,8 +9,6 @@ const LOADER_ANIMATION_THRESHOLD = 2500;
 
 /**
  * Loader component
- *
- * @extends {Component}
  */
 class Loader extends Component {
   static propTypes = {

@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 
 import Spinner from '../spinner';
 
-describe('loading-test', () => {
+describe('spinner', () => {
   it('renders', () => {
     const wrapper = mount(<Spinner />);
 

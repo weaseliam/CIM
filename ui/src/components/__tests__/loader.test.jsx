@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 
 import Loader from '../loader';
 
-describe('loading-test', () => {
+describe('loader', () => {
   it('renders', () => {
     const wrapper = mount(<Loader />);
 

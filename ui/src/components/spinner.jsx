@@ -27,8 +27,6 @@ const defaultProps = {
 
 /**
  * Spinner component
- *
- * @extends {Component}
  */
 const Spinner = ({
   children, label, size, loading, fillContainer, className, classNameWhenLoading

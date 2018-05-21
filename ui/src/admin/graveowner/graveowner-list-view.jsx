@@ -9,6 +9,7 @@ import { fetchGraveownerListAction } from './graveowner-actions';
 import { debounce } from '../../core/util';
 import withI18n from '../../i18n/i18n-hoc';
 import * as i18nc from '../../i18n/i18n-constants';
+import TableTitle from '../../components/table-title';
 
 import styles from './graveowner-list-view.scss';
 
@@ -138,6 +139,27 @@ class GraveownerListView extends Component {
     }
   }, 750)
 
+  handleTableTitleResetFilter = () => {
+    const dataKeys = keys(this.tableInputRefs);
+    let didReset = false;
+
+    for (const dataKey of dataKeys) {
+      const input = this.tableInputRefs[dataKey];
+      if (input.value !== '') {
+        // TODO find better solution for filter reset
+        // eslint-disable-next-line no-underscore-dangle
+        input._textElement.value = '';
+        input.state.value = '';
+        didReset = true;
+      }
+    }
+
+    if (didReset) {
+      const { sort } = this.props.graveownerList;
+      this.props.dispatch(fetchGraveownerListAction.trigger({ sort }));
+    }
+  }
+
   readTableInputValues = () => {
     const dataKeys = keys(this.tableInputRefs);
     const values = {};
@@ -156,72 +178,84 @@ class GraveownerListView extends Component {
 
   render() {
     const { t } = this.props;
-    const { graveowners = [] } = this.props.graveownerList;
+    const { graveowners = [], totalResults } = this.props.graveownerList;
     const { sortBy, sortDirection } = this.buildTableSort();
 
     return (
       <div className={styles.graveownerList}>
         <AutoSizer>
           {({ width, height }) => (
-            <Table
-              ref={(ref) => { this.tableRef = ref; }}
-              width={width}
-              height={height}
-              headerHeight={65}
-              rowHeight={35}
-              headerClassName={styles.tableHeaderColumn}
-              rowClassName={this.handleRowClassName}
-              rowCount={graveowners.length}
-              rowGetter={({ index }) => graveowners[index]}
-              onScroll={this.handleTableScroll}
-              noRowsRenderer={this.handleTableNoRows}
-              sort={this.handleTableSort}
-              sortBy={sortBy}
-              sortDirection={sortDirection}
-            >
-              <Column
-                label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_ID)}
-                dataKey="id"
-                width={colWidth.S}
-                headerRenderer={this.inputHeaderRenderer}
+            <div>
+              <TableTitle
+                results={totalResults || 0}
+                width={width}
+                height={30}
+                onResetFilter={this.handleTableTitleResetFilter}
+                i18n={{
+                  results: t(i18nc.GRAVEOWNER_LIST_TABLE_TITLE_RESULTS),
+                  resetFilter: t(i18nc.GRAVEOWNER_LIST_TABLE_TITLE_RESET_FILTER)
+                }}
               />
-              <Column
-                label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_CNP)}
-                dataKey="cnp"
-                width={colWidth.L}
-                headerRenderer={this.inputHeaderRenderer}
-              />
-              <Column
-                label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_NUME)}
-                dataKey="nume"
-                width={colWidth.L}
-                headerRenderer={this.inputHeaderRenderer}
-              />
-              <Column
-                label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_PRENUME)}
-                dataKey="prenume"
-                width={colWidth.L}
-                headerRenderer={this.inputHeaderRenderer}
-              />
-              <Column
-                label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_LOC)}
-                dataKey="localitate"
-                width={colWidth.M}
-                headerRenderer={this.inputHeaderRenderer}
-              />
-              <Column
-                label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_JUD)}
-                dataKey="judet"
-                width={colWidth.S}
-                headerRenderer={this.inputHeaderRenderer}
-              />
-              <Column
-                label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_ADR)}
-                dataKey="adresa"
-                width={colWidth.XL}
-                headerRenderer={this.inputHeaderRenderer}
-              />
-            </Table>
+              <Table
+                ref={(ref) => { this.tableRef = ref; }}
+                width={width}
+                height={height - 30}
+                headerHeight={65}
+                rowHeight={35}
+                headerClassName={styles.tableHeaderColumn}
+                rowClassName={this.handleRowClassName}
+                rowCount={graveowners.length}
+                rowGetter={({ index }) => graveowners[index]}
+                onScroll={this.handleTableScroll}
+                noRowsRenderer={this.handleTableNoRows}
+                sort={this.handleTableSort}
+                sortBy={sortBy}
+                sortDirection={sortDirection}
+              >
+                <Column
+                  label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_ID)}
+                  dataKey="id"
+                  width={colWidth.S}
+                  headerRenderer={this.inputHeaderRenderer}
+                />
+                <Column
+                  label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_CNP)}
+                  dataKey="cnp"
+                  width={colWidth.L}
+                  headerRenderer={this.inputHeaderRenderer}
+                />
+                <Column
+                  label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_NUME)}
+                  dataKey="nume"
+                  width={colWidth.L}
+                  headerRenderer={this.inputHeaderRenderer}
+                />
+                <Column
+                  label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_PRENUME)}
+                  dataKey="prenume"
+                  width={colWidth.L}
+                  headerRenderer={this.inputHeaderRenderer}
+                />
+                <Column
+                  label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_LOC)}
+                  dataKey="localitate"
+                  width={colWidth.M}
+                  headerRenderer={this.inputHeaderRenderer}
+                />
+                <Column
+                  label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_JUD)}
+                  dataKey="judet"
+                  width={colWidth.S}
+                  headerRenderer={this.inputHeaderRenderer}
+                />
+                <Column
+                  label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_ADR)}
+                  dataKey="adresa"
+                  width={colWidth.XL}
+                  headerRenderer={this.inputHeaderRenderer}
+                />
+              </Table>
+            </div>
           )}
         </AutoSizer>
       </div>

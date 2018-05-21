@@ -16,3 +16,5 @@ export const GRAVEOWNER_LIST_TABLE_HEADER_PRENUME = 'ui.graveownerList.table.hea
 export const GRAVEOWNER_LIST_TABLE_HEADER_LOC = 'ui.graveownerList.table.header.loc';
 export const GRAVEOWNER_LIST_TABLE_HEADER_JUD = 'ui.graveownerList.table.header.jud';
 export const GRAVEOWNER_LIST_TABLE_HEADER_ADR = 'ui.graveownerList.table.header.adr';
+export const GRAVEOWNER_LIST_TABLE_TITLE_RESULTS = 'ui.graveownerList.table.title.results';
+export const GRAVEOWNER_LIST_TABLE_TITLE_RESET_FILTER = 'ui.graveownerList.table.title.resetFilter';
