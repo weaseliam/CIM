@@ -147,6 +147,7 @@ class GraveownerListView extends Component {
       const input = this.tableInputRefs[dataKey];
       if (input.value !== '') {
         // TODO find better solution for filter reset
+        // implement as controlled component, do not couple state to this view
         // eslint-disable-next-line no-underscore-dangle
         input._textElement.value = '';
         input.state.value = '';
@@ -185,7 +186,7 @@ class GraveownerListView extends Component {
       <div className={styles.graveownerList}>
         <AutoSizer>
           {({ width, height }) => (
-            <div>
+            <React.Fragment>
               <TableTitle
                 results={totalResults || 0}
                 width={width}
@@ -255,7 +256,7 @@ class GraveownerListView extends Component {
                   headerRenderer={this.inputHeaderRenderer}
                 />
               </Table>
-            </div>
+            </React.Fragment>
           )}
         </AutoSizer>
       </div>
