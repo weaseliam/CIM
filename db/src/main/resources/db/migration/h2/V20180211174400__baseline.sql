@@ -58,6 +58,7 @@ CREATE TABLE grave (
 	marca BIGINT,
 	graveowner_id BIGINT NOT NULL,
 	graveyard_id BIGINT NOT NULL,
+	exempt_id BIGINT NULL,
 	cod_zona INT,
 	sector VARCHAR(32),
 	rind VARCHAR(32),
@@ -66,7 +67,6 @@ CREATE TABLE grave (
 	ani INT,
 	data_incep TIMESTAMP,
 	data_exp TIMESTAMP,
-	exempt_id BIGINT NULL,
 	nr_ch VARCHAR(32),
 	data_ch TIMESTAMP,
 	suma DECIMAL,
@@ -84,3 +84,7 @@ CREATE TABLE grave (
 	FOREIGN KEY (graveyard_id) REFERENCES graveyard(id),
 	FOREIGN KEY (exempt_id) REFERENCES exempt(id)
 );
+
+CREATE INDEX graveowner_id_idx ON grave(graveowner_id);
+CREATE INDEX graveyard_id_idx ON grave(graveyard_id);
+CREATE INDEX exempt_id_idx ON grave(exempt_id);

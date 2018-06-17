@@ -34,7 +34,7 @@ public class GraveownerSpecifications
 		};
 	}
 
-	public static Specification<Graveowner> buildFilterSpecification(GraveownerFilter filter)
+	public static Specification<Graveowner> buildFilterSpec(GraveownerFilter filter)
 	{
 		Specification<Graveowner> specification = null;
 		

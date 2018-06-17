@@ -50,14 +50,14 @@ public class GraveownerService
 	
 	public Page<Graveowner> list(int page, int size, String sort, GraveownerFilter filter)
 	{
-		Specification<Graveowner> specification = GraveownerSpecifications.buildFilterSpecification(filter);
+		Specification<Graveowner> spec = GraveownerSpecifications.buildFilterSpec(filter);
 		
 		PageRequest pageRequest = PageRequest.of(
 				Math.max(page - 1, 0), 
 				Math.max(size, 1), 
 				computeSort(sort));
 		
-		Page<Graveowner> graveowners = graveownerRepository.findAll(specification, pageRequest);
+		Page<Graveowner> graveowners = graveownerRepository.findAll(spec, pageRequest);
 		
 		return graveowners;
 	}

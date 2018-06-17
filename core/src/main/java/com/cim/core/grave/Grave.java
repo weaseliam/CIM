@@ -22,8 +22,9 @@ public class Grave
 	@NotNull
 	private Long		graveyardId;
 
-	private Long		marca;
 	private Long		exemptId;
+	
+	private Long		marca;
 	private Integer		codZona;
 	private String		sector;
 	private String		rind;
