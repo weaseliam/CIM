@@ -6,15 +6,13 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import com.cim.core.util.RestUtil;
 
 @Service
 public class GraveownerService
@@ -55,30 +53,10 @@ public class GraveownerService
 		PageRequest pageRequest = PageRequest.of(
 				Math.max(page - 1, 0), 
 				Math.max(size, 1), 
-				computeSort(sort));
+				RestUtil.toServiceSort(sort));
 		
 		Page<Graveowner> graveowners = graveownerRepository.findAll(spec, pageRequest);
 		
 		return graveowners;
-	}
-	
-	private Sort computeSort(String property)
-	{
-		List<Order> order = new ArrayList<>();
-		
-		if (!StringUtils.isBlank(property))
-		{
-			boolean isDescending = property.startsWith("-");
-			order.add(new Order(
-					isDescending ? Direction.DESC : Direction.ASC, 
-					isDescending ? property.substring(1) : property));
-		}
-		
-		if (!"id".equalsIgnoreCase(property))
-		{
-			order.add(new Order(Direction.ASC, "id"));
-		}
-		
-		return Sort.by(order);
 	}
 }
