@@ -9,6 +9,11 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Exempt
 {
+	/**
+	 * Caution, this is not immutable.
+	 */
+	public static final Exempt NO_EXEMPT = new Exempt();
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long	id;

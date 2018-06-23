@@ -7,7 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+
+import com.cim.core.exempt.Exempt;
+import com.cim.core.graveowner.Graveowner;
+import com.cim.core.graveyard.Graveyard;
 
 @Entity
 public class Grave
@@ -23,7 +29,7 @@ public class Grave
 	private Long		graveyardId;
 
 	private Long		exemptId;
-	
+
 	private Long		marca;
 	private Integer		codZona;
 	private String		sector;
@@ -46,6 +52,18 @@ public class Grave
 	private Integer		codCs;
 	private Integer		matricola;
 	private String		modif;
+
+	@ManyToOne
+	@JoinColumn(name = "graveownerId", insertable = false, updatable = false)
+	private Graveowner	graveowner;
+
+	@ManyToOne
+	@JoinColumn(name = "graveyardId", insertable = false, updatable = false)
+	private Graveyard	graveyard;
+
+	@ManyToOne
+	@JoinColumn(name = "exemptId", insertable = false, updatable = false)
+	private Exempt		exempt;
 
 	public Long getId()
 	{
@@ -307,15 +325,51 @@ public class Grave
 		this.modif = modif;
 	}
 
+	public Graveowner getGraveowner()
+	{
+		return graveowner;
+	}
+
+	public void setGraveowner(Graveowner graveowner)
+	{
+		this.graveowner = graveowner;
+	}
+
+	public Graveyard getGraveyard()
+	{
+		return graveyard;
+	}
+
+	public void setGraveyard(Graveyard graveyard)
+	{
+		this.graveyard = graveyard;
+	}
+
+	public Exempt getExempt()
+	{
+		if (exempt == null)
+		{
+			return Exempt.NO_EXEMPT;
+		}
+
+		return exempt;
+	}
+
+	public void setExempt(Exempt exempt)
+	{
+		this.exempt = exempt;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "Grave [id=" + id + ", graveownerId=" + graveownerId + ", graveyardId=" + graveyardId + ", marca="
-				+ marca + ", exemptId=" + exemptId + ", codZona=" + codZona + ", sector=" + sector + ", rind=" + rind
+		return "Grave [id=" + id + ", graveownerId=" + graveownerId + ", graveyardId=" + graveyardId + ", exemptId="
+				+ exemptId + ", marca=" + marca + ", codZona=" + codZona + ", sector=" + sector + ", rind=" + rind
 				+ ", pozitie=" + pozitie + ", nrLocuri=" + nrLocuri + ", ani=" + ani + ", dataIncep=" + dataIncep
 				+ ", dataExp=" + dataExp + ", nrCh=" + nrCh + ", dataCh=" + dataCh + ", suma=" + suma + ", contract="
 				+ contract + ", nrContr=" + nrContr + ", dataContr=" + dataContr + ", ind=" + ind + ", stare=" + stare
 				+ ", dataStare=" + dataStare + ", transe=" + transe + ", codCs=" + codCs + ", matricola=" + matricola
-				+ ", modif=" + modif + "]";
+				+ ", modif=" + modif + ", graveowner=" + graveowner + ", graveyard=" + graveyard + ", exempt=" + exempt
+				+ "]";
 	}
 }

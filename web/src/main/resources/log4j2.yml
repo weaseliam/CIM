@@ -13,11 +13,15 @@ Configutation:
   Loggers:
     Root:
       level: info
-      AppenderRef:
-      - ref: ConsoleAppender
-    Logger:
-    - name: com.cim
-      level: debug
       additivity: false
       AppenderRef:
       - ref: ConsoleAppender
+    Logger:
+    # cim app
+    - name: com.cim
+      level: debug
+    # hibernate
+#    - name: org.hibernate.SQL
+#      level: debug
+#    - name: org.hibernate.type.descriptor.sql.BasicBinder
+#      level: trace
