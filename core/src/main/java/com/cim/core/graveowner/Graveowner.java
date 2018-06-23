@@ -1,6 +1,6 @@
 package com.cim.core.graveowner;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,49 +13,49 @@ public class Graveowner
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long	id;
+	private Long			id;
 
 	@NotNull
-	private String	nume;
+	private String			nume;
 
 	@NotNull
-	private String	prenume;
-	
-	@NotNull
-	private String	adresa;
+	private String			prenume;
 
-	private Long	marca;
-	private String	cnp;
-	private Integer	codLoc;
-	private String	localitate;
-	private String	judet;
-	private String	tara;
-	private String	str;
-	private String	nr;
-	private String	bl;
-	private String	sc;
-	private String	et;
-	private String	ap;
-	private String	codPost;
-	private String	tel;
-	private String	fax;
-	private String	mail;
-	private String	nrContr;
-	private Date	dataContr;
-	private String	contract;
-	private String	act;
-	private String	seria;
-	private String	nrAct;
-	private String	emitator;
-	private Date	dataAct;
-	private String	dubiu;
-	private Date	dataDubiu;
-	private String	avans;
-	private Integer	anDebut;
-	private Integer	anFinal;
-	private String	modif;
-	private String	avizat;
-	private Date	dataAviz;
+	@NotNull
+	private String			adresa;
+
+	private Long			marca;
+	private String			cnp;
+	private Integer			codLoc;
+	private String			localitate;
+	private String			judet;
+	private String			tara;
+	private String			str;
+	private String			nr;
+	private String			bl;
+	private String			sc;
+	private String			et;
+	private String			ap;
+	private String			codPost;
+	private String			tel;
+	private String			fax;
+	private String			mail;
+	private String			nrContr;
+	private LocalDateTime	dataContr;
+	private String			contract;
+	private String			act;
+	private String			seria;
+	private String			nrAct;
+	private String			emitator;
+	private LocalDateTime	dataAct;
+	private String			dubiu;
+	private LocalDateTime	dataDubiu;
+	private String			avans;
+	private Integer			anDebut;
+	private Integer			anFinal;
+	private String			modif;
+	private String			avizat;
+	private LocalDateTime	dataAviz;
 
 	public Long getId()
 	{
@@ -257,12 +257,12 @@ public class Graveowner
 		this.nrContr = nrContr;
 	}
 
-	public Date getDataContr()
+	public LocalDateTime getDataContr()
 	{
 		return dataContr;
 	}
 
-	public void setDataContr(Date dataContr)
+	public void setDataContr(LocalDateTime dataContr)
 	{
 		this.dataContr = dataContr;
 	}
@@ -317,12 +317,12 @@ public class Graveowner
 		this.emitator = emitator;
 	}
 
-	public Date getDataAct()
+	public LocalDateTime getDataAct()
 	{
 		return dataAct;
 	}
 
-	public void setDataAct(Date dataAct)
+	public void setDataAct(LocalDateTime dataAct)
 	{
 		this.dataAct = dataAct;
 	}
@@ -337,12 +337,12 @@ public class Graveowner
 		this.dubiu = dubiu;
 	}
 
-	public Date getDataDubiu()
+	public LocalDateTime getDataDubiu()
 	{
 		return dataDubiu;
 	}
 
-	public void setDataDubiu(Date dataDubiu)
+	public void setDataDubiu(LocalDateTime dataDubiu)
 	{
 		this.dataDubiu = dataDubiu;
 	}
@@ -397,12 +397,12 @@ public class Graveowner
 		this.avizat = avizat;
 	}
 
-	public Date getDataAviz()
+	public LocalDateTime getDataAviz()
 	{
 		return dataAviz;
 	}
 
-	public void setDataAviz(Date dataAviz)
+	public void setDataAviz(LocalDateTime dataAviz)
 	{
 		this.dataAviz = dataAviz;
 	}

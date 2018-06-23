@@ -1,33 +1,33 @@
 package com.cim.core.grave;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotNull;
 
 public class GraveUi
 {
-	private Long		id;
-	private String		cimitir;
-	private Integer		codZona;
-	private String		sector;
-	private String		rand;
-	private String		pozitie;
-	private Integer		nrLocuri;
-	private Integer		ani;
-	private String		stare;
-	private Date		dataStare;
-	private Date		dataIncep;
-	private Date		dataExp;
-	private Integer		codCs;
-	private String		scutit;
-	private String		nrCh;
-	private Date		dataCh;
-	private BigDecimal	suma;
-	private String		nrContr;
-	private Date		dataContr;
-	private Integer		transe;
-	private Integer		matricola;
+	private Long			id;
+	private String			cimitir;
+	private Integer			codZona;
+	private String			sector;
+	private String			rand;
+	private String			pozitie;
+	private Integer			nrLocuri;
+	private Integer			ani;
+	private String			stare;
+	private LocalDateTime	dataStare;
+	private LocalDateTime	dataIncep;
+	private LocalDateTime	dataExp;
+	private Integer			codCs;
+	private String			scutit;
+	private String			nrCh;
+	private LocalDateTime	dataCh;
+	private BigDecimal		suma;
+	private String			nrContr;
+	private LocalDateTime	dataContr;
+	private Integer			transe;
+	private Integer			matricola;
 
 	public GraveUi()
 	{
@@ -148,32 +148,32 @@ public class GraveUi
 		this.stare = stare;
 	}
 
-	public Date getDataStare()
+	public LocalDateTime getDataStare()
 	{
 		return dataStare;
 	}
 
-	public void setDataStare(Date dataStare)
+	public void setDataStare(LocalDateTime dataStare)
 	{
 		this.dataStare = dataStare;
 	}
 
-	public Date getDataIncep()
+	public LocalDateTime getDataIncep()
 	{
 		return dataIncep;
 	}
 
-	public void setDataIncep(Date dataIncep)
+	public void setDataIncep(LocalDateTime dataIncep)
 	{
 		this.dataIncep = dataIncep;
 	}
 
-	public Date getDataExp()
+	public LocalDateTime getDataExp()
 	{
 		return dataExp;
 	}
 
-	public void setDataExp(Date dataExp)
+	public void setDataExp(LocalDateTime dataExp)
 	{
 		this.dataExp = dataExp;
 	}
@@ -208,12 +208,12 @@ public class GraveUi
 		this.nrCh = nrCh;
 	}
 
-	public Date getDataCh()
+	public LocalDateTime getDataCh()
 	{
 		return dataCh;
 	}
 
-	public void setDataCh(Date dataCh)
+	public void setDataCh(LocalDateTime dataCh)
 	{
 		this.dataCh = dataCh;
 	}
@@ -238,12 +238,12 @@ public class GraveUi
 		this.nrContr = nrContr;
 	}
 
-	public Date getDataContr()
+	public LocalDateTime getDataContr()
 	{
 		return dataContr;
 	}
 
-	public void setDataContr(Date dataContr)
+	public void setDataContr(LocalDateTime dataContr)
 	{
 		this.dataContr = dataContr;
 	}

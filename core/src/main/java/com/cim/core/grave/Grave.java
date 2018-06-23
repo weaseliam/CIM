@@ -1,7 +1,7 @@
 package com.cim.core.grave;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,50 +20,50 @@ public class Grave
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long		id;
+	private Long			id;
 
 	@NotNull
-	private Long		graveownerId;
+	private Long			graveownerId;
 
 	@NotNull
-	private Long		graveyardId;
+	private Long			graveyardId;
 
-	private Long		exemptId;
+	private Long			exemptId;
 
-	private Long		marca;
-	private Integer		codZona;
-	private String		sector;
-	private String		rind;
-	private String		pozitie;
-	private Integer		nrLocuri;
-	private Integer		ani;
-	private Date		dataIncep;
-	private Date		dataExp;
-	private String		nrCh;
-	private Date		dataCh;
-	private BigDecimal	suma;
-	private String		contract;
-	private String		nrContr;
-	private Date		dataContr;
-	private Integer		ind;
-	private String		stare;
-	private Date		dataStare;
-	private Integer		transe;
-	private Integer		codCs;
-	private Integer		matricola;
-	private String		modif;
+	private Long			marca;
+	private Integer			codZona;
+	private String			sector;
+	private String			rind;
+	private String			pozitie;
+	private Integer			nrLocuri;
+	private Integer			ani;
+	private LocalDateTime	dataIncep;
+	private LocalDateTime	dataExp;
+	private String			nrCh;
+	private LocalDateTime	dataCh;
+	private BigDecimal		suma;
+	private String			contract;
+	private String			nrContr;
+	private LocalDateTime	dataContr;
+	private Integer			ind;
+	private String			stare;
+	private LocalDateTime	dataStare;
+	private Integer			transe;
+	private Integer			codCs;
+	private Integer			matricola;
+	private String			modif;
 
 	@ManyToOne
 	@JoinColumn(name = "graveownerId", insertable = false, updatable = false)
-	private Graveowner	graveowner;
+	private Graveowner		graveowner;
 
 	@ManyToOne
 	@JoinColumn(name = "graveyardId", insertable = false, updatable = false)
-	private Graveyard	graveyard;
+	private Graveyard		graveyard;
 
 	@ManyToOne
 	@JoinColumn(name = "exemptId", insertable = false, updatable = false)
-	private Exempt		exempt;
+	private Exempt			exempt;
 
 	public Long getId()
 	{
@@ -175,22 +175,22 @@ public class Grave
 		this.ani = ani;
 	}
 
-	public Date getDataIncep()
+	public LocalDateTime getDataIncep()
 	{
 		return dataIncep;
 	}
 
-	public void setDataIncep(Date dataIncep)
+	public void setDataIncep(LocalDateTime dataIncep)
 	{
 		this.dataIncep = dataIncep;
 	}
 
-	public Date getDataExp()
+	public LocalDateTime getDataExp()
 	{
 		return dataExp;
 	}
 
-	public void setDataExp(Date dataExp)
+	public void setDataExp(LocalDateTime dataExp)
 	{
 		this.dataExp = dataExp;
 	}
@@ -205,12 +205,12 @@ public class Grave
 		this.nrCh = nrCh;
 	}
 
-	public Date getDataCh()
+	public LocalDateTime getDataCh()
 	{
 		return dataCh;
 	}
 
-	public void setDataCh(Date dataCh)
+	public void setDataCh(LocalDateTime dataCh)
 	{
 		this.dataCh = dataCh;
 	}
@@ -245,12 +245,12 @@ public class Grave
 		this.nrContr = nrContr;
 	}
 
-	public Date getDataContr()
+	public LocalDateTime getDataContr()
 	{
 		return dataContr;
 	}
 
-	public void setDataContr(Date dataContr)
+	public void setDataContr(LocalDateTime dataContr)
 	{
 		this.dataContr = dataContr;
 	}
@@ -275,12 +275,12 @@ public class Grave
 		this.stare = stare;
 	}
 
-	public Date getDataStare()
+	public LocalDateTime getDataStare()
 	{
 		return dataStare;
 	}
 
-	public void setDataStare(Date dataStare)
+	public void setDataStare(LocalDateTime dataStare)
 	{
 		this.dataStare = dataStare;
 	}

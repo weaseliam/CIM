@@ -24,6 +24,7 @@ import com.cim.core.graveowner.Graveowner;
 import com.cim.core.graveowner.GraveownerService;
 import com.cim.core.graveyard.Graveyard;
 import com.cim.core.graveyard.GraveyardService;
+import com.cim.core.util.DateUtil;
 
 @Service
 @Repository
@@ -128,21 +129,21 @@ public class MigrationServiceImpl implements MigrationService
 					graveowner.setFax(rs.getString("FAX"));
 					graveowner.setMail(rs.getString("MAIL"));
 					graveowner.setNrContr(rs.getString("NR_CONTR"));
-					graveowner.setDataContr(rs.getDate("DATA_CONTR"));
+					graveowner.setDataContr(DateUtil.toLocalDateTime(rs.getDate("DATA_CONTR")));
 					graveowner.setContract(rs.getString("CONTRACT"));
 					graveowner.setAct(rs.getString("ACT"));
 					graveowner.setSeria(rs.getString("SERIA"));
 					graveowner.setNrAct(rs.getString("NR_ACT"));
 					graveowner.setEmitator(rs.getString("EMITATOR"));
-					graveowner.setDataAct(rs.getDate("DATA_ACT"));
+					graveowner.setDataAct(DateUtil.toLocalDateTime(rs.getDate("DATA_ACT")));
 					graveowner.setDubiu(rs.getString("DUBIU"));
-					graveowner.setDataDubiu(rs.getDate("DATA_DUBIU"));
+					graveowner.setDataDubiu(DateUtil.toLocalDateTime(rs.getDate("DATA_DUBIU")));
 					graveowner.setAvans(rs.getString("AVANS"));
 					graveowner.setAnDebut(rs.getInt("AN_DEBUT"));
 					graveowner.setAnFinal(rs.getInt("AN_FINAL"));
 					graveowner.setModif(rs.getString("MODIF"));
 					graveowner.setAvizat(rs.getString("AVIZAT"));
-					graveowner.setDataAviz(rs.getDate("DATA_AVIZ"));
+					graveowner.setDataAviz(DateUtil.toLocalDateTime(rs.getDate("DATA_AVIZ")));
 					
 					String address = buildAddress(graveowner);
 					graveowner.setAdresa(address);
@@ -250,17 +251,17 @@ public class MigrationServiceImpl implements MigrationService
 					grave.setPozitie(rs.getString("POZITIE"));
 					grave.setNrLocuri(rs.getInt("NRLOCURI"));
 					grave.setAni(rs.getInt("ANI"));
-					grave.setDataIncep(rs.getDate("DATAINCEP"));
-					grave.setDataExp(rs.getDate("DATAEXP"));
+					grave.setDataIncep(DateUtil.toLocalDateTime(rs.getDate("DATAINCEP")));
+					grave.setDataExp(DateUtil.toLocalDateTime(rs.getDate("DATAEXP")));
 					grave.setNrCh(rs.getString("NR_CH"));
-					grave.setDataCh(rs.getDate("DATA_CH"));
+					grave.setDataCh(DateUtil.toLocalDateTime(rs.getDate("DATA_CH")));
 					grave.setSuma(rs.getBigDecimal("SUMA"));
 					grave.setContract(rs.getString("CONTRACT"));
 					grave.setNrContr(rs.getString("NR_CONTR"));
-					grave.setDataContr(rs.getDate("DATA_CONTR"));
+					grave.setDataContr(DateUtil.toLocalDateTime(rs.getDate("DATA_CONTR")));
 					grave.setInd(rs.getInt("IND"));
 					grave.setStare(rs.getString("STARE"));
-					grave.setDataStare(rs.getDate("DATA_STARE"));
+					grave.setDataStare(DateUtil.toLocalDateTime(rs.getDate("DATA_STARE")));
 					grave.setTranse(rs.getInt("TRANSE"));
 					grave.setCodCs(rs.getInt("COD_CS"));
 					grave.setMatricola(rs.getInt("MATRICOLA"));
