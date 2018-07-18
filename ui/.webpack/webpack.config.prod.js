@@ -15,7 +15,8 @@ webpackConfig.plugins = [
   plugins.occurrenceOrderPlugin,
   plugins.extractTextPlugin,
   plugins.commonsChunkPlugin,
-  plugins.htmlWebpackPlugin
+  plugins.htmlWebpackPlugin,
+  plugins.compressionPlugin
 ];
 
 module.exports = webpackConfig;

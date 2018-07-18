@@ -2,13 +2,14 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   extractTextPlugin: new ExtractTextPlugin({
     filename: 'style.[hash:8].css',
     allChunks: true
   }),
-  
+
   htmlWebpackPlugin: new HtmlWebpackPlugin({
     template: './src/index.html',
     files: {
@@ -18,7 +19,7 @@ module.exports = {
   }),
 
   commonsChunkPlugin: new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor', 
+    name: 'vendor',
     filename: 'vendor.[hash:8].js',
     minChunks: Infinity
   }),
@@ -44,5 +45,13 @@ module.exports = {
     }
   }),
 
-  occurrenceOrderPlugin: new webpack.optimize.OccurrenceOrderPlugin()
+  occurrenceOrderPlugin: new webpack.optimize.OccurrenceOrderPlugin(),
+
+  compressionPlugin: new CompressionPlugin({
+    asset: "[path].gz[query]",
+    algorithm: "gzip",
+    test: /\.js$|\.css$|\.html$/,
+    threshold: 10240,
+    minRatio: 0.8
+  })
 };
