@@ -1,4 +1,4 @@
 {
   "presets": ["env", "react", "stage-3"],
-  "plugins": ["ramda", "transform-decorators-legacy", "transform-class-properties", "react-hot-loader/babel"]
+  "plugins": ["ramda", "transform-decorators-legacy", "transform-class-properties"]
 }

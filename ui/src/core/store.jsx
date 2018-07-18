@@ -3,18 +3,17 @@ import createSagaMiddleware, { END } from 'redux-saga';
 
 import { rootReducer } from './reducers';
 import { rootSaga } from './sagas';
-import DevTools from './dev-tools';
 
 const configureStore = () => {
   // eslint-disable-next-line
   const initialState = window.__INITIAL_STATE__;
 
   const sagaMiddleware = createSagaMiddleware();
-  const enhancer = process.env.NODE_ENV === 'production' ?
-    applyMiddleware(sagaMiddleware) :
-    compose(
-      applyMiddleware(sagaMiddleware),
-      DevTools.instrument()
+  const enhancer = process.env.NODE_ENV === 'production'
+    ? applyMiddleware(sagaMiddleware)
+    // eslint-disable-next-line
+    : (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose)(
+      applyMiddleware(sagaMiddleware)
     );
 
   const store = createStore(
