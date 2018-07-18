@@ -7,11 +7,9 @@ import AppView from '../app/app-view';
 
 const Root = () => (
   <Provider store={store}>
-    <React.Fragment>
-      <Router>
-        <AppView />
-      </Router>
-    </React.Fragment>
+    <Router>
+      <AppView />
+    </Router>
   </Provider>
 );
 

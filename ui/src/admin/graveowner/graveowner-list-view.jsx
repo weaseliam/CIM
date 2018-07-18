@@ -148,8 +148,10 @@ class GraveownerListView extends Component {
       if (input.value !== '') {
         // TODO find better solution for filter reset
         // implement as controlled component, do not couple state to this view
-        // eslint-disable-next-line no-underscore-dangle
-        input._textElement.value = '';
+        /* eslint-disable no-underscore-dangle */
+        input._latestValue = '';
+        input._latestValidateValue = '';
+        /* eslint-enable */
         input.state.value = '';
         didReset = true;
       }
