@@ -7,7 +7,7 @@ import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { graveownerListSelector } from './graveowner-selector';
 import { fetchGraveownerListAction } from './graveowner-actions';
 import { debounce } from '../../core/util';
-import withI18n from '../../i18n/i18n-hoc';
+import withI18n from '../../i18n/i18n-decorator';
 import * as i18nc from '../../i18n/i18n-constants';
 import TableTitle from '../../components/table-title';
 

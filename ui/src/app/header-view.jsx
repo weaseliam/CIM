@@ -6,7 +6,7 @@ import { withRouter } from 'react-router';
 
 import { logOutUserAction } from './app-actions';
 import { appUserSelector } from './app-selector';
-import withI18n from '../i18n/i18n-hoc';
+import withI18n from '../i18n/i18n-decorator';
 import { changeLanguageAction } from '../i18n/i18n-actions';
 import LoaderView from './loader-view';
 import * as i18nc from '../i18n/i18n-constants';
