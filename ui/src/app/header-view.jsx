@@ -64,7 +64,7 @@ class HeaderView extends Component {
     // language options
     const items = i18n.languages.map(language => ({
       key: language,
-      name: t(`${i18nc.HEADER_USERMENU_LANGUAGE}.${language}`),
+      text: t(`${i18nc.HEADER_USERMENU_LANGUAGE}.${language}`),
       disabled: i18n.language === language,
       onClick: this.handleChangeLanguage
     }));
@@ -78,7 +78,7 @@ class HeaderView extends Component {
     // logout
     items.push({
       key: 'logout',
-      name: t(i18nc.HEADER_USERMENU_LOGOUT),
+      text: t(i18nc.HEADER_USERMENU_LOGOUT),
       onClick: this.handleLogout
     });
 
@@ -91,26 +91,26 @@ class HeaderView extends Component {
 
     // admin
     items.push({
-      name: t(i18nc.HEADER_ADMINISTRATION),
+      text: t(i18nc.HEADER_ADMINISTRATION),
       key: 'admin',
       itemType: ContextualMenuItemType.Header,
       iconProps: {
         iconName: 'Admin'
       },
       disabled: this.getSelectedPage() === 'admin',
-      onClick: this.handleSelectPage
+      onClick: e => this.handleSelectPage(e, items[0])
     });
 
     // report
     items.push({
-      name: t(i18nc.HEADER_REPORTS),
+      text: t(i18nc.HEADER_REPORTS),
       key: 'report',
       itemType: ContextualMenuItemType.Header,
       iconProps: {
         iconName: 'Chart'
       },
       disabled: this.getSelectedPage() === 'report',
-      onClick: this.handleSelectPage
+      onClick: e => this.handleSelectPage(e, items[1])
     });
 
     return items;
@@ -122,7 +122,7 @@ class HeaderView extends Component {
 
     // user menu
     farItems.push({
-      name: user.userName,
+      text: user.userName,
       key: 'userMenu',
       itemType: ContextualMenuItemType.Header,
       iconProps: {
