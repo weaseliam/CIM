@@ -57,7 +57,7 @@ export const format = (message, params) => {
 export const translate = (messages, code, params) => {
   if (isNilOrEmpty(code)) {
     // eslint-disable-next-line no-console
-    console.error('Invalid code provided for translation');
+    console.error('Empty code provided for translation');
     return code;
   }
 
