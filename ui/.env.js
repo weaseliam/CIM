@@ -1,0 +1,8 @@
+module.exports = {
+  DEV_SERVER_HOST: '127.0.0.1',
+  DEV_SERVER_PORT: '3000',
+  WEB_SERVER_SCHEME: 'http',
+  WEB_SERVER_HOST: '127.0.0.1',
+  WEB_SERVER_PORT: '8080',
+  WEB_SERVER_PATH: ''
+}

@@ -1,10 +1,6 @@
 const webpackConfig = require('./webpack.config.base');
 const plugins = require('./webpack.plugins');
-
-const HOST = '127.0.0.1';
-const PORT = '3000';
-const SERVER_HOST = HOST;
-const SERVER_PORT = '8080';
+const envConfig = require('../.env.js');
 
 webpackConfig.devtool = 'inline-source-map';
 
@@ -20,8 +16,8 @@ webpackConfig.devServer = {
   hot: true,
   inline: true,
   historyApiFallback: true,
-  port: PORT,
-  host: HOST,
+  host: envConfig.DEV_SERVER_HOST,
+  port: envConfig.DEV_SERVER_PORT,
   stats: {
     assets: false,
     colors: true,
@@ -33,8 +29,8 @@ webpackConfig.devServer = {
   },
   proxy: {
     '/': {
-      target: `http://${SERVER_HOST}:${SERVER_PORT}`,
-      secure: false
+      target: `${envConfig.WEB_SERVER_SCHEME}://${envConfig.WEB_SERVER_HOST}:${envConfig.WEB_SERVER_PORT}/${envConfig.WEB_SERVER_PATH}`,
+      secure: envConfig.WEB_SERVER_SCHEME === 'https'
     }
   }
 };
