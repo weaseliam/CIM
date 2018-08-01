@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { API_PATH } from '../core/constants';
+import { API_SESSION, LOGOUT_URL } from '../core/constants';
 
 /**
  * Get current app session REST call.
@@ -8,7 +8,7 @@ import { API_PATH } from '../core/constants';
  * @returns {Promise}
  */
 export const getAppSession = () =>
-  axios.get(`${API_PATH}/session`)
+  axios.get(API_SESSION)
     .then(response => response.data);
 
 /**
@@ -17,4 +17,4 @@ export const getAppSession = () =>
  * @returns {Promise}
  */
 export const logOutUser = () =>
-  axios.post('/logout');
+  axios.post(LOGOUT_URL);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { API_PATH } from '../../core/constants';
+import { API_GRAVEOWNER } from '../../core/constants';
 
 /**
  * Fetch graveowners REST call.
@@ -12,7 +12,7 @@ export const fetchGraveownerList = ({
     id, cnp, nume, prenume, localitate, judet, adresa
   }
 }) =>
-  axios.get(`${API_PATH}/graveowner/list`, {
+  axios.get(API_GRAVEOWNER, {
     params: {
       page, size, sort, id, cnp, nume, prenume, localitate, judet, adresa
     }

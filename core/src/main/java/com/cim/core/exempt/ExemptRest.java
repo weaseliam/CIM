@@ -20,7 +20,7 @@ public class ExemptRest
 {
 	private static final Logger	log	= LoggerFactory.getLogger(ExemptRest.class);
 
-	private ExemptService	exemptService;
+	private ExemptService		exemptService;
 
 	@Autowired
 	public ExemptRest(@NotNull ExemptService exemptService)

@@ -28,7 +28,7 @@ public class GraveownerRest
 		this.graveownerService = graveownerService;
 	}
 
-	@GetMapping(path = "/list")
+	@GetMapping
 	public ResponseEntity<GraveownerListUi> list(
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "100") int size,
