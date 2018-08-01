@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 public class GraveUi
 {
 	private Long			id;
-	private String			cimitir;
+	private Long			cimitirId;
 	private Integer			codZona;
 	private String			sector;
 	private String			rand;
@@ -20,7 +20,7 @@ public class GraveUi
 	private LocalDateTime	dataIncep;
 	private LocalDateTime	dataExp;
 	private Integer			codCs;
-	private String			scutit;
+	private Long			scutitId;
 	private String			nrCh;
 	private LocalDateTime	dataCh;
 	private BigDecimal		suma;
@@ -36,7 +36,7 @@ public class GraveUi
 	public GraveUi(@NotNull Grave grave)
 	{
 		id = grave.getId();
-		cimitir = grave.getGraveyard().getNume();
+		cimitirId = grave.getGraveyardId();
 		codZona = grave.getCodZona();
 		sector = grave.getSector();
 		rand = grave.getRind();
@@ -48,7 +48,7 @@ public class GraveUi
 		dataIncep = grave.getDataIncep();
 		dataExp = grave.getDataExp();
 		codCs = grave.getCodCs();
-		scutit = grave.getExempt().getNume();
+		scutitId = grave.getExemptId();
 		nrCh = grave.getNrCh();
 		dataCh = grave.getDataCh();
 		suma = grave.getSuma();
@@ -68,14 +68,14 @@ public class GraveUi
 		this.id = id;
 	}
 
-	public String getCimitir()
+	public Long getCimitirId()
 	{
-		return cimitir;
+		return cimitirId;
 	}
 
-	public void setCimitir(String cimitir)
+	public void setCimitirId(Long cimitirId)
 	{
-		this.cimitir = cimitir;
+		this.cimitirId = cimitirId;
 	}
 
 	public Integer getCodZona()
@@ -188,14 +188,14 @@ public class GraveUi
 		this.codCs = codCs;
 	}
 
-	public String getScutit()
+	public Long getScutitId()
 	{
-		return scutit;
+		return scutitId;
 	}
 
-	public void setScutit(String scutit)
+	public void setScutitId(Long scutitId)
 	{
-		this.scutit = scutit;
+		this.scutitId = scutitId;
 	}
 
 	public String getNrCh()
@@ -271,10 +271,10 @@ public class GraveUi
 	@Override
 	public String toString()
 	{
-		return "GraveUi [id=" + id + ", cimitir=" + cimitir + ", codZona=" + codZona + ", sector=" + sector + ", rand="
+		return "GraveUi [id=" + id + ", cimitir=" + cimitirId + ", codZona=" + codZona + ", sector=" + sector + ", rand="
 				+ rand + ", pozitie=" + pozitie + ", nrLocuri=" + nrLocuri + ", ani=" + ani + ", stare=" + stare
 				+ ", dataStare=" + dataStare + ", dataIncep=" + dataIncep + ", dataExp=" + dataExp + ", codCs=" + codCs
-				+ ", scutit=" + scutit + ", nrCh=" + nrCh + ", dataCh=" + dataCh + ", suma=" + suma + ", nrContr="
+				+ ", scutit=" + scutitId + ", nrCh=" + nrCh + ", dataCh=" + dataCh + ", suma=" + suma + ", nrContr="
 				+ nrContr + ", dataContr=" + dataContr + ", transe=" + transe + ", matricola=" + matricola + "]";
 	}
 }
