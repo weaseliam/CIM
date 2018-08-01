@@ -35,4 +35,12 @@ public class ExemptService
 	{
 		return exemptRepository.findFirstByCod(cod);
 	}
+
+	public List<Exempt> list()
+	{
+		List<Exempt> exempts = new ArrayList<>();
+		exemptRepository.findAll().forEach(exempts::add);
+
+		return exempts;
+	}
 }
