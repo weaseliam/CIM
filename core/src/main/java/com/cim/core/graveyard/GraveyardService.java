@@ -35,4 +35,12 @@ public class GraveyardService
 	{
 		return graveyardRepository.findFirstByNume(nume);
 	}
+
+	public List<Graveyard> list()
+	{
+		List<Graveyard> graveyards = new ArrayList<>();
+		graveyardRepository.findAll().forEach(graveyards::add);
+
+		return graveyards;
+	}
 }
