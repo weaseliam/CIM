@@ -1,5 +1,6 @@
 .centerPanel {
   display: flex;
+  flex-direction: column;
   flex-grow: 5;
   min-height: 500px;
 }

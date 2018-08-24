@@ -4,25 +4,25 @@ import { Table, Column, AutoSizer, SortDirection, SortIndicator } from 'react-vi
 import { isNil, keys, equals } from 'ramda';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 
-import { graveownerListSelector } from './graveowner-selector';
-import { fetchGraveownerListAction } from './graveowner-actions';
+import { graveownerListSelector, graveownerSelectedIndexSelector } from './graveowner-selector';
+import { fetchGraveownerListAction, setGraveownerListSelectedIndexAction } from './graveowner-actions';
 import { debounce } from '../../core/util';
 import withI18n from '../../i18n/i18n-decorator';
 import * as i18nc from '../../i18n/i18n-constants';
 import TableTitle from '../../components/table-title';
+import { fetchGraveListAction } from '../grave/grave-actions';
+import { TABLE_COL_WIDTH } from '../../core/constants';
 
 import styles from './graveowner-list-view.scss';
+import tableStyles from '../../styles/table-styles.scss';
 
-const colWidth = {
-  XS: 50,
-  S: 100,
-  M: 150,
-  L: 200,
-  XL: 400
-};
+const TABLE_TITLE_HEIGHT = 30;
+const TABLE_HEADER_HEIGHT = 65;
+const TABLE_ROW_HEIGHT = 35;
 
 const mapStateToProps = state => ({
-  graveownerList: graveownerListSelector(state)
+  graveownerList: graveownerListSelector(state),
+  graveownerListSelectedIndex: graveownerSelectedIndexSelector(state)
 });
 
 @withI18n
@@ -51,12 +51,12 @@ class GraveownerListView extends Component {
 
   handleRowClassName = ({ index }) => {
     if (index < 0) {
-      return styles.tableHeaderRow;
+      return tableStyles.tableHeaderRow;
     }
 
     return index % 2 === 0
-      ? styles.tableEvenRow
-      : styles.tableOddRow;
+      ? tableStyles.tableEvenRow
+      : tableStyles.tableOddRow;
   }
 
   handleTableScroll = ({ clientHeight, scrollHeight, scrollTop }) => {
@@ -74,6 +74,16 @@ class GraveownerListView extends Component {
     if (page < totalPages) {
       this.props.dispatch(fetchGraveownerListAction.trigger({ page: page + 1, sort, filter }));
     }
+  }
+
+  handleRowClick = ({ index, rowData }) => {
+    const { graveownerListSelectedIndex } = this.props;
+    if (graveownerListSelectedIndex === index) {
+      return;
+    }
+
+    this.props.dispatch(setGraveownerListSelectedIndexAction.success(index));
+    this.props.dispatch(fetchGraveListAction.trigger({ graveownerId: rowData.id }));
   }
 
   handleTableNoRows = () => {
@@ -192,7 +202,7 @@ class GraveownerListView extends Component {
               <TableTitle
                 results={totalResults || 0}
                 width={width}
-                height={30}
+                height={TABLE_TITLE_HEIGHT}
                 onResetFilter={this.handleTableTitleResetFilter}
                 i18n={{
                   results: t(i18nc.GRAVEOWNER_LIST_TABLE_TITLE_RESULTS),
@@ -201,60 +211,61 @@ class GraveownerListView extends Component {
               />
               <Table
                 ref={(ref) => { this.tableRef = ref; }}
-                width={width}
-                height={height - 30}
-                headerHeight={65}
-                rowHeight={35}
-                headerClassName={styles.tableHeaderColumn}
+                headerClassName={tableStyles.tableHeaderColumn}
                 rowClassName={this.handleRowClassName}
+                width={width}
+                height={height - TABLE_TITLE_HEIGHT}
+                headerHeight={TABLE_HEADER_HEIGHT}
+                rowHeight={TABLE_ROW_HEIGHT}
                 rowCount={graveowners.length}
                 rowGetter={({ index }) => graveowners[index]}
-                onScroll={this.handleTableScroll}
                 noRowsRenderer={this.handleTableNoRows}
                 sort={this.handleTableSort}
                 sortBy={sortBy}
                 sortDirection={sortDirection}
+                onScroll={this.handleTableScroll}
+                onRowClick={this.handleRowClick}
               >
                 <Column
                   label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_ID)}
                   dataKey="id"
-                  width={colWidth.S}
+                  width={TABLE_COL_WIDTH.S}
                   headerRenderer={this.inputHeaderRenderer}
                 />
                 <Column
                   label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_CNP)}
                   dataKey="cnp"
-                  width={colWidth.L}
+                  width={TABLE_COL_WIDTH.L}
                   headerRenderer={this.inputHeaderRenderer}
                 />
                 <Column
                   label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_NUME)}
                   dataKey="nume"
-                  width={colWidth.L}
+                  width={TABLE_COL_WIDTH.L}
                   headerRenderer={this.inputHeaderRenderer}
                 />
                 <Column
                   label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_PRENUME)}
                   dataKey="prenume"
-                  width={colWidth.L}
+                  width={TABLE_COL_WIDTH.L}
                   headerRenderer={this.inputHeaderRenderer}
                 />
                 <Column
                   label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_LOC)}
                   dataKey="localitate"
-                  width={colWidth.M}
+                  width={TABLE_COL_WIDTH.M}
                   headerRenderer={this.inputHeaderRenderer}
                 />
                 <Column
                   label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_JUD)}
                   dataKey="judet"
-                  width={colWidth.S}
+                  width={TABLE_COL_WIDTH.S}
                   headerRenderer={this.inputHeaderRenderer}
                 />
                 <Column
                   label={t(i18nc.GRAVEOWNER_LIST_TABLE_HEADER_ADR)}
                   dataKey="adresa"
-                  width={colWidth.XL}
+                  width={TABLE_COL_WIDTH.XL}
                   headerRenderer={this.inputHeaderRenderer}
                 />
               </Table>

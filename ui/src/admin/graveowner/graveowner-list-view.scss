@@ -1,32 +1,8 @@
 .graveownerList {
-  flex-grow: 1;
+  flex-grow: 5;
   overflow: hidden;
-}
-
-.tableHeaderColumn {
-  text-transform: none;
-
-  div {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
 }
 
 .tableHeaderColumnInput {
   padding: 0 2px 0 2px;
-}
-
-.tableHeaderRow,
-.tableEvenRow,
-.tableOddRow {
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.tableHeaderRow {
-  background-color: #f1f1f1;
-}
-
-.tableOddRow {
-  background-color: #fafafa;
 }

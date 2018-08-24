@@ -1,7 +1,8 @@
-import { fetchGraveownerListAction } from './graveowner-actions';
+import { fetchGraveownerListAction, setGraveownerListSelectedIndexAction } from './graveowner-actions';
 
 export const INITIAL_STATE = {
-  list: {}
+  list: {},
+  selectedIndex: null
 };
 
 export const graveownerReducer = (state = INITIAL_STATE, action) => {
@@ -19,6 +20,13 @@ export const graveownerReducer = (state = INITIAL_STATE, action) => {
       }
 
       return newState;
+    }
+
+    case setGraveownerListSelectedIndexAction.SUCCESS: {
+      return {
+        ...state,
+        selectedIndex: action.payload
+      };
     }
 
     default:

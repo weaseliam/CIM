@@ -1,7 +1,8 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
+import { isNil } from 'ramda';
 
 import { fetchGraveownerList } from './graveowner-api';
-import { fetchGraveownerListAction } from './graveowner-actions';
+import { fetchGraveownerListAction, setGraveownerListSelectedIndexAction } from './graveowner-actions';
 import { setAppLoadingContentAction } from '../../app/app-actions';
 
 /**
@@ -11,12 +12,12 @@ function* fetchGraveownerListSaga(action) {
   try {
     yield put(setAppLoadingContentAction.success(true));
 
-    const {
-      page = 1,
-      size = 100,
-      sort = 'id',
-      filter
-    } = action.payload || {};
+    const { page, size, sort, filter } = action.payload || {};
+
+    // reset selected index on graveowners refresh
+    if (isNil(page) || page === 1) {
+      yield put(setGraveownerListSelectedIndexAction.success(null));
+    }
 
     const graveownerList = yield call(fetchGraveownerList, {
       page, size, sort, filter: filter || {}

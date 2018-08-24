@@ -29,7 +29,7 @@ const defaultProps = {
 };
 
 /**
- * Table title component
+ * Table title component that displays the number of results, title and reset option
  */
 const TableTitle = ({ i18n, results, title, onResetFilter, className, width, height }) => (
   <div className={classNames(styles.container, className)} style={{ width, height }}>
