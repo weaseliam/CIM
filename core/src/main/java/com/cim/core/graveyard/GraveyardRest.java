@@ -34,9 +34,9 @@ public class GraveyardRest
 		log.debug("Fetching graveyards");
 
 		List<Graveyard> graveyards = graveyardService.list();
-		GraveyardListUi uiGraveyars = GraveyardAssembler.toResource(graveyards);
+		GraveyardListUi uiGraveyards = GraveyardAssembler.toResource(graveyards);
 
-		log.debug("Response {}", uiGraveyars);
-		return ResponseEntity.ok(uiGraveyars);
+		log.debug("Response {}", uiGraveyards);
+		return ResponseEntity.ok(uiGraveyards);
 	}
 }
