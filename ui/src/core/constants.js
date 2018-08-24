@@ -5,6 +5,8 @@ export const API_DICTIONARY = `${API_PATH}/dictionary`;
 export const API_SESSION = `${API_PATH}/session`;
 export const API_GRAVEOWNER = `${API_PATH}/graveowner`;
 export const API_GRAVE = `${API_PATH}/grave`;
+export const API_EXEMPT = `${API_PATH}/exempt`;
+export const API_GRAVEYARD = `${API_PATH}/graveyard`;
 
 // table constants
 export const TABLE_COL_WIDTH = {

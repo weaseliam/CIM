@@ -2,12 +2,6 @@ import axios from 'axios';
 
 import { API_DICTIONARY } from '../core/constants';
 
-/**
- * Fetch dictionary REST call.
- *
- * @param {string} language
- * @returns {Promise}
- */
 export const fetchDictionary = (language) => {
   const languageParam = language ? `/${language}` : '';
 

@@ -4,9 +4,6 @@ import { setAppLoadingContentAction } from '../../app/app-actions';
 import { fetchGraveListAction } from './grave-actions';
 import { fetchGraveList } from './grave-api';
 
-/**
- * Fetch grave list saga.
- */
 function* fetchGraveListSaga(action) {
   try {
     yield put(setAppLoadingContentAction.success(true));

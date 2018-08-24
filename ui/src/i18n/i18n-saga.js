@@ -5,9 +5,6 @@ import { fetchDictionary, fetchSupportedLanguages } from './i18n-api';
 import { currentLanguageSelector } from './i18n-selector';
 import { setAppLoadingAction } from '../app/app-actions';
 
-/**
- * Change app language saga
- */
 export function* changeLanguageSaga(action) {
   try {
     yield put(setAppLoadingAction.success(true));
@@ -24,9 +21,6 @@ export function* changeLanguageSaga(action) {
   }
 }
 
-/**
- * Fetch supported languages saga
- */
 export function* fetchSupportedLanguagesSaga() {
   const supportedLanguages = yield call(fetchSupportedLanguages);
   yield put(fetchSupportedLanguagesAction.success(supportedLanguages));

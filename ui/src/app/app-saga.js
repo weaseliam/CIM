@@ -8,31 +8,26 @@ import {
   setAppLoadingAction
 } from './app-actions';
 import { changeLanguageSaga, fetchSupportedLanguagesSaga } from '../i18n/i18n-saga';
+import { fetchExemptMapSaga } from '../admin/exempt/exempt-saga';
+import { fetchGraveyardMapSaga } from '../admin/graveyard/graveyard-saga';
 
-/**
- * Fetch current app session saga.
- */
 function* fetchAppSessionSaga() {
   const session = yield call(getAppSession);
   yield put(fetchAppSessionAction.success(session));
 }
 
-/**
- * Bootstrap application saga.
- */
 function* bootstrapAppSaga() {
   yield all([
     call(fetchAppSessionSaga),
     call(changeLanguageSaga, {}),
-    call(fetchSupportedLanguagesSaga)
+    call(fetchSupportedLanguagesSaga),
+    call(fetchExemptMapSaga),
+    call(fetchGraveyardMapSaga)
   ]);
 
   yield put(bootstrapAppAction.success());
 }
 
-/**
- * Log out current user saga.
- */
 function* logOutUserSaga() {
   try {
     yield put(setAppLoadingAction.success(true));
