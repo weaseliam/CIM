@@ -50,13 +50,20 @@ class GraveownerListView extends Component {
   }
 
   handleRowClassName = ({ index }) => {
-    if (index < 0) {
+    if (index === -1) {
       return tableStyles.tableHeaderRow;
     }
 
-    return index % 2 === 0
+    let className = index % 2 === 0
       ? tableStyles.tableEvenRow
       : tableStyles.tableOddRow;
+
+    const { graveownerListSelectedIndex } = this.props;
+    if (graveownerListSelectedIndex === index) {
+      className = `${className} ${tableStyles.tableSelectedRow}`;
+    }
+
+    return className;
   }
 
   handleTableScroll = ({ clientHeight, scrollHeight, scrollTop }) => {

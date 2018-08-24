@@ -27,7 +27,7 @@ const mapStateToProps = state => ({
 @connect(mapStateToProps)
 class GraveListView extends Component {
   handleRowClassName = ({ index }) => {
-    if (index < 0) {
+    if (index === -1) {
       return tableStyles.tableHeaderRow;
     }
 
