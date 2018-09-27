@@ -52,7 +52,7 @@ public class GraveownerRest
 		}
 		
 		Page<Graveowner> graveowners = graveownerService.list(page, size, sort, filter);
-		GraveownerListUi uiGraveowners = GraveownerAssembler.toResource(graveowners, sort, filter);
+		GraveownerListUi uiGraveowners = GraveownerAssembler.toUi(graveowners, sort, filter);
 		
 		log.debug("Response {}", uiGraveowners);
 		return ResponseEntity.ok(uiGraveowners);

@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 public class GraveyardAssembler
 {
-	public static GraveyardListUi toResource(@NotNull List<Graveyard> graveyards)
+	public static GraveyardListUi toUi(@NotNull List<Graveyard> graveyards)
 	{
 		GraveyardListUi response = new GraveyardListUi();
 		Map<Long, GraveyardUi> uiGraveyards = graveyards.stream()

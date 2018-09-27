@@ -5,7 +5,7 @@ import com.cim.core.session.user.AppUserUi;
 
 public class SessionAssembler
 {
-	public static SessionUi toResource(AppUser user)
+	public static SessionUi toUi(AppUser user)
 	{
 		AppUserUi uiUser = new AppUserUi(user);
 		SessionUi uiSession = new SessionUi();

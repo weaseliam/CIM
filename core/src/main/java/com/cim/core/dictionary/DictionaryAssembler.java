@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class DictionaryAssembler
 {
-	public static DictionaryUi toResource(String lang, Map<String, String> messages)
+	public static DictionaryUi toUi(String lang, Map<String, String> messages)
 	{
 		DictionaryUi dictionary = new DictionaryUi(lang, messages);
 		

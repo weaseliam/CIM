@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 public class ExemptAssembler
 {
-	public static ExemptListUi toResource(@NotNull List<Exempt> exempts)
+	public static ExemptListUi toUi(@NotNull List<Exempt> exempts)
 	{
 		ExemptListUi response = new ExemptListUi();
 		Map<Long, ExemptUi> uiExempts = exempts.stream()

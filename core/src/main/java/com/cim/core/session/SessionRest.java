@@ -39,7 +39,7 @@ public class SessionRest
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 
-		SessionUi uiSession = SessionAssembler.toResource(user);
+		SessionUi uiSession = SessionAssembler.toUi(user);
 
 		log.debug("Response {}", uiSession);
 		return ResponseEntity.ok(uiSession);

@@ -34,7 +34,7 @@ public class ExemptRest
 		log.debug("Fetching exempts");
 
 		List<Exempt> exempts = exemptService.list();
-		ExemptListUi uiExempts = ExemptAssembler.toResource(exempts);
+		ExemptListUi uiExempts = ExemptAssembler.toUi(exempts);
 
 		log.debug("Response {}", uiExempts);
 		return ResponseEntity.ok(uiExempts);

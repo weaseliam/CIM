@@ -46,7 +46,7 @@ public class GraveRest
 		}
 		
 		Page<Grave> graves = graveService.list(page, size, sort, filter);
-		GraveListUi uiGraves = GraveAssembler.toResource(graves, sort);
+		GraveListUi uiGraves = GraveAssembler.toUi(graves, sort);
 		
 		log.debug("Response {}", uiGraves);
 		return ResponseEntity.ok(uiGraves);

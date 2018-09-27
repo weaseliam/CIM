@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 
 public class GraveAssembler
 {
-	public static GraveListUi toResource(@NotNull Page<Grave> page, String sort)
+	public static GraveListUi toUi(@NotNull Page<Grave> page, String sort)
 	{
 		GraveListUi response = new GraveListUi();
 		response.setPage(page.getNumber() + 1);
