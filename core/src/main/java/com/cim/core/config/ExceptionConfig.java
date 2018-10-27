@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
 import com.cim.core.app.AppException;
-import com.cim.core.app.UiException;
+import com.cim.core.app.ApiException;
 import com.cim.core.dictionary.DictionaryService;
 
 @ControllerAdvice
@@ -34,14 +34,14 @@ public class ExceptionConfig
 	}
 
 	@ExceptionHandler({ Exception.class })
-	public ResponseEntity<UiException> handleGlobalException(Exception e, WebRequest request)
+	public ResponseEntity<ApiException> handleGlobalException(Exception e, WebRequest request)
 	{
 		log.error("Caught exception in global handler", e);
 
 		Exception i18nEx = tryToI18N(e, request.getLocale());
 		HttpStatus httpStatus = computeHttpStatus(e);
 
-		return new ResponseEntity<UiException>(new UiException(i18nEx), httpStatus);
+		return new ResponseEntity<ApiException>(new ApiException(i18nEx), httpStatus);
 	}
 
 	private Exception tryToI18N(Exception e, Locale locale)

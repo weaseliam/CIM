@@ -4,9 +4,14 @@ import java.util.Map;
 
 public class DictionaryAssembler
 {
-	public static DictionaryUi toUi(String lang, Map<String, String> messages)
+	private DictionaryAssembler()
 	{
-		DictionaryUi dictionary = new DictionaryUi(lang, messages);
+		// private constructor
+	}
+	
+	public static ApiDictionary toResource(String lang, Map<String, String> messages)
+	{
+		ApiDictionary dictionary = new ApiDictionary(lang, messages);
 		
 		return dictionary;
 	}

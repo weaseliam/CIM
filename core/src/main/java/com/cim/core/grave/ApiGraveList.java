@@ -2,14 +2,14 @@ package com.cim.core.grave;
 
 import java.util.List;
 
-public class GraveListUi
+public class ApiGraveList
 {
 	private Integer			page;
 	private Integer			size;
 	private String			sort;
 	private Integer			totalPages;
 	private Long			totalResults;
-	private List<GraveUi>	graves;
+	private List<ApiGrave>	graves;
 
 	public Integer getPage()
 	{
@@ -61,12 +61,12 @@ public class GraveListUi
 		this.totalResults = totalResults;
 	}
 
-	public List<GraveUi> getGraves()
+	public List<ApiGrave> getGraves()
 	{
 		return graves;
 	}
 
-	public void setGraves(List<GraveUi> graves)
+	public void setGraves(List<ApiGrave> graves)
 	{
 		this.graves = graves;
 	}

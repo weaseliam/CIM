@@ -29,7 +29,7 @@ public class SessionRest
 	}
 
 	@GetMapping
-	public ResponseEntity<SessionUi> getSession()
+	public ResponseEntity<ApiSession> getSession()
 	{
 		log.debug("Fetching session");
 
@@ -39,9 +39,9 @@ public class SessionRest
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 
-		SessionUi uiSession = SessionAssembler.toUi(user);
+		ApiSession apiSession = SessionAssembler.toResource(user);
 
-		log.debug("Response {}", uiSession);
-		return ResponseEntity.ok(uiSession);
+		log.debug("Response {}", apiSession);
+		return ResponseEntity.ok(apiSession);
 	}
 }

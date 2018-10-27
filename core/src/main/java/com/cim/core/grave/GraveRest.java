@@ -29,7 +29,7 @@ public class GraveRest
 	}
 	
 	@GetMapping
-	public ResponseEntity<GraveListUi> list(
+	public ResponseEntity<ApiGraveList> list(
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "100") int size,
 			@RequestParam(defaultValue = "id") String sort,
@@ -46,9 +46,9 @@ public class GraveRest
 		}
 		
 		Page<Grave> graves = graveService.list(page, size, sort, filter);
-		GraveListUi uiGraves = GraveAssembler.toUi(graves, sort);
+		ApiGraveList apiGraves = GraveAssembler.toResource(graves, sort);
 		
-		log.debug("Response {}", uiGraves);
-		return ResponseEntity.ok(uiGraves);
+		log.debug("Response {}", apiGraves);
+		return ResponseEntity.ok(apiGraves);
 	}
 }

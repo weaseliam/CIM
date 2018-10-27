@@ -1,14 +1,19 @@
 package com.cim.core.session;
 
+import com.cim.core.session.user.ApiAppUser;
 import com.cim.core.session.user.AppUser;
-import com.cim.core.session.user.AppUserUi;
 
 public class SessionAssembler
 {
-	public static SessionUi toUi(AppUser user)
+	public SessionAssembler()
 	{
-		AppUserUi uiUser = new AppUserUi(user);
-		SessionUi uiSession = new SessionUi();
+		// private constructor
+	}
+	
+	public static ApiSession toResource(AppUser user)
+	{
+		ApiAppUser uiUser = new ApiAppUser(user);
+		ApiSession uiSession = new ApiSession();
 
 		uiSession.setUser(uiUser);
 

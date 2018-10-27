@@ -2,17 +2,14 @@ package com.cim.core.session.user;
 
 import javax.validation.constraints.NotNull;
 
-public class AppUserUi
+public class ApiAppUser
 {
 	private String	userName;
-
 	private String	firstName;
-
 	private String	lastName;
-
 	private String	email;
 
-	public AppUserUi(@NotNull AppUser appUser)
+	public ApiAppUser(@NotNull AppUser appUser)
 	{
 		setUserName(appUser.getUserName());
 		setFirstName(appUser.getFirstName());

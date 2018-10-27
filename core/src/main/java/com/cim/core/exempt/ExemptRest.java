@@ -29,14 +29,14 @@ public class ExemptRest
 	}
 
 	@GetMapping
-	public ResponseEntity<ExemptListUi> list()
+	public ResponseEntity<ApiExemptList> list()
 	{
 		log.debug("Fetching exempts");
 
 		List<Exempt> exempts = exemptService.list();
-		ExemptListUi uiExempts = ExemptAssembler.toUi(exempts);
+		ApiExemptList apiExempts = ExemptAssembler.toResource(exempts);
 
-		log.debug("Response {}", uiExempts);
-		return ResponseEntity.ok(uiExempts);
+		log.debug("Response {}", apiExempts);
+		return ResponseEntity.ok(apiExempts);
 	}
 }

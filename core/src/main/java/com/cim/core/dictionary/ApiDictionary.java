@@ -2,17 +2,17 @@ package com.cim.core.dictionary;
 
 import java.util.Map;
 
-public class DictionaryUi
+public class ApiDictionary
 {
 	private String language;
 	
 	private Map<String, String> messages;
 
-	public DictionaryUi()
+	public ApiDictionary()
 	{
 	}
 	
-	public DictionaryUi(String language, Map<String, String> messages)
+	public ApiDictionary(String language, Map<String, String> messages)
 	{
 		this.language = language;
 		this.messages = messages;

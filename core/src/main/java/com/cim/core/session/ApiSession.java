@@ -1,17 +1,17 @@
 package com.cim.core.session;
 
-import com.cim.core.session.user.AppUserUi;
+import com.cim.core.session.user.ApiAppUser;
 
-public class SessionUi
+public class ApiSession
 {
-	private AppUserUi user;
+	private ApiAppUser user;
 
-	public AppUserUi getUser()
+	public ApiAppUser getUser()
 	{
 		return user;
 	}
 
-	public void setUser(AppUserUi user)
+	public void setUser(ApiAppUser user)
 	{
 		this.user = user;
 	}

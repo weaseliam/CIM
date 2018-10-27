@@ -9,18 +9,23 @@ import org.springframework.data.domain.Page;
 
 public class GraveownerAssembler
 {
-	public static GraveownerListUi toUi(@NotNull Page<Graveowner> page, String sort, GraveownerFilter filter)
+	public GraveownerAssembler()
 	{
-		GraveownerListUi response = new GraveownerListUi();
+		// private constructor
+	}
+	
+	public static ApiGraveownerList toResource(@NotNull Page<Graveowner> page, String sort, GraveownerFilter filter)
+	{
+		ApiGraveownerList response = new ApiGraveownerList();
 		response.setPage(page.getNumber() + 1);
 		response.setSize(page.getNumberOfElements());
 		response.setSort(sort);
 		response.setTotalPages(page.getTotalPages());
 		response.setTotalResults(page.getTotalElements());
-		response.setFilter(filter != null ? new GraveownerFilterUi(filter) : null);
+		response.setFilter(filter != null ? new ApiGraveownerFilter(filter) : null);
 		
-		List<GraveownerUi> graveowners = page.getContent().stream()
-				.map(graveowner -> new GraveownerUi(graveowner))
+		List<ApiGraveowner> graveowners = page.getContent().stream()
+				.map(graveowner -> new ApiGraveowner(graveowner))
 				.collect(Collectors.toList());
 		response.setGraveowners(graveowners);
 		

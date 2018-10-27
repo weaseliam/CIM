@@ -2,7 +2,7 @@ package com.cim.core.graveowner;
 
 import javax.validation.constraints.NotNull;
 
-public class GraveownerUi
+public class ApiGraveowner
 {
 	private Long	id;
 	private String	cnp;
@@ -12,11 +12,11 @@ public class GraveownerUi
 	private String	judet;
 	private String	adresa;
 
-	public GraveownerUi()
+	public ApiGraveowner()
 	{
 	}
 	
-	public GraveownerUi(@NotNull Graveowner graveowner)
+	public ApiGraveowner(@NotNull Graveowner graveowner)
 	{
 		id = graveowner.getId();
 		cnp = graveowner.getCnp();

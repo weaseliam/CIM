@@ -2,12 +2,12 @@ package com.cim.core.graveyard;
 
 import javax.validation.constraints.NotNull;
 
-public class GraveyardUi
+public class ApiGraveyard
 {
 	private Long	id;
 	private String	nume;
 
-	public GraveyardUi(@NotNull Graveyard graveyard)
+	public ApiGraveyard(@NotNull Graveyard graveyard)
 	{
 		this.id = graveyard.getId();
 		this.nume = graveyard.getNume();

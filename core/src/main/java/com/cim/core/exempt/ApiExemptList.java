@@ -2,20 +2,20 @@ package com.cim.core.exempt;
 
 import java.util.Map;
 
-public class ExemptListUi
+public class ApiExemptList
 {
-	private Map<Long, ExemptUi> exempts;
+	private Map<Long, ApiExempt> exempts;
 
-	public ExemptListUi()
+	public ApiExemptList()
 	{
 	}
 
-	public Map<Long, ExemptUi> getExempts()
+	public Map<Long, ApiExempt> getExempts()
 	{
 		return exempts;
 	}
 
-	public void setExempts(Map<Long, ExemptUi> exempts)
+	public void setExempts(Map<Long, ApiExempt> exempts)
 	{
 		this.exempts = exempts;
 	}

@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotNull;
 
-public class GraveUi
+public class ApiGrave
 {
 	private Long			id;
 	private Long			cimitirId;
@@ -29,11 +29,11 @@ public class GraveUi
 	private Integer			transe;
 	private Integer			matricola;
 
-	public GraveUi()
+	public ApiGrave()
 	{
 	}
 
-	public GraveUi(@NotNull Grave grave)
+	public ApiGrave(@NotNull Grave grave)
 	{
 		id = grave.getId();
 		cimitirId = grave.getGraveyardId();

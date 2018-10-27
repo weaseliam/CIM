@@ -2,12 +2,12 @@ package com.cim.core.exempt;
 
 import javax.validation.constraints.NotNull;
 
-public class ExemptUi
+public class ApiExempt
 {
 	private Long	id;
 	private String	nume;
 
-	public ExemptUi(@NotNull Exempt exempt)
+	public ApiExempt(@NotNull Exempt exempt)
 	{
 		this.id = exempt.getId();
 		this.nume = exempt.getNume();

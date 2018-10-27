@@ -2,20 +2,20 @@ package com.cim.core.graveyard;
 
 import java.util.Map;
 
-public class GraveyardListUi
+public class ApiGraveyardList
 {
-	private Map<Long, GraveyardUi> graveyards;
+	private Map<Long, ApiGraveyard> graveyards;
 
-	public GraveyardListUi()
+	public ApiGraveyardList()
 	{
 	}
 
-	public Map<Long, GraveyardUi> getGraveyards()
+	public Map<Long, ApiGraveyard> getGraveyards()
 	{
 		return graveyards;
 	}
 
-	public void setGraveyards(Map<Long, GraveyardUi> graveyards)
+	public void setGraveyards(Map<Long, ApiGraveyard> graveyards)
 	{
 		this.graveyards = graveyards;
 	}

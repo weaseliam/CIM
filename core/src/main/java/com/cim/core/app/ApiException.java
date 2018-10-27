@@ -6,7 +6,7 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
-public class UiException
+public class ApiException
 {
 	private String							code;
 	private String[]						params;
@@ -16,12 +16,12 @@ public class UiException
 	private static final String				TIMESTAMP_PATTERN	= "yyyy-MM-dd HH:mm:ss";
 	private static final SimpleDateFormat	TIMESTAMP_FORMAT	= new SimpleDateFormat(TIMESTAMP_PATTERN);
 
-	public UiException()
+	public ApiException()
 	{
 		updateTimestamp();
 	}
 
-	public UiException(@NotNull Throwable t)
+	public ApiException(@NotNull Throwable t)
 	{
 		updateTimestamp();
 

@@ -103,7 +103,7 @@ public class MigrationServiceImpl implements MigrationService
 		long cursor = 0;
 		for (;;)
 		{
-			// TODO use prepared statement
+			// TODO use prepared statement ?
 			List<Graveowner> graveowners = jdbcTemplate.query("SELECT * FROM " + tableName + " LIMIT " + cursor + ", " + batchSize,  new RowMapper<Graveowner>()
 			{
 				@Override
@@ -189,7 +189,7 @@ public class MigrationServiceImpl implements MigrationService
 	{
 		log.debug("Migrating {}", tableName);
 		
-		// TODO use prepared statement
+		// TODO use prepared statement ?
 		List<Graveyard> graveyards = jdbcTemplate.query("SELECT * FROM " + tableName, new RowMapper<Graveyard>()
 		{
 			@Override
@@ -214,7 +214,7 @@ public class MigrationServiceImpl implements MigrationService
 	{
 		log.debug("Migrating {}", tableName);
 		
-		// TODO use prepared statement
+		// TODO use prepared statement ?
 		List<Exempt> exempts = jdbcTemplate.query("SELECT * FROM " + tableName, new RowMapper<Exempt>()
 		{
 			@Override
@@ -237,7 +237,7 @@ public class MigrationServiceImpl implements MigrationService
 		long cursor = 0;
 		for (;;)
 		{
-			// TODO use prepared statement
+			// TODO use prepared statement ?
 			List<Grave> graves = jdbcTemplate.query("SELECT * FROM " + tableName + " LIMIT " + cursor + ", " + batchSize,  new RowMapper<Grave>()
 			{
 				@Override

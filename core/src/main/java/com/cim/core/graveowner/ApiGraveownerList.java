@@ -2,17 +2,17 @@ package com.cim.core.graveowner;
 
 import java.util.List;
 
-public class GraveownerListUi
+public class ApiGraveownerList
 {
 	private Integer				page;
 	private Integer				size;
 	private String				sort;
 	private Integer				totalPages;
 	private Long				totalResults;
-	private List<GraveownerUi>	graveowners;
-	private GraveownerFilterUi	filter;
+	private List<ApiGraveowner>	graveowners;
+	private ApiGraveownerFilter	filter;
 
-	public GraveownerListUi()
+	public ApiGraveownerList()
 	{
 	}
 
@@ -66,22 +66,22 @@ public class GraveownerListUi
 		this.totalResults = totalResults;
 	}
 
-	public List<GraveownerUi> getGraveowners()
+	public List<ApiGraveowner> getGraveowners()
 	{
 		return graveowners;
 	}
 
-	public void setGraveowners(List<GraveownerUi> graveowners)
+	public void setGraveowners(List<ApiGraveowner> graveowners)
 	{
 		this.graveowners = graveowners;
 	}
 
-	public GraveownerFilterUi getFilter()
+	public ApiGraveownerFilter getFilter()
 	{
 		return filter;
 	}
 
-	public void setFilter(GraveownerFilterUi filter)
+	public void setFilter(ApiGraveownerFilter filter)
 	{
 		this.filter = filter;
 	}

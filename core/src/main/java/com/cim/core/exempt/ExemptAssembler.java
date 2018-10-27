@@ -9,12 +9,17 @@ import javax.validation.constraints.NotNull;
 
 public class ExemptAssembler
 {
-	public static ExemptListUi toUi(@NotNull List<Exempt> exempts)
+	private ExemptAssembler()
 	{
-		ExemptListUi response = new ExemptListUi();
-		Map<Long, ExemptUi> uiExempts = exempts.stream()
-				.map(exempt -> new ExemptUi(exempt))
-				.collect(Collectors.toMap(ExemptUi::getId, Function.identity()));
+		// private constructor
+	}
+	
+	public static ApiExemptList toResource(@NotNull List<Exempt> exempts)
+	{
+		ApiExemptList response = new ApiExemptList();
+		Map<Long, ApiExempt> uiExempts = exempts.stream()
+				.map(exempt -> new ApiExempt(exempt))
+				.collect(Collectors.toMap(ApiExempt::getId, Function.identity()));
 		response.setExempts(uiExempts);
 		
 		return response;

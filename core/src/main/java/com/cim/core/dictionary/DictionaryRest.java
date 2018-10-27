@@ -33,14 +33,14 @@ public class DictionaryRest
 	}
 	
 	@GetMapping
-	public ResponseEntity<DictionaryUi> getDictionaryForAcceptLang(
+	public ResponseEntity<ApiDictionary> getDictionaryForAcceptLang(
 			@AcceptLanguage String acceptLanguage)
 	{
 		return getDictionary(acceptLanguage);
 	}
 
 	@GetMapping(value = "/{lang}")
-	public ResponseEntity<DictionaryUi> getDictionaryForLang(
+	public ResponseEntity<ApiDictionary> getDictionaryForLang(
 			@PathVariable("lang") String lang)
 	{
 		return getDictionary(lang);
@@ -57,7 +57,7 @@ public class DictionaryRest
 		return ResponseEntity.ok(supportedLanguages);
 	}
 
-	private ResponseEntity<DictionaryUi> getDictionary(String lang)
+	private ResponseEntity<ApiDictionary> getDictionary(String lang)
 	{
 		log.debug("Fetching dictionary for language {}", lang);
 		
@@ -67,9 +67,9 @@ public class DictionaryRest
 			messages = new HashMap<>();
 		}
 		
-		DictionaryUi uiDictionary = DictionaryAssembler.toUi(lang, messages);
+		ApiDictionary apiDictionary = DictionaryAssembler.toResource(lang, messages);
 		
-		log.debug("Response {}", uiDictionary);
-		return ResponseEntity.ok(uiDictionary);
+		log.debug("Response {}", apiDictionary);
+		return ResponseEntity.ok(apiDictionary);
 	}
 }

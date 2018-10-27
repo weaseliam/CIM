@@ -9,12 +9,17 @@ import javax.validation.constraints.NotNull;
 
 public class GraveyardAssembler
 {
-	public static GraveyardListUi toUi(@NotNull List<Graveyard> graveyards)
+	private GraveyardAssembler()
 	{
-		GraveyardListUi response = new GraveyardListUi();
-		Map<Long, GraveyardUi> uiGraveyards = graveyards.stream()
-				.map(graveyard -> new GraveyardUi(graveyard))
-				.collect(Collectors.toMap(GraveyardUi::getId, Function.identity()));
+		// private constructor
+	}
+	
+	public static ApiGraveyardList toResource(@NotNull List<Graveyard> graveyards)
+	{
+		ApiGraveyardList response = new ApiGraveyardList();
+		Map<Long, ApiGraveyard> uiGraveyards = graveyards.stream()
+				.map(graveyard -> new ApiGraveyard(graveyard))
+				.collect(Collectors.toMap(ApiGraveyard::getId, Function.identity()));
 		response.setGraveyards(uiGraveyards);
 		
 		return response;

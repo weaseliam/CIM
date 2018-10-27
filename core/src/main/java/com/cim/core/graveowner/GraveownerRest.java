@@ -29,7 +29,7 @@ public class GraveownerRest
 	}
 
 	@GetMapping
-	public ResponseEntity<GraveownerListUi> list(
+	public ResponseEntity<ApiGraveownerList> list(
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "100") int size,
 			@RequestParam(defaultValue = "id") String sort,
@@ -52,9 +52,9 @@ public class GraveownerRest
 		}
 		
 		Page<Graveowner> graveowners = graveownerService.list(page, size, sort, filter);
-		GraveownerListUi uiGraveowners = GraveownerAssembler.toUi(graveowners, sort, filter);
+		ApiGraveownerList apiGraveowners = GraveownerAssembler.toResource(graveowners, sort, filter);
 		
-		log.debug("Response {}", uiGraveowners);
-		return ResponseEntity.ok(uiGraveowners);
+		log.debug("Response {}", apiGraveowners);
+		return ResponseEntity.ok(apiGraveowners);
 	}
 }

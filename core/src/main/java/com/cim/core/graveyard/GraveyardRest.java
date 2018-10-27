@@ -29,14 +29,14 @@ public class GraveyardRest
 	}
 
 	@GetMapping
-	public ResponseEntity<GraveyardListUi> list()
+	public ResponseEntity<ApiGraveyardList> list()
 	{
 		log.debug("Fetching graveyards");
 
 		List<Graveyard> graveyards = graveyardService.list();
-		GraveyardListUi uiGraveyards = GraveyardAssembler.toUi(graveyards);
+		ApiGraveyardList apiGraveyards = GraveyardAssembler.toResource(graveyards);
 
-		log.debug("Response {}", uiGraveyards);
-		return ResponseEntity.ok(uiGraveyards);
+		log.debug("Response {}", apiGraveyards);
+		return ResponseEntity.ok(apiGraveyards);
 	}
 }
