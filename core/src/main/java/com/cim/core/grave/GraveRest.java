@@ -38,12 +38,8 @@ public class GraveRest
 		log.debug("Fetching graves for page={}, size={}, sort={}, graveownerId={}", 
 				page, size, sort, graveownerId);
 		
-		GraveFilter filter = null;
-		if (graveownerId != null)
-		{
-			filter = new GraveFilter(graveownerId);
-			log.debug("Using filter {}", filter);			
-		}
+		GraveFilter filter = GraveAssembler.fromResource(graveownerId);
+		log.debug("Using filter {}", filter);			
 		
 		Page<Grave> graves = graveService.list(page, size, sort, filter);
 		ApiGraveList apiGraves = GraveAssembler.toResource(graves, sort);

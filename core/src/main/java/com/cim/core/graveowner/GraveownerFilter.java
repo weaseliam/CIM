@@ -14,18 +14,6 @@ public class GraveownerFilter
 	{
 	}
 
-	public GraveownerFilter(Long id, String cnp, String nume, String prenume, String localitate, String judet,
-			String adresa)
-	{
-		this.id = id;
-		this.cnp = cnp;
-		this.nume = nume;
-		this.prenume = prenume;
-		this.localitate = localitate;
-		this.judet = judet;
-		this.adresa = adresa;
-	}
-
 	public Long getId()
 	{
 		return id;
@@ -101,5 +89,72 @@ public class GraveownerFilter
 	{
 		return "GraveownerFilter [id=" + id + ", cnp=" + cnp + ", nume=" + nume + ", prenume=" + prenume
 				+ ", localitate=" + localitate + ", judet=" + judet + ", adresa=" + adresa + "]";
+	}
+
+	public static class Builder
+	{
+		private Long	id;
+		private String	cnp;
+		private String	nume;
+		private String	prenume;
+		private String	localitate;
+		private String	judet;
+		private String	adresa;
+
+		public Builder setId(Long id)
+		{
+			this.id = id;
+			return this;
+		}
+
+		public Builder setCnp(String cnp)
+		{
+			this.cnp = cnp;
+			return this;
+		}
+
+		public Builder setNume(String nume)
+		{
+			this.nume = nume;
+			return this;
+		}
+
+		public Builder setPrenume(String prenume)
+		{
+			this.prenume = prenume;
+			return this;
+		}
+
+		public Builder setLocalitate(String localitate)
+		{
+			this.localitate = localitate;
+			return this;
+		}
+
+		public Builder setJudet(String judet)
+		{
+			this.judet = judet;
+			return this;
+		}
+
+		public Builder setAdresa(String adresa)
+		{
+			this.adresa = adresa;
+			return this;
+		}
+
+		public GraveownerFilter build()
+		{
+			GraveownerFilter filter = new GraveownerFilter();
+			filter.setId(this.id);
+			filter.setCnp(this.cnp);
+			filter.setNume(this.nume);
+			filter.setPrenume(this.prenume);
+			filter.setLocalitate(this.localitate);
+			filter.setJudet(this.judet);
+			filter.setAdresa(this.adresa);
+
+			return filter;
+		}
 	}
 }

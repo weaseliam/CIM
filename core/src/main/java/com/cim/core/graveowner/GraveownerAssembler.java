@@ -31,4 +31,21 @@ public class GraveownerAssembler
 		
 		return response;
 	}
+
+	public static GraveownerFilter fromResource(Long id, String cnp, String nume, String prenume, String localitate,
+			String judet, String adresa)
+	{
+		if (id == null && cnp == null && nume == null && prenume == null && 
+			localitate == null && judet == null && adresa == null)
+		{
+			return null;
+		}
+
+		GraveownerFilter filter = new GraveownerFilter.Builder()
+				.setId(id).setCnp(cnp).setNume(nume).setPrenume(prenume)
+				.setLocalitate(localitate).setJudet(judet).setAdresa(adresa)
+				.build();
+
+		return filter;
+	}
 }

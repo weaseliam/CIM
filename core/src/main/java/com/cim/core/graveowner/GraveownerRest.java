@@ -43,13 +43,8 @@ public class GraveownerRest
 	{
 		log.debug("Fetching graveowners for page={}, size={}, sort={}", page, size, sort);
 		
-		GraveownerFilter filter = null;
-		if (id != null || cnp != null || nume != null || prenume != null || 
-			localitate != null || judet != null || adresa != null)
-		{
-			filter = new GraveownerFilter(id, cnp, nume, prenume, localitate, judet, adresa);
-			log.debug("Using filter {}", filter);			
-		}
+		GraveownerFilter filter = GraveownerAssembler.fromResource(id, cnp, nume, prenume, localitate, judet, adresa);
+		log.debug("Using filter {}", filter);			
 		
 		Page<Graveowner> graveowners = graveownerService.list(page, size, sort, filter);
 		ApiGraveownerList apiGraveowners = GraveownerAssembler.toResource(graveowners, sort, filter);

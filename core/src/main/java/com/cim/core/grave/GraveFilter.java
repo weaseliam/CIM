@@ -3,14 +3,9 @@ package com.cim.core.grave;
 public class GraveFilter
 {
 	private Long graveownerId;
-	
+
 	public GraveFilter()
 	{
-	}
-	
-	public GraveFilter(Long graveownerId)
-	{
-		this.setGraveownerId(graveownerId);
 	}
 
 	public Long getGraveownerId()
@@ -27,5 +22,24 @@ public class GraveFilter
 	public String toString()
 	{
 		return "GraveFilter [graveownerId=" + graveownerId + "]";
+	}
+
+	public static class Builder
+	{
+		private Long graveownerId;
+
+		public Builder setGraveownerId(Long graveownerId)
+		{
+			this.graveownerId = graveownerId;
+			return this;
+		}
+
+		public GraveFilter build()
+		{
+			GraveFilter filter = new GraveFilter();
+			filter.setGraveownerId(graveownerId);
+
+			return filter;
+		}
 	}
 }

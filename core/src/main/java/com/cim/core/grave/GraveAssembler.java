@@ -30,4 +30,18 @@ public class GraveAssembler
 		
 		return response;
 	}
+
+	public static GraveFilter fromResource(Long graveownerId)
+	{
+		if (graveownerId == null)
+		{
+			return null;
+		}
+
+		GraveFilter filter = new GraveFilter.Builder()
+				.setGraveownerId(graveownerId)
+				.build();
+
+		return filter;
+	}
 }
