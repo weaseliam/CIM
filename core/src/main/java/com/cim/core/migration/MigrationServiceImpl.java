@@ -110,7 +110,7 @@ public class MigrationServiceImpl implements MigrationService
 				public Graveowner mapRow(ResultSet rs, int rowNum) throws SQLException
 				{
 					Graveowner graveowner = new Graveowner();
-					graveowner.setMarca(rs.getLong("MARCA"));
+					graveowner.setOldId(rs.getLong("MARCA"));
 					graveowner.setCnp(rs.getString("CNP"));
 					graveowner.setNume(rs.getString("NUME"));
 					graveowner.setPrenume(rs.getString("PRENUME") != null ? rs.getString("PRENUME") : "");
@@ -244,7 +244,7 @@ public class MigrationServiceImpl implements MigrationService
 				public Grave mapRow(ResultSet rs, int rowNum) throws SQLException
 				{
 					Grave grave = new Grave();
-					grave.setMarca(rs.getLong("MARCA"));
+					grave.setOldId(rs.getLong("MARCA"));
 					grave.setCodZona(rs.getInt("CODZONA"));
 					grave.setSector(rs.getString("SECTOR"));
 					grave.setRind(rs.getString("RIND"));
@@ -287,7 +287,7 @@ public class MigrationServiceImpl implements MigrationService
 					}
 					
 					long marca = rs.getLong("MARCA");
-					Graveowner graveowner = marca > 0 ? graveownerService.findFirstByMarca(marca) : null;
+					Graveowner graveowner = marca > 0 ? graveownerService.findFirstByOldId(marca) : null;
 					if (graveowner != null)
 					{
 						grave.setGraveownerId(graveowner.getId());

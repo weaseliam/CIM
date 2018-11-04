@@ -36,9 +36,9 @@ public class GraveownerService
 		return Collections.unmodifiableList(savedGraveowners);
 	}
 
-	public Graveowner findFirstByMarca(long marca)
+	public Graveowner findFirstByOldId(long id)
 	{
-		return graveownerRepository.findFirstByMarca(marca);
+		return graveownerRepository.findFirstByOldId(id);
 	}
 
 	public Page<Graveowner> list(int page, int size, String sort)

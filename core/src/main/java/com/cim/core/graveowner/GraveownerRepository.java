@@ -6,5 +6,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface GraveownerRepository 
 	extends PagingAndSortingRepository<Graveowner, Long>, JpaSpecificationExecutor<Graveowner>
 {
-	Graveowner findFirstByMarca(Long marca);
+	Graveowner findFirstByOldId(Long id);
 }

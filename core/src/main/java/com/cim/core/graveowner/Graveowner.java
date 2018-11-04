@@ -24,7 +24,7 @@ public class Graveowner
 	@NotNull
 	private String			adresa;
 
-	private Long			marca;
+	private Long			oldId;
 	private String			cnp;
 	private Integer			codLoc;
 	private String			localitate;
@@ -67,14 +67,14 @@ public class Graveowner
 		this.id = id;
 	}
 
-	public Long getMarca()
+	public Long getOldId()
 	{
-		return marca;
+		return oldId;
 	}
 
-	public void setMarca(Long marca)
+	public void setOldId(Long id)
 	{
-		this.marca = marca;
+		this.oldId = id;
 	}
 
 	public String getNume()
@@ -420,8 +420,8 @@ public class Graveowner
 	@Override
 	public String toString()
 	{
-		return "Graveowner [id=" + id + ", nume=" + nume + ", prenume=" + prenume + ", adresa=" + adresa + ", marca="
-				+ marca + ", cnp=" + cnp + ", codLoc=" + codLoc + ", localitate=" + localitate + ", judet=" + judet
+		return "Graveowner [id=" + id + ", nume=" + nume + ", prenume=" + prenume + ", adresa=" + adresa + ", oldId="
+				+ oldId + ", cnp=" + cnp + ", codLoc=" + codLoc + ", localitate=" + localitate + ", judet=" + judet
 				+ ", tara=" + tara + ", str=" + str + ", nr=" + nr + ", bl=" + bl + ", sc=" + sc + ", et=" + et
 				+ ", ap=" + ap + ", codPost=" + codPost + ", tel=" + tel + ", fax=" + fax + ", mail=" + mail
 				+ ", nrContr=" + nrContr + ", dataContr=" + dataContr + ", contract=" + contract + ", act=" + act

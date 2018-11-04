@@ -1,6 +1,6 @@
 CREATE TABLE graveowner (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
-	marca BIGINT,
+	old_id BIGINT,
 	cnp VARCHAR(32),
 	nume VARCHAR(128) NOT NULL,
 	prenume VARCHAR(128) NOT NULL,
@@ -55,9 +55,9 @@ CREATE TABLE exempt (
 
 CREATE TABLE grave (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
-	marca BIGINT,
-	graveowner_id BIGINT NOT NULL,
+	old_id BIGINT,
 	graveyard_id BIGINT NOT NULL,
+	graveowner_id BIGINT NULL,
 	exempt_id BIGINT NULL,
 	cod_zona INT,
 	sector VARCHAR(32),

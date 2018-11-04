@@ -17,14 +17,13 @@ public class Grave
 	private Long			id;
 
 	@NotNull
-	private Long			graveownerId;
-
-	@NotNull
 	private Long			graveyardId;
+
+	private Long			graveownerId;
 
 	private Long			exemptId;
 
-	private Long			marca;
+	private Long			oldId;
 	private Integer			codZona;
 	private String			sector;
 	private String			rind;
@@ -57,14 +56,14 @@ public class Grave
 		this.id = id;
 	}
 
-	public Long getMarca()
+	public Long getOldId()
 	{
-		return marca;
+		return oldId;
 	}
 
-	public void setMarca(Long marca)
+	public void setOldId(Long id)
 	{
-		this.marca = marca;
+		this.oldId = id;
 	}
 
 	public Long getGraveownerId()
@@ -311,7 +310,7 @@ public class Grave
 	public String toString()
 	{
 		return "Grave [id=" + id + ", graveownerId=" + graveownerId + ", graveyardId=" + graveyardId + ", exemptId="
-				+ exemptId + ", marca=" + marca + ", codZona=" + codZona + ", sector=" + sector + ", rind=" + rind
+				+ exemptId + ", oldId=" + oldId + ", codZona=" + codZona + ", sector=" + sector + ", rind=" + rind
 				+ ", pozitie=" + pozitie + ", nrLocuri=" + nrLocuri + ", ani=" + ani + ", dataIncep=" + dataIncep
 				+ ", dataExp=" + dataExp + ", nrCh=" + nrCh + ", dataCh=" + dataCh + ", suma=" + suma + ", contract="
 				+ contract + ", nrContr=" + nrContr + ", dataContr=" + dataContr + ", ind=" + ind + ", stare=" + stare
