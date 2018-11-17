@@ -1,43 +1,51 @@
 package com.cim.core.grave;
 
+import java.util.Collections;
+import java.util.List;
+
 public class GraveFilter
 {
-	private Long graveownerId;
+	private List<Long> contractIds;
 
 	public GraveFilter()
 	{
 	}
 
-	public Long getGraveownerId()
+	public List<Long> getContractIds()
 	{
-		return graveownerId;
+		if (contractIds == null)
+		{
+			return Collections.emptyList();
+		}
+
+		return contractIds;
 	}
 
-	public void setGraveownerId(Long graveownerId)
+	public void setContractIds(List<Long> contractIds)
 	{
-		this.graveownerId = graveownerId;
+		this.contractIds = contractIds;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "GraveFilter [graveownerId=" + graveownerId + "]";
+		return "GraveFilter [contractIds=" + contractIds + "]";
 	}
 
 	public static class Builder
 	{
-		private Long graveownerId;
+		private List<Long> contractIds;
 
-		public Builder setGraveownerId(Long graveownerId)
+		public Builder setContractIds(List<Long> contractIds)
 		{
-			this.graveownerId = graveownerId;
+			this.contractIds = contractIds;
 			return this;
 		}
 
 		public GraveFilter build()
 		{
 			GraveFilter filter = new GraveFilter();
-			filter.setGraveownerId(graveownerId);
+			filter.setContractIds(contractIds);
 
 			return filter;
 		}

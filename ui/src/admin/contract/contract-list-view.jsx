@@ -4,12 +4,12 @@ import { AutoSizer, Table, Column } from 'react-virtualized';
 
 import withI18n from '../../i18n/i18n-decorator';
 import { selectedGraveownerSelector } from '../graveowner/graveowner-selector';
-import { graveListSelector } from './grave-selector';
+import { contractListWithGravesSelector } from './contract-selector';
 import { TABLE_COL_WIDTH } from '../../core/constants';
 import { exemptMapSelector } from '../exempt/exempt-selector';
 import { graveyardMapSelector } from '../graveyard/graveyard-selector';
 
-import styles from './grave-list-view.scss';
+import styles from './contract-list-view.scss';
 import tableStyles from '../../styles/table-styles.scss';
 
 const TABLE_TITLE_HEIGHT = 35;
@@ -17,7 +17,7 @@ const TABLE_HEADER_HEIGHT = 30;
 const TABLE_ROW_HEIGHT = 30;
 
 const mapStateToProps = state => ({
-  graveList: graveListSelector(state),
+  contracts: contractListWithGravesSelector(state),
   selectedGraveowner: selectedGraveownerSelector(state),
   exemptMap: exemptMapSelector(state),
   graveyardMap: graveyardMapSelector(state)
@@ -25,7 +25,7 @@ const mapStateToProps = state => ({
 
 @withI18n
 @connect(mapStateToProps)
-class GraveListView extends Component {
+class ContractListView extends Component {
   handleRowClassName = ({ index }) => {
     if (index === -1) {
       return tableStyles.tableHeaderRow;
@@ -48,16 +48,16 @@ class GraveListView extends Component {
 
   render() {
     const { selectedGraveowner } = this.props;
-    const { graves = [] } = this.props.graveList;
+    const { contracts = [] } = this.props;
 
     return (
-      <div className={styles.graveList}>
+      <div className={styles.contractList}>
         <AutoSizer>
           {({ width, height }) => (
             <React.Fragment>
               <div className={styles.tableTitle}>
                 {selectedGraveowner
-                  ? `${graves.length} grave(s) for ${selectedGraveowner.nume} ${selectedGraveowner.prenume}`
+                  ? `${contracts.length} contract(s) for ${selectedGraveowner.nume} ${selectedGraveowner.prenume}`
                   : 'No selection'}
               </div>
               <Table
@@ -67,50 +67,75 @@ class GraveListView extends Component {
                 height={height - TABLE_TITLE_HEIGHT}
                 headerHeight={TABLE_HEADER_HEIGHT}
                 rowHeight={TABLE_ROW_HEIGHT}
-                rowCount={graves.length}
-                rowGetter={({ index }) => graves[index]}
+                rowCount={contracts.length}
+                rowGetter={({ index }) => contracts[index]}
               >
                 <Column
                   label="Cimitir"
                   dataKey="cimitirId"
                   cellDataGetter={this.formatGraveyardCell}
-                  width={TABLE_COL_WIDTH.XL}
+                  width={TABLE_COL_WIDTH.M}
                 />
                 <Column
                   label="Cod zona"
                   dataKey="codZona"
-                  width={TABLE_COL_WIDTH.M}
+                  width={TABLE_COL_WIDTH.XS}
                 />
                 <Column
                   label="Sector"
                   dataKey="sector"
-                  width={TABLE_COL_WIDTH.M}
+                  width={TABLE_COL_WIDTH.XS}
                 />
                 <Column
                   label="Rand"
                   dataKey="rand"
-                  width={TABLE_COL_WIDTH.M}
+                  width={TABLE_COL_WIDTH.XS}
                 />
                 <Column
                   label="Pozitie"
                   dataKey="pozitie"
-                  width={TABLE_COL_WIDTH.M}
+                  width={TABLE_COL_WIDTH.XS}
+                />
+                <Column
+                  label="NrLocuri"
+                  dataKey="nrLocuri"
+                  width={TABLE_COL_WIDTH.XS}
                 />
                 <Column
                   label="Ani"
                   dataKey="ani"
+                  width={TABLE_COL_WIDTH.XS}
+                />
+                <Column
+                  label="DataIncep"
+                  dataKey="dataIncep"
+                  width={TABLE_COL_WIDTH.M}
+                />
+                <Column
+                  label="DataExp"
+                  dataKey="dataExp"
+                  width={TABLE_COL_WIDTH.M}
+                />
+                <Column
+                  label="NrContr"
+                  dataKey="nrContr"
+                  width={TABLE_COL_WIDTH.S}
+                />
+                <Column
+                  label="DataContr"
+                  dataKey="dataContr"
                   width={TABLE_COL_WIDTH.M}
                 />
                 <Column
                   label="Scutit"
-                  dataKey="scutitId"
+                  dataKey="exemptId"
                   cellDataGetter={this.formatExemptCell}
-                  width={TABLE_COL_WIDTH.L}
+                  width={TABLE_COL_WIDTH.M}
                 />
                 <Column
                   label="Matricola"
                   dataKey="matricola"
-                  width={TABLE_COL_WIDTH.M}
+                  width={TABLE_COL_WIDTH.S}
                 />
               </Table>
             </React.Fragment>
@@ -121,4 +146,4 @@ class GraveListView extends Component {
   }
 }
 
-export default GraveListView;
+export default ContractListView;

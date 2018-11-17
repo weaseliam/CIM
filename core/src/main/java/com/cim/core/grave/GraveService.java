@@ -49,4 +49,9 @@ public class GraveService
 		
 		return graves;
 	}
+	
+	public List<Grave> findAllByOldId(Long id)
+	{
+		return graveRepository.findAllByOldId(id);
+	}
 }

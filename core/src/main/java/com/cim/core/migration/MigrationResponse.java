@@ -13,9 +13,9 @@ public class MigrationResponse
 	{
 	}
 
-	public void addTable(String name, long rows)
+	public void addTable(String source, String target, long rows)
 	{
-		MigrationTable table = new MigrationTable(name, rows);
+		MigrationTable table = new MigrationTable(source, target, rows);
 		getTables().add(table);
 	}
 

@@ -15,9 +15,16 @@ public class GraveSpecifications
 			return specification;
 		}
 		
-		if (filter.getGraveownerId() != null && filter.getGraveownerId() > 0)
+		if (!filter.getContractIds().isEmpty())
 		{
-			specification = SpecificationUtil.equal("graveownerId", filter.getGraveownerId());
+			for (Long contractId : filter.getContractIds())
+			{
+				Specification<Grave> subSpec = SpecificationUtil.equal("contractId", contractId);
+				
+				specification = specification == null 
+						? subSpec 
+						: specification.or(subSpec);
+			}
 		}
 		
 		return specification;

@@ -2,32 +2,40 @@ package com.cim.core.migration;
 
 public class MigrationTable
 {
-	private String	name;
+	private String	source;
+	private String	target;
 	private Long	rows;
 
 	public MigrationTable()
 	{
 	}
 
-	public MigrationTable(String name)
+	public MigrationTable(String source, String target, Long rows)
 	{
-		this.setName(name);
+		super();
+		this.source = source;
+		this.target = target;
+		this.rows = rows;
 	}
 
-	public MigrationTable(String name, long rows)
+	public String getSource()
 	{
-		this.setName(name);
-		this.setRows(rows);
+		return source;
 	}
 
-	public String getName()
+	public void setSource(String source)
 	{
-		return name;
+		this.source = source;
 	}
 
-	public void setName(String name)
+	public String getTarget()
 	{
-		this.name = name;
+		return target;
+	}
+
+	public void setTarget(String target)
+	{
+		this.target = target;
 	}
 
 	public Long getRows()
@@ -35,7 +43,7 @@ public class MigrationTable
 		return rows;
 	}
 
-	public void setRows(long rows)
+	public void setRows(Long rows)
 	{
 		this.rows = rows;
 	}
@@ -43,6 +51,6 @@ public class MigrationTable
 	@Override
 	public String toString()
 	{
-		return "MigrationTable [name=" + name + ", rows=" + rows + "]";
+		return "MigrationTable [source=" + source + ", target=" + target + ", rows=" + rows + "]";
 	}
 }

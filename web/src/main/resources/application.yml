@@ -35,7 +35,7 @@ spring:
       - error
 
   flyway:
-    locations: classpath:db/migration/{vendor}
+    locations: classpath:com/cim/core/db/migration/{vendor}
 
 server:
   servlet:

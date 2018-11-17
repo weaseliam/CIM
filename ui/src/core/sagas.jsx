@@ -4,12 +4,14 @@ import { appSagas } from '../app/app-saga';
 import { i18nSagas } from '../i18n/i18n-saga';
 import { graveownerSagas } from '../admin/graveowner/graveowner-saga';
 import { graveSagas } from '../admin/grave/grave-saga';
+import { contractSagas } from '../admin/contract/contract-saga';
 
 const sagas = [
   appSagas,
   i18nSagas,
   graveownerSagas,
-  graveSagas
+  graveSagas,
+  contractSagas
 ];
 
 export function* rootSaga() {

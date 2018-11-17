@@ -21,7 +21,7 @@ Configutation:
     - name: com.cim
       level: debug
     # hibernate
-#    - name: org.hibernate.SQL
-#      level: debug
-#    - name: org.hibernate.type.descriptor.sql.BasicBinder
-#      level: trace
+    - name: org.hibernate.SQL
+      level: debug
+    - name: org.hibernate.type.descriptor.sql.BasicBinder
+      level: trace

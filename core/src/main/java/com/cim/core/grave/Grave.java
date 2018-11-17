@@ -1,8 +1,5 @@
 package com.cim.core.grave;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,307 +11,184 @@ public class Grave
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long			id;
+	private Long	id;
 
 	@NotNull
-	private Long			graveyardId;
+	private Long	graveyardId;
 
-	private Long			graveownerId;
+	private Long	contractId;
 
-	private Long			exemptId;
-
-	private Long			oldId;
-	private Integer			codZona;
-	private String			sector;
-	private String			rind;
-	private String			pozitie;
-	private Integer			nrLocuri;
-	private Integer			ani;
-	private LocalDateTime	dataIncep;
-	private LocalDateTime	dataExp;
-	private String			nrCh;
-	private LocalDateTime	dataCh;
-	private BigDecimal		suma;
-	private String			contract;
-	private String			nrContr;
-	private LocalDateTime	dataContr;
-	private Integer			ind;
-	private String			stare;
-	private LocalDateTime	dataStare;
-	private Integer			transe;
-	private Integer			codCs;
-	private Integer			matricola;
-	private String			modif;
-
+	private Long	oldId;
+	private Integer	codZona;
+	private String	sector;
+	private String	rind;
+	private String	pozitie;
+	private Integer	nrLocuri;
+	
 	public Long getId()
 	{
 		return id;
 	}
-
-	public void setId(long id)
+	
+	public void setId(Long id)
 	{
 		this.id = id;
 	}
-
-	public Long getOldId()
-	{
-		return oldId;
-	}
-
-	public void setOldId(Long id)
-	{
-		this.oldId = id;
-	}
-
-	public Long getGraveownerId()
-	{
-		return graveownerId;
-	}
-
-	public void setGraveownerId(long graveownerId)
-	{
-		this.graveownerId = graveownerId;
-	}
-
+	
 	public Long getGraveyardId()
 	{
 		return graveyardId;
 	}
-
-	public void setGraveyardId(long graveyardId)
+	
+	public void setGraveyardId(Long graveyardId)
 	{
 		this.graveyardId = graveyardId;
 	}
-
-	public Long getExemptId()
+	
+	public Long getContractId()
 	{
-		return exemptId;
+		return contractId;
 	}
-
-	public void setExemptId(long exemptId)
+	
+	public void setContractId(Long contractId)
 	{
-		this.exemptId = exemptId;
+		this.contractId = contractId;
 	}
-
+	
+	public Long getOldId()
+	{
+		return oldId;
+	}
+	
+	public void setOldId(Long oldId)
+	{
+		this.oldId = oldId;
+	}
+	
 	public Integer getCodZona()
 	{
 		return codZona;
 	}
-
-	public void setCodZona(int codZona)
+	
+	public void setCodZona(Integer codZona)
 	{
 		this.codZona = codZona;
 	}
-
+	
 	public String getSector()
 	{
 		return sector;
 	}
-
+	
 	public void setSector(String sector)
 	{
 		this.sector = sector;
 	}
-
+	
 	public String getRind()
 	{
 		return rind;
 	}
-
+	
 	public void setRind(String rind)
 	{
 		this.rind = rind;
 	}
-
+	
 	public String getPozitie()
 	{
 		return pozitie;
 	}
-
+	
 	public void setPozitie(String pozitie)
 	{
 		this.pozitie = pozitie;
 	}
-
+	
 	public Integer getNrLocuri()
 	{
 		return nrLocuri;
 	}
-
-	public void setNrLocuri(int nrLocuri)
+	
+	public void setNrLocuri(Integer nrLocuri)
 	{
 		this.nrLocuri = nrLocuri;
 	}
 
-	public Integer getAni()
+	@Override
+	public int hashCode()
 	{
-		return ani;
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codZona == null) ? 0 : codZona.hashCode());
+		result = prime * result + ((nrLocuri == null) ? 0 : nrLocuri.hashCode());
+		result = prime * result + ((oldId == null) ? 0 : oldId.hashCode());
+		result = prime * result + ((pozitie == null) ? 0 : pozitie.hashCode());
+		result = prime * result + ((rind == null) ? 0 : rind.hashCode());
+		result = prime * result + ((sector == null) ? 0 : sector.hashCode());
+		return result;
 	}
 
-	public void setAni(int ani)
+	@Override
+	public boolean equals(Object obj)
 	{
-		this.ani = ani;
-	}
-
-	public LocalDateTime getDataIncep()
-	{
-		return dataIncep;
-	}
-
-	public void setDataIncep(LocalDateTime dataIncep)
-	{
-		this.dataIncep = dataIncep;
-	}
-
-	public LocalDateTime getDataExp()
-	{
-		return dataExp;
-	}
-
-	public void setDataExp(LocalDateTime dataExp)
-	{
-		this.dataExp = dataExp;
-	}
-
-	public String getNrCh()
-	{
-		return nrCh;
-	}
-
-	public void setNrCh(String nrCh)
-	{
-		this.nrCh = nrCh;
-	}
-
-	public LocalDateTime getDataCh()
-	{
-		return dataCh;
-	}
-
-	public void setDataCh(LocalDateTime dataCh)
-	{
-		this.dataCh = dataCh;
-	}
-
-	public BigDecimal getSuma()
-	{
-		return suma;
-	}
-
-	public void setSuma(BigDecimal suma)
-	{
-		this.suma = suma;
-	}
-
-	public String getContract()
-	{
-		return contract;
-	}
-
-	public void setContract(String contract)
-	{
-		this.contract = contract;
-	}
-
-	public String getNrContr()
-	{
-		return nrContr;
-	}
-
-	public void setNrContr(String nrContr)
-	{
-		this.nrContr = nrContr;
-	}
-
-	public LocalDateTime getDataContr()
-	{
-		return dataContr;
-	}
-
-	public void setDataContr(LocalDateTime dataContr)
-	{
-		this.dataContr = dataContr;
-	}
-
-	public Integer getInd()
-	{
-		return ind;
-	}
-
-	public void setInd(int ind)
-	{
-		this.ind = ind;
-	}
-
-	public String getStare()
-	{
-		return stare;
-	}
-
-	public void setStare(String stare)
-	{
-		this.stare = stare;
-	}
-
-	public LocalDateTime getDataStare()
-	{
-		return dataStare;
-	}
-
-	public void setDataStare(LocalDateTime dataStare)
-	{
-		this.dataStare = dataStare;
-	}
-
-	public Integer getTranse()
-	{
-		return transe;
-	}
-
-	public void setTranse(int transe)
-	{
-		this.transe = transe;
-	}
-
-	public Integer getCodCs()
-	{
-		return codCs;
-	}
-
-	public void setCodCs(int codCs)
-	{
-		this.codCs = codCs;
-	}
-
-	public Integer getMatricola()
-	{
-		return matricola;
-	}
-
-	public void setMatricola(int matricola)
-	{
-		this.matricola = matricola;
-	}
-
-	public String getModif()
-	{
-		return modif;
-	}
-
-	public void setModif(String modif)
-	{
-		this.modif = modif;
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Grave other = (Grave) obj;
+		if (codZona == null)
+		{
+			if (other.codZona != null)
+				return false;
+		}
+		else if (!codZona.equals(other.codZona))
+			return false;
+		if (nrLocuri == null)
+		{
+			if (other.nrLocuri != null)
+				return false;
+		}
+		else if (!nrLocuri.equals(other.nrLocuri))
+			return false;
+		if (oldId == null)
+		{
+			if (other.oldId != null)
+				return false;
+		}
+		else if (!oldId.equals(other.oldId))
+			return false;
+		if (pozitie == null)
+		{
+			if (other.pozitie != null)
+				return false;
+		}
+		else if (!pozitie.equals(other.pozitie))
+			return false;
+		if (rind == null)
+		{
+			if (other.rind != null)
+				return false;
+		}
+		else if (!rind.equals(other.rind))
+			return false;
+		if (sector == null)
+		{
+			if (other.sector != null)
+				return false;
+		}
+		else if (!sector.equals(other.sector))
+			return false;
+		return true;
 	}
 
 	@Override
 	public String toString()
 	{
-		return "Grave [id=" + id + ", graveownerId=" + graveownerId + ", graveyardId=" + graveyardId + ", exemptId="
-				+ exemptId + ", oldId=" + oldId + ", codZona=" + codZona + ", sector=" + sector + ", rind=" + rind
-				+ ", pozitie=" + pozitie + ", nrLocuri=" + nrLocuri + ", ani=" + ani + ", dataIncep=" + dataIncep
-				+ ", dataExp=" + dataExp + ", nrCh=" + nrCh + ", dataCh=" + dataCh + ", suma=" + suma + ", contract="
-				+ contract + ", nrContr=" + nrContr + ", dataContr=" + dataContr + ", ind=" + ind + ", stare=" + stare
-				+ ", dataStare=" + dataStare + ", transe=" + transe + ", codCs=" + codCs + ", matricola=" + matricola
-				+ ", modif=" + modif + "]";
+		return "Grave [id=" + id + ", graveyardId=" + graveyardId + ", contractId=" + contractId + ", oldId=" + oldId
+				+ ", codZona=" + codZona + ", sector=" + sector + ", rind=" + rind + ", pozitie=" + pozitie
+				+ ", nrLocuri=" + nrLocuri + "]";
 	}
 }

@@ -1,33 +1,17 @@
 package com.cim.core.grave;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-
 import javax.validation.constraints.NotNull;
 
 public class ApiGrave
 {
 	private Long			id;
 	private Long			cimitirId;
+	private Long			contractId;
 	private Integer			codZona;
 	private String			sector;
 	private String			rand;
 	private String			pozitie;
 	private Integer			nrLocuri;
-	private Integer			ani;
-	private String			stare;
-	private LocalDateTime	dataStare;
-	private LocalDateTime	dataIncep;
-	private LocalDateTime	dataExp;
-	private Integer			codCs;
-	private Long			scutitId;
-	private String			nrCh;
-	private LocalDateTime	dataCh;
-	private BigDecimal		suma;
-	private String			nrContr;
-	private LocalDateTime	dataContr;
-	private Integer			transe;
-	private Integer			matricola;
 
 	public ApiGrave()
 	{
@@ -37,25 +21,12 @@ public class ApiGrave
 	{
 		id = grave.getId();
 		cimitirId = grave.getGraveyardId();
+		contractId = grave.getContractId();
 		codZona = grave.getCodZona();
 		sector = grave.getSector();
 		rand = grave.getRind();
 		pozitie = grave.getPozitie();
 		nrLocuri = grave.getNrLocuri();
-		ani = grave.getAni();
-		stare = grave.getStare();
-		dataStare = grave.getDataStare();
-		dataIncep = grave.getDataIncep();
-		dataExp = grave.getDataExp();
-		codCs = grave.getCodCs();
-		scutitId = grave.getExemptId();
-		nrCh = grave.getNrCh();
-		dataCh = grave.getDataCh();
-		suma = grave.getSuma();
-		nrContr = grave.getNrContr();
-		dataContr = grave.getDataContr();
-		transe = grave.getTranse();
-		matricola = grave.getMatricola();
 	}
 
 	public Long getId()
@@ -76,6 +47,16 @@ public class ApiGrave
 	public void setCimitirId(Long cimitirId)
 	{
 		this.cimitirId = cimitirId;
+	}
+
+	public Long getContractId()
+	{
+		return contractId;
+	}
+
+	public void setContractId(Long contractId)
+	{
+		this.contractId = contractId;
 	}
 
 	public Integer getCodZona()
@@ -128,153 +109,10 @@ public class ApiGrave
 		this.nrLocuri = nrLocuri;
 	}
 
-	public Integer getAni()
-	{
-		return ani;
-	}
-
-	public void setAni(Integer ani)
-	{
-		this.ani = ani;
-	}
-
-	public String getStare()
-	{
-		return stare;
-	}
-
-	public void setStare(String stare)
-	{
-		this.stare = stare;
-	}
-
-	public LocalDateTime getDataStare()
-	{
-		return dataStare;
-	}
-
-	public void setDataStare(LocalDateTime dataStare)
-	{
-		this.dataStare = dataStare;
-	}
-
-	public LocalDateTime getDataIncep()
-	{
-		return dataIncep;
-	}
-
-	public void setDataIncep(LocalDateTime dataIncep)
-	{
-		this.dataIncep = dataIncep;
-	}
-
-	public LocalDateTime getDataExp()
-	{
-		return dataExp;
-	}
-
-	public void setDataExp(LocalDateTime dataExp)
-	{
-		this.dataExp = dataExp;
-	}
-
-	public Integer getCodCs()
-	{
-		return codCs;
-	}
-
-	public void setCodCs(Integer codCs)
-	{
-		this.codCs = codCs;
-	}
-
-	public Long getScutitId()
-	{
-		return scutitId;
-	}
-
-	public void setScutitId(Long scutitId)
-	{
-		this.scutitId = scutitId;
-	}
-
-	public String getNrCh()
-	{
-		return nrCh;
-	}
-
-	public void setNrCh(String nrCh)
-	{
-		this.nrCh = nrCh;
-	}
-
-	public LocalDateTime getDataCh()
-	{
-		return dataCh;
-	}
-
-	public void setDataCh(LocalDateTime dataCh)
-	{
-		this.dataCh = dataCh;
-	}
-
-	public BigDecimal getSuma()
-	{
-		return suma;
-	}
-
-	public void setSuma(BigDecimal suma)
-	{
-		this.suma = suma;
-	}
-
-	public String getNrContr()
-	{
-		return nrContr;
-	}
-
-	public void setNrContr(String nrContr)
-	{
-		this.nrContr = nrContr;
-	}
-
-	public LocalDateTime getDataContr()
-	{
-		return dataContr;
-	}
-
-	public void setDataContr(LocalDateTime dataContr)
-	{
-		this.dataContr = dataContr;
-	}
-
-	public Integer getTranse()
-	{
-		return transe;
-	}
-
-	public void setTranse(Integer transe)
-	{
-		this.transe = transe;
-	}
-
-	public Integer getMatricola()
-	{
-		return matricola;
-	}
-
-	public void setMatricola(Integer matricola)
-	{
-		this.matricola = matricola;
-	}
-
 	@Override
 	public String toString()
 	{
-		return "GraveUi [id=" + id + ", cimitir=" + cimitirId + ", codZona=" + codZona + ", sector=" + sector + ", rand="
-				+ rand + ", pozitie=" + pozitie + ", nrLocuri=" + nrLocuri + ", ani=" + ani + ", stare=" + stare
-				+ ", dataStare=" + dataStare + ", dataIncep=" + dataIncep + ", dataExp=" + dataExp + ", codCs=" + codCs
-				+ ", scutit=" + scutitId + ", nrCh=" + nrCh + ", dataCh=" + dataCh + ", suma=" + suma + ", nrContr="
-				+ nrContr + ", dataContr=" + dataContr + ", transe=" + transe + ", matricola=" + matricola + "]";
+		return "ApiGrave [id=" + id + ", cimitirId=" + cimitirId + ", contractId=" + contractId + ", codZona=" + codZona
+				+ ", sector=" + sector + ", rand=" + rand + ", pozitie=" + pozitie + ", nrLocuri=" + nrLocuri + "]";
 	}
 }

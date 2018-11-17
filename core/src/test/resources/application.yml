@@ -21,4 +21,4 @@ spring:
       path: /h2-console
 
   flyway:
-    locations: classpath:db/migration/{vendor}
+    locations: classpath:com/cim/core/db/migration/{vendor}

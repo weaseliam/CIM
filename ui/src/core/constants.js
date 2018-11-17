@@ -7,6 +7,7 @@ export const API_GRAVEOWNER = `${API_PATH}/graveowner`;
 export const API_GRAVE = `${API_PATH}/grave`;
 export const API_EXEMPT = `${API_PATH}/exempt`;
 export const API_GRAVEYARD = `${API_PATH}/graveyard`;
+export const API_CONTRACT = `${API_PATH}/contract`;
 
 // table constants
 export const TABLE_COL_WIDTH = {

@@ -3,3 +3,6 @@ const getRoot = state =>
 
 export const graveListSelector = state =>
   getRoot(state).list;
+
+export const graveMapSelector = state =>
+  getRoot(state).map;

@@ -31,15 +31,15 @@ public class GraveAssembler
 		return response;
 	}
 
-	public static GraveFilter fromResource(Long graveownerId)
+	public static GraveFilter fromResource(List<Long> contractIds)
 	{
-		if (graveownerId == null)
+		if (contractIds == null)
 		{
 			return null;
 		}
 
 		GraveFilter filter = new GraveFilter.Builder()
-				.setGraveownerId(graveownerId)
+				.setContractIds(contractIds)
 				.build();
 
 		return filter;

@@ -1,15 +1,14 @@
-import { fetchGraveListAction } from './grave-actions';
+import { fetchContractListAction } from './contract-actions';
 import { setGraveownerListSelectedIndexAction } from '../graveowner/graveowner-actions';
 
 export const INITIAL_STATE = {
-  list: {},
-  map: {}
+  list: {}
 };
 
-export const graveReducer = (state = INITIAL_STATE, action) => {
+export const contractReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case fetchGraveListAction.SUCCESS: {
-      const { graves = [] } = state.list;
+    case fetchContractListAction.SUCCESS: {
+      const { contracts = [] } = state.list;
       const { page = 1 } = action.payload;
       const newState = {
         ...state,
@@ -17,14 +16,8 @@ export const graveReducer = (state = INITIAL_STATE, action) => {
       };
 
       if (page > 1) {
-        newState.list.graves = graves.concat(action.payload.graves);
+        newState.list.contracts = contracts.concat(action.payload.contracts);
       }
-
-      const map = Object.assign({}, state.map);
-      for (const grave of action.payload.graves) {
-        map[grave.id] = grave;
-      }
-      newState.map = map;
 
       return newState;
     }
@@ -34,8 +27,7 @@ export const graveReducer = (state = INITIAL_STATE, action) => {
       if (!selectedIndex) {
         return {
           ...state,
-          list: {},
-          map: {}
+          list: {}
         };
       }
 

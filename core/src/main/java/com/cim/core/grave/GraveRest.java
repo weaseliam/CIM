@@ -1,5 +1,7 @@
 package com.cim.core.grave;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 
 import org.slf4j.Logger;
@@ -33,12 +35,12 @@ public class GraveRest
 			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(defaultValue = "100") int size,
 			@RequestParam(defaultValue = "id") String sort,
-			@RequestParam(required = false) Long graveownerId)
+			@RequestParam(required = false) List<Long> contractIds)
 	{
-		log.debug("Fetching graves for page={}, size={}, sort={}, graveownerId={}", 
-				page, size, sort, graveownerId);
+		log.debug("Fetching graves for page={}, size={}, sort={}, contractIds={}", 
+				page, size, sort, contractIds);
 		
-		GraveFilter filter = GraveAssembler.fromResource(graveownerId);
+		GraveFilter filter = GraveAssembler.fromResource(contractIds);
 		log.debug("Using filter {}", filter);			
 		
 		Page<Grave> graves = graveService.list(page, size, sort, filter);

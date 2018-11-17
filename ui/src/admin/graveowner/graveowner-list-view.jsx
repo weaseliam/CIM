@@ -10,8 +10,8 @@ import { debounce } from '../../core/util';
 import withI18n from '../../i18n/i18n-decorator';
 import * as i18nc from '../../i18n/i18n-constants';
 import TableTitle from '../../components/table-title';
-import { fetchGraveListAction } from '../grave/grave-actions';
 import { TABLE_COL_WIDTH } from '../../core/constants';
+import { fetchContractListWithGravesAction } from '../contract/contract-actions';
 
 import styles from './graveowner-list-view.scss';
 import tableStyles from '../../styles/table-styles.scss';
@@ -90,7 +90,7 @@ class GraveownerListView extends Component {
     }
 
     this.props.dispatch(setGraveownerListSelectedIndexAction.success(index));
-    this.props.dispatch(fetchGraveListAction.trigger({ graveownerId: rowData.id }));
+    this.props.dispatch(fetchContractListWithGravesAction.trigger({ graveownerId: rowData.id }));
   }
 
   handleTableNoRows = () => {

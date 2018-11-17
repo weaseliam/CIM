@@ -16,7 +16,7 @@ export const graveownerReducer = (state = INITIAL_STATE, action) => {
       };
 
       if (page > 1) {
-        newState.list.graveowners.unshift(...graveowners);
+        newState.list.graveowners = graveowners.concat(action.payload.graveowners);
       }
 
       return newState;
