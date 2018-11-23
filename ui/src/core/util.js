@@ -1,4 +1,7 @@
 import { isNil, isEmpty } from 'ramda';
+import moment from 'moment';
+
+import { DEFAULT_DATE_FORMAT } from './constants';
 
 /**
  * Check if the provided value is nil or empty using ramda.
@@ -15,8 +18,8 @@ export const isNilOrEmpty = value => (
  * be triggered. The function will be called after it stops being called for
  * N milliseconds.
  *
- * @param {*} fn function
- * @param {*} time debounce time
+ * @param {function} fn function
+ * @param {number} time debounce time milliseconds
  */
 export const debounce = (fn, time) => {
   let timeout;
@@ -29,3 +32,12 @@ export const debounce = (fn, time) => {
     timeout = setTimeout(functionCall, time);
   };
 };
+
+/**
+ * Parse and display a date using a specific format.
+ *
+ * @param {string} date the date to be parsed
+ * @param {string} format the format to be used for display
+ */
+export const parseAndFormatDate = (date, format = DEFAULT_DATE_FORMAT) =>
+  moment(date).format(format);

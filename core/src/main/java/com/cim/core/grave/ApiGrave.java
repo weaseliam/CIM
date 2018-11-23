@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 public class ApiGrave
 {
 	private Long			id;
-	private Long			cimitirId;
+	private Long			graveyardId;
 	private Long			contractId;
 	private Integer			codZona;
 	private String			sector;
@@ -20,7 +20,7 @@ public class ApiGrave
 	public ApiGrave(@NotNull Grave grave)
 	{
 		id = grave.getId();
-		cimitirId = grave.getGraveyardId();
+		graveyardId = grave.getGraveyardId();
 		contractId = grave.getContractId();
 		codZona = grave.getCodZona();
 		sector = grave.getSector();
@@ -39,14 +39,14 @@ public class ApiGrave
 		this.id = id;
 	}
 
-	public Long getCimitirId()
+	public Long getGraveyardId()
 	{
-		return cimitirId;
+		return graveyardId;
 	}
 
-	public void setCimitirId(Long cimitirId)
+	public void setGraveyardId(Long graveyardId)
 	{
-		this.cimitirId = cimitirId;
+		this.graveyardId = graveyardId;
 	}
 
 	public Long getContractId()
@@ -112,7 +112,8 @@ public class ApiGrave
 	@Override
 	public String toString()
 	{
-		return "ApiGrave [id=" + id + ", cimitirId=" + cimitirId + ", contractId=" + contractId + ", codZona=" + codZona
-				+ ", sector=" + sector + ", rand=" + rand + ", pozitie=" + pozitie + ", nrLocuri=" + nrLocuri + "]";
+		return "ApiGrave [id=" + id + ", graveyardId=" + graveyardId + ", contractId=" + contractId + ", codZona="
+				+ codZona + ", sector=" + sector + ", rand=" + rand + ", pozitie=" + pozitie + ", nrLocuri=" + nrLocuri
+				+ "]";
 	}
 }

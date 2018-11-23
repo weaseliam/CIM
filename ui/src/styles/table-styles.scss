@@ -1,5 +1,17 @@
+.table {
+  div {
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
 .tableHeaderColumn {
   text-transform: none;
+
+  &:focus {
+    outline: none;
+  }
 
   div {
     white-space: nowrap;

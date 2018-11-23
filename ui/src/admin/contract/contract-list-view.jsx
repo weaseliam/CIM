@@ -8,6 +8,8 @@ import { contractListWithGravesSelector } from './contract-selector';
 import { TABLE_COL_WIDTH } from '../../core/constants';
 import { exemptMapSelector } from '../exempt/exempt-selector';
 import { graveyardMapSelector } from '../graveyard/graveyard-selector';
+import * as i18nc from '../../i18n/i18n-constants';
+import { parseAndFormatDate, isNilOrEmpty } from '../../core/util';
 
 import styles from './contract-list-view.scss';
 import tableStyles from '../../styles/table-styles.scss';
@@ -36,18 +38,34 @@ class ContractListView extends Component {
       : tableStyles.tableOddRow;
   }
 
-  formatGraveyardCell = ({ dataKey, rowData }) => {
-    const { nume = '' } = this.props.graveyardMap[rowData[dataKey]] || {};
-    return nume;
+  formatGraveyardCell = ({ rowData }) => {
+    const { graveyardMap } = this.props;
+    const { graveyardId, codZona = '', sector = '', rand = '', pozitie = '' } = rowData;
+    const { nume = '' } = graveyardMap[graveyardId] || {};
+
+    return `${nume},${codZona},${sector},${rand},${pozitie}`;
   }
 
   formatExemptCell = ({ dataKey, rowData }) => {
-    const { nume = '' } = this.props.exemptMap[rowData[dataKey]] || {};
+    const { exemptMap } = this.props;
+    const { nume = '' } = exemptMap[rowData[dataKey]] || {};
+
     return nume;
   }
 
+  formatDateCell = ({ dataKey, rowData }) => {
+    const { i18n } = this.props;
+    const date = rowData[dataKey];
+
+    if (isNilOrEmpty(date)) {
+      return '';
+    }
+
+    return parseAndFormatDate(date, i18n.formats.date);
+  }
+
   render() {
-    const { selectedGraveowner } = this.props;
+    const { selectedGraveowner, t } = this.props;
     const { contracts = [] } = this.props;
 
     return (
@@ -57,10 +75,15 @@ class ContractListView extends Component {
             <React.Fragment>
               <div className={styles.tableTitle}>
                 {selectedGraveowner
-                  ? `${contracts.length} contract(s) for ${selectedGraveowner.nume} ${selectedGraveowner.prenume}`
-                  : 'No selection'}
+                  ? t(i18nc.CONTRACT_LIST_SELECTION_DESC, [
+                    contracts.length,
+                    selectedGraveowner.nume,
+                    selectedGraveowner.prenume
+                  ])
+                  : t(i18nc.CONTRACT_LIST_NO_SELECTION)}
               </div>
               <Table
+                className={tableStyles.table}
                 headerClassName={tableStyles.tableHeaderColumn}
                 rowClassName={this.handleRowClassName}
                 width={width}
@@ -71,69 +94,52 @@ class ContractListView extends Component {
                 rowGetter={({ index }) => contracts[index]}
               >
                 <Column
-                  label="Cimitir"
-                  dataKey="cimitirId"
+                  label={t(i18nc.CONTRACT_LIST_TABLE_HEADER_GRAVEYARD)}
+                  dataKey="graveyardId"
                   cellDataGetter={this.formatGraveyardCell}
-                  width={TABLE_COL_WIDTH.M}
+                  width={TABLE_COL_WIDTH.L}
                 />
                 <Column
-                  label="Cod zona"
-                  dataKey="codZona"
-                  width={TABLE_COL_WIDTH.XS}
-                />
-                <Column
-                  label="Sector"
-                  dataKey="sector"
-                  width={TABLE_COL_WIDTH.XS}
-                />
-                <Column
-                  label="Rand"
-                  dataKey="rand"
-                  width={TABLE_COL_WIDTH.XS}
-                />
-                <Column
-                  label="Pozitie"
-                  dataKey="pozitie"
-                  width={TABLE_COL_WIDTH.XS}
-                />
-                <Column
-                  label="NrLocuri"
+                  label={t(i18nc.CONTRACT_LIST_TABLE_HEADER_PLACES)}
                   dataKey="nrLocuri"
                   width={TABLE_COL_WIDTH.XS}
                 />
                 <Column
-                  label="Ani"
+                  label={t(i18nc.CONTRACT_LIST_TABLE_HEADER_YEARS)}
                   dataKey="ani"
                   width={TABLE_COL_WIDTH.XS}
                 />
                 <Column
-                  label="DataIncep"
+                  label={t(i18nc.CONTRACT_LIST_TABLE_HEADER_START_DATE)}
                   dataKey="dataIncep"
-                  width={TABLE_COL_WIDTH.M}
+                  cellDataGetter={this.formatDateCell}
+                  width={TABLE_COL_WIDTH.S}
                 />
                 <Column
-                  label="DataExp"
+                  label={t(i18nc.CONTRACT_LIST_TABLE_HEADER_END_DATE)}
                   dataKey="dataExp"
-                  width={TABLE_COL_WIDTH.M}
+                  cellDataGetter={this.formatDateCell}
+                  width={TABLE_COL_WIDTH.S}
                 />
                 <Column
-                  label="NrContr"
+                  label={t(i18nc.CONTRACT_LIST_TABLE_HEADER_CONTRACT_NO)}
                   dataKey="nrContr"
                   width={TABLE_COL_WIDTH.S}
                 />
                 <Column
-                  label="DataContr"
+                  label={t(i18nc.CONTRACT_LIST_TABLE_HEADER_CONTRACT_DATE)}
                   dataKey="dataContr"
-                  width={TABLE_COL_WIDTH.M}
+                  cellDataGetter={this.formatDateCell}
+                  width={TABLE_COL_WIDTH.S}
                 />
                 <Column
-                  label="Scutit"
+                  label={t(i18nc.CONTRACT_LIST_TABLE_HEADER_EXEMPT)}
                   dataKey="exemptId"
                   cellDataGetter={this.formatExemptCell}
-                  width={TABLE_COL_WIDTH.M}
+                  width={TABLE_COL_WIDTH.S}
                 />
                 <Column
-                  label="Matricola"
+                  label={t(i18nc.CONTRACT_LIST_TABLE_HEADER_REGISTRATION)}
                   dataKey="matricola"
                   width={TABLE_COL_WIDTH.S}
                 />

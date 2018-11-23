@@ -1,9 +1,13 @@
 import { changeLanguageAction, fetchSupportedLanguagesAction } from './i18n-actions';
 
+import { DEFAULT_DATE_FORMAT } from '../core/constants';
+import { DATE_FORMAT } from './i18n-constants';
+
 export const INITIAL_STATE = {
   language: '',
   messages: {},
-  languages: []
+  languages: [],
+  formats: {}
 };
 
 export const i18nReducer = (state = INITIAL_STATE, action) => {
@@ -11,7 +15,10 @@ export const i18nReducer = (state = INITIAL_STATE, action) => {
     case changeLanguageAction.SUCCESS:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        formats: {
+          date: action.payload.messages[DATE_FORMAT] || DEFAULT_DATE_FORMAT
+        }
       };
 
     case fetchSupportedLanguagesAction.SUCCESS:

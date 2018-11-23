@@ -218,6 +218,7 @@ class GraveownerListView extends Component {
               />
               <Table
                 ref={(ref) => { this.tableRef = ref; }}
+                className={tableStyles.table}
                 headerClassName={tableStyles.tableHeaderColumn}
                 rowClassName={this.handleRowClassName}
                 width={width}

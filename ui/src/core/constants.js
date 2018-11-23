@@ -1,4 +1,7 @@
-// api constants
+// formats
+export const DEFAULT_DATE_FORMAT = 'MM/DD/YYYY';
+
+// api
 export const LOGOUT_URL = 'logout';
 export const API_PATH = 'api';
 export const API_DICTIONARY = `${API_PATH}/dictionary`;
@@ -9,7 +12,7 @@ export const API_EXEMPT = `${API_PATH}/exempt`;
 export const API_GRAVEYARD = `${API_PATH}/graveyard`;
 export const API_CONTRACT = `${API_PATH}/contract`;
 
-// table constants
+// table
 export const TABLE_COL_WIDTH = {
   XS: 50,
   S: 100,

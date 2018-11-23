@@ -16,11 +16,12 @@ export const graveReducer = (state = INITIAL_STATE, action) => {
         list: action.payload
       };
 
+      let map = {};
       if (page > 1) {
         newState.list.graves = graves.concat(action.payload.graves);
+        map = Object.assign({}, state.map);
       }
 
-      const map = Object.assign({}, state.map);
       for (const grave of action.payload.graves) {
         map[grave.id] = grave;
       }
