@@ -38,7 +38,10 @@ describe('i18n-saga-test', () => {
     await sagaTester.waitFor(changeLanguageAction.SUCCESS);
     expect(sagaTester.getState().i18n).toEqual({
       ...I18N_INITIAL_STATE,
-      ...payload
+      ...payload,
+      formats: {
+        date: 'MM/DD/YYYY'
+      }
     });
   });
 

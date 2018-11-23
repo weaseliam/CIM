@@ -21,7 +21,10 @@ describe('i18n-reducer-test', () => {
 
     expect(state).toEqual({
       ...INITIAL_STATE,
-      ...payload
+      ...payload,
+      formats: {
+        date: 'MM/DD/YYYY'
+      }
     });
   });
 });

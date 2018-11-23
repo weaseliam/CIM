@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table, Column, AutoSizer, SortDirection, SortIndicator } from 'react-virtualized';
-import { isNil, keys, equals } from 'ramda';
+import { isNil, keys, equals, filter as Rfilter } from 'ramda';
 import { TextField } from 'office-ui-fabric-react/lib/TextField';
 
 import { graveownerListSelector, graveownerSelectedIndexSelector } from './graveowner-selector';
@@ -32,7 +32,7 @@ class GraveownerListView extends Component {
     super(props);
 
     this.tableRef = null;
-    this.tableInputRefs = {};
+    this.tableInputValues = {};
   }
 
   componentDidMount() {
@@ -129,23 +129,24 @@ class GraveownerListView extends Component {
       {sortBy === dataKey && <SortIndicator sortDirection={sortDirection} />}
       {label}
       <TextField
-        ref={(ref) => { this.tableInputRefs[dataKey] = ref; }}
         inputClassName={styles.tableHeaderColumnInput}
-        onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+        onClick={e => e.stopPropagation() && e.preventDefault()}
         onKeyDown={e => (e.keyCode === 13 || e.keyCode === 32) && e.stopPropagation()}
-        onChanged={newValue => this.handleTableHeaderInputChange(dataKey, newValue)}
+        onChange={e => this.handleTableHeaderInputChange(dataKey, e)}
+        value={this.tableInputValues[dataKey] || ''}
       />
     </div>
   )
 
-  handleTableHeaderInputChange = debounce(() => {
+  handleTableHeaderInputChange = debounce((dataKey, e) => {
     const { sort, filter } = this.props.graveownerList;
 
-    // read values from UNCONTROLLED inputs
-    const newFilter = this.readTableInputValues();
+    this.updateTableHeaderInputValue(dataKey, e);
+    const newFilter = this.tableInputValues;
 
     // deep comparison
-    if (!equals(filter, newFilter)) {
+    const isNotNil = val => !isNil(val);
+    if (!equals(Rfilter(isNotNil, filter || {}), Rfilter(isNotNil, newFilter))) {
       this.props.dispatch(fetchGraveownerListAction.trigger({
         sort,
         filter: {
@@ -157,20 +158,15 @@ class GraveownerListView extends Component {
   }, 750)
 
   handleTableTitleResetFilter = () => {
-    const dataKeys = keys(this.tableInputRefs);
+    const dataKeys = keys(this.tableInputValues);
     let didReset = false;
 
     for (const dataKey of dataKeys) {
-      const input = this.tableInputRefs[dataKey];
-      if (input.value !== '') {
-        // TODO find better solution for filter reset
-        // implement as controlled component, do not couple state to this view
-        /* eslint-disable no-underscore-dangle */
-        input._latestValue = '';
-        input._latestValidateValue = '';
-        /* eslint-enable */
-        input.state.value = '';
+      const value = this.tableInputValues[dataKey];
+      if (value !== null) {
         didReset = true;
+        this.tableInputValues = {};
+        break;
       }
     }
 
@@ -180,20 +176,12 @@ class GraveownerListView extends Component {
     }
   }
 
-  readTableInputValues = () => {
-    const dataKeys = keys(this.tableInputRefs);
-    const values = {};
+  updateTableHeaderInputValue = (dataKey, e) => {
+    const { value = '' } = e.target;
 
-    for (const dataKey of dataKeys) {
-      let { value } = this.tableInputRefs[dataKey];
-      value = value && value.trim();
-      if (value === '') {
-        value = null;
-      }
-      values[dataKey] = value;
-    }
-
-    return values;
+    this.tableInputValues[dataKey] = value.trim() === ''
+      ? null
+      : value;
   }
 
   render() {
