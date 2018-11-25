@@ -31,13 +31,17 @@ class Loader extends Component {
   };
 
   componentWillMount() {
-    if (this.props.loading === true) {
+    const { loading } = this.props;
+
+    if (loading === true) {
       this.activateLoading();
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.loading === nextProps.loading) {
+    const { loading } = this.props;
+
+    if (loading === nextProps.loading) {
       return;
     }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Loader from '../components/loader';
-import { appLoadingContentSelector } from '../app/app-selector';
+import { appLoadingContentSelector } from './app-selector';
 
 const mapStateToProps = state => ({
   loading: appLoadingContentSelector(state)

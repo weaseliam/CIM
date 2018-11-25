@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Spinner from '../components/spinner';
-import { appLoadingSelector } from '../app/app-selector';
+import { appLoadingSelector } from './app-selector';
 
 const mapStateToProps = state => ({
   loading: appLoadingSelector(state)

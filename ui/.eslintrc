@@ -24,6 +24,8 @@
     "function-paren-newline": "off",
     "no-restricted-syntax": "off",
     "no-unused-expressions": "off",
-    "no-confusing-arrow": "off"
+    "no-confusing-arrow": "off",
+    "implicit-arrow-linebreak": "off",
+    "operator-linebreak": "off"
   }
 }

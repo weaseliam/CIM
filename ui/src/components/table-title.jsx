@@ -33,11 +33,15 @@ const defaultProps = {
  */
 const TableTitle = ({ i18n, results, title, onResetFilter, className, width, height }) => (
   <div className={classNames(styles.container, className)} style={{ width, height }}>
-    <span className={styles.text}>{results} {i18n.results}</span>
+    <span className={styles.text}>
+      {results}
+      &nbsp;
+      {i18n.results}
+    </span>
     <span className={styles.text}>{title}</span>
     {
       typeof onResetFilter === 'function' &&
-        <ActionButton onClick={onResetFilter}>{i18n.resetFilter}</ActionButton>
+      <ActionButton onClick={onResetFilter}>{i18n.resetFilter}</ActionButton>
     }
   </div>
 );

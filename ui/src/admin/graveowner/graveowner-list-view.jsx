@@ -28,6 +28,26 @@ const mapStateToProps = state => ({
 @withI18n
 @connect(mapStateToProps)
 class GraveownerListView extends Component {
+  handleTableHeaderInputChange = debounce((dataKey, e) => {
+    const { graveownerList, dispatch } = this.props;
+    const { sort, filter } = graveownerList;
+
+    this.updateTableHeaderInputValue(dataKey, e);
+    const newFilter = this.tableInputValues;
+
+    // deep comparison
+    const isNotNil = val => !isNil(val);
+    if (!equals(Rfilter(isNotNil, filter || {}), Rfilter(isNotNil, newFilter))) {
+      dispatch(fetchGraveownerListAction.trigger({
+        sort,
+        filter: {
+          ...filter,
+          ...newFilter
+        }
+      }));
+    }
+  }, 750)
+
   constructor(props) {
     super(props);
 
@@ -36,11 +56,14 @@ class GraveownerListView extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchGraveownerListAction.trigger());
+    const { dispatch } = this.props;
+
+    dispatch(fetchGraveownerListAction.trigger());
   }
 
   componentWillReceiveProps(nextProps) {
-    const { sort, filter } = this.props.graveownerList;
+    const { graveownerList } = this.props;
+    const { sort, filter } = graveownerList;
     const nextSort = nextProps.graveownerList.sort;
     const nextFilter = nextProps.graveownerList.filter;
 
@@ -77,20 +100,21 @@ class GraveownerListView extends Component {
 
     this.lastTime = currentTime;
 
-    const { page, totalPages, sort, filter } = this.props.graveownerList;
+    const { graveownerList, dispatch } = this.props;
+    const { page, totalPages, sort, filter } = graveownerList;
     if (page < totalPages) {
-      this.props.dispatch(fetchGraveownerListAction.trigger({ page: page + 1, sort, filter }));
+      dispatch(fetchGraveownerListAction.trigger({ page: page + 1, sort, filter }));
     }
   }
 
   handleRowClick = ({ index, rowData }) => {
-    const { graveownerListSelectedIndex } = this.props;
+    const { graveownerListSelectedIndex, dispatch } = this.props;
     if (graveownerListSelectedIndex === index) {
       return;
     }
 
-    this.props.dispatch(setGraveownerListSelectedIndexAction.success(index));
-    this.props.dispatch(fetchContractListWithGravesAction.trigger({ graveownerId: rowData.id }));
+    dispatch(setGraveownerListSelectedIndexAction.success(index));
+    dispatch(fetchContractListWithGravesAction.trigger({ graveownerId: rowData.id }));
   }
 
   handleTableNoRows = () => {
@@ -99,17 +123,19 @@ class GraveownerListView extends Component {
   }
 
   handleTableSort = ({ sortBy, sortDirection }) => {
-    const { graveowners = [], filter } = this.props.graveownerList;
+    const { graveownerList, dispatch } = this.props;
+    const { graveowners = [], filter } = graveownerList;
     if (graveowners.length === 0) {
       return;
     }
 
     const sort = sortDirection === SortDirection.DESC ? `-${sortBy}` : sortBy;
-    this.props.dispatch(fetchGraveownerListAction.trigger({ sort, filter }));
+    dispatch(fetchGraveownerListAction.trigger({ sort, filter }));
   }
 
   buildTableSort = () => {
-    const { sort } = this.props.graveownerList;
+    const { graveownerList } = this.props;
+    const { sort } = graveownerList;
     let sortBy = 'id';
     let sortDirection = SortDirection.ASC;
 
@@ -138,26 +164,8 @@ class GraveownerListView extends Component {
     </div>
   )
 
-  handleTableHeaderInputChange = debounce((dataKey, e) => {
-    const { sort, filter } = this.props.graveownerList;
-
-    this.updateTableHeaderInputValue(dataKey, e);
-    const newFilter = this.tableInputValues;
-
-    // deep comparison
-    const isNotNil = val => !isNil(val);
-    if (!equals(Rfilter(isNotNil, filter || {}), Rfilter(isNotNil, newFilter))) {
-      this.props.dispatch(fetchGraveownerListAction.trigger({
-        sort,
-        filter: {
-          ...filter,
-          ...newFilter
-        }
-      }));
-    }
-  }, 750)
-
   handleTableTitleResetFilter = () => {
+    const { graveownerList, dispatch } = this.props;
     const dataKeys = keys(this.tableInputValues);
     let didReset = false;
 
@@ -171,8 +179,8 @@ class GraveownerListView extends Component {
     }
 
     if (didReset) {
-      const { sort } = this.props.graveownerList;
-      this.props.dispatch(fetchGraveownerListAction.trigger({ sort }));
+      const { sort } = graveownerList;
+      dispatch(fetchGraveownerListAction.trigger({ sort }));
     }
   }
 
@@ -185,8 +193,8 @@ class GraveownerListView extends Component {
   }
 
   render() {
-    const { t } = this.props;
-    const { graveowners = [], totalResults } = this.props.graveownerList;
+    const { t, graveownerList } = this.props;
+    const { graveowners = [], totalResults } = graveownerList;
     const { sortBy, sortDirection } = this.buildTableSort();
 
     return (

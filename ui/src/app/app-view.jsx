@@ -7,7 +7,7 @@ import { bootstrapAppAction } from './app-actions';
 import AdminPage from '../admin/layout/admin-page';
 import HeaderView from './header-view';
 import ReportPage from '../report/layout/report-page';
-import { appBootstrapSelector } from '../app/app-selector';
+import { appBootstrapSelector } from './app-selector';
 import SpinnerView from './spinner-view';
 
 import styles from './app-view.scss';
@@ -20,7 +20,9 @@ const mapStateToProps = state => ({
 @connect(mapStateToProps)
 class AppView extends Component {
   componentDidMount() {
-    this.props.dispatch(bootstrapAppAction.trigger());
+    const { dispatch } = this.props;
+
+    dispatch(bootstrapAppAction.trigger());
   }
 
   render() {

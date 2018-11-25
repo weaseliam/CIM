@@ -51,11 +51,15 @@ class HeaderView extends Component {
   }
 
   handleLogout = () => {
-    this.props.dispatch(logOutUserAction.trigger());
+    const { dispatch } = this.props;
+
+    dispatch(logOutUserAction.trigger());
   }
 
   handleChangeLanguage = (e, languageItem) => {
-    this.props.dispatch(changeLanguageAction.trigger(languageItem.key));
+    const { dispatch } = this.props;
+
+    dispatch(changeLanguageAction.trigger(languageItem.key));
   }
 
   createUserMenuItems = () => {
@@ -139,9 +143,9 @@ class HeaderView extends Component {
   render() {
     return (
       <div className={styles.header}>
-        <div className={styles.nav} >
+        <div className={styles.nav}>
           <div className={styles.company} />
-          <div className={styles.commandbar} >
+          <div className={styles.commandbar}>
             <CommandBar
               items={this.createItems()}
               farItems={this.createFarItems()}

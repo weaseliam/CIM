@@ -10,9 +10,11 @@ const mapStateToProps = state => ({
 @connect(mapStateToProps)
 class I18nProvider extends Component {
   render() {
+    const { i18n, children } = this.props;
+
     return (
-      <i18nContext.Provider value={this.props.i18n}>
-        {this.props.children}
+      <i18nContext.Provider value={i18n}>
+        {children}
       </i18nContext.Provider>
     );
   }

@@ -39,7 +39,7 @@ const Spinner = ({
     {
       loading &&
       <div className={styles.background}>
-        <div className={styles.spinner} >
+        <div className={styles.spinner}>
           <MSpinner size={size} label={label} ariaLive="assertive" />
         </div>
       </div>
