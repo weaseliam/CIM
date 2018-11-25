@@ -1,3 +1,4 @@
+.cache/
 node/
 *.iml
 package-lock.json

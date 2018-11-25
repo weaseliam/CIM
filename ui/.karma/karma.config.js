@@ -1,4 +1,27 @@
-const path = require('path');
+const baseRules = require('../.webpack/webpack.rules.base');
+const devRules = require('../.webpack/webpack.rules.dev');
+
+const webpack = {
+  mode: 'development',
+  devtool: 'inline-source-map',
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
+  module: {
+    rules: baseRules.concat(devRules)
+  },
+
+  cache: true,
+  watch: true,
+
+  externals: {
+    jsdom: 'window',
+    cheerio: 'window',
+    'react/addons': true,
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
+  }
+};
 
 module.exports = function (config) {
   config.set({
@@ -21,48 +44,11 @@ module.exports = function (config) {
     reporters: ['spec'],
 
     colors: true,
-    logLevel: config.LOG_ERROR,
     autoWatch: true,
     singleRun: false,
     browserNoActivityTimeout: 60000,
 
-    webpack: {
-      devtool: 'inline-source-map',
-      resolve: {
-        extensions: ['.js', '.jsx']
-      },
-      module: {
-        loaders: [
-          {
-            test: /\.jsx?$/,
-            include: path.resolve(__dirname, '../src'),
-            exclude: /(node|node_modules)/,
-            loader: 'babel-loader'
-          },
-          {
-            test: /\.scss$/,
-            include: path.resolve(__dirname, '../src'),
-            loader: 'style-loader!css-loader!postcss-loader!sass-loader'
-          },
-          {
-            test: /\.png/,
-            include: path.resolve(__dirname, '../src'),
-            loader: 'url-loader'
-          }
-        ]
-      },
-
-      cache: true,
-      watch: true,
-
-      externals: {
-        jsdom: 'window',
-        cheerio: 'window',
-        'react/addons': true,
-        'react/lib/ExecutionEnvironment': true,
-        'react/lib/ReactContext': true
-      }
-    },
+    webpack,
 
     webpackServer: {
       noInfo: true

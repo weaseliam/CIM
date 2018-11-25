@@ -1,3 +1,7 @@
+@import url('../../node_modules/office-ui-fabric-react/dist/css/fabric.css');
+@import url('../../node_modules/font-awesome/css/font-awesome.css');
+@import url('../../node_modules/react-virtualized/styles.css');
+
 body {
     min-width: 800px;
     margin: 0;

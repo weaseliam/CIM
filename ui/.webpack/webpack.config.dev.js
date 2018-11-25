@@ -1,14 +1,20 @@
 const webpackConfig = require('./webpack.config.base');
 const plugins = require('./webpack.plugins');
 const envConfig = require('../.env.js');
+const devRules = require('./webpack.rules.dev');
+
+webpackConfig.mode = 'development';
 
 webpackConfig.devtool = 'inline-source-map';
 
-webpackConfig.module.rules.push({
-  test: /\.scss$/,
-  use: ['style-loader', 'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]', 'postcss-loader', 'sass-loader'],
-  exclude: ['node', 'node_modules']
-});
+webpackConfig.module.rules.push(...devRules);
+
+webpackConfig.plugins = [
+  plugins.noEmitOnErrorsPlugin,
+  plugins.hotModuleReplacementPlugin,
+  plugins.cssExtractPlugin,
+  plugins.htmlWebpackPlugin
+];
 
 webpackConfig.devServer = {
   contentBase: './target/dist',
@@ -34,14 +40,5 @@ webpackConfig.devServer = {
     }
   }
 };
-
-webpackConfig.plugins = [
-  plugins.noEmitOnErrorsPlugin,
-  plugins.hotModuleReplacementPlugin,
-  plugins.namedModulesPlugin,
-  plugins.extractTextPlugin,
-  plugins.commonsChunkPlugin,
-  plugins.htmlWebpackPlugin
-];
 
 module.exports = webpackConfig;

@@ -1,15 +1,8 @@
-const genDefaultConfig = require('@storybook/react/dist/server/config/defaults/webpack.config.js');
-const baseConfig = require('../.webpack/webpack.config.base');
+const devRules = require('../.webpack/webpack.rules.dev');
 
-module.exports = function(config, env) {
-  var config = genDefaultConfig(config, env);
+module.exports = function (baseConfig, env, defaultConfig) {
+  defaultConfig.mode = 'development';
+  defaultConfig.module.rules.push(devRules[1]);
 
-  config.module = baseConfig.module;
-  config.module.rules.push({
-    test: /\.scss$/,
-    use: ['style-loader', 'css-loader?importLoaders=1&modules&localIdentName=[name]__[local]___[hash:base64:5]', 'postcss-loader', 'sass-loader'],
-    exclude: ['node_modules']
-  });
-
-  return config;
+  return defaultConfig;
 };

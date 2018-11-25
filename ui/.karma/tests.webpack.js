@@ -1,4 +1,4 @@
-require("babel-polyfill");
+require('@babel/polyfill');
 
 // Configure enzyme
 const enzyme = require('enzyme');

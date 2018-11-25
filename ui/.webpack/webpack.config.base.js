@@ -1,11 +1,9 @@
 const path = require('path');
-const rules = require('./webpack.rules');
-const pkgJson = require('../package.json');
+const baseRules = require('./webpack.rules.base');
 
 module.exports = {
   entry: {
-    app: ['./src/index.jsx'],
-    vendor: Object.keys(pkgJson.dependencies)
+    app: ['./src/index.jsx']
   },
 
   devtool: 'cheap-source-map',
@@ -13,7 +11,8 @@ module.exports = {
   output: {
     publicPath: '',
     path: path.resolve(__dirname, '../target/dist'),
-    filename: 'app.[hash:8].js'
+    filename: 'app.[hash:8].js',
+    chunkFilename: 'vendor.[hash:8].js'
   },
 
   resolve: {
@@ -22,6 +21,20 @@ module.exports = {
 
   module: {
     exprContextCritical: false,
-    rules
+    rules: baseRules
+  },
+
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        default: false,
+        vendors: false,
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all'
+        }
+      }
+    }
   }
 };
