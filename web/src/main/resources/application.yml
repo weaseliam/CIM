@@ -21,6 +21,9 @@ spring:
     hibernate:
       ddl-auto: validate
     show-sql: false
+    properties:
+      hibernate:
+        generate_statistics: true
 
   h2:
     console:
@@ -28,7 +31,6 @@ spring:
       path: /h2-console
 
   thymeleaf:
-    prefix: /templates/
     cache: false
     view-names:
       - login
@@ -36,6 +38,9 @@ spring:
 
   flyway:
     locations: classpath:com/cim/core/db/migration/{vendor}
+    
+  jmx:
+    enabled: false
 
 server:
   servlet:
@@ -60,3 +65,39 @@ server:
   error:
     whitelabel:
       enabled: false
+
+management:
+  metrics:
+    export:
+      simple:
+        enabled: true
+    web:
+      server:
+        auto-time-requests: true
+  endpoints:
+    enabled-by-default: false
+    jmx:
+      exposure:
+        exclude: "*"
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    beans:
+      enabled: true
+    caches:
+      enabled: true
+    env:
+      enabled: true
+    flyway:
+      enabled: true
+    health:
+      enabled: true
+    info:
+      enabled: true
+    loggers:
+      enabled: true
+    metrics:
+      enabled: true
+    sessions:
+      enabled: true

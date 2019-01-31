@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+	<title>Login</title>
+	
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="icon" href="/assets/favicon.ico" />
+	<link rel="stylesheet" th:href="@{/css/fabric.min.css}" href="/css/fabric.min.css" />
+	<link rel="stylesheet" th:href="@{/css/fabric.components.min.css}" href="/css/fabric.components.min.css" />
+	<link rel="stylesheet" th:href="@{/css/login.css}" href="/css/login.css" />
+</head>
+
+<body class="ms-Fabric ms-font-m">
+	<form class="form-signin" th:action="@{/login}" action="/login" method="POST">
+		<div th:if="${param.error}" class="ms-MessageBar ms-MessageBar--blocked">
+			<div class="ms-MessageBar-content">
+				<div class="ms-MessageBar-icon">
+					<i class="ms-Icon ms-Icon--Blocked"></i>
+				</div>
+				<div class="ms-MessageBar-text">
+					Invalid username and password.
+				</div>
+			</div>
+		</div>
+
+		<div th:if="${param.logout}" class="ms-MessageBar">
+			<div class="ms-MessageBar-content">
+				<div class="ms-MessageBar-icon">
+					<i class="ms-Icon ms-Icon--Info"></i>
+				</div>
+				<div class="ms-MessageBar-text">
+					You have been logged out.
+				</div>
+			</div>
+		</div>
+		
+		<br />
+
+		<label for="inputUser" class="ms-u-screenReaderOnly">User name</label>
+		<div class="ms-TextField ms-TextField--underlined">
+			<label class="ms-Label">
+				<i class="ms-Icon ms-Icon--Contact" aria-hidden="true"></i>
+			</label>
+			<input class="ms-TextField-field" type="text" name="username" id="inputUser" 
+				required="true" autofocus="true" />
+		</div>
+
+		<label for="inputPass" class="ms-u-screenReaderOnly">Password</label>
+		<div class="ms-TextField ms-TextField--underlined">
+			<label class="ms-Label">
+				<i class="ms-Icon ms-Icon--EditMirrored" aria-hidden="true"></i>
+			</label> 
+			<input class="ms-TextField-field" type="password" name="password" id="inputPass" 
+				required="true" />
+		</div>
+
+		<button class="ms-Button ms-Button--primary" type="submit" id="buttonSubmit">
+			<span class="ms-Button-label">
+				<i class="ms-Icon ms-Icon--Forward" aria-hidden="true"></i>
+			</span>
+		</button>
+	</form>
+</body>
+</html>

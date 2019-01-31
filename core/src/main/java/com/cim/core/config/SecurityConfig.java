@@ -84,7 +84,7 @@ class SecurityConfig
 
 			http
 				.authorizeRequests()
-					.antMatchers("/templates/**", "/login**").permitAll()
+					.antMatchers("/css/**", "/assets/**", "/login**").permitAll()
 					.anyRequest().fullyAuthenticated()
 					.and()
 				.formLogin()
