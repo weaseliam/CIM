@@ -111,7 +111,13 @@ public class MigrationServiceImpl implements MigrationService
 		
 		if (isGravesMigrated && isContractsMigrated)
 		{
+			long startTime = System.currentTimeMillis();
+			
 			mapGravesToContracts();
+			
+			long localDuration = System.currentTimeMillis() - startTime;
+			log.info("Map graves to contracts took {} milliseconds", localDuration);
+			duration += localDuration;
 		}
 		else
 		{
