@@ -1,20 +1,17 @@
 package com.cim.core.app;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
-import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
 public class ApiException
 {
-	private String							code;
-	private String[]						params;
-	private String							message;
-	private String							timestamp;
-
-	private static final String				TIMESTAMP_PATTERN	= "yyyy-MM-dd HH:mm:ss";
-	private static final SimpleDateFormat	TIMESTAMP_FORMAT	= new SimpleDateFormat(TIMESTAMP_PATTERN);
+	private String		code;
+	private String[]	params;
+	private String		message;
+	private String		timestamp;
 
 	public ApiException()
 	{
@@ -82,7 +79,7 @@ public class ApiException
 
 	private void updateTimestamp()
 	{
-		setTimestamp(TIMESTAMP_FORMAT.format(new Date()));
+		setTimestamp(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
 	}
 
 	@Override
