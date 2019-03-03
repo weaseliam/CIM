@@ -6,14 +6,10 @@
   "configurations": [
     {
       "type": "java",
-      "name": "Debug CIMApplication",
+      "name": "CIMApplication",
       "request": "launch",
-      "cwd": "${workspaceFolder}",
-      "console": "internalConsole",
-      "stopOnEntry": false,
       "mainClass": "com.cim.web.CIMApplication",
-      "projectName": "cim-web",
-      "args": ""
+      "projectName": "cim-web"
     }
   ]
 }
