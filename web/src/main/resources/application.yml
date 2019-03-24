@@ -80,6 +80,7 @@ management:
       exposure:
         exclude: "*"
     web:
+      base-path: /actuator
       exposure:
         include: "*"
   endpoint:
