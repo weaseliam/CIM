@@ -22,12 +22,6 @@
 	<dependencies>
 		<!-- Compile -->
 		<dependency>
-			<groupId>com.cim</groupId>
-			<artifactId>cim-db</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 			<exclusions>

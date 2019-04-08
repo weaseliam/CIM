@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -27,20 +28,60 @@
 			</plugin>
 
 			<plugin>
-			    <groupId>org.apache.maven.plugins</groupId>
-			    <artifactId>maven-war-plugin</artifactId>
-			    <configuration>
-			        <overlays>
-			            <overlay>
-			                <groupId>com.cim</groupId>
-			                <artifactId>cim-ui</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<overlays>
+						<overlay>
+							<groupId>com.cim</groupId>
+							<artifactId>cim-ui</artifactId>
 							<type>war</type>
-			            </overlay>
-			        </overlays>
-			    </configuration>
+							<excludes>
+								<exclude>META-INF/**, WEB-INF/**</exclude>
+							</excludes>
+						</overlay>
+					</overlays>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>m2e</id>
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>copy-resources</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>src/main/webapp</outputDirectory>
+									<resources>
+										<resource>
+											<directory>../ui/target/dist</directory>
+											<filtering>true</filtering>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 	<dependencies>
 		<!-- Compile -->
@@ -70,15 +111,16 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 		</dependency>
 
-		<!-- Provided -->
+		<!-- Test -->
 		<dependency>
 			<groupId>com.cim</groupId>
 			<artifactId>cim-ui</artifactId>
 			<version>${project.version}</version>
 			<type>war</type>
-			<scope>provided</scope>
+			<scope>test</scope>
 		</dependency>
-		
+
+		<!-- Provided -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>

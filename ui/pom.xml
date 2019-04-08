@@ -73,7 +73,7 @@
 							<directory>${project.build.directory}/dist</directory>
 						</resource>
 					</webResources>
-					<packagingExcludes>META-INF/, WEB-INF/</packagingExcludes>
+					<packagingExcludes>META-INF/**, WEB-INF/**</packagingExcludes>
 				</configuration>
 			</plugin>
 		</plugins>
