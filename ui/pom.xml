@@ -17,7 +17,7 @@
 
 	<properties>
 		<node.version>v10.15.3</node.version>
-		<yarn.version>v1.15.2</yarn.version>
+		<npm.version>6.9.0</npm.version>
 	</properties>
 
 	<build>
@@ -28,22 +28,22 @@
 				<version>1.7.5</version>
 				<configuration>
 					<nodeVersion>${node.version}</nodeVersion>
-					<yarnVersion>${yarn.version}</yarnVersion>
+					<npmVersion>${npm.version}</npmVersion>
 				</configuration>
 				<executions>
 					<execution>
-						<id>install node and yarn</id>
+						<id>install node and npm</id>
 						<phase>initialize</phase>
 						<goals>
-							<goal>install-node-and-yarn</goal>
+							<goal>install-node-and-npm</goal>
 						</goals>
 					</execution>
 
 					<execution>
-						<id>yarn install</id>
+						<id>npm install</id>
 						<phase>initialize</phase>
 						<goals>
-							<goal>yarn</goal>
+							<goal>npm</goal>
 						</goals>
 						<configuration>
 							<arguments>install</arguments>
@@ -51,13 +51,13 @@
 					</execution>
 
 					<execution>
-						<id>yarn build</id>
+						<id>npm build</id>
 						<phase>generate-resources</phase>
 						<goals>
-							<goal>yarn</goal>
+							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<arguments>build</arguments>
+							<arguments>run build</arguments>
 						</configuration>
 					</execution>
 				</executions>
