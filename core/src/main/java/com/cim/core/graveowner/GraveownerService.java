@@ -13,6 +13,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.cim.core.util.RestUtil;
+import com.cim.core.util.ServiceListResponse;
 
 @Service
 public class GraveownerService
@@ -41,12 +42,12 @@ public class GraveownerService
 		return graveownerRepository.findFirstByOldId(id);
 	}
 
-	public Page<Graveowner> list(int page, int size, String sort)
+	public ServiceListResponse<Graveowner> list(int page, int size, String sort)
 	{
 		return list(page, size, sort, null);
 	}
 	
-	public Page<Graveowner> list(int page, int size, String sort, GraveownerFilter filter)
+	public ServiceListResponse<Graveowner> list(int page, int size, String sort, GraveownerFilter filter)
 	{
 		Specification<Graveowner> spec = GraveownerSpecifications.buildFilterSpec(filter);
 		
@@ -56,7 +57,8 @@ public class GraveownerService
 				RestUtil.toServiceSort(sort));
 		
 		Page<Graveowner> graveowners = graveownerRepository.findAll(spec, pageRequest);
+		ServiceListResponse<Graveowner> response = GraveownerAssembler.toServiceListResponse(graveowners, sort);
 		
-		return graveowners;
+		return response;
 	}
 }

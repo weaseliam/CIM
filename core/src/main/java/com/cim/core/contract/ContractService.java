@@ -2,7 +2,12 @@ package com.cim.core.contract;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 
@@ -12,17 +17,29 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.cim.core.grave.Grave;
+import com.cim.core.grave.GraveFilter;
+import com.cim.core.grave.GraveService;
+import com.cim.core.graveowner.Graveowner;
+import com.cim.core.graveowner.GraveownerFilter;
+import com.cim.core.graveowner.GraveownerService;
 import com.cim.core.util.RestUtil;
+import com.cim.core.util.ServiceListResponse;
 
 @Service
 public class ContractService
 {
-	private ContractRepository contractRepository;
+	private ContractRepository	contractRepository;
+	private GraveownerService	graveownerService;
+	private GraveService		graveService;
 
 	@Autowired
-	public ContractService(@NotNull ContractRepository contractRepository)
+	public ContractService(@NotNull ContractRepository contractRepository, @NotNull GraveownerService graveownerService,
+			@NotNull GraveService graveService)
 	{
 		this.contractRepository = contractRepository;
+		this.graveownerService = graveownerService;
+		this.graveService = graveService;
 	}
 
 	public List<Contract> save(List<Contract> contracts)
@@ -41,7 +58,7 @@ public class ContractService
 		return contractRepository.findAllByOldId(id);
 	}
 	
-	public Page<Contract> list(int page, int size, String sort, ContractFilter filter)
+	public ServiceListResponse<Contract> list(int page, int size, String sort, ContractFilter filter)
 	{
 		Specification<Contract> spec = ContractSpecifications.buildFilterSpec(filter);
 		
@@ -51,7 +68,52 @@ public class ContractService
 				RestUtil.toServiceSort(sort));
 		
 		Page<Contract> contracts = contractRepository.findAll(spec, pageRequest);
+		ServiceListResponse<Contract> response = ContractAssembler.toServiceListResponse(contracts, sort);
 		
-		return contracts;
+		return response;
+	}
+	
+	public ServiceListResponse<ContractFull> listFull(int page, int size, String sort, ContractFilter filter)
+	{
+		Set<Long> graveownerIds = new HashSet<>();
+		Set<Long> graveIds = new HashSet<>();
+		
+		ServiceListResponse<Contract> contracts = list(page, size, sort, filter);
+		for (Contract contract : contracts.getResponse())
+		{
+			graveownerIds.add(contract.getGraveownerId());
+			graveIds.add(contract.getGraveId());
+		}
+		
+		GraveownerFilter oFilter = new GraveownerFilter.Builder()
+				.setIds(graveownerIds.stream().collect(Collectors.toList()))
+				.build();
+		ServiceListResponse<Graveowner> graveowners = graveownerService.list(1, size, null, oFilter);
+		Map<Long, Graveowner> graveownerIdToGraveowner = graveowners.getResponse().stream()
+				.collect(Collectors.toMap(Graveowner::getId, Function.identity()));
+		
+		GraveFilter gFilter = new GraveFilter.Builder()
+				.setIds(graveIds.stream().collect(Collectors.toList()))
+				.build();
+		ServiceListResponse<Grave> graves = graveService.list(1, size, null, gFilter);
+		Map<Long, Grave> graveIdToGrave = graves.getResponse().stream()
+				.collect(Collectors.toMap(Grave::getId, Function.identity()));
+	
+		List<ContractFull> fullContracts = contracts.getResponse().stream()
+				.map(contract -> new ContractFull(
+						contract, 
+						graveownerIdToGraveowner.get(contract.getGraveownerId()),
+						graveIdToGrave.get(contract.getGraveId())))
+				.collect(Collectors.toList());
+		
+		ServiceListResponse<ContractFull> response = new ServiceListResponse<>();
+		response.setPage(contracts.getPage());
+		response.setSize(contracts.getSize());
+		response.setSort(sort);
+		response.setTotalPages(contracts.getTotalPages());
+		response.setTotalResults(contracts.getTotalResults());
+		response.setResponse(fullContracts);
+		
+		return response;
 	}
 }

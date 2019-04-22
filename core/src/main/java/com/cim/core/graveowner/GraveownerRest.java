@@ -5,7 +5,6 @@ import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cim.core.app.AppConstants;
+import com.cim.core.util.ServiceListResponse;
 
 @RestController
 @RequestMapping(AppConstants.API_PATH + "/graveowner")
@@ -46,8 +46,8 @@ public class GraveownerRest
 		GraveownerFilter filter = GraveownerAssembler.fromResource(id, cnp, nume, prenume, localitate, judet, adresa);
 		log.debug("Using filter {}", filter);			
 		
-		Page<Graveowner> graveowners = graveownerService.list(page, size, sort, filter);
-		ApiGraveownerList apiGraveowners = GraveownerAssembler.toResource(graveowners, sort, filter);
+		ServiceListResponse<Graveowner> graveowners = graveownerService.list(page, size, sort, filter);
+		ApiGraveownerList apiGraveowners = GraveownerAssembler.toResource(graveowners, filter);
 		
 		log.debug("Response {}", apiGraveowners);
 		return ResponseEntity.ok(apiGraveowners);

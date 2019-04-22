@@ -7,6 +7,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.data.domain.Page;
 
+import com.cim.core.util.ServiceListResponse;
+
 public class GraveownerAssembler
 {
 	public GraveownerAssembler()
@@ -14,17 +16,17 @@ public class GraveownerAssembler
 		// private constructor
 	}
 	
-	public static ApiGraveownerList toResource(@NotNull Page<Graveowner> page, String sort, GraveownerFilter filter)
+	public static ApiGraveownerList toResource(@NotNull ServiceListResponse<Graveowner> page, GraveownerFilter filter)
 	{
 		ApiGraveownerList response = new ApiGraveownerList();
-		response.setPage(page.getNumber() + 1);
-		response.setSize(page.getNumberOfElements());
-		response.setSort(sort);
+		response.setPage(page.getPage());
+		response.setSize(page.getSize());
+		response.setSort(page.getSort());
 		response.setTotalPages(page.getTotalPages());
-		response.setTotalResults(page.getTotalElements());
+		response.setTotalResults(page.getTotalResults());
 		response.setFilter(filter != null ? new ApiGraveownerFilter(filter) : null);
 		
-		List<ApiGraveowner> graveowners = page.getContent().stream()
+		List<ApiGraveowner> graveowners = page.getResponse().stream()
 				.map(graveowner -> new ApiGraveowner(graveowner))
 				.collect(Collectors.toList());
 		response.setGraveowners(graveowners);
@@ -47,5 +49,18 @@ public class GraveownerAssembler
 				.build();
 
 		return filter;
+	}
+
+	public static ServiceListResponse<Graveowner> toServiceListResponse(Page<Graveowner> page, String sort)
+	{
+		ServiceListResponse<Graveowner> response = new ServiceListResponse<Graveowner>();
+		response.setPage(page.getNumber() + 1);
+		response.setSize(page.getNumberOfElements());
+		response.setSort(sort);
+		response.setTotalPages(page.getTotalPages());
+		response.setTotalResults(page.getTotalElements());
+		response.setResponse(page.getContent());
+		
+		return response;
 	}
 }

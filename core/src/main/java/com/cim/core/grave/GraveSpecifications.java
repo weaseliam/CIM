@@ -9,24 +9,23 @@ public class GraveSpecifications
 	public static Specification<Grave> buildFilterSpec(GraveFilter filter)
 	{
 		Specification<Grave> specification = null;
-		
+
 		if (filter == null)
 		{
 			return specification;
 		}
+
+		if (!filter.getIds().isEmpty())
+		{
+			specification = SpecificationUtil.in("id", filter.getIds());
+		}
 		
 		if (!filter.getContractIds().isEmpty())
 		{
-			for (Long contractId : filter.getContractIds())
-			{
-				Specification<Grave> subSpec = SpecificationUtil.equal("contractId", contractId);
-				
-				specification = specification == null 
-						? subSpec 
-						: specification.or(subSpec);
-			}
+			Specification<Grave> spec = SpecificationUtil.in("contractId", filter.getContractIds());
+			specification = specification != null ? specification.and(spec) : spec;
 		}
-		
+
 		return specification;
 	}
 }

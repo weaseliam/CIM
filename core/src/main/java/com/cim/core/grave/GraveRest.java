@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cim.core.app.AppConstants;
+import com.cim.core.util.ServiceListResponse;
 
 @RestController
 @RequestMapping(AppConstants.API_PATH + "/grave")
@@ -43,8 +43,8 @@ public class GraveRest
 		GraveFilter filter = GraveAssembler.fromResource(contractIds);
 		log.debug("Using filter {}", filter);			
 		
-		Page<Grave> graves = graveService.list(page, size, sort, filter);
-		ApiGraveList apiGraves = GraveAssembler.toResource(graves, sort);
+		ServiceListResponse<Grave> graves = graveService.list(page, size, sort, filter);
+		ApiGraveList apiGraves = GraveAssembler.toResource(graves);
 		
 		log.debug("Response {}", apiGraves);
 		return ResponseEntity.ok(apiGraves);

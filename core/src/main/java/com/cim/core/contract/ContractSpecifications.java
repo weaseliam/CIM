@@ -19,6 +19,20 @@ public class ContractSpecifications
 		{
 			specification = SpecificationUtil.equal("graveownerId", filter.getGraveownerId());
 		}
+		else
+		{
+			if (filter.getDataExpGt() != null)
+			{
+				Specification<Contract> spec = SpecificationUtil.gt("dataExp", filter.getDataExpGt());
+				specification = specification != null ? specification.and(spec) : spec;
+			}
+			
+			if (filter.getDataExpLt() != null)
+			{
+				Specification<Contract> spec = SpecificationUtil.lt("dataExp", filter.getDataExpLt());
+				specification = specification != null ? specification.and(spec) : spec;
+			}
+		}
 
 		return specification;
 	}

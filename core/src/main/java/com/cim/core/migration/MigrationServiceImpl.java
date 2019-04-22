@@ -113,15 +113,15 @@ public class MigrationServiceImpl implements MigrationService
 		{
 			long startTime = System.currentTimeMillis();
 			
-			mapGravesToContracts();
+			mapContractsToGraves();
 			
 			long localDuration = System.currentTimeMillis() - startTime;
-			log.info("Map graves to contracts took {} milliseconds", localDuration);
+			log.info("Map contracts to graves took {} milliseconds", localDuration);
 			duration += localDuration;
 		}
 		else
 		{
-			log.warn("Did not map graves to contracts");
+			log.warn("Did not map contracts to graves");
 		}
 
 		response.setDurationSeconds(duration / 1000);
@@ -307,7 +307,7 @@ public class MigrationServiceImpl implements MigrationService
 					}
 					else
 					{
-						log.warn("Failed to associate graveyard for {}", grave);
+						log.warn("Failed to associate graveyard to {}", grave);
 					}
 					
 					// handle existing graves
@@ -395,7 +395,7 @@ public class MigrationServiceImpl implements MigrationService
 					}
 					else
 					{
-						log.warn("Failed to associate graveowner for {}", contract);
+						log.warn("Failed to associate graveowner to {}", contract);
 					}
 					
 					// graveId
@@ -429,12 +429,12 @@ public class MigrationServiceImpl implements MigrationService
 						}
 						else
 						{
-							log.warn("Failed to associate grave for {}", contract);
+							log.warn("Failed to associate grave to {}", contract);
 						}
 					}
 					else
 					{
-						log.warn("Failed to associate grave for {}", contract);
+						log.warn("Failed to associate grave to {}", contract);
 					}
 					
 					return contract;
@@ -452,7 +452,7 @@ public class MigrationServiceImpl implements MigrationService
 		response.addTable(source, target, cursor);
 	}
 	
-	private void mapGravesToContracts()
+	private void mapContractsToGraves()
 	{
 		log.debug("Mapping graves to contracts");
 		
@@ -460,7 +460,7 @@ public class MigrationServiceImpl implements MigrationService
 		int page = 1;
 		
 		List<Grave> graves;
-		while (!(graves = graveService.list(page, batchSize, null, null).getContent()).isEmpty())
+		while (!(graves = graveService.list(page, batchSize, null, null).getResponse()).isEmpty())
 		{
 			log.debug("graves cursor at {}", (page-1) * batchSize);
 			

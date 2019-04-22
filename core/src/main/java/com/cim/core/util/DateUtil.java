@@ -8,6 +8,10 @@ import java.util.Date;
 
 public class DateUtil
 {
+	private DateUtil()
+	{
+	}
+	
 	public static Date toDate(LocalDateTime ldt)
 	{
 		if (ldt == null)

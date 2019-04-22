@@ -1,14 +1,18 @@
 package com.cim.core.graveowner;
 
+import java.util.Collections;
+import java.util.List;
+
 public class GraveownerFilter
 {
-	private Long	id;
-	private String	cnp;
-	private String	nume;
-	private String	prenume;
-	private String	localitate;
-	private String	judet;
-	private String	adresa;
+	private Long		id;
+	private List<Long>	ids;
+	private String		cnp;
+	private String		nume;
+	private String		prenume;
+	private String		localitate;
+	private String		judet;
+	private String		adresa;
 
 	public GraveownerFilter()
 	{
@@ -22,6 +26,21 @@ public class GraveownerFilter
 	public void setId(Long id)
 	{
 		this.id = id;
+	}
+
+	public List<Long> getIds()
+	{
+		if (ids == null)
+		{
+			ids = Collections.emptyList();
+		}
+		
+		return ids;
+	}
+
+	public void setIds(List<Long> ids)
+	{
+		this.ids = ids;
 	}
 
 	public String getCnp()
@@ -87,23 +106,30 @@ public class GraveownerFilter
 	@Override
 	public String toString()
 	{
-		return "GraveownerFilter [id=" + id + ", cnp=" + cnp + ", nume=" + nume + ", prenume=" + prenume
-				+ ", localitate=" + localitate + ", judet=" + judet + ", adresa=" + adresa + "]";
+		return "GraveownerFilter [id=" + id + ", ids=" + ids + ", cnp=" + cnp + ", nume=" + nume + ", prenume="
+				+ prenume + ", localitate=" + localitate + ", judet=" + judet + ", adresa=" + adresa + "]";
 	}
 
 	public static class Builder
 	{
-		private Long	id;
-		private String	cnp;
-		private String	nume;
-		private String	prenume;
-		private String	localitate;
-		private String	judet;
-		private String	adresa;
+		private Long		id;
+		private List<Long>	ids;
+		private String		cnp;
+		private String		nume;
+		private String		prenume;
+		private String		localitate;
+		private String		judet;
+		private String		adresa;
 
 		public Builder setId(Long id)
 		{
 			this.id = id;
+			return this;
+		}
+
+		public Builder setIds(List<Long> ids)
+		{
+			this.ids = ids;
 			return this;
 		}
 
@@ -147,6 +173,7 @@ public class GraveownerFilter
 		{
 			GraveownerFilter filter = new GraveownerFilter();
 			filter.setId(this.id);
+			filter.setIds(this.ids);
 			filter.setCnp(this.cnp);
 			filter.setNume(this.nume);
 			filter.setPrenume(this.prenume);

@@ -10,6 +10,10 @@ import org.springframework.data.domain.Sort.Order;
 
 public class RestUtil
 {
+	private RestUtil()
+	{
+	}
+	
 	public static Sort toServiceSort(String property)
 	{
 		List<Order> order = new ArrayList<>();
