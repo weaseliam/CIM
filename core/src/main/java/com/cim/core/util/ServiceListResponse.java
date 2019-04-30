@@ -10,7 +10,7 @@ public class ServiceListResponse<T>
 	private String	sort;
 	private Integer	totalPages;
 	private Long	totalResults;
-	private List<T>	response;
+	private List<T>	results;
 
 	public Integer getPage()
 	{
@@ -62,25 +62,25 @@ public class ServiceListResponse<T>
 		this.totalResults = totalResults;
 	}
 
-	public List<T> getResponse()
+	public List<T> getResults()
 	{
-		if (response == null)
+		if (results == null)
 		{
-			response = Collections.emptyList();
+			results = Collections.emptyList();
 		}
 
-		return response;
+		return results;
 	}
 
-	public void setResponse(List<T> response)
+	public void setResults(List<T> response)
 	{
-		this.response = response;
+		this.results = response;
 	}
 
 	@Override
 	public String toString()
 	{
 		return "ServiceListResponse [page=" + page + ", size=" + size + ", sort=" + sort + ", totalPages=" + totalPages
-				+ ", totalResults=" + totalResults + ", response=" + response + "]";
+				+ ", totalResults=" + totalResults + ", results=" + results + "]";
 	}
 }

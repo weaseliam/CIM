@@ -25,7 +25,7 @@ public class ContractAssembler
 		response.setTotalPages(page.getTotalPages());
 		response.setTotalResults(page.getTotalResults());
 		
-		List<ApiContract> contracts = page.getResponse().stream()
+		List<ApiContract> contracts = page.getResults().stream()
 				.map(contract -> new ApiContract(contract))
 				.collect(Collectors.toList());
 		response.setContracts(contracts);
@@ -55,7 +55,7 @@ public class ContractAssembler
 		response.setSort(sort);
 		response.setTotalPages(page.getTotalPages());
 		response.setTotalResults(page.getTotalElements());
-		response.setResponse(page.getContent());
+		response.setResults(page.getContent());
 		
 		return response;
 	}

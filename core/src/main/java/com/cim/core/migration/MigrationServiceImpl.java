@@ -460,7 +460,7 @@ public class MigrationServiceImpl implements MigrationService
 		int page = 1;
 		
 		List<Grave> graves;
-		while (!(graves = graveService.list(page, batchSize, null, null).getResponse()).isEmpty())
+		while (!(graves = graveService.list(page, batchSize, null, null).getResults()).isEmpty())
 		{
 			log.debug("graves cursor at {}", (page-1) * batchSize);
 			

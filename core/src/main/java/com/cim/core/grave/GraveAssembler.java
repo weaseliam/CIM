@@ -25,7 +25,7 @@ public class GraveAssembler
 		response.setTotalPages(page.getTotalPages());
 		response.setTotalResults(page.getTotalResults());
 		
-		List<ApiGrave> graves = page.getResponse().stream()
+		List<ApiGrave> graves = page.getResults().stream()
 				.map(grave -> new ApiGrave(grave))
 				.collect(Collectors.toList());
 		response.setGraves(graves);
@@ -55,7 +55,7 @@ public class GraveAssembler
 		response.setSort(sort);
 		response.setTotalPages(page.getTotalPages());
 		response.setTotalResults(page.getTotalElements());
-		response.setResponse(page.getContent());
+		response.setResults(page.getContent());
 		
 		return response;
 	}

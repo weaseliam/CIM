@@ -79,7 +79,7 @@ public class ContractService
 		Set<Long> graveIds = new HashSet<>();
 		
 		ServiceListResponse<Contract> contracts = list(page, size, sort, filter);
-		for (Contract contract : contracts.getResponse())
+		for (Contract contract : contracts.getResults())
 		{
 			graveownerIds.add(contract.getGraveownerId());
 			graveIds.add(contract.getGraveId());
@@ -89,17 +89,17 @@ public class ContractService
 				.setIds(graveownerIds.stream().collect(Collectors.toList()))
 				.build();
 		ServiceListResponse<Graveowner> graveowners = graveownerService.list(1, size, null, oFilter);
-		Map<Long, Graveowner> graveownerIdToGraveowner = graveowners.getResponse().stream()
+		Map<Long, Graveowner> graveownerIdToGraveowner = graveowners.getResults().stream()
 				.collect(Collectors.toMap(Graveowner::getId, Function.identity()));
 		
 		GraveFilter gFilter = new GraveFilter.Builder()
 				.setIds(graveIds.stream().collect(Collectors.toList()))
 				.build();
 		ServiceListResponse<Grave> graves = graveService.list(1, size, null, gFilter);
-		Map<Long, Grave> graveIdToGrave = graves.getResponse().stream()
+		Map<Long, Grave> graveIdToGrave = graves.getResults().stream()
 				.collect(Collectors.toMap(Grave::getId, Function.identity()));
 	
-		List<ContractFull> fullContracts = contracts.getResponse().stream()
+		List<ContractFull> fullContracts = contracts.getResults().stream()
 				.map(contract -> new ContractFull(
 						contract, 
 						graveownerIdToGraveowner.get(contract.getGraveownerId()),
@@ -112,7 +112,7 @@ public class ContractService
 		response.setSort(sort);
 		response.setTotalPages(contracts.getTotalPages());
 		response.setTotalResults(contracts.getTotalResults());
-		response.setResponse(fullContracts);
+		response.setResults(fullContracts);
 		
 		return response;
 	}

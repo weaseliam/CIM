@@ -24,7 +24,7 @@ public class StatusAssembler
 		response.setTotalPages(page.getTotalPages());
 		response.setTotalResults(page.getTotalResults());
 		
-		List<ApiContractStatus> contractStatuses = page.getResponse().stream()
+		List<ApiContractStatus> contractStatuses = page.getResults().stream()
 				.map(contract -> new ApiContractStatus(contract))
 				.collect(Collectors.toList());
 		response.setResponse(contractStatuses);

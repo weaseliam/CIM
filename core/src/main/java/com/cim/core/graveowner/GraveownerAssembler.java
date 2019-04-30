@@ -26,7 +26,7 @@ public class GraveownerAssembler
 		response.setTotalResults(page.getTotalResults());
 		response.setFilter(filter != null ? new ApiGraveownerFilter(filter) : null);
 		
-		List<ApiGraveowner> graveowners = page.getResponse().stream()
+		List<ApiGraveowner> graveowners = page.getResults().stream()
 				.map(graveowner -> new ApiGraveowner(graveowner))
 				.collect(Collectors.toList());
 		response.setGraveowners(graveowners);
@@ -59,7 +59,7 @@ public class GraveownerAssembler
 		response.setSort(sort);
 		response.setTotalPages(page.getTotalPages());
 		response.setTotalResults(page.getTotalElements());
-		response.setResponse(page.getContent());
+		response.setResults(page.getContent());
 		
 		return response;
 	}
