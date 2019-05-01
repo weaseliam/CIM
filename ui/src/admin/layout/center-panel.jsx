@@ -8,6 +8,7 @@ import styles from './center-panel.scss';
 const CenterPanel = () => (
   <div className={styles.centerPanel}>
     <GraveownerListView />
+    <hr />
     <ContractListView />
   </div>
 );

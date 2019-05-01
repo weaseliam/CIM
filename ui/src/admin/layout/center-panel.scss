@@ -1,6 +1,13 @@
 .centerPanel {
   display: flex;
   flex-direction: column;
-  flex-grow: 3;
+  flex-grow: 1;
   min-height: 600px;
+}
+
+hr {
+  width: 100%;
+  margin-top: 2px;
+  margin-bottom: 0px;
+  padding: 0;
 }
