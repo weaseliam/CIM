@@ -27,7 +27,7 @@ public class StatusAssembler
 		List<ApiContractStatus> contractStatuses = page.getResults().stream()
 				.map(contract -> new ApiContractStatus(contract))
 				.collect(Collectors.toList());
-		response.setResponse(contractStatuses);
+		response.setResults(contractStatuses);
 		
 		return response;
 	}

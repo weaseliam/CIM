@@ -9,7 +9,7 @@ public class ApiListResponse<T>
 	private Integer	size;
 	private Integer	totalPages;
 	private Long	totalResults;
-	private List<T>	response;
+	private List<T>	results;
 
 	public Integer getPage()
 	{
@@ -51,25 +51,25 @@ public class ApiListResponse<T>
 		this.totalResults = totalResults;
 	}
 
-	public List<T> getResponse()
+	public List<T> getResults()
 	{
-		if (response == null)
+		if (results == null)
 		{
-			response = Collections.emptyList();
+			results = Collections.emptyList();
 		}
 
-		return response;
+		return results;
 	}
 
-	public void setResponse(List<T> response)
+	public void setResults(List<T> results)
 	{
-		this.response = response;
+		this.results = results;
 	}
 
 	@Override
 	public String toString()
 	{
 		return "ContractStatusList [page=" + page + ", size=" + size + ", totalPages=" + totalPages + ", totalResults="
-				+ totalResults + ", response=" + response + "]";
+				+ totalResults + ", results=" + results + "]";
 	}
 }
