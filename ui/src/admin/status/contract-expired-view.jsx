@@ -5,10 +5,23 @@ import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBa
 
 import withI18n from '../../i18n/i18n-decorator';
 import Pagination from '../../components/pagination';
+import { fetchStatusContractListAction } from './status-actions';
+
+const mapStateToProps = state => ({
+  expiredContracts: state.status.contract.list
+});
 
 @withI18n
-@connect()
+@connect(mapStateToProps)
 class ContractExpiredView extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(fetchStatusContractListAction.trigger({
+      page: 1, size: 5, dte: 0
+    }));
+  }
+
   onRenderListItem = () => (
     <MessageBar
       messageBarType={MessageBarType.severeWarning}
@@ -29,10 +42,13 @@ class ContractExpiredView extends Component {
   );
 
   render() {
+    const { expiredContracts } = this.props;
+    const noOfExpiredContracts = expiredContracts.totalResults;
+
     return (
       <Fragment>
         <MessageBar messageBarType={MessageBarType.severeWarning}>
-          <span>100 expired contracts.</span>
+          <span>{`${noOfExpiredContracts} expired contracts.`}</span>
           <Pagination />
         </MessageBar>
         <List items={[1, 2, 3, 4, 5]} onRenderCell={this.onRenderListItem} />

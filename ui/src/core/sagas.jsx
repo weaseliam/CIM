@@ -5,13 +5,15 @@ import { i18nSagas } from '../i18n/i18n-saga';
 import { graveownerSagas } from '../admin/graveowner/graveowner-saga';
 import { graveSagas } from '../admin/grave/grave-saga';
 import { contractSagas } from '../admin/contract/contract-saga';
+import { statusSagas } from '../admin/status/status-saga';
 
 const sagas = [
   appSagas,
   i18nSagas,
   graveownerSagas,
   graveSagas,
-  contractSagas
+  contractSagas,
+  statusSagas
 ];
 
 export function* rootSaga() {

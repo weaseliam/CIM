@@ -11,6 +11,7 @@ export const API_GRAVE = `${API_PATH}/grave`;
 export const API_EXEMPT = `${API_PATH}/exempt`;
 export const API_GRAVEYARD = `${API_PATH}/graveyard`;
 export const API_CONTRACT = `${API_PATH}/contract`;
+export const API_STATUS_CONTRACT = `${API_PATH}/status/contract`;
 
 // table
 export const TABLE_COL_WIDTH = {

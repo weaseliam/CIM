@@ -7,6 +7,7 @@ import { graveReducer } from '../admin/grave/grave-reducer';
 import { exemptReducer } from '../admin/exempt/exempt-reducer';
 import { graveyardReducer } from '../admin/graveyard/graveyard-reducer';
 import { contractReducer } from '../admin/contract/contract-reducer';
+import { statusReducer } from '../admin/status/status-reducer';
 
 export const rootReducer = combineReducers({
   app: appReducer,
@@ -15,5 +16,6 @@ export const rootReducer = combineReducers({
   grave: graveReducer,
   exempt: exemptReducer,
   graveyard: graveyardReducer,
-  contract: contractReducer
+  contract: contractReducer,
+  status: statusReducer
 });
