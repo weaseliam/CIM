@@ -7,7 +7,7 @@ import { Label } from 'office-ui-fabric-react/lib/Label';
 import styles from './pagination.scss';
 
 const propTypes = {
-  i18n: PropTypes.shape,
+  i18n: PropTypes.shape(),
   page: PropTypes.number,
   pages: PropTypes.number,
   onFirstPage: PropTypes.func,
@@ -53,9 +53,21 @@ const Pagination = ({ i18n, page, pages, onFirstPage, onPrevPage, onNextPage, on
 
   return (
     <span>
-      <Link onClick={handleFirstPage} title={i18n.firstPageTooltip}>&#9668;</Link>
+      <Link
+        className={styles.linkButton}
+        onClick={handleFirstPage}
+        title={i18n.firstPageTooltip}
+      >
+        &#9668;
+      </Link>
       &nbsp;
-      <Link onClick={handlePrevPage} title={i18n.prevPageTooltip}>&#8882;</Link>
+      <Link
+        className={styles.linkButton}
+        onClick={handlePrevPage}
+        title={i18n.prevPageTooltip}
+      >
+        &#8882;
+      </Link>
       &nbsp;
       <Label className={styles.pagesLabel}>
         {page}
@@ -63,9 +75,21 @@ const Pagination = ({ i18n, page, pages, onFirstPage, onPrevPage, onNextPage, on
         {pages}
       </Label>
       &nbsp;
-      <Link onClick={handleNextPage} title={i18n.nextPageTooltip}>&#8883;</Link>
+      <Link
+        className={styles.linkButton}
+        onClick={handleNextPage}
+        title={i18n.nextPageTooltip}
+      >
+        &#8883;
+      </Link>
       &nbsp;
-      <Link onClick={handleLastPage} title={i18n.lastPageTooltip}>&#9658;</Link>
+      <Link
+        className={styles.linkButton}
+        onClick={handleLastPage}
+        title={i18n.lastPageTooltip}
+      >
+        &#9658;
+      </Link>
     </span>
   );
 };

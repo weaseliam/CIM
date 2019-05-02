@@ -5,37 +5,98 @@ import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBa
 
 import withI18n from '../../i18n/i18n-decorator';
 import Pagination from '../../components/pagination';
+import { fetchToExpireContractListAction } from './status-actions';
+import { toExpireContractListSelector } from './status-selector';
+import { parseAndFormatDate } from '../../core/util';
+import { graveyardMapSelector } from '../graveyard/graveyard-selector';
+import { exemptMapSelector } from '../exempt/exempt-selector';
+
+import styles from './contract-to-expire-view.scss';
+
+const PAGE_SIZE = 5;
+const messageBarNoIconStyle = { icon: { display: 'none' } };
+
+const mapStateToProps = state => ({
+  toExpireContracts: toExpireContractListSelector(state),
+  graveyardMap: graveyardMapSelector(state),
+  exemptMap: exemptMapSelector(state)
+});
 
 @withI18n
-@connect()
+@connect(mapStateToProps)
 class ContractToExpireView extends Component {
-  onRenderListItem = () => (
-    <MessageBar
-      messageBarType={MessageBarType.warning}
-      isMultiline={false}
-      truncated
-      styles={{ icon: { display: 'none' } }}
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Morbi luctus, purus a lobortis tristique, odio augue pharetra metus,
-      ac placerat nunc mi nec dui. Vestibulum aliquam et nunc semper scelerisque.
-      Curabitur vitae orci nec quam condimentum porttitor et sed lacus.
-      Vivamus ac efficitur leo. Cras faucibus mauris libero, ac placerat erat euismod et.
-      Donec pulvinar commodo odio sit amet faucibus. In hac habitasse platea dictumst.
-      Duis eu ante commodo, condimentum nibh pellentesque, laoreet enim. Fusce massa lorem,
-      ultrices eu mi a, fermentum suscipit magna. Integer porta purus pulvinar,
-      hendrerit felis eget, condimentum mauris.
-    </MessageBar>
-  );
+  componentDidMount() {
+    this.fetchToExpireContracts(1);
+  }
+
+  fetchToExpireContracts = (page) => {
+    const { dispatch } = this.props;
+
+    dispatch(fetchToExpireContractListAction.trigger({
+      page, size: PAGE_SIZE
+    }));
+  }
+
+  handleFirstPage = (page) => {
+    this.fetchToExpireContracts(page);
+  }
+
+  handlePrevPage = (page) => {
+    this.fetchToExpireContracts(page);
+  }
+
+  handleNextPage = (page) => {
+    this.fetchToExpireContracts(page);
+  }
+
+  handleLastPage = (page) => {
+    this.fetchToExpireContracts(page);
+  }
+
+  onRenderListItemContract = ({ contract, grave, graveowner }) => {
+    const { i18n, graveyardMap, exemptMap } = this.props;
+    const formatDate = date =>
+      parseAndFormatDate(date, i18n.formats.date);
+    const cemeteryName = (graveyardMap[grave.graveyardId] || {}).nume || '';
+    const exemptName = (exemptMap[contract.exemptId] || {}).nume || '';
+
+    return (
+      <MessageBar
+        messageBarType={MessageBarType.warning}
+        isMultiline={false}
+        truncated
+        styles={messageBarNoIconStyle}
+      >
+        {
+          `${graveowner.nume} ${graveowner.prenume}, ${graveowner.localitate}, ${graveowner.adresa}, ${graveowner.judet}, ID ${graveowner.id}. ${exemptName}
+Grave ${cemeteryName}, zone ${grave.codZona}, sector ${grave.sector}, row ${grave.rand}, pozition ${grave.pozitie}, ${grave.nrLocuri} places.
+Contract end date ${formatDate(contract.dataExp)}, start date ${formatDate(contract.dataIncep)}, registration ${contract.matricola}.`
+        }
+      </MessageBar>
+    );
+  };
 
   render() {
+    const { toExpireContracts } = this.props;
+    const { totalResults, page, totalPages, results } = toExpireContracts;
+
     return (
       <Fragment>
-        <MessageBar messageBarType={MessageBarType.warning}>
-          <span>100 contracts will expire in 30 days.</span>
-          <Pagination />
+        <MessageBar
+          className={styles.titleMessageBar}
+          messageBarType={MessageBarType.warning}
+        >
+          <Pagination
+            page={page}
+            pages={totalPages}
+            onFirstPage={this.handleFirstPage}
+            onPrevPage={this.handlePrevPage}
+            onNextPage={this.handleNextPage}
+            onLastPage={this.handleLastPage}
+          />
+          <span>{`${totalResults} contracts will expire in 30 days.`}</span>
         </MessageBar>
-        <List items={[1, 2, 3, 4, 5]} onRenderCell={this.onRenderListItem} />
+        <List items={results} onRenderCell={this.onRenderListItemContract} />
       </Fragment>
     );
   }

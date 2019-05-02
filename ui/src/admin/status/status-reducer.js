@@ -1,20 +1,29 @@
-import { fetchStatusContractListAction } from './status-actions';
+import { fetchExpiredContractListAction, fetchToExpireContractListAction } from './status-actions';
 
 export const INITIAL_STATE = {
   contract: {
-    list: {}
-  },
-  invoice: {}
+    expired: {},
+    toExpire: {}
+  }
 };
 
 export const statusReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case fetchStatusContractListAction.SUCCESS:
+    case fetchExpiredContractListAction.SUCCESS:
       return {
         ...state,
         contract: {
           ...state.contract,
-          list: action.payload
+          expired: action.payload
+        }
+      };
+
+    case fetchToExpireContractListAction.SUCCESS:
+      return {
+        ...state,
+        contract: {
+          ...state.contract,
+          toExpire: action.payload
         }
       };
 

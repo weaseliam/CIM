@@ -5,53 +5,98 @@ import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBa
 
 import withI18n from '../../i18n/i18n-decorator';
 import Pagination from '../../components/pagination';
-import { fetchStatusContractListAction } from './status-actions';
+import { fetchExpiredContractListAction } from './status-actions';
+import { expiredContractListSelector } from './status-selector';
+import { parseAndFormatDate } from '../../core/util';
+import { graveyardMapSelector } from '../graveyard/graveyard-selector';
+import { exemptMapSelector } from '../exempt/exempt-selector';
+
+import styles from './contract-expired-view.scss';
+
+const PAGE_SIZE = 5;
+const messageBarNoIconStyle = { icon: { display: 'none' } };
 
 const mapStateToProps = state => ({
-  expiredContracts: state.status.contract.list
+  expiredContracts: expiredContractListSelector(state),
+  graveyardMap: graveyardMapSelector(state),
+  exemptMap: exemptMapSelector(state)
 });
 
 @withI18n
 @connect(mapStateToProps)
 class ContractExpiredView extends Component {
   componentDidMount() {
+    this.fetchExpiredContracts(1);
+  }
+
+  fetchExpiredContracts = (page) => {
     const { dispatch } = this.props;
 
-    dispatch(fetchStatusContractListAction.trigger({
-      page: 1, size: 5, dte: 0
+    dispatch(fetchExpiredContractListAction.trigger({
+      page, size: PAGE_SIZE
     }));
   }
 
-  onRenderListItem = () => (
-    <MessageBar
-      messageBarType={MessageBarType.severeWarning}
-      isMultiline={false}
-      truncated
-      styles={{ icon: { display: 'none' } }}
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Morbi luctus, purus a lobortis tristique, odio augue pharetra metus,
-      ac placerat nunc mi nec dui. Vestibulum aliquam et nunc semper scelerisque.
-      Curabitur vitae orci nec quam condimentum porttitor et sed lacus.
-      Vivamus ac efficitur leo. Cras faucibus mauris libero, ac placerat erat euismod et.
-      Donec pulvinar commodo odio sit amet faucibus. In hac habitasse platea dictumst.
-      Duis eu ante commodo, condimentum nibh pellentesque, laoreet enim. Fusce massa lorem,
-      ultrices eu mi a, fermentum suscipit magna. Integer porta purus pulvinar,
-      hendrerit felis eget, condimentum mauris.
-    </MessageBar>
-  );
+  handleFirstPage = (page) => {
+    this.fetchExpiredContracts(page);
+  }
+
+  handlePrevPage = (page) => {
+    this.fetchExpiredContracts(page);
+  }
+
+  handleNextPage = (page) => {
+    this.fetchExpiredContracts(page);
+  }
+
+  handleLastPage = (page) => {
+    this.fetchExpiredContracts(page);
+  }
+
+  onRenderListItemContract = ({ contract, grave, graveowner }) => {
+    const { i18n, graveyardMap, exemptMap } = this.props;
+    const formatDate = date =>
+      parseAndFormatDate(date, i18n.formats.date);
+    const cemeteryName = (graveyardMap[grave.graveyardId] || {}).nume || '';
+    const exemptName = (exemptMap[contract.exemptId] || {}).nume || '';
+
+    return (
+      <MessageBar
+        messageBarType={MessageBarType.severeWarning}
+        isMultiline={false}
+        truncated
+        styles={messageBarNoIconStyle}
+      >
+        {
+          `${graveowner.nume} ${graveowner.prenume}, ${graveowner.localitate}, ${graveowner.adresa}, ${graveowner.judet}, ID ${graveowner.id}. ${exemptName}
+Grave ${cemeteryName}, zone ${grave.codZona}, sector ${grave.sector}, row ${grave.rand}, pozition ${grave.pozitie}, ${grave.nrLocuri} places.
+Contract end date ${formatDate(contract.dataExp)}, start date ${formatDate(contract.dataIncep)}, registration ${contract.matricola}.`
+        }
+      </MessageBar>
+    );
+  };
 
   render() {
     const { expiredContracts } = this.props;
-    const noOfExpiredContracts = expiredContracts.totalResults;
+    const { totalResults, page, totalPages, results } = expiredContracts;
 
     return (
       <Fragment>
-        <MessageBar messageBarType={MessageBarType.severeWarning}>
-          <span>{`${noOfExpiredContracts} expired contracts.`}</span>
-          <Pagination />
+        <MessageBar
+          className={styles.titleMessageBar}
+          messageBarType={MessageBarType.severeWarning}
+        >
+          <Pagination
+            page={page}
+            pages={totalPages}
+            onFirstPage={this.handleFirstPage}
+            onPrevPage={this.handlePrevPage}
+            onNextPage={this.handleNextPage}
+            onLastPage={this.handleLastPage}
+          />
+          <span>{`${totalResults} expired contracts.`}</span>
         </MessageBar>
-        <List items={[1, 2, 3, 4, 5]} onRenderCell={this.onRenderListItem} />
+        <List items={results} onRenderCell={this.onRenderListItemContract} />
       </Fragment>
     );
   }
