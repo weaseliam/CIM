@@ -486,6 +486,12 @@ public class MigrationServiceImpl implements MigrationService
 				});
 				
 				grave.setContractId(contracts.get(0).getId());
+				
+				// delete the other expired contracts, keep only the most recent one
+				for (int i = 1; i < contracts.size(); i++)
+				{
+					contractService.deleteById(contracts.get(i).getId());
+				}
 			}
 			
 			graveService.save(graves);

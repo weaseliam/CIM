@@ -116,4 +116,9 @@ public class ContractService
 		
 		return response;
 	}
+	
+	public void deleteById(Long id)
+	{
+		contractRepository.deleteById(id);
+	}
 }
